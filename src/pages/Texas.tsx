@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
-import { Accordion } from "../components/ui/Accordion";
+import { Accordion } from "../components/ui/accordion";
 
 // List of city slugs for the hub grid
 const CITY_SLUGS = [

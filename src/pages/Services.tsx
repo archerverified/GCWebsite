@@ -6,7 +6,7 @@ import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
-import { Accordion } from "../components/ui/Accordion";
+import { Accordion } from "../components/ui/accordion";
 
 // List of service slugs for the hub grid
 const SERVICE_SLUGS = [
