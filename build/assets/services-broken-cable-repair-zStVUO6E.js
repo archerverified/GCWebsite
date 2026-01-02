@@ -1,0 +1,32 @@
+const e="Broken Garage Door Cable & Drum Repair in DFW",a=`* Broken Cable Replacement  
+* Drum Replacement  
+* Door Rebalancing   
+* Safety Inspection
+
+If your garage door is lifting unevenly or a cable has come loose, our technicians safely secure the door, replace damaged cables or drums, and restore balanced, dependable operation—often the same day.
+
+
+A broken garage door cable or damaged drum can cause your door to lift unevenly, jam, or suddenly drop—creating a serious safety risk. Garage Cowboy provides **fast, professional garage door cable and drum repair across the Dallas–Fort Worth metroplex**, restoring safe, balanced operation without causing further damage to your door or opener.
+
+If your garage door looks crooked, won’t open properly, or has a cable hanging loose from the side, stop using it immediately. Continuing to operate the door with damaged cables or drums can bend tracks, break rollers, or cause the door to fall unexpectedly. Our certified local technicians respond quickly to secure the system and diagnose the problem safely.
+
+*If a cable or drum fails suddenly and your garage door is unsafe to operate, visit our **Emergency Garage Door Repair page** for immediate after-hours service.*`,r=[{title:"Safe, Professional Cable & Drum Repair — Done Right",content:`Garage door cables and drums work together to lift the full weight of the door evenly. When a cable snaps, frays, or slips off the drum—or when a drum becomes worn or damaged—the door can bind, tilt, or slam shut.
+
+Our technicians carefully secure the door, release unsafe tension, and repair or replace damaged components using **high-quality, manufacturer-approved cables and drums**. We don’t reuse stretched cables or install mismatched parts. Every repair includes proper cable routing, drum alignment, correct tensioning, and a full safety and balance check to ensure smooth, reliable operation.`},{title:"Why Garage Door Cables & Drums Fail",content:`Cables and drums wear over time due to daily use, door weight, moisture exposure, and improper tension. Worn springs, misaligned tracks, or impact damage can place uneven stress on cables, causing fraying or sudden failure. Drums can also wear or crack, allowing cables to slip or unwind.
+
+Correcting the root cause—not just replacing parts—is essential to preventing repeat failures.`},{title:"Common Signs of Cable or Drum Failure",content:`* One side of the garage door is lower than the other  
+* Loose or hanging cables near the tracks  
+* Door jerks, binds, or stops while opening  
+* Grinding or popping noises near the drums  
+* Door won’t open or close completely
+
+If you notice any of these signs, professional service is recommended right away.`},{title:"Why Choose Garage Cowboy for Cable & Drum Repair?",content:`* Same-day cable and drum repair across DFW  
+* Certified local technicians near you  
+* Safe handling of heavy, unstable doors  
+* High-quality replacement cables and drums  
+* Transparent pricing with a Best Price Guarantee  
+* After-hours emergency service at no additional charge
+
+Garage Cowboy is a **locally owned, referral-based company** built on trust, craftsmanship, and standing behind our work. If you’re not completely satisfied, we’ll come back and make it right.`},{title:"Serving Homes & Businesses Across DFW",content:`We provide broken garage door cable and drum repair for **residential and commercial properties** throughout Fort Worth, Arlington, Dallas, Keller, Mansfield, and surrounding DFW communities. Whether a cable failed suddenly or a drum wore down over time, we’re ready to help.
+
+If your garage door cable or drum is damaged, don’t risk injury or costly door damage. Contact Garage Cowboy for fast, dependable repair you can trust.`}],o=[{question:"What happens when a garage door cable breaks?",answer:"When a cable breaks, the garage door may lift unevenly, jam, or suddenly drop. Because cables support the full weight of the door, failure creates a serious safety risk and should be addressed immediately."},{question:"Is it dangerous to use my garage door with a broken cable or drum?",answer:"Yes. Operating a door with damaged cables or drums can cause the door to fall, bend tracks, break rollers, or damage the opener. Stop using the door and contact a professional."},{question:"What causes garage door cables or drums to fail?",answer:"Common causes include normal wear, rust or corrosion, improper tension, worn springs, misaligned tracks, and impact damage. Drums can also wear over time, allowing cables to slip."},{question:"Can a broken garage door cable be repaired, or does it need replacement?",answer:"Cables are not safely repairable once damaged. Frayed or broken cables should always be replaced to ensure safe operation."},{question:"Do both garage door cables need to be replaced at the same time?",answer:"In most cases, yes. Cables wear evenly, and replacing both helps maintain balance and reduce the risk of another failure."},{question:"How long does cable or drum repair take?",answer:"Most cable and drum repairs can be completed in a single visit once the door is safely secured. Timing depends on door size and any additional damage found."},{question:"Will you replace the drums if they are worn or damaged?",answer:"Yes. If drums show signs of wear, cracking, or cable slippage, we replace them with properly sized, manufacturer-approved drums."},{question:"Can a broken cable damage my garage door opener?",answer:"Yes. An opener attempting to lift a door with failed cables or drums can burn out gears or bend the rail. Turning off the opener until repairs are made is often the safest option."},{question:"Do you offer same-day cable and drum repair in DFW?",answer:"Yes. Same-day service is available when possible across the Dallas–Fort Worth area, including Arlington, Dallas, Keller, Mansfield, and nearby cities."},{question:"Do you offer emergency garage door cable repair?",answer:"Yes. We offer after-hours emergency service at no additional charge because cable and drum failures can pose serious safety and security risks."}],n={title:e,intro:a,sections:r,faqs:o};export{n as default,o as faqs,a as intro,r as sections,e as title};
