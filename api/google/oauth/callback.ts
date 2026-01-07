@@ -4,40 +4,62 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
  * Google OAuth Callback Endpoint
  * 
  * Handles the OAuth 2.0 callback from Google after user consent.
- * Exchanges the authorization code for access/refresh tokens.
+ * Exchanges the authorization code for access/refresh tokens and displays them.
  * 
  * Environment Variables Required:
  * - GOOGLE_OAUTH_CLIENT_ID: Your Google OAuth 2.0 Client ID
  * - GOOGLE_OAUTH_CLIENT_SECRET: Your Google OAuth 2.0 Client Secret
  * - GOOGLE_OAUTH_REDIRECT_URI: The callback URL (must match the one used in start.ts)
  * 
- * Optional:
- * - OAUTH_SUCCESS_REDIRECT: URL to redirect after successful auth (defaults to /)
- * - OAUTH_ERROR_REDIRECT: URL to redirect after failed auth (defaults to /?error=oauth)
+ * Query Parameters:
+ * - debug=1: Returns diagnostic JSON instead of processing OAuth
  */
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const { code, state, error } = req.query;
+  const { code, state, error, debug } = req.query;
 
   const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
   const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI || process.env.GOOGLE_REDIRECT_URI;
-  const successRedirect = process.env.OAUTH_SUCCESS_REDIRECT || '/';
-  const errorRedirect = process.env.OAUTH_ERROR_REDIRECT || '/?error=oauth';
+
+  // Debug mode - return diagnostic info
+  if (debug === '1') {
+    const storedState = getCookieValue(req, 'gc_oauth_state');
+    return res.status(200).json({
+      debug: true,
+      redirectUri,
+      queryParams: {
+        code: code ? `${String(code).substring(0, 10)}...` : null,
+        state: state || null,
+        error: error || null,
+      },
+      cookieStateExists: !!storedState,
+      envVars: {
+        GOOGLE_OAUTH_CLIENT_ID: clientId ? 'set' : 'missing',
+        GOOGLE_OAUTH_CLIENT_SECRET: clientSecret ? 'set' : 'missing',
+        GOOGLE_OAUTH_REDIRECT_URI: redirectUri ? 'set' : 'missing',
+      },
+    });
+  }
 
   // Handle OAuth errors from Google
   if (error) {
-    console.error('OAuth error from Google:', error);
-    return res.redirect(302, `${errorRedirect}&reason=${encodeURIComponent(String(error))}`);
+    return res.status(400).json({
+      error: 'oauth_error',
+      message: `Google returned an error: ${error}`,
+      googleError: error,
+    });
   }
 
   // Validate required parameters
   if (!code || typeof code !== 'string') {
-    console.error('Missing authorization code');
-    return res.redirect(302, `${errorRedirect}&reason=missing_code`);
+    return res.status(400).json({
+      error: 'missing_code',
+      message: 'Authorization code not provided by Google.',
+    });
   }
 
   // Validate all required environment variables
@@ -47,44 +69,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!redirectUri) missingVars.push('GOOGLE_OAUTH_REDIRECT_URI');
 
   if (missingVars.length > 0) {
-    const errorHtml = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OAuth Configuration Error</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-    .error-box { background: white; border: 2px solid #dc3545; border-radius: 8px; padding: 24px 32px; max-width: 500px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    h1 { color: #dc3545; margin: 0 0 16px 0; font-size: 24px; }
-    p { color: #333; margin: 0 0 12px 0; }
-    code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; font-size: 14px; color: #d63384; }
-    ul { text-align: left; margin: 16px 0; padding-left: 24px; }
-    li { margin: 8px 0; }
-  </style>
-</head>
-<body>
-  <div class="error-box">
-    <h1>⚠️ OAuth Not Configured</h1>
-    <p>The following environment variables are missing:</p>
-    <ul>
-      ${missingVars.map(v => `<li><code>${v}</code></li>`).join('')}
-    </ul>
-    <p>Please add these to your Vercel project settings.</p>
-  </div>
-</body>
-</html>`;
-
-    res.setHeader('Content-Type', 'text/html');
-    return res.status(500).send(errorHtml);
+    return res.status(500).json({
+      error: 'config_error',
+      message: 'OAuth not configured properly.',
+      missingVars,
+    });
   }
 
   // Verify state parameter (CSRF protection)
-  const storedState = getCookieValue(req, 'oauth_state');
+  const storedState = getCookieValue(req, 'gc_oauth_state');
   if (!storedState || storedState !== state) {
-    console.error('State mismatch - possible CSRF attack');
-    return res.redirect(302, `${errorRedirect}&reason=state_mismatch`);
+    return res.status(400).json({
+      error: 'state_mismatch',
+      message: 'CSRF state cookie missing or does not match. Try starting OAuth flow again.',
+      storedState: storedState ? 'present' : 'missing',
+      queryState: state ? 'present' : 'missing',
+    });
   }
 
   try {
@@ -104,9 +104,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     if (!tokenResponse.ok) {
-      // Do NOT log error body to avoid leaking tokens or secrets
-      console.error('Token exchange failed - status:', tokenResponse.status);
-      return res.redirect(302, `${errorRedirect}&reason=token_exchange_failed`);
+      const errorStatus = tokenResponse.status;
+      return res.status(500).json({
+        error: 'token_exchange_failed',
+        message: `Failed to exchange authorization code for tokens. Google returned status ${errorStatus}.`,
+        status: errorStatus,
+      });
     }
 
     const tokens = await tokenResponse.json() as {
@@ -124,43 +127,105 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
     });
 
-    let userInfo = null;
+    let userInfo: { email?: string; name?: string } | null = null;
     if (userInfoResponse.ok) {
       userInfo = await userInfoResponse.json();
     }
 
     // Clear the state cookie
-    res.setHeader('Set-Cookie', 'oauth_state=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0');
+    res.setHeader('Set-Cookie', 'gc_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
 
-    // Log successful authentication (in production, you'd store tokens securely)
-    console.log('OAuth successful for user:', userInfo?.email || 'unknown');
+    // Display success HTML with tokens
+    const successHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAuth Success - Garage Cowboy</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 40px 20px; margin: 0; }
+    .container { background: white; border: 2px solid #28a745; border-radius: 8px; padding: 32px; max-width: 700px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { color: #28a745; margin: 0 0 24px 0; }
+    .field { margin-bottom: 20px; }
+    .label { font-weight: 600; color: #333; margin-bottom: 4px; }
+    .value { background: #f8f9fa; padding: 12px; border-radius: 4px; font-family: monospace; word-break: break-all; border: 1px solid #dee2e6; }
+    .highlight { background: #fff3cd; border-color: #ffc107; }
+    .warning { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+    .next-steps { background: #e7f5ff; padding: 16px; border-radius: 4px; margin-top: 24px; }
+    .next-steps h3 { margin: 0 0 8px 0; color: #0c5460; }
+    .next-steps ol { margin: 0; padding-left: 20px; }
+    .next-steps li { margin-bottom: 8px; }
+    code { background: #e9ecef; padding: 2px 6px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ OAuth Success</h1>
+    
+    <div class="field">
+      <div class="label">User</div>
+      <div class="value">${userInfo?.email || 'Unknown'}</div>
+    </div>
+    
+    <div class="field">
+      <div class="label">Calendar ID</div>
+      <div class="value">primary</div>
+    </div>
+    
+    <div class="field">
+      <div class="label">Refresh Token</div>
+      <div class="value ${tokens.refresh_token ? 'highlight' : 'warning'}">${tokens.refresh_token || '⚠️ Not returned - You may need to revoke access at https://myaccount.google.com/permissions and try again'}</div>
+    </div>
+    
+    <div class="field">
+      <div class="label">Access Token</div>
+      <div class="value">${tokens.access_token.substring(0, 30)}...</div>
+    </div>
+    
+    <div class="field">
+      <div class="label">Expires In</div>
+      <div class="value">${tokens.expires_in} seconds</div>
+    </div>
+    
+    <div class="field">
+      <div class="label">Scopes Granted</div>
+      <div class="value">${tokens.scope}</div>
+    </div>
+    
+    ${tokens.refresh_token ? `
+    <div class="next-steps">
+      <h3>📋 Next Steps</h3>
+      <ol>
+        <li>Copy the <strong>Refresh Token</strong> above</li>
+        <li>Go to <strong>Vercel Project Settings → Environment Variables</strong></li>
+        <li>Add a new variable: <code>GOOGLE_REFRESH_TOKEN</code> with the copied value</li>
+        <li>Redeploy your project</li>
+      </ol>
+    </div>
+    ` : `
+    <div class="next-steps" style="background: #fff3cd;">
+      <h3>⚠️ No Refresh Token</h3>
+      <ol>
+        <li>Go to <a href="https://myaccount.google.com/permissions" target="_blank">Google Account Permissions</a></li>
+        <li>Find and remove access for "Garage Cowboy" (or your app name)</li>
+        <li>Return to <a href="/api/google/oauth/start">/api/google/oauth/start</a> and try again</li>
+      </ol>
+    </div>
+    `}
+  </div>
+</body>
+</html>`;
 
-    // For now, we'll store minimal info in a session cookie
-    // In production, use a proper session store or JWT
-    if (userInfo?.email) {
-      const sessionData = JSON.stringify({
-        email: userInfo.email,
-        name: userInfo.name,
-        picture: userInfo.picture,
-        authenticated: true,
-        expiresAt: Date.now() + tokens.expires_in * 1000,
-      });
-      
-      // Base64 encode the session data (in production, sign this with a secret)
-      const encodedSession = Buffer.from(sessionData).toString('base64');
-      
-      res.setHeader('Set-Cookie', [
-        'oauth_state=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0',
-        `gc_session=${encodedSession}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${tokens.expires_in}`,
-      ]);
-    }
-
-    // Redirect to success page
-    res.redirect(302, successRedirect);
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(200).send(successHtml);
 
   } catch (err) {
-    console.error('OAuth callback error:', err);
-    return res.redirect(302, `${errorRedirect}&reason=server_error`);
+    return res.status(500).json({
+      error: 'server_error',
+      message: 'An unexpected error occurred during OAuth callback.',
+      details: err instanceof Error ? err.message : 'Unknown error',
+    });
   }
 }
 

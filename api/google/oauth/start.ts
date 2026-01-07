@@ -94,7 +94,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   const authUrl = `${GOOGLE_AUTH_URL}?${params.toString()}`;
 
   // Set the state in a cookie for verification in the callback
-  res.setHeader('Set-Cookie', `oauth_state=${state}; Path=/; HttpOnly; SameSite=Lax; Max-Age=600`);
+  res.setHeader('Set-Cookie', `gc_oauth_state=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`);
 
   // Redirect the user to Google's consent screen
   res.redirect(302, authUrl);
