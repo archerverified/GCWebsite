@@ -667,7 +667,7 @@ function Frame4() {
           <span className="font-['Product_Sans:Regular',product-sans] text-black">Call</span>
           <span className="font-['Product_Sans_Medium:Regular',product-sans]">{` us at`}</span>
         </p>
-        <p className="font-['Product_Sans_Black:Regular',product-sans]">(871) 256-0122</p>
+        <p className="font-['Product_Sans_Black:Regular',product-sans]">(817) 256-0122</p>
       </div>
       <div className="absolute flex flex-col font-['Product_Sans:Regular',product-sans] justify-center leading-[0] left-[1870.63px] not-italic text-[20px] text-black text-center text-nowrap top-[101.89px] tracking-[-0.32px] translate-x-[-50%] translate-y-[-50%]">
         <p className="leading-[11px]">Facebook</p>

@@ -1,4 +1,4 @@
-import { Phone } from "lucide-react";
+import { Phone, UserPlus } from "lucide-react";
 import imgBackgroundTop from "figma:asset/1e540751c4a94b57d2d98c37fda165d4dbe79475.png";
 import imgContacts from "figma:asset/b8be1fd15140cd16a4057de1244424c380b3e121.png";
 
@@ -29,16 +29,37 @@ export function HeroSection() {
               CONTACT US TODAY
             </h2>
             
-            {/* Phone Button */}
-            <a 
-              href="tel:8712560122"
-              className="inline-flex items-center gap-2 sm:gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            >
-              <img src={imgContacts} alt="" className="w-6 h-6 sm:w-[30px] sm:h-[30px]" />
-              <span className="font-product-sans font-black text-lg sm:text-xl md:text-2xl text-[#222] uppercase">
-                (871) 256-0122
-              </span>
-            </a>
+            {/* Phone number display */}
+            <p className="font-product-sans font-black text-lg sm:text-xl md:text-2xl text-white mb-4">
+              (817) 256-0122
+            </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              {/* Primary: Add to Contacts */}
+              <a 
+                href="/contact/garage-cowboy.vcf"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                aria-label="Add Garage Cowboy to contacts"
+              >
+                <UserPlus className="w-6 h-6 sm:w-7 sm:h-7 text-[#222]" />
+                <span className="font-product-sans font-black text-base sm:text-lg md:text-xl text-[#222] uppercase">
+                  Add to Contacts
+                </span>
+              </a>
+              
+              {/* Secondary: Call Now */}
+              <a 
+                href="tel:+18172560122"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-white border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                aria-label="Call Garage Cowboy"
+              >
+                <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-[#222]" />
+                <span className="font-product-sans font-black text-base sm:text-lg md:text-xl text-[#222] uppercase">
+                  Call Now
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Crawl-delay for bots that respect it
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://garagecowboy.com/sitemap.xml
+

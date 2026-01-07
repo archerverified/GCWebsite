@@ -237,7 +237,7 @@ Edit `/styles/globals.css`:
 
 ### Update Content
 
-- **Phone Number:** Search for `(871) 256-0122` and replace
+- **Phone Number:** Search for `(817) 256-0122` and replace
 - **Service Areas:** Edit `ServiceAreasSection.tsx`
 - **FAQs:** Edit `faqData` array in `FAQSection.tsx`
 - **Testimonials:** Edit `testimonials` array in `FormFiller.tsx`

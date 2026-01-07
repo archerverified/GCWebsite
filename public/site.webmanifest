@@ -1,0 +1,30 @@
+{
+  "name": "Garage Cowboy",
+  "short_name": "Garage Cowboy",
+  "description": "24/7 Professional Garage Door Repair & Installation in Dallas-Fort Worth",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#FEC300",
+  "background_color": "#35363A",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}
+
+

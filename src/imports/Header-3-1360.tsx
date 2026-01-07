@@ -8,7 +8,7 @@ function Container() {
         <p className="mb-0">
           <span className="font-['Product_Sans:Regular',product-sans] not-italic tracking-[-0.32px]">Call</span> us at
         </p>
-        <p className="font-['Product_Sans_Black:Regular',product-sans]">(871) 256-0122</p>
+        <p className="font-['Product_Sans_Black:Regular',product-sans]">(817) 256-0122</p>
       </div>
       <div className="absolute h-[81.354px] left-[1739.09px] top-[57.1px] w-[209.242px]" data-name="emergency">
         <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />

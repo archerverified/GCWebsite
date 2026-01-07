@@ -6,6 +6,8 @@ import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { Accordion } from "../components/ui/accordion";
+import { Seo } from "../components/seo/Seo";
+import { createBreadcrumbSchema } from "../seo/schemas";
 
 // #region agent log
 fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AboutUs.tsx:10',message:'AboutUs module loaded',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'K'})}).catch(()=>{});
@@ -26,8 +28,20 @@ export function AboutUs() {
   fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AboutUs.tsx:25',message:'AboutUs content loaded',data:{title:content.title,sectionsCount:content.sections?.length},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'K'})}).catch(()=>{});
   // #endregion
 
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About Us", url: "/about-us" }
+  ]);
+
   return (
     <main className="bg-white">
+      <Seo
+        title="About Garage Cowboy - Your Trusted DFW Garage Door Experts"
+        description="Learn about Garage Cowboy's commitment to quality garage door services in Dallas-Fort Worth. Family-owned, professional technicians, 24/7 availability."
+        canonicalPath="/about-us"
+        schema={breadcrumbSchema}
+      />
+      
       {/* Hero Section */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-[#35363a]/90 rounded-b-[20px] border-t-2 border-t-[#fec300] border-x-0 border-b-0">
         <div className="container mx-auto max-w-5xl text-center">
@@ -42,7 +56,7 @@ export function AboutUs() {
             </div>
           )}
           <a 
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105 mt-8"
           >
             <Phone size={24} className="text-[#222]" />
@@ -79,7 +93,7 @@ export function AboutUs() {
       )}
 
       {/* CTA Section */}
-      <ReadyToGetStartedCTA ctaLabel="(871) 256-0122" />
+      <ReadyToGetStartedCTA ctaLabel="(817) 256-0122" />
     </main>
   );
 }

@@ -8,6 +8,8 @@ import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
+import { Seo } from "../components/seo/Seo";
+import { createServiceSchema, createBreadcrumbSchema, createFAQSchema } from "../seo/schemas";
 
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -17,8 +19,35 @@ export function ServiceDetail() {
   if (error) return <ContentError message={error} />;
   if (!content) return <ContentError message="Service not found" />;
 
+  // Create schemas for this page
+  const serviceSchema = createServiceSchema(
+    content.title, 
+    content.intro || content.description || `Professional ${content.title} services in Dallas-Fort Worth`,
+    slug
+  );
+  
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Services", url: "/services" },
+    { name: content.title, url: `/services/${slug}` }
+  ]);
+
+  const schemas = [serviceSchema, breadcrumbSchema];
+  
+  // Add FAQ schema if FAQs exist
+  if (content.faqs && content.faqs.length > 0) {
+    schemas.push(createFAQSchema(content.faqs));
+  }
+
   return (
     <main className="bg-white">
+      <Seo
+        title={`${content.title} in DFW - Garage Cowboy`}
+        description={content.intro || content.description || `Professional ${content.title} services in Dallas-Fort Worth. Expert technicians, same-day service. Call (817) 256-0122.`}
+        canonicalPath={`/services/${slug}`}
+        schema={schemas}
+      />
+      
       {/* Hero Section */}
       <section 
         className="relative min-h-[400px] bg-cover bg-center flex items-center justify-center"
@@ -36,7 +65,7 @@ export function ServiceDetail() {
             {content.title}
           </h1>
           <a 
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
           >
             <Phone size={24} className="text-[#222]" />

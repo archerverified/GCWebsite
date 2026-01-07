@@ -1,0 +1,130 @@
+[
+  {
+    "route": "home",
+    "path": "/",
+    "mobile": {
+      "performance": 50,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 66,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "services",
+    "path": "/services",
+    "mobile": {
+      "performance": 49,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 66,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "service-broken-spring",
+    "path": "/services/broken-spring-repair",
+    "mobile": {
+      "performance": 50,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 68,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "texas",
+    "path": "/texas",
+    "mobile": {
+      "performance": 51,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 67,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "city-dallas",
+    "path": "/texas/dallas",
+    "mobile": {
+      "performance": 46,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 67,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "residential",
+    "path": "/residential",
+    "mobile": {
+      "performance": 51,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 67,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "commercial",
+    "path": "/commercial",
+    "mobile": {
+      "performance": 50,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 67,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  },
+  {
+    "route": "about-us",
+    "path": "/about-us",
+    "mobile": {
+      "performance": 51,
+      "seo": 93,
+      "accessibility": 90,
+      "bestPractices": 96
+    },
+    "desktop": {
+      "performance": 66,
+      "seo": 92,
+      "accessibility": 90,
+      "bestPractices": 96
+    }
+  }
+]

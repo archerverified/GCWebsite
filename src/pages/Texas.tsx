@@ -6,25 +6,12 @@ import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { Accordion } from "../components/ui/accordion";
+import { Seo } from "../components/seo/Seo";
+import { buildTexasItemList } from "../seo/schemas";
+import { HUBS } from "../seo/areas";
 
-// List of city slugs for the hub grid
-const CITY_SLUGS = [
-  "dallas",
-  "fort-worth",
-  "arlington",
-  "plano",
-  "irving",
-  "frisco",
-  "grand-prairie",
-  "keller",
-  "mansfield",
-  "weatherford",
-  "denton",
-  "southlake",
-  "burleson",
-  "cleburne",
-  "mckinney",
-];
+// Filter out the DFW master hub for the city grid display
+const cityHubs = HUBS.filter(h => h.slug !== "dfw");
 
 export function Texas() {
   const { data: content, loading, error } = useContent<MarkdownContent>("texas");
@@ -33,8 +20,22 @@ export function Texas() {
   if (error) return <ContentError message={error} />;
   if (!content) return <ContentError message="No content available" />;
 
+  // Build ItemList schema for the hub cities
+  const itemListSchema = buildTexasItemList(cityHubs);
+
   return (
     <main className="bg-white">
+      <Seo
+        title="Garage Door Services in Texas - Dallas-Fort Worth Metroplex"
+        description="Professional garage door repair and installation services throughout the Dallas-Fort Worth metroplex. Same-day service in all major cities."
+        canonicalPath="/texas"
+        schema={itemListSchema}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Texas Service Areas", path: "/texas" }
+        ]}
+      />
+      
       {/* Hero (markdown-first: title + intro) */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-[#35363a]">
         <div className="container mx-auto max-w-5xl text-center">
@@ -56,29 +57,26 @@ export function Texas() {
             Service Areas
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {CITY_SLUGS.map((slug) => {
-              const cityName = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-              return (
-                <Link 
-                  key={slug}
-                  to={`/texas/${slug}`}
-                  className="bg-white rounded-[15px] border-2 border-[#35363a] p-6 hover:shadow-lg transition-all hover:border-[#fec300] block text-center"
-                >
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <MapPin size={24} className="text-[#fec300]" />
-                    <h3 className="font-product-sans font-bold text-xl text-[#323232]">
-                      {cityName}
-                    </h3>
-                  </div>
-                  <p className="font-product-sans text-sm text-[#666] mb-4">
-                    Residential, Commercial, Emergency
-                  </p>
-                  <span className="block w-full text-center bg-[#fec300] rounded-[10px] py-2 font-product-sans font-bold text-sm text-[#222] uppercase hover:bg-[#f7bd15] transition-colors">
-                    View Details
-                  </span>
-                </Link>
-              );
-            })}
+            {cityHubs.map((hub) => (
+              <Link 
+                key={hub.slug}
+                to={`/texas/${hub.slug}`}
+                className="bg-white rounded-[15px] border-2 border-[#35363a] p-6 hover:shadow-lg transition-all hover:border-[#fec300] block text-center"
+              >
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <MapPin size={24} className="text-[#fec300]" />
+                  <h3 className="font-product-sans font-bold text-xl text-[#323232]">
+                    {hub.name}
+                  </h3>
+                </div>
+                <p className="font-product-sans text-sm text-[#666] mb-4">
+                  Residential, Commercial, Emergency
+                </p>
+                <span className="block w-full text-center bg-[#fec300] rounded-[10px] py-2 font-product-sans font-bold text-sm text-[#222] uppercase hover:bg-[#f7bd15] transition-colors">
+                  View Details
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -33,13 +33,13 @@ export function Header() {
                 Call us at
               </p>
               <a 
-                href="tel:8712560122" 
+                href="tel:8172560122" 
                 className="font-product-sans font-black text-2xl lg:text-3xl transition-colors"
                 style={{ color: colors.brand.black }}
                 onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
                 onMouseLeave={(e) => e.currentTarget.style.color = colors.brand.black}
               >
-                (871) 256-0122
+                (817) 256-0122
               </a>
             </div>
           </div>

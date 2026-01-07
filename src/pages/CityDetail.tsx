@@ -8,26 +8,51 @@ import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
+import { Seo } from "../components/seo/Seo";
+import { buildCityServiceSchema, createFAQSchema } from "../seo/schemas";
+import { SUBAREAS_BY_HUB, getHubBySlug } from "../seo/areas";
+import { ServiceAreasGrid } from "../components/sections/ServiceAreasGrid";
+import { ServiceAreaMap } from "../components/maps/ServiceAreaMap";
 
-// Google Maps embed URLs for each city
-const CITY_MAPS: Record<string, string> = {
-  'dallas': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d214587.67967751tried67!2d-96.808891!3d32.779167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c19f77b45974b%3A0xb9ec9ba4f647678f!2sDallas%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'fort-worth': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d214587.67967751tried67!2d-97.309341!3d32.768799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e6e122dc807ad%3A0xa4af8bf8dd69cf17!2sFort%20Worth%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'arlington': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-97.115067!3d32.733398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e62d3c7a4e5c5%3A0x6d0e9ef3e5a6b!2sArlington%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'plano': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-96.698883!3d33.019844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c21da13c59513%3A0x62aa036489cd602b!2sPlano%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'irving': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-96.945419!3d32.819595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c2821b9c1f26f%3A0x26a5fdbc9fee7c3d!2sIrving%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'garland': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-96.638820!3d32.912624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c1f3ed1b7e3b5%3A0x12adc74ee75f2b91!2sGarland%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'frisco': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-96.818733!3d33.155373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3cb5d6f2a39b%3A0x8423a750f4fab7d3!2sFrisco%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'mckinney': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-96.614456!3d33.214561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c10cc52e63bfb%3A0xf6d173c81d3ed8e!2sMcKinney%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'grand-prairie': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107146.0!2d-97.003098!3d32.738773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e85917e2f9a07%3A0x3a7f7de4e37f8f8f!2sGrand%20Prairie%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'keller': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.2350!3d32.9232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864dd6f77b14ddf5%3A0xf7c49dbd40b6c87d!2sKeller%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'mansfield': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.142014!3d32.563507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e6bb02c0ed127%3A0xf08c0e3e66c5ef3b!2sMansfield%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'denton': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.133064!3d33.214840!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864dca71f15c78f1%3A0x7f6b8f9f0a4a7f6a!2sDenton%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'southlake': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.1341!3d32.9413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864dd11afec8d2ad%3A0x85f47cf0a5d9c7e1!2sSouthlake%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'burleson': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.3208!3d32.5421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e761ed2b7d8e9%3A0x3d8a29b0e3f5c6f1!2sBurleson%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'cleburne': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.3867!3d32.3476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e7f3f3b8e2d1b%3A0x5a4c3e2f1d0b9a87!2sCleburne%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
-  'weatherford': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53573.0!2d-97.797386!3d32.758972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8651ff3f5b3e2b1d%3A0x7a6b5c4d3e2f1a0b!2sWeatherford%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000',
+/**
+ * Hub map configurations with center coordinates and zoom levels.
+ * Zoom levels are adjusted to show the hub city boundary + surrounding subcities.
+ */
+const HUB_MAP_CONFIG: Record<string, { lat: number; lng: number; zoom: number }> = {
+  "dallas": { lat: 32.7767, lng: -96.7970, zoom: 10 },
+  "fort-worth": { lat: 32.7555, lng: -97.3308, zoom: 10 },
+  "arlington": { lat: 32.7357, lng: -97.1081, zoom: 11 },
+  "plano": { lat: 33.0198, lng: -96.6989, zoom: 11 },
+  "irving": { lat: 32.8140, lng: -96.9489, zoom: 11 },
+  "frisco": { lat: 33.1507, lng: -96.8236, zoom: 11 },
+  "grand-prairie": { lat: 32.7459, lng: -96.9978, zoom: 11 },
+  "keller": { lat: 32.9346, lng: -97.2517, zoom: 11 },
+  "mansfield": { lat: 32.5632, lng: -97.1417, zoom: 10 },
+  "weatherford": { lat: 32.7593, lng: -97.7972, zoom: 10 },
+  "denton": { lat: 33.2148, lng: -97.1331, zoom: 10 },
+  "southlake": { lat: 32.9412, lng: -97.1342, zoom: 11 },
+  "burleson": { lat: 32.5421, lng: -97.3208, zoom: 11 },
+  "cleburne": { lat: 32.3476, lng: -97.3867, zoom: 11 },
+  "mckinney": { lat: 33.1972, lng: -96.6397, zoom: 10 }
 };
+
+/**
+ * Generate Google Maps embed URL showing the hub city with its boundary.
+ * Uses the hub city name for search (to get city boundary outline) and
+ * coordinates for proper centering to show surrounding service areas.
+ */
+function generateServiceAreaMapUrl(hubSlug: string, hubName: string): string {
+  const config = HUB_MAP_CONFIG[hubSlug];
+  
+  if (config) {
+    // Use coordinates-based embed centered on the hub with zoom to show surrounding areas
+    // Searching for just the hub city name shows its boundary (the red dotted line)
+    return `https://www.google.com/maps?q=${encodeURIComponent(hubName + ', TX')}&ll=${config.lat},${config.lng}&z=${config.zoom}&output=embed`;
+  }
+  
+  // Fallback to simple search
+  return `https://www.google.com/maps?q=${encodeURIComponent(hubName + ', TX')}&t=m&z=10&output=embed`;
+}
 
 // Helper to extract city name from slug
 const getCityDisplayName = (slug: string): string => {
@@ -45,11 +70,38 @@ export function CityDetail() {
   if (error) return <ContentError message={error} />;
   if (!content) return <ContentError message="City not found" />;
 
-  const cityName = getCityDisplayName(city || '');
-  const mapSrc = CITY_MAPS[city || ''];
+  const citySlug = city || '';
+  const hub = getHubBySlug(citySlug);
+  const cityName = hub?.name || getCityDisplayName(citySlug);
+  const subcities = SUBAREAS_BY_HUB[citySlug] ?? [];
+  
+  // Generate map URL showing hub city boundary + surrounding service area
+  const mapSrc = generateServiceAreaMapUrl(citySlug, cityName);
+
+  // Create schemas for SEO - use new buildCityServiceSchema that includes subcities
+  const serviceSchema = buildCityServiceSchema(citySlug, `Garage Door Repair in ${cityName}`);
+
+  const schemas: object[] = [serviceSchema];
+  
+  // Add FAQ schema if FAQs exist
+  if (content.faqs && content.faqs.length > 0) {
+    schemas.push(createFAQSchema(content.faqs));
+  }
 
   return (
     <main className="bg-white">
+      <Seo
+        title={`Garage Door Service in ${cityName}, TX`}
+        description={`Professional garage door repair and installation in ${cityName}, Texas. Same-day service, 24/7 emergency repairs. Call (817) 256-0122.`}
+        canonicalPath={`/texas/${city}`}
+        schema={schemas}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Texas", path: "/texas" },
+          { name: cityName, path: `/texas/${city}` }
+        ]}
+      />
+      
       {/* Hero Section */}
       <section 
         className="relative min-h-[400px] bg-cover bg-center flex items-center justify-center"
@@ -70,7 +122,7 @@ export function CityDetail() {
             </h1>
           </div>
           <a 
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
           >
             <Phone size={24} className="text-[#222]" />
@@ -112,6 +164,15 @@ export function CityDetail() {
         </section>
       )}
 
+      {/* Also Serving Section - displays subcities for this hub */}
+      {subcities.length > 0 && (
+        <ServiceAreasGrid 
+          title={`Also Serving Near ${cityName}`}
+          items={subcities}
+          linkMode="hubAnchor"
+        />
+      )}
+
       {/* FAQs Section */}
       {content.faqs && content.faqs.length > 0 && (
         <Accordion 
@@ -120,28 +181,23 @@ export function CityDetail() {
         />
       )}
 
-      {/* Map Section */}
-      {mapSrc && (
-        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
-          <div className="container mx-auto max-w-6xl">
-            <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] mb-8 text-center">
-              Service Area: {cityName}, TX
-            </h2>
-            <div className="rounded-[20px] overflow-hidden shadow-lg border-2 border-[#35363a]">
-              <iframe 
-                src={mapSrc}
-                width="100%" 
-                height="450" 
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Map of ${cityName}, TX`}
-              />
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Map Section - Shows hub city and all subcities with markers and polygon */}
+      <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] mb-8 text-center">
+            {subcities.length > 0 
+              ? `Service Area: ${cityName} & Surrounding Cities`
+              : `Service Area: ${cityName}, TX`
+            }
+          </h2>
+          <ServiceAreaMap
+            hubSlug={citySlug}
+            hubName={cityName}
+            subcities={subcities}
+            fallbackEmbedUrl={mapSrc}
+          />
+        </div>
+      </section>
 
       {/* CTA Section */}
       <ReadyToGetStartedCTA 

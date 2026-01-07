@@ -2,7 +2,6 @@ import { useState, FormEvent, useEffect } from "react";
 import { toast } from "sonner";
 import svgPaths from "../imports/svg-pry7uv8zg5";
 import imgVerified from "figma:asset/52e672056319f396f2b1bf45a03eee134d6b47d8.png";
-import imgGmail from "figma:asset/a3e4058ae769d1d9a0cd5c9e6f8d349b2c963f57.png";
 
 const testimonials = [
   {
@@ -57,7 +56,9 @@ export function FormFiller() {
     email: "",
     phone: "",
     zipCode: "",
-    message: ""
+    message: "",
+    preferredDate: "",
+    preferredTime: ""
   });
 
   // Auto-advance carousel every 5 seconds
@@ -84,7 +85,9 @@ export function FormFiller() {
       email: "",
       phone: "",
       zipCode: "",
-      message: ""
+      message: "",
+      preferredDate: "",
+      preferredTime: ""
     });
   };
 
@@ -104,16 +107,13 @@ export function FormFiller() {
           className="font-product-sans text-base md:text-lg lg:text-2xl text-center text-[#222] uppercase px-4 font-black"
           data-font-probe="cta-banner"
         >
-          Send us a message & GET a{" "}
-          <span className="font-product-sans font-black">free estimate</span>
-          {" "}within{" "}
-          <span className="font-product-sans font-black">24 hours</span>
+          BOOK AN APPOINTMENT & GET A FREE INSPECTION TODAY
         </p>
       </div>
 
       {/* Form Section */}
       <form onSubmit={handleSubmit} className="px-4 lg:px-8 py-8 lg:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6">
           {/* Name & Email Column */}
           <div className="space-y-4">
             <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
@@ -145,7 +145,7 @@ export function FormFiller() {
                 placeholder="Phone Number*"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
                 required
               />
             </div>
@@ -155,7 +155,37 @@ export function FormFiller() {
                 placeholder="Zip Code"
                 value={formData.zipCode}
                 onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-['Product_Sans_Medium:Regular'] text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+              />
+            </div>
+          </div>
+
+          {/* Date & Time Column */}
+          <div className="space-y-4">
+            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+              <label htmlFor="preferredDate" className="sr-only">Preferred Date</label>
+              <input
+                type="date"
+                id="preferredDate"
+                name="preferredDate"
+                placeholder="Preferred Date"
+                value={formData.preferredDate}
+                onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                aria-label="Preferred Date"
+              />
+            </div>
+            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+              <label htmlFor="preferredTime" className="sr-only">Preferred Time</label>
+              <input
+                type="time"
+                id="preferredTime"
+                name="preferredTime"
+                placeholder="Preferred Time"
+                value={formData.preferredTime}
+                onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                aria-label="Preferred Time"
               />
             </div>
           </div>
@@ -174,7 +204,7 @@ export function FormFiller() {
           </div>
 
           {/* Submit Column */}
-          <div className="flex flex-col items-center justify-between gap-4">
+          <div className="flex flex-col items-center justify-center gap-4">
             <button
               type="submit"
               className="w-full max-w-[208px] bg-[#fec300] border-2 border-[#35363a] rounded-[5px] px-8 py-4 shadow-[0px_2px_5px_0px_#535458] hover:shadow-lg transition-all hover:scale-105 font-product-sans"
@@ -183,19 +213,12 @@ export function FormFiller() {
                 SUBMIT
               </span>
             </button>
-            
-            <div className="flex items-center gap-2 text-[#303135]">
-              <img src={imgGmail} alt="" className="w-5 h-5" />
-              <span className="font-product-sans font-black text-[13px]">
-                Powered by Google
-              </span>
-            </div>
           </div>
         </div>
 
         {/* Required note */}
-        <p className="font-product-sans font-black text-[12px] text-[#303135] mt-4">
-          *Required
+        <p className="font-product-sans font-black text-[12px] text-[#FEC300] mt-4">
+          *REQUIRED
         </p>
       </form>
 
@@ -209,10 +232,10 @@ export function FormFiller() {
               <img src={imgVerified} alt="Verified" className="w-8 h-8" />
               <div className="h-[1.25px] w-20 md:w-40 lg:w-80 bg-[#8b8b92]" />
             </div>
-            <h2 className="font-['Product_Sans_Regular'] text-xl md:text-2xl text-[#323232] mb-1">
+            <h2 className="font-product-sans text-xl md:text-2xl text-[#323232] mb-1 uppercase">
               TAKE IT FROM OUR
             </h2>
-            <h3 className="font-['Product_Sans_Regular'] text-xl md:text-2xl text-[#323232] font-black">
+            <h3 className="font-product-sans text-xl md:text-2xl text-[#323232] font-black uppercase">
               VALUED CUSTOMERS
             </h3>
           </div>

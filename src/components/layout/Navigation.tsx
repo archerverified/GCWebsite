@@ -185,9 +185,9 @@ export function Navigation() {
           <div className="flex items-center h-full ml-auto lg:ml-0">
             {/* Mobile: Icon-only phone button (below xl) */}
             <a
-              href="tel:8712560122"
+              href="tel:8172560122"
               className="xl:hidden flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#EAEAEA] transition-colors group"
-              aria-label="Call 871-256-0122"
+              aria-label="Call 817-256-0122"
             >
               <Phone 
                 className="w-6 h-6 text-white group-hover:text-[#FEC300] transition-colors" 
@@ -197,13 +197,13 @@ export function Navigation() {
 
             {/* Desktop: Full CTA button (xl+) */}
             <a
-              href="tel:8712560122"
+              href="tel:8172560122"
               className="hidden xl:flex items-center gap-3 rounded-[20px] px-6 py-3 shadow-md hover:shadow-lg transition-all font-product-sans"
               style={{ 
                 backgroundColor: colors.brand.yellowPrimary, 
                 border: `2px solid ${colors.brand.dark}` 
               }}
-              aria-label="Call to schedule a free inspection at 871-256-0122"
+              aria-label="Call to schedule a free inspection at 817-256-0122"
             >
               <Phone size={24} style={{ color: colors.brand.black }} aria-hidden="true" />
               <div className="text-left">

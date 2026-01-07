@@ -192,7 +192,7 @@ function createServiceDetailJson(parsedContent, filename) {
       headline: parsedContent.title,
       subheadline: parsedContent.intro.split('\n')[0] || '',
       ctaText: 'Get Free Quote',
-      ctaLink: 'tel:8712560122'
+      ctaLink: 'tel:8172560122'
     },
     sections: parsedContent.sections,
     faqs: parsedContent.faqs,
@@ -200,7 +200,7 @@ function createServiceDetailJson(parsedContent, filename) {
       title: `Need ${parsedContent.title}?`,
       subtitle: 'Our expert technicians are ready to help',
       buttonText: 'Call Now',
-      phone: '(871) 256-0122'
+      phone: '(817) 256-0122'
     }
   };
 }
@@ -226,7 +226,7 @@ function createCityJson(parsedContent, filename) {
       'Door Off Track',
       'Roller Repair'
     ],
-    phone: '(871) 256-0122'
+    phone: '(817) 256-0122'
   };
 }
 

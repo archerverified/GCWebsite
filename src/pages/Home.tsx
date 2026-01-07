@@ -4,6 +4,8 @@ import { GarageDoorRepair } from "../components/GarageDoorRepair";
 import { GarageCowboyStoryWhySection } from "../components/GarageCowboyStoryWhySection";
 import { FAQSection } from "../components/FAQSection";
 import { ServiceAreasSection } from "../components/ServiceAreasSection";
+import { Seo } from "../components/seo/Seo";
+import { buildBaseGraph } from "../seo/schemas";
 
 export function Home() {
   // #region agent log
@@ -11,6 +13,13 @@ export function Home() {
   // #endregion
   return (
     <>
+      <Seo
+        title="Garage Cowboy - 24/7 Garage Door Repair in Dallas-Fort Worth"
+        description="Professional garage door repair and installation services in Dallas-Fort Worth. Same-day service, expert technicians, competitive prices. Call (817) 256-0122 for immediate assistance."
+        canonicalPath="/"
+        schema={buildBaseGraph()}
+      />
+      
       {/* Hero Section */}
       <HeroSection />
       

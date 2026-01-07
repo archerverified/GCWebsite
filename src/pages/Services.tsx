@@ -8,6 +8,8 @@ import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
+import { Seo } from "../components/seo/Seo";
+import { createBreadcrumbSchema } from "../seo/schemas";
 
 // List of service slugs for the hub grid
 const SERVICE_SLUGS = [
@@ -36,8 +38,20 @@ export function Services() {
   if (error) return <ContentError message={error} />;
   if (!content) return <ContentError message="No content available" />;
 
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Services", url: "/services" }
+  ]);
+
   return (
     <main className="bg-white">
+      <Seo
+        title="Garage Door Services in DFW - Repair & Installation"
+        description="Complete garage door services including spring repair, opener installation, off-track repair, and new door installation. 24/7 emergency service available in Dallas-Fort Worth."
+        canonicalPath="/services"
+        schema={breadcrumbSchema}
+      />
+      
       {/* Hero Section */}
       <section 
         className="relative min-h-[400px] bg-cover bg-center flex items-center justify-center"
@@ -53,7 +67,7 @@ export function Services() {
             </ReactMarkdown>
           </div>
           <a 
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
           >
             <Phone size={24} className="text-[#222]" />

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Cowboy hat favicon for Garage Cowboy -->
+  <!-- Brand colors: Yellow #FEC300, Dark Gray #35363A -->
+  
+  <!-- Hat brim (dark gray) -->
+  <ellipse cx="16" cy="22" rx="14" ry="4" fill="#35363A"/>
+  
+  <!-- Hat crown base (yellow) -->
+  <path d="M8 22 C8 22, 6 14, 10 12 L22 12 C26 14, 24 22, 24 22 Z" fill="#FEC300"/>
+  
+  <!-- Hat crown top (yellow with curve) -->
+  <path d="M10 12 C10 8, 12 6, 16 6 C20 6, 22 8, 22 12 Z" fill="#FEC300"/>
+  
+  <!-- Hat band (dark gray stripe) -->
+  <rect x="9" y="13" width="14" height="2" rx="0.5" fill="#35363A"/>
+  
+  <!-- Crown crease (subtle shadow) -->
+  <path d="M12 8 Q16 10, 20 8" stroke="#E5B000" stroke-width="0.5" fill="none"/>
+</svg>
+
+

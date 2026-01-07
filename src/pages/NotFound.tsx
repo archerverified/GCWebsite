@@ -25,7 +25,7 @@ export function NotFound() {
             </span>
           </Link>
           <a
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center justify-center gap-3 bg-[#35363a] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
           >
             <Phone size={24} className="text-white" />

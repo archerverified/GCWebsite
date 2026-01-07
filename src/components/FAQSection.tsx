@@ -100,7 +100,7 @@ export function FAQSection() {
             HAVE MORE QUESTIONS?
           </h3>
           <a
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-8 md:px-12 py-4 md:py-6 shadow-[0px_5px_5px_0px_rgba(0,0,0,0.25)] hover:shadow-xl transition-all hover:scale-105"
           >
             <span className="font-product-sans font-black text-2xl md:text-3xl lg:text-4xl text-[#222] uppercase leading-9">

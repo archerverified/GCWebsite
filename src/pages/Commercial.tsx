@@ -7,6 +7,8 @@ import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
+import { Seo } from "../components/seo/Seo";
+import { createBreadcrumbSchema, createServiceSchema, createFAQSchema } from "../seo/schemas";
 
 export function Commercial() {
   const { data: content, loading, error } = useContent<MarkdownContent>("commercial");
@@ -15,8 +17,34 @@ export function Commercial() {
   if (error) return <ContentError message={error} />;
   if (!content) return <ContentError message="No content available" />;
 
+  // Create schemas for SEO
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Commercial", url: "/commercial" }
+  ]);
+
+  const serviceSchema = createServiceSchema(
+    "Commercial Garage Door Services",
+    content.intro || "Commercial and industrial garage door solutions in Dallas-Fort Worth. Roll-up doors, sectional doors, emergency repairs.",
+    undefined
+  );
+
+  const schemas = [breadcrumbSchema, serviceSchema];
+  
+  // Add FAQ schema if FAQs exist
+  if (content.faqs && content.faqs.length > 0) {
+    schemas.push(createFAQSchema(content.faqs));
+  }
+
   return (
     <main className="bg-white">
+      <Seo
+        title="Commercial Garage Door Services in DFW"
+        description="Commercial and industrial garage door solutions in Dallas-Fort Worth. Roll-up doors, sectional doors, emergency repairs. Call (817) 256-0122."
+        canonicalPath="/commercial"
+        schema={schemas}
+      />
+      
       {/* Hero Section */}
       <section 
         className="relative min-h-[400px] bg-cover bg-center flex items-center justify-center"
@@ -27,7 +55,7 @@ export function Commercial() {
             {content.title}
           </h1>
           <a 
-            href="tel:8712560122"
+            href="tel:8172560122"
             className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
           >
             <Phone size={24} className="text-[#222]" />

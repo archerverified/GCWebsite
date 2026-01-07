@@ -1,21 +1,23 @@
 // #region agent log
 fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GarageDoorRepair.tsx:1',message:'GarageDoorRepair module loading',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'M'})}).catch(()=>{});
 // #endregion
-import imgBrokenSpringRepairJpg from "figma:asset/0d6675a94a5aabfd635c22fe5ff422c3d7fc04fe.png";
-import imgOpenerRepairInstallationJpg from "figma:asset/1ac7d2002343a9831139ef4d90b7b17778658369.png";
-import imgDoorOffTrackJpg from "figma:asset/f527372ca61ec0cc7f6ffa7ded9c984ae03ac584.png";
-import imgBrokenCableRepairJpg from "figma:asset/1c62f51752f44c4fd21814716eecceafee19b544.png";
-import imgNewDoorInstallationJpg from "figma:asset/273650105c2aa2cdba2fd19a6badb774ff0ae0a3.png";
-import imgImage3726 from "figma:asset/506261cfe7744ad1bc312cebba705b1e4dfd119e.png";
-import imgRemoteRepairProgram1Jpg from "figma:asset/7f99de03b46383c460c4e6dbd31e2bfd41b5d9a8.png";
-import imgGarageDoorRollerRepairJpg from "figma:asset/0b552500288d8ce3f03f67c96b0ae808ebed82f2.png";
+// Optimized WebP service images
+import brokenSpringImg from "../assets/services/broken-spring-repair.webp";
+import openerRepairImg from "../assets/services/garage-opener-repair-install.webp";
+import offTrackImg from "../assets/services/fixing-door-off-track.webp";
+import brokenCableImg from "../assets/services/broken-cable-repair.webp";
+import newInstallImg from "../assets/services/new-garage-door-installs.webp";
+import maintenanceImg from "../assets/services/door-service-maintenance.webp";
+import remotesImg from "../assets/services/garage-door-remotes.webp";
+import rollerRepairImg from "../assets/services/garage-door-roller-repair.webp";
 import { useNavigate } from "react-router-dom";
 import { Group47927 } from "./Group47927";
 
 const servicesData = [
   {
-    image: imgBrokenSpringRepairJpg,
+    image: brokenSpringImg,
     title: "BROKEN SPRING REPAIR",
+    objectPosition: "50% 35%", // Springs often at top of image
     roundedCorner: "",
     cardStyle: { borderRadius: "20px 0px 0px 0px" },
     imageStyle: {
@@ -34,8 +36,9 @@ const servicesData = [
     ]
   },
   {
-    image: imgOpenerRepairInstallationJpg,
+    image: openerRepairImg,
     title: "GARAGE OPENER REPAIR & INSTALL",
+    objectPosition: "50% 40%", // Opener mechanism focus
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 0px" },
     services: [
@@ -46,7 +49,7 @@ const servicesData = [
     ]
   },
   {
-    image: imgDoorOffTrackJpg,
+    image: offTrackImg,
     title: "FIXING DOOR OFF-TRACK",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 0px" },
@@ -58,7 +61,7 @@ const servicesData = [
     ]
   },
   {
-    image: imgBrokenCableRepairJpg,
+    image: brokenCableImg,
     title: "BROKEN CABLE REPAIR",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 20px 0px 0px", borderWidth: "2px" },
@@ -71,7 +74,7 @@ const servicesData = [
     ]
   },
   {
-    image: imgNewDoorInstallationJpg,
+    image: newInstallImg,
     title: "NEW GARAGE DOOR INSTALLS",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 20px" },
@@ -83,7 +86,7 @@ const servicesData = [
     ]
   },
   {
-    image: imgImage3726,
+    image: maintenanceImg,
     title: "DOOR SERVICE & MAINTENANCE",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 0px" },
@@ -95,7 +98,7 @@ const servicesData = [
     ]
   },
   {
-    image: imgRemoteRepairProgram1Jpg,
+    image: remotesImg,
     title: "GARAGE DOOR REMOTES",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px", borderWidth: "3px" },
@@ -107,7 +110,7 @@ const servicesData = [
     ]
   },
   {
-    image: imgGarageDoorRollerRepairJpg,
+    image: rollerRepairImg,
     title: "GARAGE DOOR ROLLER REPAIR",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 20px 0px" },
@@ -124,13 +127,14 @@ interface ServiceCardProps {
   image: string;
   title: string;
   services: { name: string; highlighted: boolean }[];
+  objectPosition?: string;
   roundedCorner?: string;
   cardStyle?: React.CSSProperties;
   imageStyle?: React.CSSProperties;
   onReadMore?: () => void;
 }
 
-function ServiceCard({ image, title, services, roundedCorner = "", cardStyle, imageStyle, onReadMore }: ServiceCardProps) {
+function ServiceCard({ image, title, services, objectPosition, roundedCorner = "", cardStyle, imageStyle, onReadMore }: ServiceCardProps) {
   return (
     <div 
       className="flex flex-col bg-white overflow-hidden border-[3px] border-black shadow-lg hover:shadow-xl transition-all rounded-b-[20px] px-[0px] py-[-39px] font-product-sans font-black"
@@ -141,8 +145,13 @@ function ServiceCard({ image, title, services, roundedCorner = "", cardStyle, im
         <img 
           src={image} 
           alt={title}
-          className="w-full h-full object-cover"
-          style={imageStyle}
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover object-center"
+          style={{ 
+            ...imageStyle,
+            objectPosition: objectPosition ?? "50% 50%"
+          }}
         />
         <div aria-hidden="true" className={`absolute border-[3px_3px_0px] border-black border-solid inset-0 pointer-events-none ${roundedCorner}`} />
       </div>
@@ -231,6 +240,7 @@ export function GarageDoorRepair() {
               image={service.image}
               title={service.title}
               services={service.services}
+              objectPosition={service.objectPosition}
               roundedCorner={service.roundedCorner}
               cardStyle={service.cardStyle}
               imageStyle={service.imageStyle}
@@ -251,7 +261,7 @@ export function GarageDoorRepair() {
             </p>
             
             <a
-              href="tel:8712560122"
+              href="tel:8172560122"
               className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
