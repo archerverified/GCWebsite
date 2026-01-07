@@ -7,9 +7,9 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
  * Exchanges the authorization code for access/refresh tokens.
  * 
  * Environment Variables Required:
- * - GOOGLE_CLIENT_ID: Your Google OAuth 2.0 Client ID
- * - GOOGLE_CLIENT_SECRET: Your Google OAuth 2.0 Client Secret
- * - GOOGLE_REDIRECT_URI: The callback URL (must match the one used in start.ts)
+ * - GOOGLE_OAUTH_CLIENT_ID: Your Google OAuth 2.0 Client ID
+ * - GOOGLE_OAUTH_CLIENT_SECRET: Your Google OAuth 2.0 Client Secret
+ * - GOOGLE_OAUTH_REDIRECT_URI: The callback URL (must match the one used in start.ts)
  * 
  * Optional:
  * - OAUTH_SUCCESS_REDIRECT: URL to redirect after successful auth (defaults to /)
@@ -22,9 +22,9 @@ const GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo';
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { code, state, error } = req.query;
 
-  const clientId = process.env.GOOGLE_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  const redirectUri = process.env.GOOGLE_REDIRECT_URI;
+  const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
+  const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI;
   const successRedirect = process.env.OAUTH_SUCCESS_REDIRECT || '/';
   const errorRedirect = process.env.OAUTH_ERROR_REDIRECT || '/?error=oauth';
 
@@ -40,12 +40,44 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.redirect(302, `${errorRedirect}&reason=missing_code`);
   }
 
-  if (!clientId || !clientSecret || !redirectUri) {
-    console.error('OAuth not configured');
-    return res.status(500).json({
-      error: 'OAuth not configured',
-      message: 'Missing required environment variables.',
-    });
+  // Validate all required environment variables
+  const missingVars: string[] = [];
+  if (!clientId) missingVars.push('GOOGLE_OAUTH_CLIENT_ID');
+  if (!clientSecret) missingVars.push('GOOGLE_OAUTH_CLIENT_SECRET');
+  if (!redirectUri) missingVars.push('GOOGLE_OAUTH_REDIRECT_URI');
+
+  if (missingVars.length > 0) {
+    const errorHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAuth Configuration Error</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+    .error-box { background: white; border: 2px solid #dc3545; border-radius: 8px; padding: 24px 32px; max-width: 500px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { color: #dc3545; margin: 0 0 16px 0; font-size: 24px; }
+    p { color: #333; margin: 0 0 12px 0; }
+    code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; font-size: 14px; color: #d63384; }
+    ul { text-align: left; margin: 16px 0; padding-left: 24px; }
+    li { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="error-box">
+    <h1>⚠️ OAuth Not Configured</h1>
+    <p>The following environment variables are missing:</p>
+    <ul>
+      ${missingVars.map(v => `<li><code>${v}</code></li>`).join('')}
+    </ul>
+    <p>Please add these to your Vercel project settings.</p>
+  </div>
+</body>
+</html>`;
+
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(500).send(errorHtml);
   }
 
   // Verify state parameter (CSRF protection)
@@ -142,4 +174,3 @@ function getCookieValue(req: VercelRequest, name: string): string | null {
   const match = cookies.match(new RegExp(`(^| )${name}=([^;]+)`));
   return match ? match[2] : null;
 }
-
