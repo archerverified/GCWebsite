@@ -50,6 +50,7 @@ export function FormFiller() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<'sent' | 'failed' | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -80,6 +81,7 @@ export function FormFiller() {
       preferredTime: ""
     });
     setSubmitSuccess(false);
+    setEmailStatus(null);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -121,7 +123,13 @@ export function FormFiller() {
 
       // Success!
       setSubmitSuccess(true);
-      toast.success('Appointment scheduled! Check your email for confirmation.');
+      setEmailStatus(data.emailStatus || 'sent');
+      
+      if (data.emailStatus === 'sent') {
+        toast.success('Booked! Added to calendar. Confirmation email sent.');
+      } else {
+        toast.success('Booked! Added to calendar. Email may be delayed.');
+      }
       
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
@@ -168,7 +176,10 @@ export function FormFiller() {
               ✅ Added to calendar
             </p>
             <p className="font-product-sans text-[#303135] mb-6">
-              We've sent a confirmation to your email. We'll see you soon!
+              {emailStatus === 'sent' 
+                ? "Confirmation email sent! We'll see you soon!"
+                : "Email may be delayed, but your appointment is confirmed. We'll see you soon!"
+              }
             </p>
             <button
               type="button"

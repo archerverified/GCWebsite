@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { sendAdminBookingEmail, sendCustomerBookingEmail, type BookingPayload } from '../_lib/email';
 
 /**
  * Booking Creation Endpoint
@@ -237,12 +238,47 @@ Booked via garagecowboy.com
       end: { dateTime: string };
     };
 
+    // Send email notifications (non-blocking - don't fail booking if email fails)
+    let emailStatus: 'sent' | 'failed' = 'sent';
+    let emailErrorHint: string | null = null;
+
+    const emailPayload: BookingPayload = {
+      name: body.name!,
+      phone: body.phone!,
+      email: body.email!,
+      date: body.date!,
+      time: body.time!,
+      zipCode: body.zipCode,
+      message: body.message,
+    };
+
+    try {
+      const [adminResult, customerResult] = await Promise.all([
+        sendAdminBookingEmail(emailPayload, eventData.htmlLink),
+        sendCustomerBookingEmail(emailPayload, eventData.htmlLink),
+      ]);
+
+      if (!adminResult.success || !customerResult.success) {
+        emailStatus = 'failed';
+        emailErrorHint = 'Email delivery may be delayed';
+        console.error('Email send partial failure - admin:', adminResult.success, 'customer:', customerResult.success);
+      } else {
+        console.log('Emails sent successfully - eventId:', eventData.id);
+      }
+    } catch (emailErr) {
+      emailStatus = 'failed';
+      emailErrorHint = 'Email delivery may be delayed';
+      console.error('Email send error:', emailErr instanceof Error ? emailErr.message : 'Unknown error');
+    }
+
     // Success response
     return res.status(200).json({
       success: true,
       message: 'Your appointment has been scheduled!',
       eventId: eventData.id,
       htmlLink: eventData.htmlLink,
+      emailStatus,
+      emailErrorHint,
       appointment: {
         date: body.date,
         time: body.time,
