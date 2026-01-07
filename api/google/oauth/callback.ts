@@ -24,7 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
-  const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI;
+  const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI || process.env.GOOGLE_REDIRECT_URI;
   const successRedirect = process.env.OAUTH_SUCCESS_REDIRECT || '/';
   const errorRedirect = process.env.OAUTH_ERROR_REDIRECT || '/?error=oauth';
 
@@ -104,8 +104,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     if (!tokenResponse.ok) {
-      const errorData = await tokenResponse.text();
-      console.error('Token exchange failed:', errorData);
+      // Do NOT log error body to avoid leaking tokens or secrets
+      console.error('Token exchange failed - status:', tokenResponse.status);
       return res.redirect(302, `${errorRedirect}&reason=token_exchange_failed`);
     }
 

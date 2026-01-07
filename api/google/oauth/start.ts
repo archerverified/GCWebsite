@@ -10,15 +10,15 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
  * - GOOGLE_OAUTH_REDIRECT_URI: The callback URL (e.g., https://yourdomain.com/api/google/oauth/callback)
  * 
  * Optional:
- * - GOOGLE_OAUTH_SCOPES: Comma-separated list of scopes (defaults to email,profile)
+ * - GOOGLE_OAUTH_SCOPES: Comma-separated list of scopes (defaults to email,profile,calendar.events)
  */
 
 const GOOGLE_AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
-  const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI;
-  const scopes = process.env.GOOGLE_OAUTH_SCOPES || 'email,profile';
+  const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI || process.env.GOOGLE_REDIRECT_URI;
+  const scopes = process.env.GOOGLE_OAUTH_SCOPES || 'email,profile,https://www.googleapis.com/auth/calendar.events';
 
   // Validate all required environment variables
   const missingVars: string[] = [];
@@ -59,6 +59,23 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).send(errorHtml);
   }
 
+  // Validate redirectUri format
+  if (!redirectUri.startsWith('https://')) {
+    return res.status(400).json({
+      error: 'OAuth misconfigured',
+      redirectUri,
+      hint: 'Set GOOGLE_OAUTH_REDIRECT_URI to https://garagecowboy.com/api/google/oauth/callback and add it to Google Authorized Redirect URIs exactly.'
+    });
+  }
+
+  if (!redirectUri.includes('/api/google/oauth/callback')) {
+    return res.status(400).json({
+      error: 'OAuth misconfigured',
+      redirectUri,
+      hint: 'Set GOOGLE_OAUTH_REDIRECT_URI to https://garagecowboy.com/api/google/oauth/callback and add it to Google Authorized Redirect URIs exactly.'
+    });
+  }
+
   // Generate a random state parameter for CSRF protection
   const state = generateRandomState();
 
@@ -70,6 +87,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     scope: scopes.split(',').map(s => s.trim()).join(' '),
     access_type: 'offline',
     prompt: 'consent',
+    include_granted_scopes: 'true',
     state,
   });
 
