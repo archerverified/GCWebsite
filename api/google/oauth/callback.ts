@@ -1,0 +1,145 @@
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+
+/**
+ * Google OAuth Callback Endpoint
+ * 
+ * Handles the OAuth 2.0 callback from Google after user consent.
+ * Exchanges the authorization code for access/refresh tokens.
+ * 
+ * Environment Variables Required:
+ * - GOOGLE_CLIENT_ID: Your Google OAuth 2.0 Client ID
+ * - GOOGLE_CLIENT_SECRET: Your Google OAuth 2.0 Client Secret
+ * - GOOGLE_REDIRECT_URI: The callback URL (must match the one used in start.ts)
+ * 
+ * Optional:
+ * - OAUTH_SUCCESS_REDIRECT: URL to redirect after successful auth (defaults to /)
+ * - OAUTH_ERROR_REDIRECT: URL to redirect after failed auth (defaults to /?error=oauth)
+ */
+
+const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
+const GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo';
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const { code, state, error } = req.query;
+
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const redirectUri = process.env.GOOGLE_REDIRECT_URI;
+  const successRedirect = process.env.OAUTH_SUCCESS_REDIRECT || '/';
+  const errorRedirect = process.env.OAUTH_ERROR_REDIRECT || '/?error=oauth';
+
+  // Handle OAuth errors from Google
+  if (error) {
+    console.error('OAuth error from Google:', error);
+    return res.redirect(302, `${errorRedirect}&reason=${encodeURIComponent(String(error))}`);
+  }
+
+  // Validate required parameters
+  if (!code || typeof code !== 'string') {
+    console.error('Missing authorization code');
+    return res.redirect(302, `${errorRedirect}&reason=missing_code`);
+  }
+
+  if (!clientId || !clientSecret || !redirectUri) {
+    console.error('OAuth not configured');
+    return res.status(500).json({
+      error: 'OAuth not configured',
+      message: 'Missing required environment variables.',
+    });
+  }
+
+  // Verify state parameter (CSRF protection)
+  const storedState = getCookieValue(req, 'oauth_state');
+  if (!storedState || storedState !== state) {
+    console.error('State mismatch - possible CSRF attack');
+    return res.redirect(302, `${errorRedirect}&reason=state_mismatch`);
+  }
+
+  try {
+    // Exchange authorization code for tokens
+    const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+        grant_type: 'authorization_code',
+        redirect_uri: redirectUri,
+      }),
+    });
+
+    if (!tokenResponse.ok) {
+      const errorData = await tokenResponse.text();
+      console.error('Token exchange failed:', errorData);
+      return res.redirect(302, `${errorRedirect}&reason=token_exchange_failed`);
+    }
+
+    const tokens = await tokenResponse.json() as {
+      access_token: string;
+      refresh_token?: string;
+      expires_in: number;
+      token_type: string;
+      scope: string;
+    };
+
+    // Optionally fetch user info
+    const userInfoResponse = await fetch(GOOGLE_USERINFO_URL, {
+      headers: {
+        Authorization: `Bearer ${tokens.access_token}`,
+      },
+    });
+
+    let userInfo = null;
+    if (userInfoResponse.ok) {
+      userInfo = await userInfoResponse.json();
+    }
+
+    // Clear the state cookie
+    res.setHeader('Set-Cookie', 'oauth_state=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0');
+
+    // Log successful authentication (in production, you'd store tokens securely)
+    console.log('OAuth successful for user:', userInfo?.email || 'unknown');
+
+    // For now, we'll store minimal info in a session cookie
+    // In production, use a proper session store or JWT
+    if (userInfo?.email) {
+      const sessionData = JSON.stringify({
+        email: userInfo.email,
+        name: userInfo.name,
+        picture: userInfo.picture,
+        authenticated: true,
+        expiresAt: Date.now() + tokens.expires_in * 1000,
+      });
+      
+      // Base64 encode the session data (in production, sign this with a secret)
+      const encodedSession = Buffer.from(sessionData).toString('base64');
+      
+      res.setHeader('Set-Cookie', [
+        'oauth_state=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0',
+        `gc_session=${encodedSession}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${tokens.expires_in}`,
+      ]);
+    }
+
+    // Redirect to success page
+    res.redirect(302, successRedirect);
+
+  } catch (err) {
+    console.error('OAuth callback error:', err);
+    return res.redirect(302, `${errorRedirect}&reason=server_error`);
+  }
+}
+
+/**
+ * Extracts a cookie value from the request.
+ */
+function getCookieValue(req: VercelRequest, name: string): string | null {
+  const cookies = req.headers.cookie;
+  if (!cookies) return null;
+
+  const match = cookies.match(new RegExp(`(^| )${name}=([^;]+)`));
+  return match ? match[2] : null;
+}
+
