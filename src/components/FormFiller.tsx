@@ -47,10 +47,9 @@ const testimonials = [
 ];
 
 export function FormFiller() {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'FormFiller.tsx:50',message:'FormFiller component rendering',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'J'})}).catch(()=>{});
-  // #endregion
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -70,16 +69,7 @@ export function FormFiller() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.phone) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
-    toast.success("Thank you! We'll contact you within 24 hours.");
-    
+  const resetForm = () => {
     setFormData({
       name: "",
       email: "",
@@ -89,6 +79,56 @@ export function FormFiller() {
       preferredDate: "",
       preferredTime: ""
     });
+    setSubmitSuccess(false);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    // Client-side validation
+    if (!formData.name || !formData.phone || !formData.email || !formData.preferredDate || !formData.preferredTime) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/booking/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          date: formData.preferredDate,
+          time: formData.preferredTime,
+          zipCode: formData.zipCode,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Handle validation errors
+        if (data.fields) {
+          const fieldErrors = Object.values(data.fields).join(', ');
+          throw new Error(fieldErrors);
+        }
+        throw new Error(data.message || 'Failed to schedule appointment');
+      }
+
+      // Success!
+      setSubmitSuccess(true);
+      toast.success('Appointment scheduled! Check your email for confirmation.');
+      
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      toast.error(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const nextSlide = () => {
@@ -112,115 +152,170 @@ export function FormFiller() {
       </div>
 
       {/* Form Section */}
-      <form onSubmit={handleSubmit} className="px-4 lg:px-8 py-8 lg:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6">
-          {/* Name & Email Column */}
-          <div className="space-y-4">
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-              <input
-                type="text"
-                placeholder="Name*"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-                required
-              />
+      {submitSuccess ? (
+        // Success State
+        <div className="px-4 lg:px-8 py-12 lg:py-16 text-center">
+          <div className="max-w-md mx-auto">
+            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-bl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-              />
-            </div>
-          </div>
-
-          {/* Phone & Zip Column */}
-          <div className="space-y-4">
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tr-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-              <input
-                type="tel"
-                placeholder="Phone Number*"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-                required
-              />
-            </div>
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-br-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-              <input
-                type="text"
-                placeholder="Zip Code"
-                value={formData.zipCode}
-                onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-              />
-            </div>
-          </div>
-
-          {/* Date & Time Column */}
-          <div className="space-y-4">
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-              <label htmlFor="preferredDate" className="sr-only">Preferred Date</label>
-              <input
-                type="date"
-                id="preferredDate"
-                name="preferredDate"
-                placeholder="Preferred Date"
-                value={formData.preferredDate}
-                onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-                aria-label="Preferred Date"
-              />
-            </div>
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-              <label htmlFor="preferredTime" className="sr-only">Preferred Time</label>
-              <input
-                type="time"
-                id="preferredTime"
-                name="preferredTime"
-                placeholder="Preferred Time"
-                value={formData.preferredTime}
-                onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-                aria-label="Preferred Time"
-              />
-            </div>
-          </div>
-
-          {/* Message Column */}
-          <div className="sm:col-span-1">
-            <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#222] rounded-tr-[5px] rounded-br-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] h-full">
-              <textarea
-                placeholder="Type your message..."
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={4}
-                className="w-full h-full px-4 py-4 bg-transparent font-product-sans text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] resize-none focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-              />
-            </div>
-          </div>
-
-          {/* Submit Column */}
-          <div className="flex flex-col items-center justify-center gap-4">
+            <h3 className="font-product-sans font-black text-2xl text-[#303135] mb-3">
+              Appointment Scheduled!
+            </h3>
+            <p className="font-product-sans text-[#303135] mb-2">
+              ✅ Added to calendar
+            </p>
+            <p className="font-product-sans text-[#303135] mb-6">
+              We've sent a confirmation to your email. We'll see you soon!
+            </p>
             <button
-              type="submit"
-              className="w-full max-w-[208px] bg-[#fec300] border-2 border-[#35363a] rounded-[5px] px-8 py-4 shadow-[0px_2px_5px_0px_#535458] hover:shadow-lg transition-all hover:scale-105 font-product-sans"
+              type="button"
+              onClick={resetForm}
+              className="bg-[#303135] text-white font-product-sans font-black text-[13px] uppercase px-8 py-4 rounded-[5px] hover:bg-[#404145] transition-colors"
             >
-              <span className="font-product-sans font-black text-[13px] text-[#303135] uppercase">
-                SUBMIT
-              </span>
+              Book Another Appointment
             </button>
           </div>
         </div>
+      ) : (
+        // Form State
+        <form onSubmit={handleSubmit} className="px-4 lg:px-8 py-8 lg:py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6">
+            {/* Name & Email Column */}
+            <div className="space-y-4">
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                <input
+                  type="text"
+                  placeholder="Name*"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-bl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                <input
+                  type="email"
+                  placeholder="Email Address*"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
 
-        {/* Required note */}
-        <p className="font-product-sans font-black text-[12px] text-[#FEC300] mt-4">
-          *REQUIRED
-        </p>
-      </form>
+            {/* Phone & Zip Column */}
+            <div className="space-y-4">
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tr-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                <input
+                  type="tel"
+                  placeholder="Phone Number*"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-br-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                <input
+                  type="text"
+                  placeholder="Zip Code"
+                  value={formData.zipCode}
+                  onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
+
+            {/* Date & Time Column */}
+            <div className="space-y-4">
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                <label htmlFor="preferredDate" className="sr-only">Preferred Date*</label>
+                <input
+                  type="date"
+                  id="preferredDate"
+                  name="preferredDate"
+                  placeholder="Preferred Date*"
+                  value={formData.preferredDate}
+                  onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  aria-label="Preferred Date"
+                  required
+                  disabled={isSubmitting}
+                  min={new Date().toISOString().split('T')[0]}
+                />
+              </div>
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                <label htmlFor="preferredTime" className="sr-only">Preferred Time*</label>
+                <input
+                  type="time"
+                  id="preferredTime"
+                  name="preferredTime"
+                  placeholder="Preferred Time*"
+                  value={formData.preferredTime}
+                  onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  aria-label="Preferred Time"
+                  required
+                  disabled={isSubmitting}
+                  step="1800"
+                  min="08:00"
+                  max="18:00"
+                />
+              </div>
+            </div>
+
+            {/* Message Column */}
+            <div className="sm:col-span-1">
+              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#222] rounded-tr-[5px] rounded-br-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] h-full">
+                <textarea
+                  placeholder="Type your message..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  rows={4}
+                  className="w-full h-full px-4 py-4 bg-transparent font-product-sans text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] resize-none focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
+
+            {/* Submit Column */}
+            <div className="flex flex-col items-center justify-center gap-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full max-w-[208px] bg-[#fec300] border-2 border-[#35363a] rounded-[5px] px-8 py-4 shadow-[0px_2px_5px_0px_#535458] hover:shadow-lg transition-all hover:scale-105 font-product-sans disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                {isSubmitting ? (
+                  <span className="font-product-sans font-black text-[13px] text-[#303135] uppercase flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    BOOKING...
+                  </span>
+                ) : (
+                  <span className="font-product-sans font-black text-[13px] text-[#303135] uppercase">
+                    SUBMIT
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Required note */}
+          <p className="font-product-sans font-black text-[12px] text-[#FEC300] mt-4">
+            *REQUIRED
+          </p>
+        </form>
+      )}
 
       {/* Testimonials Section */}
       <div className="bg-white border-[2px] border-[#303135] mx-0 mb-0">
