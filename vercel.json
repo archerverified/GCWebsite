@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/contac", "destination": "/contact", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
+

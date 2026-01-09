@@ -17,7 +17,7 @@ export function ContactQuickActions({
       }
     >
       <a
-        href="/contact/garage-cowboy.vcf"
+        href="/garage-cowboy.vcf"
         download="garage-cowboy.vcf"
         className="inline-flex items-center gap-2 sm:gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
         aria-label="Add Garage Cowboy to contacts"

@@ -26,7 +26,7 @@ export function Navigation() {
   const isPathActive = (path: string) => location.pathname.startsWith(path);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `font-product-sans font-bold text-lg md:text-xl uppercase transition-colors ${
+    `font-product-sans font-bold text-lg md:text-xl uppercase whitespace-nowrap transition-colors ${
       isActive ? `text-[${colors.brand.yellowPrimary}]` : `text-white hover:text-[${colors.brand.yellowPrimary}]`
     }`;
 
@@ -39,15 +39,18 @@ export function Navigation() {
       aria-label="Main navigation"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28 h-full">
-        <div className="flex items-center justify-between h-full relative">
+        <div className="h-full relative flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">
           
           {/* Mobile Menu - Absolutely Centered */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-20">
             <MobileMenuDropdown />
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-10 font-product-sans" role="menubar">
+          {/* Left spacer (keeps the center column truly centered) */}
+          <div className="hidden lg:block" aria-hidden="true" />
+
+          {/* Desktop Navigation (center column) */}
+          <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 font-product-sans min-w-0" role="menubar">
             <NavLink to="/" className={navLinkClass} end aria-label="Go to Home page">
               Home
             </NavLink>
@@ -59,7 +62,7 @@ export function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("services")}
-                className={`font-product-sans font-bold text-xl uppercase transition-colors flex items-center gap-2 ${
+                className={`font-product-sans font-bold text-xl uppercase whitespace-nowrap transition-colors flex items-center gap-2 ${
                   isPathActive("/services") ? "text-[#fec300]" : "text-white hover:text-[#fec300]"
                 }`}
                 aria-expanded={activeDropdown === "services"}
@@ -98,7 +101,7 @@ export function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("texas")}
-                className={`font-product-sans font-bold text-xl uppercase transition-colors flex items-center gap-2 ${
+                className={`font-product-sans font-bold text-xl uppercase whitespace-nowrap transition-colors flex items-center gap-2 ${
                   isPathActive("/texas") ? "text-[#fec300]" : "text-white hover:text-[#fec300]"
                 }`}
                 aria-expanded={activeDropdown === "texas"}
@@ -144,48 +147,48 @@ export function Navigation() {
             </NavLink>
           </div>
 
-          {/* Social Icons - Desktop only */}
-          <div className="hidden lg:flex items-center gap-4" aria-label="Social media links">
-            <a
-              href="https://www.google.com/search?q=garage+cowboy+fort+worth&sca_esv=cea07bd29ebaa7bd&ei=giRYafyPA4eWvr0P4rHXmAk&ved=0ahUKEwj82MWY0-2RAxUHi68BHeLYFZMQ4dUDCBE&uact=5&oq=garage+cowboy+fort+worth&gs_lp=Egxnd3Mtd2l6LXNlcnAiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aDIFECEYoAEyBRAhGKABSMwYUOEBWKUXcAN4AZABAJgBYqAB5giqAQIxM7gBA8gBAPgBAZgCEKACkQnCAgoQABiwAxjWBBhHwgINEAAYsAMY1gQYRxjJA8ICDhAAGIAEGLADGJIDGIoFwgIKEAAYgAQYQxiKBcICBRAAGIAEwgIGEAAYFhgewgIFEAAY7wXCAggQABiABBiiBMICCxAAGIAEGIYDGIoFmAMAiAYBkAYJkgcEMTUuMaAHw0eyBwQxMi4xuAeICcIHBjIuMTMuMcgHHYAIAA&sclient=gws-wiz-serp&lqi=ChhnYXJhZ2UgY293Ym95IGZvcnQgd29ydGhIm9TVhM2zgIAIWiYQABABGAAYARgCGAMiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aJIBFGdhcmFnZV9kb29yX3N1cHBsaWVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0RmVsb3dTakZSYkRsTlkwZG9XbE5YVWpKU2VsWk9UVmQ0U0dReVl4QUL6AQUIkwMQPQ"
-              className="hover:opacity-80 transition-opacity"
-              aria-label="Visit our Google reviews"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={imgGoogle} alt="Google reviews" className="w-10 h-10 object-contain" loading="lazy" />
-            </a>
-            <a
-              href="https://share.google/cW1X5hiNDh12RmEl9"
-              className="hover:opacity-80 transition-opacity"
-              aria-label="Find us on Google Maps"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={imgGoogleMaps} alt="Google Maps location" className="w-10 h-10 object-contain" loading="lazy" />
-            </a>
-            <a
-              href="https://www.yelp.com/biz/garage-cowboy-fort-worth"
-              className="hover:opacity-80 transition-opacity"
-              aria-label="Visit our Yelp page"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={imgYelp} alt="Yelp reviews" className="w-10 h-10 object-contain" loading="lazy" />
-            </a>
-            <a
-              href="https://www.facebook.com/profile.php?id=61577149727757"
-              className="hover:opacity-80 transition-opacity"
-              aria-label="Visit our Facebook page"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={imgFacebook} alt="Facebook page" className="w-10 h-10 object-contain" loading="lazy" />
-            </a>
-          </div>
+          {/* Right side (social + CTA) */}
+          <div className="flex items-center justify-end h-full ml-auto lg:ml-0 gap-5 xl:gap-8">
+            {/* Social Icons - Desktop only */}
+            <div className="hidden lg:flex items-center gap-4 px-2 xl:px-3" aria-label="Social media links">
+              <a
+                href="https://www.google.com/search?q=garage+cowboy+fort+worth&sca_esv=cea07bd29ebaa7bd&ei=giRYafyPA4eWvr0P4rHXmAk&ved=0ahUKEwj82MWY0-2RAxUHi68BHeLYFZMQ4dUDCBE&uact=5&oq=garage+cowboy+fort+worth&gs_lp=Egxnd3Mtd2l6LXNlcnAiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aDIFECEYoAEyBRAhGKABSMwYUOEBWKUXcAN4AZABAJgBYqAB5giqAQIxM7gBA8gBAPgBAZgCEKACkQnCAgoQABiwAxjWBBhHwgINEAAYsAMY1gQYRxjJA8ICDhAAGIAEGLADGJIDGIoFwgIKEAAYgAQYQxiKBcICBRAAGIAEwgIGEAAYFhgewgIFEAAY7wXCAggQABiABBiiBMICCxAAGIAEGIYDGIoFmAMAiAYBkAYJkgcEMTUuMaAHw0eyBwQxMi4xuAeICcIHBjIuMTMuMcgHHYAIAA&sclient=gws-wiz-serp&lqi=ChhnYXJhZ2UgY293Ym95IGZvcnQgd29ydGhIm9TVhM2zgIAIWiYQABABGAAYARgCGAMiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aJIBFGdhcmFnZV9kb29yX3N1cHBsaWVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0RmVsb3dTakZSYkRsTlkwZG9XbE5YVWpKU2VsWk9UVmQ0U0dReVl4QUL6AQUIkwMQPQ"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Visit our Google reviews"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={imgGoogle} alt="Google reviews" className="w-10 h-10 object-contain" loading="lazy" />
+              </a>
+              <a
+                href="https://share.google/cW1X5hiNDh12RmEl9"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Find us on Google Maps"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={imgGoogleMaps} alt="Google Maps location" className="w-10 h-10 object-contain" loading="lazy" />
+              </a>
+              <a
+                href="https://www.yelp.com/biz/garage-cowboy-fort-worth"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Visit our Yelp page"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={imgYelp} alt="Yelp reviews" className="w-10 h-10 object-contain" loading="lazy" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61577149727757"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Visit our Facebook page"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={imgFacebook} alt="Facebook page" className="w-10 h-10 object-contain" loading="lazy" />
+              </a>
+            </div>
 
-          {/* CTA Area - Right side */}
-          <div className="flex items-center h-full ml-auto lg:ml-0">
             {/* Mobile: Icon-only phone button (below xl) */}
             <a
               href="tel:8172560122"
@@ -201,7 +204,7 @@ export function Navigation() {
             {/* Desktop: Full CTA button (xl+) */}
             <a
               href="tel:8172560122"
-              className="hidden xl:flex items-center gap-3 rounded-[20px] px-6 py-3 shadow-md hover:shadow-lg transition-all font-product-sans"
+              className="hidden xl:flex items-center gap-3 rounded-[20px] px-6 2xl:px-7 py-3 shadow-md hover:shadow-lg transition-all font-product-sans whitespace-nowrap shrink-0"
               style={{ 
                 backgroundColor: colors.brand.yellowPrimary, 
                 border: `2px solid ${colors.brand.dark}` 
@@ -209,20 +212,12 @@ export function Navigation() {
               aria-label="Call to schedule a free inspection at 817-256-0122"
             >
               <Phone size={24} style={{ color: colors.brand.black }} aria-hidden="true" />
-              <div className="text-left">
-                <div 
-                  className="font-product-sans font-black text-base leading-tight"
-                  style={{ color: colors.brand.black }}
-                >
-                  SCHEDULE A
-                </div>
-                <div 
-                  className="font-product-sans font-black text-base leading-tight"
-                  style={{ color: colors.brand.black }}
-                >
-                  FREE INSPECTION
-                </div>
-              </div>
+              <span
+                className="font-product-sans font-black text-sm 2xl:text-base leading-none whitespace-nowrap"
+                style={{ color: colors.brand.black }}
+              >
+                SCHEDULE A FREE INSPECTION
+              </span>
             </a>
           </div>
         </div>
