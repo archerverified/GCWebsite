@@ -11,6 +11,7 @@ const quickLinks = [
   { name: "Services", path: "/services" },
   { name: "Residential", path: "/residential" },
   { name: "Commercial", path: "/commercial" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const serviceLinks = [
@@ -172,11 +173,32 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div 
-          className="border-t mt-8 pt-8 text-center"
+          className="border-t mt-8 pt-8"
           style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}
         >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-2">
+            <Link 
+              to="/privacy" 
+              className="font-product-sans text-sm transition-colors"
+              style={{ color: colors.text.secondary }}
+              onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
+              onMouseLeave={(e) => e.currentTarget.style.color = colors.text.secondary}
+            >
+              Privacy Policy
+            </Link>
+            <span className="hidden sm:inline" style={{ color: colors.text.secondary }}>|</span>
+            <Link 
+              to="/terms" 
+              className="font-product-sans text-sm transition-colors"
+              style={{ color: colors.text.secondary }}
+              onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
+              onMouseLeave={(e) => e.currentTarget.style.color = colors.text.secondary}
+            >
+              Terms of Service
+            </Link>
+          </div>
           <p 
-            className="font-product-sans text-sm"
+            className="font-product-sans text-sm text-center"
             style={{ color: colors.text.secondary }}
           >
             © {currentYear} Garage Cowboy. All rights reserved. | Professional Garage Door Services in DFW

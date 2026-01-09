@@ -23,6 +23,18 @@
       
       <title>Garage Cowboy - Professional Garage Door Repair & Installation</title>
       
+      <!-- Google Analytics 4 (production only) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+      <script>
+        // Only run GA4 in production (not localhost or 127.x.x.x)
+        if (location.hostname !== 'localhost' && !location.hostname.startsWith('127.')) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX'); // Replace with actual GA4 ID in Vercel
+        }
+      </script>
+      
       <!-- Favicon set for broad compatibility -->
       <link rel="icon" href="/favicon.svg" type="image/svg+xml">
       <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">

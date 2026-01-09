@@ -139,6 +139,9 @@ export function Navigation() {
             <NavLink to="/commercial" className={navLinkClass} aria-label="Go to Commercial services page">
               Commercial
             </NavLink>
+            <NavLink to="/contact" className={navLinkClass} aria-label="Go to Contact page">
+              Contact
+            </NavLink>
           </div>
 
           {/* Social Icons - Desktop only */}

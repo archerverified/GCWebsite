@@ -13,9 +13,12 @@ const staticPages = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
   { path: '/services', priority: 0.9, changefreq: 'weekly' },
   { path: '/texas', priority: 0.9, changefreq: 'weekly' },
+  { path: '/contact', priority: 0.8, changefreq: 'monthly' },
   { path: '/residential', priority: 0.8, changefreq: 'monthly' },
   { path: '/commercial', priority: 0.8, changefreq: 'monthly' },
-  { path: '/about-us', priority: 0.7, changefreq: 'monthly' }
+  { path: '/about-us', priority: 0.7, changefreq: 'monthly' },
+  { path: '/privacy', priority: 0.3, changefreq: 'yearly' },
+  { path: '/terms', priority: 0.3, changefreq: 'yearly' }
 ];
 
 async function getDynamicPages() {

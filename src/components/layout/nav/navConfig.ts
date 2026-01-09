@@ -16,6 +16,7 @@ export const NAV_LINKS: NavItem[] = [
   { label: "About Us", to: "/about-us" },
   { label: "Residential", to: "/residential" },
   { label: "Commercial", to: "/commercial" },
+  { label: "Contact", to: "/contact" },
 ];
 
 /**

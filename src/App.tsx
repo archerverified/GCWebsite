@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { MainLayout } from "./layouts/MainLayout";
 
 // Lazy load page components for code-splitting
@@ -11,6 +11,9 @@ const Texas = lazy(() => import("./pages/Texas").then(m => ({ default: m.Texas }
 const CityDetail = lazy(() => import("./pages/CityDetail").then(m => ({ default: m.CityDetail })));
 const Residential = lazy(() => import("./pages/Residential").then(m => ({ default: m.Residential })));
 const Commercial = lazy(() => import("./pages/Commercial").then(m => ({ default: m.Commercial })));
+const Privacy = lazy(() => import("./pages/Privacy").then(m => ({ default: m.Privacy })));
+const Terms = lazy(() => import("./pages/Terms").then(m => ({ default: m.Terms })));
+const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
 const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.NotFound })));
 
 // Loading fallback component
@@ -26,9 +29,6 @@ function PageLoader() {
 }
 
 export default function App() {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:29',message:'App component rendering',data:{pathname:typeof window!=='undefined'?window.location.pathname:'unknown'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
-  // #endregion
   return (
     <BrowserRouter>
       <MainLayout>
@@ -43,6 +43,10 @@ export default function App() {
             <Route path="/texas/:city" element={<CityDetail />} />
             <Route path="/residential" element={<Residential />} />
             <Route path="/commercial" element={<Commercial />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contac" element={<Navigate to="/contact" replace />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
