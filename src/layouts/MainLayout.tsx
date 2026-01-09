@@ -7,9 +7,6 @@ interface MainLayoutProps {
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'MainLayout.tsx:9',message:'MainLayout rendering',data:{hasChildren:!!children},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B,C'})}).catch(()=>{});
-  // #endregion
   return (
     <div 
       className={`min-h-screen w-full bg-[#f5f5f5] font-product-sans ${PAGE_X_PADDING} py-4 sm:py-6`}

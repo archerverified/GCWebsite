@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 
 export function ServiceAreasSection() {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServiceAreasSection.tsx:4',message:'ServiceAreasSection rendering',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'home-fix-1',hypothesisId:'J'})}).catch(()=>{});
-  // #endregion
   const leftColumnCities = [
     { name: "Fort Worth", slug: "fort-worth" },
     { name: "Arlington", slug: "arlington" },

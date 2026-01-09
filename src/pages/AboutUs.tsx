@@ -9,24 +9,12 @@ import { Accordion } from "../components/ui/accordion";
 import { Seo } from "../components/seo/Seo";
 import { createBreadcrumbSchema } from "../seo/schemas";
 
-// #region agent log
-fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AboutUs.tsx:10',message:'AboutUs module loaded',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'K'})}).catch(()=>{});
-// #endregion
-
 export function AboutUs() {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AboutUs.tsx:15',message:'AboutUs component rendering',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'K'})}).catch(()=>{});
-  // #endregion
-
   const { data: content, loading, error } = useContent<MarkdownContent>("about-us");
 
   if (loading) return <ContentLoading />;
   if (error) return <ContentError message={error} />;
   if (!content) return <ContentError message="No content available" />;
-
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AboutUs.tsx:25',message:'AboutUs content loaded',data:{title:content.title,sectionsCount:content.sections?.length},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'K'})}).catch(()=>{});
-  // #endregion
 
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", url: "/" },

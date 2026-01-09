@@ -2,10 +2,6 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import type { FAQ } from "../../types/content";
 
-// #region agent log
-fetch('http://127.0.0.1:7244/ingest/23ab62f1-5c38-48eb-b223-f0625384f7d1',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'components/ui/accordion.tsx:module',message:'Accordion module loaded',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'netlify-fix',hypothesisId:'H1'})}).catch(()=>{});
-// #endregion
-
 interface AccordionProps {
   faqs: FAQ[];
   title?: string;
@@ -19,14 +15,7 @@ interface AccordionProps {
 export function Accordion({ faqs, title = "Frequently Asked Questions", showHeader = true }: AccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // #region agent log
-  fetch('http://127.0.0.1:7244/ingest/23ab62f1-5c38-48eb-b223-f0625384f7d1',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'components/ui/accordion.tsx:Accordion',message:'Accordion render start',data:{faqCount:faqs?.length ?? 0,title,showHeader},timestamp:Date.now(),sessionId:'debug-session',runId:'netlify-fix',hypothesisId:'H1'})}).catch(()=>{});
-  // #endregion
-
   const toggleFAQ = (index: number) => {
-    // #region agent log
-    fetch('http://127.0.0.1:7244/ingest/23ab62f1-5c38-48eb-b223-f0625384f7d1',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'components/ui/accordion.tsx:toggleFAQ',message:'Toggle FAQ',data:{index,prevOpenIndex:openIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'netlify-fix',hypothesisId:'H1'})}).catch(()=>{});
-    // #endregion
     setOpenIndex(openIndex === index ? null : index);
   };
 

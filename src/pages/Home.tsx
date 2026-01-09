@@ -8,9 +8,6 @@ import { Seo } from "../components/seo/Seo";
 import { buildBaseGraph } from "../seo/schemas";
 
 export function Home() {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Home.tsx:9',message:'Home component rendering',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
-  // #endregion
   return (
     <>
       <Seo

@@ -1,51 +1,54 @@
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="24/7 garage door repair and installation services in Dallas-Fort Worth. Expert technicians, same-day service, competitive prices. Call (817) 256-0122." />
-      <meta name="author" content="Garage Cowboy" />
-      <meta name="theme-color" content="#FEC300" />
-      
-      <!-- Fallback Open Graph tags -->
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Garage Cowboy" />
-      <meta property="og:title" content="Garage Cowboy - Professional Garage Door Service" />
-      <meta property="og:description" content="24/7 garage door repair and installation in DFW. Expert technicians, same-day service." />
-      <meta property="og:image" content="/og/og-default.png" />
-      
-      <!-- Fallback Twitter tags -->
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Garage Cowboy - Professional Garage Door Service" />
-      <meta name="twitter:description" content="24/7 garage door repair and installation in DFW." />
-      <meta name="twitter:image" content="/og/og-default.png" />
-      
-      <title>Garage Cowboy - Professional Garage Door Repair & Installation</title>
-      
-      <!-- Google Analytics 4 (production only) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-      <script>
-        // Only run GA4 in production (not localhost or 127.x.x.x)
-        if (location.hostname !== 'localhost' && !location.hostname.startsWith('127.')) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX'); // Replace with actual GA4 ID in Vercel
-        }
-      </script>
-      
-      <!-- Favicon set for broad compatibility -->
-      <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-      <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
-      <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
-      <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-      <link rel="manifest" href="/site.webmanifest">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Garage Cowboy" />
+    <meta name="theme-color" content="#FEC300" />
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
+    <title>Garage Cowboy - Professional Garage Door Repair & Installation</title>
+
+    <!-- Google Analytics 4 (only when configured + only in production) -->
+    <script type="module">
+      (function () {
+        const ga4Id = import.meta.env.VITE_GA4_ID;
+        const isConfigured = Boolean(ga4Id);
+        const isLocalhost =
+          location.hostname === "localhost" ||
+          location.hostname.startsWith("127.") ||
+          location.hostname === "0.0.0.0";
+
+        if (!isConfigured || isLocalhost) return;
+
+        const s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(ga4Id);
+        document.head.appendChild(s);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          // @ts-ignore
+          dataLayer.push(arguments);
+        }
+        // @ts-ignore
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", ga4Id);
+      })();
+    </script>
+
+    <!-- Favicon set for broad compatibility -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
   

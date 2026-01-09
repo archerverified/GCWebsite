@@ -27,26 +27,17 @@ export function useContent<T>(fileName: string): UseContentResult<T> {
     const loadContent = async () => {
       setLoading(true);
       setError(null);
-      // #region agent log
-      fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useContent.tsx:30',message:'loadContent started',data:{fileName},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A,D'})}).catch(()=>{});
-      // #endregion
 
       try {
         // Dynamic import for JSON files from data folder
         // Vite handles this with its glob import capabilities
         const content = await import(`../data/${fileName}.json`) as { default: T };
-        // #region agent log
-        fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useContent.tsx:38',message:'Content loaded successfully',data:{fileName,hasDefault:!!content.default},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A,D'})}).catch(()=>{});
-        // #endregion
         
         if (isMounted) {
           setData(content.default);
           setLoading(false);
         }
       } catch (err) {
-        // #region agent log
-        fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useContent.tsx:48',message:'Content load FAILED',data:{fileName,error:String(err)},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A,D'})}).catch(()=>{});
-        // #endregion
         if (isMounted) {
           console.error(`Failed to load content: ${fileName}`, err);
           setError(`Failed to load content for ${fileName}`);

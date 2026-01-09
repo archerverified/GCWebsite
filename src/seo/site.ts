@@ -32,8 +32,8 @@ export const BUSINESS_INFO = {
   ],
   openingHours: "Mo,Tu,We,Th,Fr,Sa,Su 00:00-24:00",
   sameAs: [
-    "https://www.facebook.com/garagecowboy",
-    "https://www.yelp.com/biz/garage-cowboy",
-    "https://www.google.com/maps/place/garage-cowboy"
+    "https://www.facebook.com/profile.php?id=61577149727757",
+    "https://www.yelp.com/biz/garage-cowboy-fort-worth",
+    "https://share.google/cW1X5hiNDh12RmEl9"
   ]
 };
