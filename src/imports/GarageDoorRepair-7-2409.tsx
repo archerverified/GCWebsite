@@ -202,7 +202,7 @@ function Container10() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
       <div className="absolute flex flex-col font-['Product_Sans_Medium:Regular',product-sans] justify-center leading-[0] left-[calc(50%-0.39px)] not-italic text-[#323232] text-[16px] text-center top-[calc(50%-2.37px)] translate-x-[-50%] translate-y-[-50%] uppercase w-[173px]">
-        <p className="leading-[10px]">{`Torsion & Extantion`}</p>
+        <p className="leading-[10px]">{`Torsion & Extension`}</p>
       </div>
     </div>
   );

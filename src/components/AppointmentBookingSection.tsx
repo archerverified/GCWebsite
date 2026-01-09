@@ -1,7 +1,52 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { toast } from "sonner";
+import { CalendarDays, Clock } from "lucide-react";
 import svgPaths from "../imports/svg-pry7uv8zg5";
 import imgVerified from "figma:asset/52e672056319f396f2b1bf45a03eee134d6b47d8.png";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Calendar } from "./ui/calendar";
+
+function pad2(n: number) {
+  return String(n).padStart(2, "0");
+}
+
+function isoToLocalDate(iso: string): Date {
+  const [y, m, d] = iso.split("-").map((x) => Number(x));
+  return new Date(y, m - 1, d);
+}
+
+function dateToIso(d: Date): string {
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+}
+
+function formatDateDisplay(iso: string): string {
+  const [y, m, d] = iso.split("-");
+  return `${m}/${d}/${y}`;
+}
+
+function formatTime12h(time24: string): string {
+  const hh = Number(time24.slice(0, 2));
+  const mm = time24.slice(3, 5);
+  const ampm = hh >= 12 ? "PM" : "AM";
+  const hour12 = ((hh + 11) % 12) + 1;
+  return `${hour12}:${mm} ${ampm}`;
+}
+
+function buildTimeSlots(): Array<{ value: string; label: string }> {
+  const startMinutes = 8 * 60;
+  const endMinutes = 20 * 60;
+  const step = 15;
+  const slots: Array<{ value: string; label: string }> = [];
+
+  for (let mins = startMinutes; mins <= endMinutes; mins += step) {
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    const value = `${pad2(h)}:${pad2(m)}`;
+    slots.push({ value, label: formatTime12h(value) });
+  }
+
+  return slots;
+}
 
 const testimonials = [
   {
@@ -67,6 +112,8 @@ export function AppointmentBookingSection({
   const [emailStatus, setEmailStatus] = useState<"sent" | "failed" | null>(
     null
   );
+  const [isDateOpen, setIsDateOpen] = useState(false);
+  const [isTimeOpen, setIsTimeOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -76,6 +123,13 @@ export function AppointmentBookingSection({
     preferredDate: "",
     preferredTime: "",
   });
+
+  const selectedDate = useMemo(() => {
+    if (!formData.preferredDate) return undefined;
+    return isoToLocalDate(formData.preferredDate);
+  }, [formData.preferredDate]);
+
+  const timeSlots = useMemo(() => buildTimeSlots(), []);
 
   useEffect(() => {
     if (!includeTestimonials) return;
@@ -166,15 +220,27 @@ export function AppointmentBookingSection({
   };
 
   return (
-    <div className="bg-[#f7bd15] rounded-tl-[20px] rounded-tr-[20px] border-l-[3px] border-r-[3px] border-[#303135] relative font-product-sans">
-      <div className="bg-[rgba(255,255,255,0.5)] border-2 border-black rounded-tl-[16px] rounded-tr-[16px] py-4 lg:py-5">
+    <div
+      className={
+        includeTestimonials
+          ? "bg-[#f7bd15] rounded-tl-[20px] rounded-tr-[20px] border-l-[3px] border-r-[3px] border-[#303135] relative font-product-sans uppercase"
+          : "bg-[#f7bd15] rounded-[20px] border-x border-b border-t-0 border-black relative font-product-sans uppercase"
+      }
+    >
+      <div
+        className={
+          includeTestimonials
+            ? "bg-[rgba(255,255,255,0.5)] border-2 border-black rounded-tl-[16px] rounded-tr-[16px] py-4 lg:py-5"
+            : "bg-[rgba(255,255,255,0.5)] border-2 border-black rounded-[16px] py-4 lg:py-5"
+        }
+      >
         <p className="font-product-sans text-base md:text-lg lg:text-2xl text-center text-[#222] uppercase px-4 font-black">
           BOOK AN APPOINTMENT & GET A FREE INSPECTION TODAY
         </p>
       </div>
 
       {submitSuccess ? (
-        <div className="px-4 lg:px-8 py-12 lg:py-16 text-center">
+        <div className="px-4 lg:px-8 py-12 lg:py-16 text-center uppercase">
           <div className="max-w-md mx-auto">
             <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
@@ -223,7 +289,7 @@ export function AppointmentBookingSection({
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
                   required
                   disabled={isSubmitting}
                 />
@@ -236,7 +302,7 @@ export function AppointmentBookingSection({
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
                   required
                   disabled={isSubmitting}
                 />
@@ -252,7 +318,7 @@ export function AppointmentBookingSection({
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
                   required
                   disabled={isSubmitting}
                 />
@@ -265,50 +331,115 @@ export function AppointmentBookingSection({
                   onChange={(e) =>
                     setFormData({ ...formData, zipCode: e.target.value })
                   }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
                   disabled={isSubmitting}
                 />
               </div>
             </div>
 
             <div className="space-y-4">
+              {/* Date Picker */}
               <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <label htmlFor="preferredDate" className="sr-only">
-                  Preferred Date*
-                </label>
-                <input
-                  type="date"
-                  id="preferredDate"
-                  name="preferredDate"
-                  value={formData.preferredDate}
-                  onChange={(e) =>
-                    setFormData({ ...formData, preferredDate: e.target.value })
-                  }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-                  required
-                  disabled={isSubmitting}
-                  min={new Date().toISOString().split("T")[0]}
-                />
+                <Popover open={isDateOpen} onOpenChange={setIsDateOpen}>
+                  <PopoverTrigger asChild>
+                    <button
+                      type="button"
+                      disabled={isSubmitting}
+                      aria-label="Select date"
+                      className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] flex items-center justify-between gap-3"
+                    >
+                      <span
+                        className={
+                          formData.preferredDate
+                            ? "text-[#303135]"
+                            : "text-[rgba(48,49,53,0.75)]"
+                        }
+                      >
+                        {formData.preferredDate
+                          ? formatDateDisplay(formData.preferredDate)
+                          : "Date"}
+                      </span>
+                      <CalendarDays className="w-4 h-4 text-[rgba(48,49,53,0.75)]" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    align="start"
+                    className="w-auto max-w-[calc(100vw-2rem)] p-0"
+                    sideOffset={8}
+                  >
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={(d) => {
+                        if (!d) return;
+                        setFormData({
+                          ...formData,
+                          preferredDate: dateToIso(d),
+                        });
+                        setIsDateOpen(false);
+                      }}
+                      disabled={(date) => {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        const candidate = new Date(date);
+                        candidate.setHours(0, 0, 0, 0);
+                        return candidate < today;
+                      }}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
+
+              {/* Time Picker */}
               <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <label htmlFor="preferredTime" className="sr-only">
-                  Preferred Time*
-                </label>
-                <input
-                  type="time"
-                  id="preferredTime"
-                  name="preferredTime"
-                  value={formData.preferredTime}
-                  onChange={(e) =>
-                    setFormData({ ...formData, preferredTime: e.target.value })
-                  }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300]"
-                  required
-                  disabled={isSubmitting}
-                  step="1800"
-                  min="08:00"
-                  max="18:00"
-                />
+                <Popover open={isTimeOpen} onOpenChange={setIsTimeOpen}>
+                  <PopoverTrigger asChild>
+                    <button
+                      type="button"
+                      disabled={isSubmitting}
+                      aria-label="Select time"
+                      className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] flex items-center justify-between gap-3"
+                    >
+                      <span
+                        className={
+                          formData.preferredTime
+                            ? "text-[#303135]"
+                            : "text-[rgba(48,49,53,0.75)]"
+                        }
+                      >
+                        {formData.preferredTime
+                          ? formatTime12h(formData.preferredTime)
+                          : "Time"}
+                      </span>
+                      <Clock className="w-4 h-4 text-[rgba(48,49,53,0.75)]" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    align="start"
+                    className="w-56 max-w-[calc(100vw-2rem)] p-2"
+                    sideOffset={8}
+                  >
+                    <div className="max-h-64 overflow-auto pr-1">
+                      {timeSlots.map((slot) => (
+                        <button
+                          key={slot.value}
+                          type="button"
+                          className="w-full text-left px-3 py-2 rounded-md hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-[#fec300] font-product-sans text-[13px] text-[#303135]"
+                          onClick={() => {
+                            setFormData({
+                              ...formData,
+                              preferredTime: slot.value,
+                            });
+                            setIsTimeOpen(false);
+                          }}
+                        >
+                          {slot.label}
+                        </button>
+                      ))}
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
 
@@ -321,7 +452,7 @@ export function AppointmentBookingSection({
                     setFormData({ ...formData, message: e.target.value })
                   }
                   rows={4}
-                  className="w-full h-full px-4 py-4 bg-transparent font-product-sans text-[13px] text-[rgba(48,49,53,0.75)] resize-none focus:outline-none focus:ring-2 focus:ring-[#fec300]"
+                  className="w-full h-full px-4 py-4 bg-transparent font-product-sans text-[13px] text-[rgba(48,49,53,0.75)] resize-none focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
                   disabled={isSubmitting}
                 />
               </div>

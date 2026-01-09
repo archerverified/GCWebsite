@@ -33,13 +33,24 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
-// Valid 30-minute time slots (8 AM to 6 PM)
-const VALID_TIME_SLOTS = [
-  '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
-  '11:00', '11:30', '12:00', '12:30', '13:00', '13:30',
-  '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
-  '17:00', '17:30', '18:00',
-];
+function pad2(n: number) {
+  return String(n).padStart(2, '0');
+}
+
+// Valid 15-minute time slots (8:00 AM to 8:00 PM), stored as HH:MM (24h)
+const VALID_TIME_SLOTS = (() => {
+  const startMinutes = 8 * 60;
+  const endMinutes = 20 * 60;
+  const step = 15;
+
+  const slots: string[] = [];
+  for (let mins = startMinutes; mins <= endMinutes; mins += step) {
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    slots.push(`${pad2(h)}:${pad2(m)}`);
+  }
+  return slots;
+})();
 
 function validateRequest(body: Partial<BookingRequest>): ValidationErrors {
   const errors: ValidationErrors = {};
@@ -70,7 +81,7 @@ function validateRequest(body: Partial<BookingRequest>): ValidationErrors {
     // Normalize time to HH:MM format
     const normalizedTime = body.time.substring(0, 5);
     if (!VALID_TIME_SLOTS.includes(normalizedTime)) {
-      errors.time = 'Time must be a 30-minute interval (e.g., 08:00, 08:30, 09:00)';
+      errors.time = 'Time must be a 15-minute interval between 08:00 and 20:00 (e.g., 08:00, 08:15, 08:30)';
     }
   }
 

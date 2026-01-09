@@ -1,6 +1,3 @@
-// #region agent log
-fetch('http://127.0.0.1:7243/ingest/3b9dec33-55db-414b-9cbe-62f230d8aae6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'GarageDoorRepair.tsx:1',message:'GarageDoorRepair module loading',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'M'})}).catch(()=>{});
-// #endregion
 // Optimized WebP service images
 import brokenSpringImg from "../assets/services/broken-spring-repair.webp";
 import openerRepairImg from "../assets/services/garage-opener-repair-install.webp";
@@ -30,7 +27,7 @@ const servicesData = [
     },
     services: [
       { name: "Spring Repair", highlighted: false },
-      { name: "Torsion & Extantion", highlighted: true },
+      { name: "Torsion & Extension", highlighted: true },
       { name: "Spring Adjustment", highlighted: false },
       { name: "System Conversion", highlighted: true }
     ]

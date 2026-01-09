@@ -31,10 +31,6 @@ export function Contact() {
             CONTACT GARAGE COWBOY
           </h1>
 
-          <p className="font-product-sans font-black text-xl md:text-2xl text-[#323232] mb-6">
-            (817) 256-0122
-          </p>
-
           <ContactQuickActions showEmail />
         </div>
       </section>
