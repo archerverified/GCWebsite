@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Garage Cowboy - Build Your Perfect Garage Door</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/product-sans">
+    <style>
+        /* ===========================================
+           GARAGE COWBOY SALES PRESENTATION
+           Mobile-First Design / Touch Optimized
+           =========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            /* Garage Cowboy Brand Colors */
+            --primary: #303135;
+            --primary-light: #35363A;
+            --accent: #F7BD15;
+            --accent-light: #FEC300;
+            --success: #276749;
+            --white: #ffffff;
+            --black: #000000;
+            --gray-50: #EAEAEA;
+            --gray-100: #f5f5f5;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e0;
+            --gray-400: #a0aec0;
+            --gray-500: #718096;
+            --gray-600: #4a5568;
+            --gray-700: #35363A;
+            --gray-800: #303135;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
+
+            /* Radii */
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+
+            /* Mobile Touch Targets (minimum 48px) */
+            --touch-min: 48px;
+            --touch-spacing: 8px;
+
+            /* Safe areas */
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* Base for accessibility */
+        }
+
+        body {
+            font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =====================
+           NAVIGATION - Mobile First
+           ===================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            padding: 0.5rem 1rem;
+            padding-top: calc(0.5rem + var(--safe-top));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: calc(56px + var(--safe-top));
+        }
+
+        .nav-logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            /* Touch target expansion */
+            position: relative;
+        }
+
+        .nav-dot::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        /* =====================
+           BOTTOM PRICE BAR - Mobile Primary
+           ===================== */
+        .price-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            z-index: 1000;
+            padding: 1rem;
+            padding-bottom: calc(1rem + var(--safe-bottom));
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+
+        .price-bar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-bar-info {
+            flex: 1;
+        }
+
+        .price-bar-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-bar-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-bar-total.zero {
+            color: var(--gray-400);
+        }
+
+        .price-bar-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* =====================
+           BUTTONS - Touch Optimized (48px minimum)
+           ===================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: var(--touch-min);
+            padding: 0.875rem 1.25rem;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+            -webkit-appearance: none;
+            touch-action: manipulation;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            background: var(--accent-light);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:active {
+            background: var(--gray-200);
+        }
+
+        .btn-icon {
+            width: var(--touch-min);
+            height: var(--touch-min);
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        /* =====================
+           MAIN CONTENT
+           ===================== */
+        .main {
+            padding-top: calc(56px + var(--safe-top));
+            padding-bottom: calc(100px + var(--safe-bottom));
+        }
+
+        /* =====================
+           SLIDES - Mobile First
+           ===================== */
+        .slide {
+            min-height: calc(100vh - 56px - 100px);
+            min-height: calc(100svh - 56px - 100px);
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .slide-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .slide-subtitle {
+            font-size: 1rem;
+            color: var(--gray-500);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* =====================
+           SLIDE 1: HERO - Mobile First
+           ===================== */
+        #slide-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            text-align: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #slide-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(247,189,21,0.1) 0%, transparent 70%);
+        }
+
+        .hero-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-logo img {
+            height: 60px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        #slide-hero .slide-number {
+            color: rgba(255,255,255,0.7);
+        }
+
+        #slide-hero .slide-title {
+            color: var(--white);
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        #slide-hero .slide-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-preview {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .hero-preview-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+            min-height: var(--touch-min);
+        }
+
+        .hero-preview-item:active {
+            transform: scale(0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-preview-item img {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-preview-item span {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .hero-cta {
+            margin-top: 2rem;
+        }
+
+        /* =====================
+           SLIDE 2: DOOR STYLES - Touch Optimized
+           ===================== */
+        .door-tabs {
+            display: flex;
+            gap: var(--touch-spacing);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .door-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .door-tab {
+            flex-shrink: 0;
+            min-height: var(--touch-min);
+            padding: 0.75rem 1rem;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .door-tab:active {
+            transform: scale(0.98);
+        }
+
+        .door-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        .door-display {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .door-image-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            min-height: 200px;
+        }
+
+        .door-image {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+        }
+
+        .door-info {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .door-info h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .door-info p {
+            color: var(--gray-600);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .door-price {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .door-price strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0.25rem;
+        }
+
+        /* =====================
+           SLIDE 3: SIZE SELECTOR - Touch Grid
+           ===================== */
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--touch-spacing);
+        }
+
+        .size-option {
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: calc(var(--touch-min) + 24px);
+        }
+
+        .size-option:active {
+            transform: scale(0.98);
+        }
+
+        .size-option.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .size-option .size-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .size-option .size-price {
+            font-size: 0.8125rem;
+            opacity: 0.8;
+        }
+
+        .size-visual {
+            margin-top: 1.5rem;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .size-visual h4 {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .size-comparison {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 0.5rem;
+            height: 120px;
+        }
+
+        .size-box {
+            background: var(--gray-200);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            transition: all 0.3s ease;
+        }
+
+        .size-box.active {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        /* =====================
+           SLIDE 4: COLORS - Touch Swatches
+           ===================== */
+        .color-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .color-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .color-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+        }
+
+        .color-section .premium-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--black);
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--touch-spacing);
+        }
+
+        .color-item {
+            text-align: center;
+        }
+
+        .color-swatch {
+            width: 100%;
+            aspect-ratio: 1;
+            min-width: var(--touch-min);
+            min-height: var(--touch-min);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-swatch:active {
+            transform: scale(0.95);
+        }
+
+        .color-swatch.active {
+            border-color: var(--primary);
+        }
+
+        .color-swatch.active::after {
+            content: '\2713';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .color-swatch img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .color-name {
+            font-size: 0.6875rem;
+            color: var(--gray-600);
+            margin-top: 0.375rem;
+        }
+
+        /* =====================
+           SLIDE 5: UPGRADES - Touch Cards
+           ===================== */
+        .upgrades-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .upgrade-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .upgrade-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upgrade-section h4 .icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .insulation-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--touch-spacing);
+        }
+
+        .insulation-option {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: var(--touch-min);
+            align-items: center;
+        }
+
+        .insulation-option:active {
+            transform: scale(0.99);
+        }
+
+        .insulation-option.active {
+            border-color: var(--accent);
+            background: rgba(247,189,21,0.1);
+        }
+
+        .insulation-option img {
+            width: 60px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: var(--radius);
+            flex-shrink: 0;
+        }
+
+        .insulation-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .insulation-info h5 {
+            font-size: 0.9375rem;
+            color: var(--gray-800);
+            margin-bottom: 0.125rem;
+        }
+
+        .insulation-info .r-value {
+            font-size: 0.75rem;
+            color: var(--black);
+            font-weight: 600;
+            background: var(--accent);
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        .insulation-info .price {
+            font-size: 0.8125rem;
+            color: var(--gray-500);
+            margin-top: 0.25rem;
+        }
+
+        .window-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--touch-spacing);
+        }
+
+        .window-option {
+            padding: 0.875rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            min-height: var(--touch-min);
+        }
+
+        .window-option:active {
+            transform: scale(0.98);
+        }
+
+        .window-option.active {
+            border-color: var(--accent);
+            background: rgba(247,189,21,0.1);
+        }
+
+        .window-option img {
+            width: 100%;
+            height: 32px;
+            object-fit: contain;
+            margin-bottom: 0.375rem;
+        }
+
+        .window-option span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        .window-option .price {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .opener-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--touch-spacing);
+        }
+
+        .opener-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: var(--touch-min);
+        }
+
+        .opener-option:active {
+            transform: scale(0.99);
+        }
+
+        .opener-option.active {
+            border-color: var(--accent);
+            background: rgba(247,189,21,0.1);
+        }
+
+        .opener-option h5 {
+            font-size: 0.9375rem;
+            color: var(--gray-800);
+        }
+
+        .opener-option p {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .opener-option .price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* =====================
+           SLIDE 6: SUMMARY
+           ===================== */
+        #slide-summary {
+            background: var(--white);
+        }
+
+        .summary-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .summary-preview {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .summary-preview img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+        }
+
+        .summary-preview .config-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .config-tag {
+            background: var(--accent);
+            color: var(--black);
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .summary-breakdown {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+        }
+
+        .summary-breakdown h4 {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.9375rem;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            color: var(--gray-600);
+        }
+
+        .breakdown-value {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .breakdown-total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 3px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breakdown-total-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .breakdown-total-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .summary-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* =====================
+           SLIDE 7: CONTACT
+           ===================== */
+        #slide-contact {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            text-align: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        #slide-contact .slide-number {
+            color: rgba(255,255,255,0.7);
+        }
+
+        #slide-contact .slide-title {
+            color: var(--white);
+        }
+
+        #slide-contact .slide-subtitle {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+
+        .contact-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-feature {
+            text-align: center;
+        }
+
+        .contact-feature .icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .contact-feature h5 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-feature p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* =====================
+           PRICE DETAIL MODAL (Mobile)
+           ===================== */
+        .price-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.5);
+            align-items: flex-end;
+        }
+
+        .price-modal.active {
+            display: flex;
+        }
+
+        .price-modal-content {
+            background: var(--white);
+            width: 100%;
+            max-height: 80vh;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            padding: 1.5rem;
+            padding-bottom: calc(1.5rem + var(--safe-bottom));
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .price-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .price-modal-close {
+            width: var(--touch-min);
+            height: var(--touch-min);
+            border: none;
+            background: var(--gray-100);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price-modal-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .price-modal-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.9375rem;
+        }
+
+        .price-modal-item:last-child {
+            border-bottom: none;
+        }
+
+        /* =====================
+           TABLET & DESKTOP ENHANCEMENTS
+           ===================== */
+        @media (min-width: 768px) {
+            .slide {
+                padding: 2rem;
+            }
+
+            .slide-title {
+                font-size: 2.25rem;
+            }
+
+            .hero-preview {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 700px;
+            }
+
+            .hero-logo img {
+                height: 80px;
+            }
+
+            #slide-hero .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .door-display {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .door-image-container {
+                flex: 1;
+                min-height: 300px;
+            }
+
+            .door-info {
+                width: 320px;
+                flex-shrink: 0;
+            }
+
+            .size-grid {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 600px;
+            }
+
+            .color-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .color-sections {
+                flex-direction: row;
+            }
+
+            .color-section {
+                flex: 1;
+            }
+
+            .upgrades-grid {
+                flex-direction: row;
+            }
+
+            .upgrade-section {
+                flex: 1;
+            }
+
+            .summary-content {
+                flex-direction: row;
+            }
+
+            .summary-preview,
+            .summary-breakdown {
+                flex: 1;
+            }
+
+            .summary-actions {
+                flex-direction: row;
+            }
+
+            .contact-features {
+                flex-direction: row;
+                justify-content: center;
+                gap: 3rem;
+            }
+
+            .price-bar-content {
+                max-width: 1200px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .nav {
+                padding: 0.75rem 2rem;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .slide {
+                padding: 3rem 4rem;
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            .door-image {
+                max-height: 400px;
+            }
+
+            .door-info {
+                width: 400px;
+            }
+
+            .summary-preview img {
+                max-height: 300px;
+            }
+        }
+
+        /* =====================
+           PRINT STYLES
+           ===================== */
+        @media print {
+            .nav, .price-bar, .price-modal {
+                display: none !important;
+            }
+            .main {
+                padding: 0;
+            }
+            .slide {
+                page-break-after: always;
+                min-height: auto;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <img src="GC Logo.png" alt="Garage Cowboy">
+        </div>
+        <div class="nav-dots">
+            <div class="nav-dot active" data-slide="0"></div>
+            <div class="nav-dot" data-slide="1"></div>
+            <div class="nav-dot" data-slide="2"></div>
+            <div class="nav-dot" data-slide="3"></div>
+            <div class="nav-dot" data-slide="4"></div>
+            <div class="nav-dot" data-slide="5"></div>
+            <div class="nav-dot" data-slide="6"></div>
+        </div>
+    </nav>
+
+    <!-- Bottom Price Bar (Mobile-First Primary UI) -->
+    <div class="price-bar">
+        <div class="price-bar-content">
+            <div class="price-bar-info" onclick="openPriceModal()">
+                <div class="price-bar-label">Your Quote</div>
+                <div class="price-bar-total" id="price-total-display">$0.00</div>
+            </div>
+            <div class="price-bar-actions">
+                <button class="btn btn-secondary btn-icon" onclick="openPriceModal()" aria-label="View details">
+                    <span style="font-size: 1.25rem;">&#9776;</span>
+                </button>
+                <button class="btn btn-primary" onclick="scrollToSlide(6)">Get Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Detail Modal -->
+    <div class="price-modal" id="price-modal" onclick="closePriceModalOutside(event)">
+        <div class="price-modal-content" onclick="event.stopPropagation()">
+            <div class="price-modal-header">
+                <h3>Your Configuration</h3>
+                <button class="price-modal-close" onclick="closePriceModal()">&times;</button>
+            </div>
+            <div class="price-modal-items" id="price-modal-items">
+                <!-- Populated by JS -->
+            </div>
+            <div class="breakdown-total">
+                <span class="breakdown-total-label">Total</span>
+                <span class="breakdown-total-value" id="price-modal-total">$0.00</span>
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+                <button class="btn btn-secondary" style="flex:1" onclick="resetConfiguration(); closePriceModal();">Reset</button>
+                <button class="btn btn-primary" style="flex:1" onclick="window.print(); closePriceModal();">Print Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Slide 1: Hero -->
+        <section id="slide-hero" class="slide">
+            <div class="hero-logo">
+                <img src="GC Logo.png" alt="Garage Cowboy">
+            </div>
+            <div class="slide-header">
+                <div class="slide-number">Welcome</div>
+                <h1 class="slide-title">Build Your Perfect<br>Garage Door</h1>
+                <p class="slide-subtitle">Choose from premium styles, sizes, colors, and upgrades. Get an instant quote today.</p>
+            </div>
+            <div class="hero-preview">
+                <div class="hero-preview-item" onclick="scrollToSlide(1); selectDoorStyle('standard')">
+                    <img src="assets/doors/standard-short-panel.png" alt="Standard Panel">
+                    <span>Standard Panel</span>
+                </div>
+                <div class="hero-preview-item" onclick="scrollToSlide(1); selectDoorStyle('long')">
+                    <img src="assets/doors/long-panel.png" alt="Long Panel">
+                    <span>Long Panel</span>
+                </div>
+                <div class="hero-preview-item" onclick="scrollToSlide(1); selectDoorStyle('carriage')">
+                    <img src="assets/doors/carriage-style.png" alt="Carriage Style">
+                    <span>Carriage Style</span>
+                </div>
+                <div class="hero-preview-item" onclick="scrollToSlide(1); selectDoorStyle('flush')">
+                    <img src="assets/doors/flush-panel.png" alt="Flush Panel">
+                    <span>Flush Panel</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <button class="btn btn-primary" onclick="scrollToSlide(1)">Start Configuring &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Slide 2: Door Styles -->
+        <section id="slide-styles" class="slide">
+            <div class="slide-header">
+                <div class="slide-number">Step 1</div>
+                <h2 class="slide-title">Choose Your Door Style</h2>
+                <p class="slide-subtitle">Select from four premium designs.</p>
+            </div>
+            <div class="door-tabs">
+                <button class="door-tab" data-style="standard">Standard Panel</button>
+                <button class="door-tab" data-style="long">Long Panel</button>
+                <button class="door-tab" data-style="carriage">Carriage Style</button>
+                <button class="door-tab" data-style="flush">Flush Panel</button>
+            </div>
+            <div class="door-display">
+                <div class="door-image-container">
+                    <img id="door-image" class="door-image" src="assets/doors/standard-short-panel.png" alt="Selected Door Style">
+                </div>
+                <div class="door-info">
+                    <h3 id="door-name">Select a Style</h3>
+                    <p id="door-description">Tap one of the style buttons above to see details and pricing.</p>
+                    <div class="door-price">
+                        Starting at
+                        <strong id="door-starting-price">--</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Size Selector -->
+        <section id="slide-size" class="slide">
+            <div class="slide-header">
+                <div class="slide-number">Step 2</div>
+                <h2 class="slide-title">Select Your Size</h2>
+                <p class="slide-subtitle">Choose the dimensions for your garage opening.</p>
+            </div>
+            <div class="size-grid">
+                <div class="size-option" data-size="8x7">
+                    <div class="size-label">8' x 7'</div>
+                    <div class="size-price">Single Car</div>
+                </div>
+                <div class="size-option" data-size="8x8">
+                    <div class="size-label">8' x 8'</div>
+                    <div class="size-price">Single Car</div>
+                </div>
+                <div class="size-option" data-size="9x7">
+                    <div class="size-label">9' x 7'</div>
+                    <div class="size-price">Single Car</div>
+                </div>
+                <div class="size-option" data-size="9x8">
+                    <div class="size-label">9' x 8'</div>
+                    <div class="size-price">Single Car</div>
+                </div>
+                <div class="size-option" data-size="16x7">
+                    <div class="size-label">16' x 7'</div>
+                    <div class="size-price">Double Car</div>
+                </div>
+                <div class="size-option" data-size="16x8">
+                    <div class="size-label">16' x 8'</div>
+                    <div class="size-price">Double Car</div>
+                </div>
+                <div class="size-option" data-size="18x7">
+                    <div class="size-label">18' x 7'</div>
+                    <div class="size-price">Double Car +</div>
+                </div>
+                <div class="size-option" data-size="18x8">
+                    <div class="size-label">18' x 8'</div>
+                    <div class="size-price">Double Car +</div>
+                </div>
+            </div>
+            <div class="size-visual">
+                <h4>Size Comparison</h4>
+                <div class="size-comparison" id="size-comparison"></div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Colors -->
+        <section id="slide-colors" class="slide">
+            <div class="slide-header">
+                <div class="slide-number">Step 3</div>
+                <h2 class="slide-title">Choose Your Color</h2>
+                <p class="slide-subtitle">Standard colors included, or upgrade to premium wood grain.</p>
+            </div>
+            <div class="color-sections">
+                <div class="color-section">
+                    <h4>Standard Colors</h4>
+                    <div class="color-grid" id="standard-colors"></div>
+                </div>
+                <div class="color-section">
+                    <h4>Wood Grain <span class="premium-badge">Premium</span></h4>
+                    <div class="color-grid" id="premium-colors"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Upgrades -->
+        <section id="slide-upgrades" class="slide">
+            <div class="slide-header">
+                <div class="slide-number">Step 4</div>
+                <h2 class="slide-title">Upgrades & Add-ons</h2>
+                <p class="slide-subtitle">Enhance with insulation, windows, and openers.</p>
+            </div>
+            <div class="upgrades-grid">
+                <div class="upgrade-section">
+                    <h4><span class="icon">1</span> Insulation</h4>
+                    <div class="insulation-options" id="insulation-options"></div>
+                </div>
+                <div class="upgrade-section">
+                    <h4><span class="icon">2</span> Windows</h4>
+                    <div class="window-options" id="window-options"></div>
+                </div>
+                <div class="upgrade-section">
+                    <h4><span class="icon">3</span> Opener</h4>
+                    <div class="opener-options" id="opener-options"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Summary -->
+        <section id="slide-summary" class="slide">
+            <div class="slide-header">
+                <div class="slide-number">Step 5</div>
+                <h2 class="slide-title">Your Configuration</h2>
+                <p class="slide-subtitle">Review your selections and quote.</p>
+            </div>
+            <div class="summary-content">
+                <div class="summary-preview">
+                    <img id="summary-door-image" src="assets/doors/standard-short-panel.png" alt="Your Door">
+                    <div class="config-tags" id="config-tags"></div>
+                </div>
+                <div class="summary-breakdown">
+                    <h4>Price Breakdown</h4>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label" id="summary-style-label">Door Style & Size</span>
+                        <span class="breakdown-value" id="summary-base-price">--</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Insulation</span>
+                        <span class="breakdown-value" id="summary-insulation-price">--</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Windows</span>
+                        <span class="breakdown-value" id="summary-windows-price">--</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Color</span>
+                        <span class="breakdown-value" id="summary-color-price">--</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Opener</span>
+                        <span class="breakdown-value" id="summary-opener-price">--</span>
+                    </div>
+                    <div class="breakdown-total">
+                        <span class="breakdown-total-label">Total</span>
+                        <span class="breakdown-total-value" id="summary-total">$0.00</span>
+                    </div>
+                    <div class="summary-actions">
+                        <button class="btn btn-primary" onclick="scrollToSlide(6)">Schedule Installation</button>
+                        <button class="btn btn-secondary" onclick="window.print()">Print Quote</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Contact -->
+        <section id="slide-contact" class="slide">
+            <div class="slide-header">
+                <div class="slide-number">Final Step</div>
+                <h2 class="slide-title">Ready to Get Started?</h2>
+                <p class="slide-subtitle">Professional installation within 2 weeks of order.</p>
+            </div>
+            <div class="contact-features">
+                <div class="contact-feature">
+                    <div class="icon">&#10003;</div>
+                    <h5>Free Measurement</h5>
+                    <p>On-site visit included</p>
+                </div>
+                <div class="contact-feature">
+                    <div class="icon">&#9733;</div>
+                    <h5>5-Year Warranty</h5>
+                    <p>Parts and labor covered</p>
+                </div>
+                <div class="contact-feature">
+                    <div class="icon">&#128736;</div>
+                    <h5>Pro Installation</h5>
+                    <p>Licensed & insured team</p>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <button class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">Schedule Installation</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ===========================================
+        // PRICING DATA (Matches Excel exactly)
+        // ===========================================
+        const PRICING = {
+            basePrices: {
+                'standard': {
+                    '8x7': 1117.42, '8x8': 1216.23, '9x7': 1206.87, '9x8': 1313.15,
+                    '16x7': 1768.11, '16x8': 1924.31, '18x7': 2018.98, '18x8': 2203.43
+                },
+                'long': {
+                    '8x7': 1117.42, '8x8': 1216.23, '9x7': 1206.87, '9x8': 1313.15,
+                    '16x7': 1768.11, '16x8': 1924.31, '18x7': 2018.98, '18x8': 2203.43
+                },
+                'carriage': {
+                    '8x7': 1117.42, '8x8': 1216.23, '9x7': 1206.87, '9x8': 1313.15,
+                    '16x7': 1768.11, '16x8': 1924.31, '18x7': 2018.98, '18x8': 2203.43
+                },
+                'flush': {
+                    '8x7': 1117.42, '8x8': 1216.23, '9x7': 1206.87, '9x8': 1313.15,
+                    '16x7': 1768.11, '16x8': 1924.31, '18x7': 2018.98, '18x8': 2203.43
+                }
+            },
+            insulation: {
+                'none': { '8x7': 0, '8x8': 0, '9x7': 0, '9x8': 0, '16x7': 0, '16x8': 0, '18x7': 0, '18x8': 0 },
+                'vinyl': {
+                    '8x7': 278.45, '8x8': 303.49, '9x7': 303.49, '9x8': 331.22,
+                    '16x7': 458.85, '16x8': 500.13, '18x7': 524.63, '18x8': 571.75
+                },
+                'steel': {
+                    '8x7': 554.13, '8x8': 603.39, '9x7': 603.39, '9x8': 658.10,
+                    '16x7': 959.73, '16x8': 1045.97, '18x7': 1098.09, '18x8': 1196.95
+                }
+            },
+            windows: {
+                'none': 0,
+                '8-short': 474.32,
+                '4-long': 415.38
+            },
+            woodGrain: {
+                '8x7': 373.44, '8x8': 406.45, '9x7': 406.45, '9x8': 443.04,
+                '16x7': 671.11, '16x8': 731.06, '18x7': 768.46, '18x8': 837.00
+            },
+            openers: {
+                'none': 0,
+                'jackshaft': 850,
+                'half-hp-belt': 240,
+                'three-quarter-hp-belt': 335
+            }
+        };
+
+        const DOOR_DATA = {
+            'standard': {
+                name: 'Standard Short Panel',
+                description: 'Classic raised panel design with timeless appeal. Perfect for homes seeking a clean, balanced aesthetic.',
+                image: 'assets/doors/standard-short-panel.png',
+                imageNoWindows: 'assets/doors/standard-short-panel-no-windows.png'
+            },
+            'long': {
+                name: 'Long Panel',
+                description: 'Elegant horizontal lines create a modern, sophisticated look with elongated panels.',
+                image: 'assets/doors/long-panel.png',
+                imageNoWindows: 'assets/doors/long-panel-no-windows.png'
+            },
+            'carriage': {
+                name: 'Carriage Style',
+                description: 'Rustic charm meets modern convenience with decorative hardware and vertical board design.',
+                image: 'assets/doors/carriage-style.png',
+                imageNoWindows: 'assets/doors/carriage-style-no-windows.png'
+            },
+            'flush': {
+                name: 'Flush Panel',
+                description: 'Clean, minimalist design for contemporary homes with smooth, flat surface.',
+                image: 'assets/doors/flush-panel.png',
+                imageNoWindows: 'assets/doors/flush-panel.png'
+            }
+        };
+
+        const COLORS = {
+            standard: [
+                { id: 'white', name: 'White', image: 'assets/colors/white.png' },
+                { id: 'almond', name: 'Almond', image: 'assets/colors/almond.png' },
+                { id: 'sandstone', name: 'Sandstone', image: 'assets/colors/sandstone.png' },
+                { id: 'taupe', name: 'Taupe', image: 'assets/colors/taupe.png' },
+                { id: 'gray', name: 'Gray', image: 'assets/colors/gray.png' },
+                { id: 'charcoal', name: 'Charcoal', image: 'assets/colors/charcoal.png' },
+                { id: 'black', name: 'Black', image: 'assets/colors/black.png' },
+                { id: 'brown', name: 'Brown', image: 'assets/colors/brown.png' }
+            ],
+            premium: [
+                { id: 'walnut', name: 'Walnut', image: 'assets/colors/walnut-woodgrain.png' },
+                { id: 'dark-oak', name: 'Dark Oak', image: 'assets/colors/dark-oak-woodgrain.png' }
+            ]
+        };
+
+        const INSULATION_DATA = [
+            { id: 'none', name: 'Non-Insulated', rValue: 'R-N/A', image: 'assets/insulation/non-insulated.png' },
+            { id: 'vinyl', name: 'Vinyl Back', rValue: 'R-7.94', image: 'assets/insulation/vinyl-back.png' },
+            { id: 'steel', name: 'Steel Back', rValue: 'R-9.65', image: 'assets/insulation/steel-back.png' }
+        ];
+
+        const WINDOW_DATA = [
+            { id: 'none', name: 'No Windows', price: 0 },
+            { id: '8-short', name: '8 Short Windows', price: 474.32, image: 'assets/windows/short-stockton-panel.png' },
+            { id: '4-long', name: '4 Long Windows', price: 415.38, image: 'assets/windows/long-plain.png' }
+        ];
+
+        const OPENER_DATA = [
+            { id: 'none', name: 'No Opener', description: 'Door only', price: 0 },
+            { id: 'half-hp-belt', name: '1/2 HP Belt', description: 'Standard', price: 240 },
+            { id: 'three-quarter-hp-belt', name: '3/4 HP Belt', description: 'Heavy-duty', price: 335 },
+            { id: 'jackshaft', name: 'Jackshaft', description: 'Wall-mount', price: 850 }
+        ];
+
+        // ===========================================
+        // STATE - Starts with nothing selected
+        // ===========================================
+        let config = {
+            style: null,        // Nothing selected initially
+            size: null,         // Nothing selected initially
+            color: 'white',
+            isPremiumColor: false,
+            insulation: 'none',
+            windows: 'none',
+            opener: 'none'
+        };
+
+        // ===========================================
+        // INITIALIZATION
+        // ===========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initDoorTabs();
+            initSizeSelector();
+            initColors();
+            initInsulation();
+            initWindows();
+            initOpeners();
+            updatePricing();
+            renderSizeComparison();
+        });
+
+        // ===========================================
+        // NAVIGATION
+        // ===========================================
+        function initNavigation() {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    scrollToSlide(parseInt(dot.dataset.slide));
+                });
+            });
+
+            const slides = document.querySelectorAll('.slide');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(slides).indexOf(entry.target);
+                        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            slides.forEach(slide => observer.observe(slide));
+        }
+
+        function scrollToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            if (slides[index]) {
+                slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ===========================================
+        // DOOR STYLES
+        // ===========================================
+        function initDoorTabs() {
+            document.querySelectorAll('.door-tab').forEach(tab => {
+                tab.addEventListener('click', () => selectDoorStyle(tab.dataset.style));
+            });
+        }
+
+        function selectDoorStyle(style) {
+            config.style = style;
+
+            document.querySelectorAll('.door-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.style === style);
+            });
+
+            const data = DOOR_DATA[style];
+            document.getElementById('door-image').src = data.image;
+            document.getElementById('door-name').textContent = data.name;
+            document.getElementById('door-description').textContent = data.description;
+
+            const startingPrice = Math.min(...Object.values(PRICING.basePrices[style]));
+            document.getElementById('door-starting-price').textContent = formatPrice(startingPrice);
+
+            updatePricing();
+            updateSummary();
+        }
+
+        // ===========================================
+        // SIZE SELECTOR
+        // ===========================================
+        function initSizeSelector() {
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', () => selectSize(option.dataset.size));
+            });
+        }
+
+        function selectSize(size) {
+            config.size = size;
+
+            document.querySelectorAll('.size-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.size === size);
+            });
+
+            renderSizeComparison();
+            initInsulation(); // Update insulation prices
+            updatePricing();
+            updateSummary();
+        }
+
+        function renderSizeComparison() {
+            const container = document.getElementById('size-comparison');
+            const sizes = ['8x7', '9x7', '16x7', '18x7'];
+            const maxWidth = 100;
+            const maxHeight = 100;
+
+            container.innerHTML = sizes.map(size => {
+                const [w, h] = size.split('x').map(Number);
+                const width = (w / 18) * maxWidth;
+                const height = (h / 8) * maxHeight;
+                const isActive = config.size && config.size.startsWith(size.split('x')[0]);
+                return `<div class="size-box ${isActive ? 'active' : ''}" style="width: ${width}px; height: ${height}px;">${size}</div>`;
+            }).join('');
+        }
+
+        // ===========================================
+        // COLORS
+        // ===========================================
+        function initColors() {
+            const standardContainer = document.getElementById('standard-colors');
+            const premiumContainer = document.getElementById('premium-colors');
+
+            standardContainer.innerHTML = COLORS.standard.map(color => `
+                <div class="color-item">
+                    <div class="color-swatch ${config.color === color.id && !config.isPremiumColor ? 'active' : ''}"
+                         data-color="${color.id}" onclick="selectColor('${color.id}', false)">
+                        <img src="${color.image}" alt="${color.name}">
+                    </div>
+                    <div class="color-name">${color.name}</div>
+                </div>
+            `).join('');
+
+            premiumContainer.innerHTML = COLORS.premium.map(color => `
+                <div class="color-item">
+                    <div class="color-swatch ${config.color === color.id && config.isPremiumColor ? 'active' : ''}"
+                         data-color="${color.id}" onclick="selectColor('${color.id}', true)">
+                        <img src="${color.image}" alt="${color.name}">
+                    </div>
+                    <div class="color-name">${color.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectColor(colorId, isPremium) {
+            config.color = colorId;
+            config.isPremiumColor = isPremium;
+
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                const isMatch = swatch.dataset.color === colorId;
+                swatch.classList.toggle('active', isMatch);
+            });
+
+            updatePricing();
+            updateSummary();
+        }
+
+        // ===========================================
+        // INSULATION
+        // ===========================================
+        function initInsulation() {
+            const container = document.getElementById('insulation-options');
+            const size = config.size || '16x7';
+
+            container.innerHTML = INSULATION_DATA.map(ins => {
+                const price = PRICING.insulation[ins.id][size];
+                return `
+                <div class="insulation-option ${config.insulation === ins.id ? 'active' : ''}"
+                     data-insulation="${ins.id}" onclick="selectInsulation('${ins.id}')">
+                    <img src="${ins.image}" alt="${ins.name}">
+                    <div class="insulation-info">
+                        <h5>${ins.name}</h5>
+                        <div class="r-value">${ins.rValue}</div>
+                        <div class="price">${price === 0 ? 'Included' : '+' + formatPrice(price)}</div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function selectInsulation(id) {
+            config.insulation = id;
+
+            document.querySelectorAll('.insulation-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.insulation === id);
+            });
+
+            updatePricing();
+            updateSummary();
+        }
+
+        // ===========================================
+        // WINDOWS
+        // ===========================================
+        function initWindows() {
+            const container = document.getElementById('window-options');
+            container.innerHTML = WINDOW_DATA.map(win => `
+                <div class="window-option ${config.windows === win.id ? 'active' : ''}"
+                     data-windows="${win.id}" onclick="selectWindows('${win.id}')">
+                    ${win.image ? `<img src="${win.image}" alt="${win.name}">` : '<div style="height:32px;display:flex;align-items:center;justify-content:center;color:var(--gray-400);font-size:0.75rem;">None</div>'}
+                    <span>${win.name}</span>
+                    <div class="price">${win.price === 0 ? 'Included' : '+' + formatPrice(win.price)}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectWindows(id) {
+            config.windows = id;
+
+            document.querySelectorAll('.window-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.windows === id);
+            });
+
+            updatePricing();
+            updateSummary();
+        }
+
+        // ===========================================
+        // OPENERS
+        // ===========================================
+        function initOpeners() {
+            const container = document.getElementById('opener-options');
+            container.innerHTML = OPENER_DATA.map(opener => `
+                <div class="opener-option ${config.opener === opener.id ? 'active' : ''}"
+                     data-opener="${opener.id}" onclick="selectOpener('${opener.id}')">
+                    <div>
+                        <h5>${opener.name}</h5>
+                        <p>${opener.description}</p>
+                    </div>
+                    <div class="price">${opener.price === 0 ? '--' : formatPrice(opener.price)}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectOpener(id) {
+            config.opener = id;
+
+            document.querySelectorAll('.opener-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.opener === id);
+            });
+
+            updatePricing();
+            updateSummary();
+        }
+
+        // ===========================================
+        // PRICING CALCULATOR
+        // ===========================================
+        function calculateTotal() {
+            // If no style or size selected, return zeros
+            if (!config.style || !config.size) {
+                return {
+                    base: 0,
+                    insulation: 0,
+                    windows: 0,
+                    color: 0,
+                    opener: 0,
+                    total: 0,
+                    hasSelections: false
+                };
+            }
+
+            const basePrice = PRICING.basePrices[config.style][config.size];
+            const insulationPrice = PRICING.insulation[config.insulation][config.size];
+            const windowPrice = PRICING.windows[config.windows];
+            const colorPrice = config.isPremiumColor ? PRICING.woodGrain[config.size] : 0;
+            const openerPrice = PRICING.openers[config.opener];
+
+            return {
+                base: basePrice,
+                insulation: insulationPrice,
+                windows: windowPrice,
+                color: colorPrice,
+                opener: openerPrice,
+                total: basePrice + insulationPrice + windowPrice + colorPrice + openerPrice,
+                hasSelections: true
+            };
+        }
+
+        function updatePricing() {
+            const prices = calculateTotal();
+
+            // Update bottom bar total
+            const totalDisplay = document.getElementById('price-total-display');
+            if (prices.hasSelections) {
+                totalDisplay.textContent = formatPrice(prices.total);
+                totalDisplay.classList.remove('zero');
+            } else {
+                totalDisplay.textContent = '$0.00';
+                totalDisplay.classList.add('zero');
+            }
+
+            // Update modal items
+            updatePriceModal(prices);
+        }
+
+        function updatePriceModal(prices) {
+            const itemsContainer = document.getElementById('price-modal-items');
+            const doorData = config.style ? DOOR_DATA[config.style] : null;
+            const insulationData = INSULATION_DATA.find(i => i.id === config.insulation);
+            const windowData = WINDOW_DATA.find(w => w.id === config.windows);
+            const openerData = OPENER_DATA.find(o => o.id === config.opener);
+
+            const items = [];
+
+            if (prices.hasSelections) {
+                items.push({
+                    label: `${doorData.name} (${config.size})`,
+                    value: formatPrice(prices.base)
+                });
+                items.push({
+                    label: insulationData.name,
+                    value: prices.insulation > 0 ? formatPrice(prices.insulation) : 'Included'
+                });
+                items.push({
+                    label: windowData.name,
+                    value: prices.windows > 0 ? formatPrice(prices.windows) : 'None'
+                });
+                items.push({
+                    label: config.isPremiumColor ? 'Wood Grain' : 'Standard Color',
+                    value: prices.color > 0 ? formatPrice(prices.color) : 'Included'
+                });
+                items.push({
+                    label: openerData.name,
+                    value: prices.opener > 0 ? formatPrice(prices.opener) : 'None'
+                });
+            } else {
+                items.push({
+                    label: 'Select a door style and size to see pricing',
+                    value: '--'
+                });
+            }
+
+            itemsContainer.innerHTML = items.map(item => `
+                <div class="price-modal-item">
+                    <span>${item.label}</span>
+                    <span style="font-weight: 600;">${item.value}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('price-modal-total').textContent = prices.hasSelections ? formatPrice(prices.total) : '$0.00';
+        }
+
+        function updateSummary() {
+            const prices = calculateTotal();
+
+            if (!prices.hasSelections) {
+                document.getElementById('summary-style-label').textContent = 'Select door style & size';
+                document.getElementById('summary-base-price').textContent = '--';
+                document.getElementById('summary-insulation-price').textContent = '--';
+                document.getElementById('summary-windows-price').textContent = '--';
+                document.getElementById('summary-color-price').textContent = '--';
+                document.getElementById('summary-opener-price').textContent = '--';
+                document.getElementById('summary-total').textContent = '$0.00';
+                document.getElementById('config-tags').innerHTML = '<span class="config-tag">No selections</span>';
+                return;
+            }
+
+            const doorData = DOOR_DATA[config.style];
+            const insulationData = INSULATION_DATA.find(i => i.id === config.insulation);
+            const windowData = WINDOW_DATA.find(w => w.id === config.windows);
+            const openerData = OPENER_DATA.find(o => o.id === config.opener);
+            const colorData = [...COLORS.standard, ...COLORS.premium].find(c => c.id === config.color);
+
+            // Update image
+            document.getElementById('summary-door-image').src = config.windows === 'none'
+                ? (doorData.imageNoWindows || doorData.image)
+                : doorData.image;
+
+            // Update prices
+            document.getElementById('summary-style-label').textContent = `${doorData.name} (${config.size})`;
+            document.getElementById('summary-base-price').textContent = formatPrice(prices.base);
+            document.getElementById('summary-insulation-price').textContent = prices.insulation > 0 ? formatPrice(prices.insulation) : 'Included';
+            document.getElementById('summary-windows-price').textContent = prices.windows > 0 ? formatPrice(prices.windows) : 'None';
+            document.getElementById('summary-color-price').textContent = prices.color > 0 ? formatPrice(prices.color) : 'Included';
+            document.getElementById('summary-opener-price').textContent = prices.opener > 0 ? formatPrice(prices.opener) : 'None';
+            document.getElementById('summary-total').textContent = formatPrice(prices.total);
+
+            // Update tags
+            const tags = [
+                doorData.name,
+                config.size,
+                colorData ? colorData.name : 'White',
+                insulationData.rValue !== 'R-N/A' ? insulationData.rValue : null,
+                config.windows !== 'none' ? 'Windows' : null,
+                config.opener !== 'none' ? 'Opener' : null
+            ].filter(Boolean);
+
+            document.getElementById('config-tags').innerHTML = tags.map(tag =>
+                `<span class="config-tag">${tag}</span>`
+            ).join('');
+        }
+
+        // ===========================================
+        // PRICE MODAL
+        // ===========================================
+        function openPriceModal() {
+            document.getElementById('price-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePriceModal() {
+            document.getElementById('price-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closePriceModalOutside(event) {
+            if (event.target === document.getElementById('price-modal')) {
+                closePriceModal();
+            }
+        }
+
+        // ===========================================
+        // UTILITIES
+        // ===========================================
+        function formatPrice(amount) {
+            return '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function resetConfiguration() {
+            config = {
+                style: null,
+                size: null,
+                color: 'white',
+                isPremiumColor: false,
+                insulation: 'none',
+                windows: 'none',
+                opener: 'none'
+            };
+
+            // Reset UI
+            document.querySelectorAll('.door-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
+
+            document.getElementById('door-name').textContent = 'Select a Style';
+            document.getElementById('door-description').textContent = 'Tap one of the style buttons above to see details and pricing.';
+            document.getElementById('door-starting-price').textContent = '--';
+            document.getElementById('door-image').src = 'assets/doors/standard-short-panel.png';
+
+            initColors();
+            initInsulation();
+            initWindows();
+            initOpeners();
+            updatePricing();
+            updateSummary();
+            renderSizeComparison();
+        }
+    </script>
+</body>
+</html>
