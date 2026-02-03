@@ -1,11 +1,11 @@
 export const SITE_NAME = "Garage Cowboy";
 export const DEFAULT_TITLE = "Garage Cowboy - 24/7 Garage Door Repair in Dallas-Fort Worth";
-export const DEFAULT_DESCRIPTION = "Professional garage door repair and installation services in Dallas-Fort Worth. Same-day service, expert technicians, competitive prices. Call (817) 256-0122 for immediate assistance.";
+export const DEFAULT_DESCRIPTION = "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured. Call (817) 256-0122!";
 
 // Use environment variable with fallback
 export const SITE_URL = import.meta.env.VITE_SITE_URL || "https://garagecowboy.com";
 
-export const DEFAULT_OG_IMAGE = "/og/og-default.png";
+export const DEFAULT_OG_IMAGE = "/social-preview.png";
 
 // Business information for schema
 export const BUSINESS_INFO = {

@@ -15,8 +15,8 @@ export const localBusinessSchema = {
   })),
   "sameAs": BUSINESS_INFO.sameAs,
   "url": SITE_URL,
-  "description": "Professional garage door repair and installation services in Dallas-Fort Worth metroplex. 24/7 emergency service available.",
-  "image": `${SITE_URL}/og/og-default.png`
+  "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
+  "image": `${SITE_URL}/social-preview.png`
 };
 
 export const websiteSchema = {
@@ -108,7 +108,7 @@ export function buildBaseGraph() {
         "url": SITE_URL,
         "telephone": BUSINESS_INFO.telephone,
         "sameAs": BUSINESS_INFO.sameAs,
-        "logo": `${SITE_URL}/og/og-default.png`
+        "logo": `${SITE_URL}/social-preview.png`
       },
       {
         "@type": "WebSite",
@@ -135,8 +135,8 @@ export function buildBaseGraph() {
         "telephone": BUSINESS_INFO.telephone,
         "priceRange": BUSINESS_INFO.priceRange,
         "openingHours": BUSINESS_INFO.openingHours,
-        "description": "Professional garage door repair and installation services in Dallas-Fort Worth metroplex. 24/7 emergency service available.",
-        "image": `${SITE_URL}/og/og-default.png`,
+        "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
+        "image": `${SITE_URL}/social-preview.png`,
         "sameAs": BUSINESS_INFO.sameAs,
         "areaServed": HUBS.filter(h => h.slug !== "dfw").map(hub => ({
           "@type": "City",
@@ -289,7 +289,7 @@ export function createBlogPostingSchema(post: {
       "name": BUSINESS_INFO.businessName,
       "logo": {
         "@type": "ImageObject",
-        "url": `${SITE_URL}/og/og-default.png`
+        "url": `${SITE_URL}/social-preview.png`
       }
     },
     "datePublished": post.publishDate,
