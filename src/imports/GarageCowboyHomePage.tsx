@@ -30,10 +30,10 @@ function Container() {
         <p className="font-['Product_Sans_Black:Regular',product-sans]">(817) 256-0122</p>
       </div>
       <div className="absolute h-[81.354px] left-[1739.09px] top-[57.1px] w-[209.242px]" data-name="emergency">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
+        <img alt="24/7 Emergency garage door repair" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
       </div>
       <div className="absolute h-[153.719px] left-[854px] top-[25.14px] w-[414.001px]" data-name="logo">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
+        <img alt="Garage Cowboy logo" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
       </div>
     </div>
   );
@@ -125,18 +125,18 @@ function NavSection() {
       <div className="size-full">
         <div className="content-stretch flex flex-col items-start px-[390px] py-0 relative size-full">
           <div className="absolute left-[1341.36px] size-[55.994px] top-[36.79px]" data-name="Google">
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogle} />
+            <img alt="Google reviews" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogle} />
           </div>
           <div className="absolute h-[55.994px] left-[1469.07px] top-[36.79px] w-[48.691px]" data-name="facebook">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[86.72%] left-0 max-w-none top-[8.58%] w-full" src={imgFacebook} />
+              <img alt="Facebook reviews" className="absolute h-[86.72%] left-0 max-w-none top-[8.58%] w-full" src={imgFacebook} />
             </div>
           </div>
           <div className="absolute left-[1277.5px] size-[55.994px] top-[36.79px]" data-name="Yelp">
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgYelp} />
+            <img alt="Yelp reviews" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgYelp} />
           </div>
           <div className="absolute left-[1405.21px] size-[55.994px] top-[36.79px]" data-name="Google Maps">
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleMaps} />
+            <img alt="Google Maps location" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleMaps} />
           </div>
           <div className="absolute bg-[#fec300] h-[85px] left-[1579.75px] rounded-[20px] top-[21.13px] w-[300px]">
             <div aria-hidden="true" className="absolute border-2 border-[#35363a] border-solid inset-0 pointer-events-none rounded-[20px] shadow-[0px_5px_5px_0px_rgba(0,0,0,0.25)]" />
@@ -576,7 +576,7 @@ function FormFiller() {
         </p>
       </div>
       <div className="absolute left-[1118.4px] size-[20px] top-[224.5px]" data-name="Gmail">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGmail} />
+        <img alt="Email contact" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGmail} />
       </div>
     </div>
   );
@@ -586,7 +586,7 @@ function Svg() {
   return (
     <div className="relative shrink-0 size-[18px]" data-name="SVG">
       <div className="absolute inset-[-2.98%_175.74%_-63.68%_-242.4%]" data-name="Contacts">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgContacts} />
+        <img alt="Phone contact" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgContacts} />
       </div>
     </div>
   );
@@ -813,7 +813,7 @@ function Container38() {
         </div>
         <div className="absolute left-[629.07px] size-[32.5px] top-[16px]" data-name="verified">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <img alt="" className="absolute h-[114.8%] left-[-7.69%] max-w-none top-[-7.65%] w-[115.38%]" src={imgVerified} />
+            <img alt="Verified technician badge" className="absolute h-[114.8%] left-[-7.69%] max-w-none top-[-7.65%] w-[115.38%]" src={imgVerified} />
           </div>
         </div>
       </div>
@@ -856,7 +856,7 @@ function BrokenSpringRepairJpg() {
   return (
     <div className="h-[194.63px] max-h-[194.6300048828125px] max-w-[265px] pointer-events-none relative rounded-tl-[15px] shrink-0 w-[265px]" data-name="BROKEN-SPRING-REPAIR.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tl-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenSpringRepairJpg} />
+        <img alt="Broken garage door spring repair service" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenSpringRepairJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tl-[15px]" />
     </div>
@@ -891,7 +891,7 @@ function OpenerRepairInstallationJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative shrink-0 w-[265px]" data-name="OPENER-REPAIR-INSTALLATION.jpg">
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgOpenerRepairInstallationJpg} />
+        <img alt="Garage door opener repair and installation" className="absolute left-0 max-w-none size-full top-0" src={imgOpenerRepairInstallationJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
     </div>
@@ -926,7 +926,7 @@ function DoorOffTrackJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative shrink-0 w-[265px]" data-name="DOOR-OFF-TRACK.jpg">
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgDoorOffTrackJpg} />
+        <img alt="Garage door off track repair service" className="absolute left-0 max-w-none size-full top-0" src={imgDoorOffTrackJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
     </div>
@@ -961,7 +961,7 @@ function BrokenCableRepairJpg() {
   return (
     <div className="h-[194.63px] max-h-[194.6300048828125px] max-w-[265px] pointer-events-none relative rounded-tr-[15px] shrink-0 w-[265px]" data-name="BROKEN-CABLE-REPAIR.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tr-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenCableRepairJpg} />
+        <img alt="Broken garage door cable repair" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenCableRepairJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tr-[15px]" />
     </div>
@@ -1724,7 +1724,7 @@ function NewDoorInstallationJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative rounded-tl-[15px] shrink-0 w-[265px]" data-name="NEW-DOOR-INSTALLATION.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tl-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgNewDoorInstallationJpg} />
+        <img alt="New garage door installation service" className="absolute left-0 max-w-none size-full top-0" src={imgNewDoorInstallationJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tl-[15px]" />
     </div>
@@ -1941,7 +1941,7 @@ function Container99() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0 w-full" data-name="Container">
       <div className="absolute h-[195px] left-[calc(50%-0.23px)] pointer-events-none top-[0.04px] translate-x-[-50%] w-[265px]" data-name="image 3726">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover size-full" src={imgImage3726} />
+        <img alt="Garage door service and maintenance" className="absolute inset-0 max-w-none object-50%-50% object-cover size-full" src={imgImage3726} />
         <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
       </div>
     </div>
@@ -2144,7 +2144,7 @@ function RemoteRepairProgram1Jpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative shrink-0 w-[265px]" data-name="REMOTE-REPAIR-PROGRAM-1.jpg">
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRemoteRepairProgram1Jpg} />
+        <img alt="Garage door remote programming and repair" className="absolute left-0 max-w-none size-full top-0" src={imgRemoteRepairProgram1Jpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
     </div>
@@ -2353,7 +2353,7 @@ function GarageDoorRollerRepairJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative rounded-tr-[15px] shrink-0 w-[265px]" data-name="GARAGE-DOOR-ROLLER-REPAIR.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tr-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgGarageDoorRollerRepairJpg} />
+        <img alt="Garage door roller repair service" className="absolute left-0 max-w-none size-full top-0" src={imgGarageDoorRollerRepairJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tr-[15px]" />
     </div>
@@ -2659,7 +2659,7 @@ function Group2() {
   return (
     <div className="absolute contents left-[175.22px] top-[19.54px]">
       <div className="absolute h-[79.52px] left-[175.22px] top-[19.54px] w-[963.777px]" data-name="GarageCowboy">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgGarageCowboy} />
+        <img alt="Garage Cowboy service truck" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgGarageCowboy} />
       </div>
     </div>
   );
@@ -2990,12 +2990,12 @@ function GarageCowboyStoryWhySection() {
       <div className="absolute flex h-[93.607px] items-center justify-center left-[1078.66px] top-[109.11px] w-[163.787px]">
         <div className="flex-none rotate-[180deg] scale-y-[-100%]">
           <div className="h-[93.607px] relative shadow-[0px_2px_4px_0px_rgba(0,0,0,0.18)] w-[163.787px]" data-name="hat">
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
+            <img alt="Garage Cowboy cowboy hat logo" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
           </div>
         </div>
       </div>
       <div className="absolute h-[93.607px] left-[50.37px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.18)] top-[109.11px] w-[163.787px]" data-name="hat">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
+        <img alt="Garage Cowboy cowboy hat logo" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
       </div>
     </div>
   );
@@ -3336,17 +3336,17 @@ function Frame8() {
     <div className="absolute h-[286px] left-0 top-0 w-[2118px]">
       <div className="absolute bg-[#fec300] border-2 border-[#35363a] border-solid h-[85px] left-[1339.52px] rounded-[20px] shadow-[0px_5px_5px_0px_rgba(0,0,0,0.25)] top-[102.76px] w-[300px]" />
       <div className="absolute left-[1794.51px] size-[25px] top-[206.77px]" data-name="Yelp">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgYelp} />
+        <img alt="Yelp reviews" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgYelp} />
       </div>
       <div className="absolute left-[1794.51px] size-[25px] top-[129.59px]" data-name="Google">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogle} />
+        <img alt="Google reviews" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogle} />
       </div>
       <div className="absolute left-[1794.51px] size-[25px] top-[168.18px]" data-name="Google Maps">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleMaps} />
+        <img alt="Google Maps location" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleMaps} />
       </div>
       <div className="absolute h-[25px] left-[1797.77px] top-[91px] w-[21.739px]" data-name="facebook">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[86.72%] left-0 max-w-none top-[8.58%] w-full" src={imgFacebook} />
+          <img alt="Facebook reviews" className="absolute h-[86.72%] left-0 max-w-none top-[8.58%] w-full" src={imgFacebook} />
         </div>
       </div>
       <div className="absolute flex flex-col font-['Product_Sans_Black:Regular',product-sans] justify-center leading-[0] left-[1423.91px] not-italic text-[#222] text-[0px] text-nowrap top-[146.41px] translate-y-[-50%]">
@@ -3361,10 +3361,10 @@ function Frame8() {
         </p>
       </div>
       <div className="absolute left-[962.86px] size-[30px] top-[153.78px]" data-name="Google Contacts">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgContacts} />
+        <img alt="Phone contact" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgContacts} />
       </div>
       <div className="absolute h-[96.438px] left-[934.38px] top-[48.82px] w-[248.036px]" data-name="emergency">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
+        <img alt="24/7 Emergency garage door repair" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
       </div>
       <div className="absolute flex flex-col font-['Product_Sans_Medium:Regular',product-sans] justify-center leading-[32px] left-[1058.4px] not-italic text-[0px] text-[32px] text-black text-center text-nowrap top-[185.78px] tracking-[-0.32px] translate-x-[-50%] translate-y-[-50%]">
         <p className="mb-0">
@@ -3389,7 +3389,7 @@ function Frame8() {
         <p className="leading-[11px]">Find Garage Cowboy</p>
       </div>
       <div className="absolute h-[130.808px] left-[132.38px] top-[47.97px] w-[352.297px]" data-name="logo">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
+        <img alt="Garage Cowboy logo" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
       </div>
       <div className="absolute left-[1369.13px] size-[40px] top-[125.26px]" data-name="Vector">
         <div className="absolute inset-0" style={{ "--fill-0": "rgba(34, 34, 34, 1)" } as React.CSSProperties}>

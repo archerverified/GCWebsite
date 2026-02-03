@@ -12,7 +12,7 @@ function BrokenSpringRepairJpg() {
   return (
     <div className="h-[194.63px] max-h-[194.6300048828125px] max-w-[265px] pointer-events-none relative rounded-tl-[15px] shrink-0 w-[265px]" data-name="BROKEN-SPRING-REPAIR.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tl-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenSpringRepairJpg} />
+        <img alt="Broken garage door spring repair service" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenSpringRepairJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tl-[15px]" />
     </div>
@@ -47,7 +47,7 @@ function OpenerRepairInstallationJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative shrink-0 w-[265px]" data-name="OPENER-REPAIR-INSTALLATION.jpg">
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgOpenerRepairInstallationJpg} />
+        <img alt="Garage door opener repair and installation" className="absolute left-0 max-w-none size-full top-0" src={imgOpenerRepairInstallationJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
     </div>
@@ -82,7 +82,7 @@ function DoorOffTrackJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative shrink-0 w-[265px]" data-name="DOOR-OFF-TRACK.jpg">
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgDoorOffTrackJpg} />
+        <img alt="Garage door off track repair service" className="absolute left-0 max-w-none size-full top-0" src={imgDoorOffTrackJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
     </div>
@@ -117,7 +117,7 @@ function BrokenCableRepairJpg() {
   return (
     <div className="h-[194.63px] max-h-[194.6300048828125px] max-w-[265px] pointer-events-none relative rounded-tr-[15px] shrink-0 w-[265px]" data-name="BROKEN-CABLE-REPAIR.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tr-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenCableRepairJpg} />
+        <img alt="Broken garage door cable repair" className="absolute left-0 max-w-none size-full top-0" src={imgBrokenCableRepairJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tr-[15px]" />
     </div>
@@ -880,7 +880,7 @@ function NewDoorInstallationJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative rounded-tl-[15px] shrink-0 w-[265px]" data-name="NEW-DOOR-INSTALLATION.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tl-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgNewDoorInstallationJpg} />
+        <img alt="New garage door installation service" className="absolute left-0 max-w-none size-full top-0" src={imgNewDoorInstallationJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tl-[15px]" />
     </div>
@@ -1097,7 +1097,7 @@ function Container60() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0 w-full" data-name="Container">
       <div className="absolute h-[195px] left-[calc(50%-0.23px)] pointer-events-none top-[0.04px] translate-x-[-50%] w-[265px]" data-name="image 3726">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover size-full" src={imgImage3726} />
+        <img alt="Garage door service and maintenance" className="absolute inset-0 max-w-none object-50%-50% object-cover size-full" src={imgImage3726} />
         <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
       </div>
     </div>
@@ -1300,7 +1300,7 @@ function RemoteRepairProgram1Jpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative shrink-0 w-[265px]" data-name="REMOTE-REPAIR-PROGRAM-1.jpg">
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRemoteRepairProgram1Jpg} />
+        <img alt="Garage door remote programming and repair" className="absolute left-0 max-w-none size-full top-0" src={imgRemoteRepairProgram1Jpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0" />
     </div>
@@ -1509,7 +1509,7 @@ function GarageDoorRollerRepairJpg() {
   return (
     <div className="h-[194.63px] max-w-[265px] pointer-events-none relative rounded-tr-[15px] shrink-0 w-[265px]" data-name="GARAGE-DOOR-ROLLER-REPAIR.jpg">
       <div className="absolute inset-0 overflow-hidden rounded-tr-[15px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgGarageDoorRollerRepairJpg} />
+        <img alt="Garage door roller repair service" className="absolute left-0 max-w-none size-full top-0" src={imgGarageDoorRollerRepairJpg} />
       </div>
       <div aria-hidden="true" className="absolute border-[3px_3px_0px] border-black border-solid inset-0 rounded-tr-[15px]" />
     </div>

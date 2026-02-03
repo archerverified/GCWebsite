@@ -531,7 +531,7 @@ function Container34() {
         </div>
         <div className="absolute left-[629.07px] size-[32.5px] top-[16px]" data-name="verified">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <img alt="" className="absolute h-[114.8%] left-[-7.69%] max-w-none top-[-7.65%] w-[115.38%]" src={imgVerified} />
+            <img alt="Verified Google reviews" className="absolute h-[114.8%] left-[-7.69%] max-w-none top-[-7.65%] w-[115.38%]" src={imgVerified} />
           </div>
         </div>
       </div>
@@ -579,7 +579,7 @@ export default function FormFiller() {
             </p>
           </div>
           <div className="absolute left-[1118.4px] size-[20px] top-[224.5px]" data-name="Gmail">
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGmail} />
+            <img alt="Contact via email" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGmail} />
           </div>
           <ReferenceSection />
         </div>

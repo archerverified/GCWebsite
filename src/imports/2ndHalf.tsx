@@ -286,7 +286,7 @@ function GarageCowboyStoryWhySection() {
       <div className="absolute flex h-[93.607px] items-center justify-center left-[1079.06px] top-[35.11px] w-[163.787px]">
         <div className="flex-none rotate-[180deg] scale-y-[-100%]">
           <div className="h-[93.607px] relative shadow-[0px_2px_4px_0px_rgba(0,0,0,0.18)] w-[163.787px]" data-name="hat">
-            <img alt="" role="presentation" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
+            <img alt="Decorative cowboy hat" role="presentation" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
           </div>
         </div>
       </div>

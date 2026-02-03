@@ -11,10 +11,10 @@ function Container() {
         <p className="font-['Product_Sans_Black:Regular',product-sans]">(817) 256-0122</p>
       </div>
       <div className="absolute h-[81.354px] left-[1739.09px] top-[57.1px] w-[209.242px]" data-name="emergency">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
+        <img alt="24/7 Emergency garage door repair" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
       </div>
       <div className="absolute h-[153.719px] left-[854px] top-[25.14px] w-[414.001px]" data-name="logo">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
+        <img alt="Garage Cowboy logo" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
       </div>
     </div>
   );

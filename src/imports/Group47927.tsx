@@ -7,7 +7,7 @@ export default function Group() {
         <p className="leading-[42px]">{`GARAGE DOOR & REPAIR SERVICES`}</p>
       </div>
       <div className="absolute h-[79.52px] left-0 top-0 w-[963.777px]" data-name="GarageCowboy">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgGarageCowboy} />
+        <img alt="Garage Cowboy service truck" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgGarageCowboy} />
       </div>
     </div>
   );
