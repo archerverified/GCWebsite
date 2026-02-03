@@ -13,6 +13,7 @@ const staticPages = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
   { path: '/services', priority: 0.9, changefreq: 'weekly' },
   { path: '/texas', priority: 0.9, changefreq: 'weekly' },
+  { path: '/blog', priority: 0.8, changefreq: 'weekly' },
   { path: '/contact', priority: 0.8, changefreq: 'monthly' },
   { path: '/residential', priority: 0.8, changefreq: 'monthly' },
   { path: '/commercial', priority: 0.8, changefreq: 'monthly' },
@@ -51,6 +52,27 @@ async function getDynamicPages() {
       priority: 0.7,
       changefreq: 'monthly'
     });
+  }
+
+  // Add blog posts
+  const blogDir = path.join(ROOT_DIR, 'src', 'data', 'blog');
+  try {
+    const postsFile = await fs.readFile(path.join(blogDir, 'posts.json'), 'utf-8');
+    const postsData = JSON.parse(postsFile);
+    if (postsData.posts && Array.isArray(postsData.posts)) {
+      for (const post of postsData.posts) {
+        if (post.slug) {
+          dynamicPages.push({
+            path: `/blog/${post.slug}`,
+            priority: 0.7,
+            changefreq: 'monthly'
+          });
+        }
+      }
+    }
+  } catch (error) {
+    // Blog posts file may not exist yet, continue without error
+    console.log('   Note: No blog posts found for sitemap');
   }
 
   return dynamicPages;

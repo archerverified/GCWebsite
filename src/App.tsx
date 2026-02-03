@@ -15,6 +15,8 @@ const Privacy = lazy(() => import("./pages/Privacy").then(m => ({ default: m.Pri
 const Terms = lazy(() => import("./pages/Terms").then(m => ({ default: m.Terms })));
 const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
 const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.NotFound })));
+const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));
+const BlogPost = lazy(() => import("./pages/BlogPost").then(m => ({ default: m.BlogPost })));
 
 // Loading fallback component
 function PageLoader() {
@@ -47,6 +49,8 @@ export default function App() {
             <Route path="/contac" element={<Navigate to="/contact" replace />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

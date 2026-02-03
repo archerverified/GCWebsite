@@ -249,6 +249,78 @@ export function buildBreadcrumbList(crumbs: Array<{ name: string; path: string }
 }
 
 // ============================================================================
+// Blog Schema Builders
+// ============================================================================
+
+/**
+ * Build BlogPosting schema for individual blog posts.
+ * Includes author, publisher, dates, and image metadata.
+ */
+export function createBlogPostingSchema(post: {
+  title: string;
+  description: string;
+  slug: string;
+  author: { name: string; title: string };
+  publishDate: string;
+  lastModified: string;
+  featuredImage: { url: string; width: number; height: number };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.description,
+    "image": {
+      "@type": "ImageObject",
+      "url": post.featuredImage.url.startsWith('http')
+        ? post.featuredImage.url
+        : `${SITE_URL}${post.featuredImage.url}`,
+      "width": post.featuredImage.width,
+      "height": post.featuredImage.height
+    },
+    "author": {
+      "@type": "Person",
+      "name": post.author.name,
+      "jobTitle": post.author.title
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": `${SITE_URL}#organization`,
+      "name": BUSINESS_INFO.businessName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/og/og-default.png`
+      }
+    },
+    "datePublished": post.publishDate,
+    "dateModified": post.lastModified,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${post.slug}`
+    }
+  };
+}
+
+/**
+ * Build Blog/CollectionPage schema for the blog listing page.
+ */
+export function createBlogListSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Garage Cowboy Blog",
+    "description": "Expert tips, guides, and insights on garage door repair, maintenance, and installation from the Garage Cowboy team.",
+    "url": `${SITE_URL}/blog`,
+    "isPartOf": {
+      "@id": `${SITE_URL}#website`
+    },
+    "publisher": {
+      "@id": `${SITE_URL}#organization`
+    }
+  };
+}
+
+// ============================================================================
 // Helpers
 // ============================================================================
 

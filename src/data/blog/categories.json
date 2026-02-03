@@ -1,0 +1,36 @@
+{
+  "categories": [
+    {
+      "id": "garage-door-types",
+      "name": "Garage Door Types",
+      "slug": "garage-door-types",
+      "description": "Explore different types of garage doors including sectional, roll-up, tilt-up, and more. Learn which style suits your home.",
+      "metaDescription": "Learn about different garage door types for your home. Compare sectional, roll-up, and tilt-up garage doors with expert guidance.",
+      "color": "#fec300"
+    },
+    {
+      "id": "maintenance-repair",
+      "name": "Maintenance & Repair",
+      "slug": "maintenance-repair",
+      "description": "Expert tips on maintaining your garage door and handling common repairs. Keep your door running smoothly.",
+      "metaDescription": "Garage door maintenance tips and repair guides from Texas professionals. Learn how to extend your door's lifespan.",
+      "color": "#35363a"
+    },
+    {
+      "id": "troubleshooting",
+      "name": "Troubleshooting",
+      "slug": "troubleshooting",
+      "description": "Diagnose and solve common garage door problems. From noisy doors to opener issues, find solutions here.",
+      "metaDescription": "Troubleshoot common garage door problems with our expert guides. Fix noisy doors, stuck openers, and more.",
+      "color": "#f7bd15"
+    },
+    {
+      "id": "buying-guides",
+      "name": "Buying Guides",
+      "slug": "buying-guides",
+      "description": "Make informed decisions when purchasing a new garage door. Compare features, materials, and costs.",
+      "metaDescription": "Comprehensive garage door buying guides for Texas homeowners. Compare prices, features, and find the best value.",
+      "color": "#323232"
+    }
+  ]
+}
