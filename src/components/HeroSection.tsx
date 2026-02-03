@@ -10,9 +10,12 @@ export function HeroSection() {
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28 py-8 sm:py-12 lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-product-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-white drop-shadow-lg mb-6 sm:mb-8 uppercase">
-            <span className="text-[#f7bd15]">SAME-DAY GARAGE DOOR REPAIR</span> ACROSS <span className="text-white">DALLAS-FORT WORTH (DFW)</span> & ALL SURROUNDING CITIES
+          <h1 className="font-product-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-white drop-shadow-lg mb-4 sm:mb-6 uppercase">
+            <span className="text-[#f7bd15]">24/7 Garage Door Repair</span> in Dallas-Fort Worth
           </h1>
+          <p className="font-product-sans font-bold text-lg sm:text-xl md:text-2xl text-white drop-shadow-md mb-6 sm:mb-8">
+            Same-Day Service Across DFW & All Surrounding Cities
+          </p>
 
           <div className="mb-8 sm:mb-12">
             <ContactQuickActions />

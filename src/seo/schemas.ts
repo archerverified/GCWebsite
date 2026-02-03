@@ -8,11 +8,28 @@ export const localBusinessSchema = {
   "telephone": BUSINESS_INFO.telephone,
   "priceRange": BUSINESS_INFO.priceRange,
   "openingHours": BUSINESS_INFO.openingHours,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Fort Worth",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "32.7555",
+    "longitude": "-97.3308"
+  },
   "areaServed": BUSINESS_INFO.serviceArea.map(city => ({
     "@type": "City",
     "name": city,
     "addressRegion": "TX"
   })),
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "47",
+    "bestRating": "5"
+  },
   "sameAs": BUSINESS_INFO.sameAs,
   "url": SITE_URL,
   "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
@@ -135,9 +152,26 @@ export function buildBaseGraph() {
         "telephone": BUSINESS_INFO.telephone,
         "priceRange": BUSINESS_INFO.priceRange,
         "openingHours": BUSINESS_INFO.openingHours,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Fort Worth",
+          "addressRegion": "TX",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "32.7555",
+          "longitude": "-97.3308"
+        },
         "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
         "image": `${SITE_URL}/social-preview.png`,
         "sameAs": BUSINESS_INFO.sameAs,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "47",
+          "bestRating": "5"
+        },
         "areaServed": HUBS.filter(h => h.slug !== "dfw").map(hub => ({
           "@type": "City",
           "name": hub.name,

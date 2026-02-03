@@ -286,12 +286,12 @@ function GarageCowboyStoryWhySection() {
       <div className="absolute flex h-[93.607px] items-center justify-center left-[1079.06px] top-[35.11px] w-[163.787px]">
         <div className="flex-none rotate-[180deg] scale-y-[-100%]">
           <div className="h-[93.607px] relative shadow-[0px_2px_4px_0px_rgba(0,0,0,0.18)] w-[163.787px]" data-name="hat">
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
+            <img alt="" role="presentation" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
           </div>
         </div>
       </div>
       <div className="absolute h-[93.607px] left-[50.77px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.18)] top-[35.11px] w-[163.787px]" data-name="hat">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
+        <img alt="Garage Cowboy cowboy hat logo" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgHat} />
       </div>
     </div>
   );
@@ -632,17 +632,17 @@ function Frame4() {
     <div className="absolute h-[286px] left-0 top-0 w-[2118px]">
       <div className="absolute bg-[#fec300] border-2 border-[#35363a] border-solid h-[85px] left-[1339.52px] rounded-[20px] shadow-[0px_5px_5px_0px_rgba(0,0,0,0.25)] top-[102.76px] w-[300px]" />
       <div className="absolute left-[1794.51px] size-[25px] top-[206.77px]" data-name="Yelp">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgYelp} />
+        <img alt="Yelp reviews for Garage Cowboy" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgYelp} />
       </div>
       <div className="absolute left-[1794.51px] size-[25px] top-[129.59px]" data-name="Google">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogle} />
+        <img alt="Google reviews for Garage Cowboy" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogle} />
       </div>
       <div className="absolute left-[1794.51px] size-[25px] top-[168.18px]" data-name="Google Maps">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleMaps} />
+        <img alt="Find Garage Cowboy on Google Maps" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleMaps} />
       </div>
       <div className="absolute h-[25px] left-[1797.77px] top-[91px] w-[21.739px]" data-name="facebook">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[86.72%] left-0 max-w-none top-[8.58%] w-full" src={imgFacebook} />
+          <img alt="Garage Cowboy on Facebook" className="absolute h-[86.72%] left-0 max-w-none top-[8.58%] w-full" src={imgFacebook} />
         </div>
       </div>
       <div className="absolute flex flex-col font-['Product_Sans_Black:Regular',product-sans] justify-center leading-[0] left-[1423.91px] not-italic text-[#222] text-[0px] text-nowrap top-[146.41px] translate-y-[-50%]">
@@ -657,10 +657,10 @@ function Frame4() {
         </p>
       </div>
       <div className="absolute left-[962.86px] size-[30px] top-[153.78px]" data-name="Google Contacts">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleContacts} />
+        <img alt="Save Garage Cowboy contact" className="absolute inset-0 max-w-none object-50%-50% object-contain pointer-events-none size-full" src={imgGoogleContacts} />
       </div>
       <div className="absolute h-[96.438px] left-[934.38px] top-[48.82px] w-[248.036px]" data-name="emergency">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
+        <img alt="24/7 Emergency garage door repair service" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgEmergency} />
       </div>
       <div className="absolute flex flex-col font-['Product_Sans_Medium:Regular',product-sans] justify-center leading-[32px] left-[1058.4px] not-italic text-[0px] text-[32px] text-black text-center text-nowrap top-[185.78px] tracking-[-0.32px] translate-x-[-50%] translate-y-[-50%]">
         <p className="mb-0">
@@ -685,7 +685,7 @@ function Frame4() {
         <p className="leading-[11px]">Find Garage Cowboy</p>
       </div>
       <div className="absolute h-[130.808px] left-[132.38px] top-[47.97px] w-[352.297px]" data-name="logo">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
+        <img alt="Garage Cowboy logo - Professional garage door repair in Dallas-Fort Worth" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgLogo} />
       </div>
       <div className="absolute left-[1369.13px] size-[40px] top-[125.26px]" data-name="Vector">
         <div className="absolute inset-0" style={{ "--fill-0": "rgba(34, 34, 34, 1)" } as React.CSSProperties}>

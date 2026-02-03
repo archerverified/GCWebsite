@@ -53,9 +53,9 @@ export function GarageCowboyStoryWhySection() {
         <div className="bg-white rounded-tl-[20px] rounded-tr-[20px] border-b-[3px] border-black py-8 relative">
           {/* Left Hat */}
           <div className="absolute left-8 md:left-12 lg:left-16 top-1/2 -translate-y-1/2 w-24 md:w-32 lg:w-40">
-            <img 
-              src={imgHat} 
-              alt="" 
+            <img
+              src={imgHat}
+              alt="Garage Cowboy cowboy hat logo"
               className="w-full h-auto"
             />
           </div>
@@ -80,9 +80,10 @@ export function GarageCowboyStoryWhySection() {
 
           {/* Right Hat (flipped) */}
           <div className="absolute right-8 md:right-12 lg:right-16 top-1/2 -translate-y-1/2 w-24 md:w-32 lg:w-40">
-            <img 
-              src={imgHat} 
-              alt="" 
+            <img
+              src={imgHat}
+              alt=""
+              role="presentation"
               className="w-full h-auto transform scale-x-[-1]"
             />
           </div>
