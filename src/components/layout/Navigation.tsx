@@ -142,6 +142,9 @@ export function Navigation() {
             <NavLink to="/commercial" className={navLinkClass} aria-label="Go to Commercial services page">
               Commercial
             </NavLink>
+            <NavLink to="/blog" className={navLinkClass} aria-label="Go to Blog page">
+              Blog
+            </NavLink>
             <NavLink to="/contact" className={navLinkClass} aria-label="Go to Contact page">
               Contact
             </NavLink>
