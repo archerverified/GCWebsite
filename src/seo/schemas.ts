@@ -12,7 +12,7 @@ export const localBusinessSchema = {
     "@type": "PostalAddress",
     "addressLocality": "Fort Worth",
     "addressRegion": "TX",
-    "postalCode": "76102",
+    "postalCode": "76104",
     "addressCountry": "US"
   },
   "geo": {
@@ -141,7 +141,7 @@ export function buildBaseGraph() {
           "@type": "PostalAddress",
           "addressLocality": "Fort Worth",
           "addressRegion": "TX",
-          "postalCode": "76102",
+          "postalCode": "76104",
           "addressCountry": "US"
         }
       },
@@ -174,7 +174,7 @@ export function buildBaseGraph() {
           "@type": "PostalAddress",
           "addressLocality": "Fort Worth",
           "addressRegion": "TX",
-          "postalCode": "76102",
+          "postalCode": "76104",
           "addressCountry": "US"
         },
         "geo": {
