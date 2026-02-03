@@ -12,6 +12,7 @@ export const localBusinessSchema = {
     "@type": "PostalAddress",
     "addressLocality": "Fort Worth",
     "addressRegion": "TX",
+    "postalCode": "76102",
     "addressCountry": "US"
   },
   "geo": {
@@ -33,7 +34,12 @@ export const localBusinessSchema = {
   "sameAs": BUSINESS_INFO.sameAs,
   "url": SITE_URL,
   "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
-  "image": `${SITE_URL}/social-preview.png`
+  "image": {
+    "@type": "ImageObject",
+    "url": `${SITE_URL}/social-preview.png`,
+    "width": 1200,
+    "height": 630
+  }
 };
 
 export const websiteSchema = {
@@ -125,7 +131,19 @@ export function buildBaseGraph() {
         "url": SITE_URL,
         "telephone": BUSINESS_INFO.telephone,
         "sameAs": BUSINESS_INFO.sameAs,
-        "logo": `${SITE_URL}/social-preview.png`
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${SITE_URL}/social-preview.png`,
+          "width": 1200,
+          "height": 630
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Fort Worth",
+          "addressRegion": "TX",
+          "postalCode": "76102",
+          "addressCountry": "US"
+        }
       },
       {
         "@type": "WebSite",
@@ -156,6 +174,7 @@ export function buildBaseGraph() {
           "@type": "PostalAddress",
           "addressLocality": "Fort Worth",
           "addressRegion": "TX",
+          "postalCode": "76102",
           "addressCountry": "US"
         },
         "geo": {
@@ -164,7 +183,12 @@ export function buildBaseGraph() {
           "longitude": "-97.3308"
         },
         "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
-        "image": `${SITE_URL}/social-preview.png`,
+        "image": {
+          "@type": "ImageObject",
+          "url": `${SITE_URL}/social-preview.png`,
+          "width": 1200,
+          "height": 630
+        },
         "sameAs": BUSINESS_INFO.sameAs,
         "aggregateRating": {
           "@type": "AggregateRating",
