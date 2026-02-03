@@ -10,6 +10,7 @@ export const localBusinessSchema = {
   "openingHours": BUSINESS_INFO.openingHours,
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "801 W Vickery Blvd",
     "addressLocality": "Fort Worth",
     "addressRegion": "TX",
     "postalCode": "76104",
@@ -139,6 +140,7 @@ export function buildBaseGraph() {
         },
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "801 W Vickery Blvd",
           "addressLocality": "Fort Worth",
           "addressRegion": "TX",
           "postalCode": "76104",
@@ -172,6 +174,7 @@ export function buildBaseGraph() {
         "openingHours": BUSINESS_INFO.openingHours,
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "801 W Vickery Blvd",
           "addressLocality": "Fort Worth",
           "addressRegion": "TX",
           "postalCode": "76104",
