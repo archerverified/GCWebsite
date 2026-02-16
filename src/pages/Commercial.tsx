@@ -25,7 +25,7 @@ export function Commercial() {
 
   const serviceSchema = createServiceSchema(
     "Commercial Garage Door Services",
-    content.intro || "Commercial and industrial garage door solutions in Dallas-Fort Worth. Roll-up doors, sectional doors, emergency repairs.",
+    content.intro || "Commercial garage door repair and industrial door solutions in Dallas-Fort Worth. Roll-up doors, sectional doors, emergency service.",
     undefined
   );
 
@@ -40,7 +40,7 @@ export function Commercial() {
     <main className="bg-white">
       <Seo
         title="Commercial Garage Door Services in DFW"
-        description="Commercial and industrial garage door solutions in Dallas-Fort Worth. Roll-up doors, sectional doors, emergency repairs. Call (817) 256-0122."
+        description="Commercial garage door repair & industrial doors in Dallas-Fort Worth. Roll-up, sectional doors, emergency service. Call (817) 256-0122."
         canonicalPath="/commercial"
         schema={schemas}
       />

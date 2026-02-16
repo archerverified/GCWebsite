@@ -47,7 +47,7 @@ export function Services() {
     <main className="bg-white">
       <Seo
         title="Garage Door Services in DFW - Repair & Installation"
-        description="Complete garage door services including spring repair, opener installation, off-track repair, and new door installation. 24/7 emergency service available in Dallas-Fort Worth."
+        description="Garage door spring repair, opener installation, off-track repair & new doors in DFW. 24/7 emergency service. Call (817) 256-0122."
         canonicalPath="/services"
         schema={breadcrumbSchema}
       />

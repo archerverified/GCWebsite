@@ -34,7 +34,7 @@ const servicesData = [
   },
   {
     image: openerRepairImg,
-    title: "GARAGE OPENER REPAIR & INSTALL",
+    title: "GARAGE DOOR OPENER REPAIR",
     objectPosition: "50% 40%", // Opener mechanism focus
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 0px" },
@@ -59,7 +59,7 @@ const servicesData = [
   },
   {
     image: brokenCableImg,
-    title: "BROKEN CABLE REPAIR",
+    title: "BROKEN GARAGE CABLE REPAIR",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 20px 0px 0px", borderWidth: "2px" },
     imageStyle: { borderTopRightRadius: "20px" },
@@ -72,7 +72,7 @@ const servicesData = [
   },
   {
     image: newInstallImg,
-    title: "NEW GARAGE DOOR INSTALLS",
+    title: "NEW GARAGE DOOR REPLACEMENT",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 20px" },
     services: [
@@ -84,7 +84,7 @@ const servicesData = [
   },
   {
     image: maintenanceImg,
-    title: "DOOR SERVICE & MAINTENANCE",
+    title: "GARAGE DOOR REPAIR & SERVICE",
     roundedCorner: "",
     cardStyle: { borderRadius: "0px 0px 0px 0px" },
     services: [
@@ -141,7 +141,7 @@ function ServiceCard({ image, title, services, objectPosition, roundedCorner = "
       <div className={`relative w-full aspect-[265/195] overflow-hidden ${roundedCorner}`}>
         <img 
           src={image} 
-          alt={title}
+          alt={`${title.charAt(0)}${title.slice(1).toLowerCase()} in Dallas-Fort Worth`}
           loading="lazy"
           decoding="async"
           className="w-full h-full object-cover object-center"
@@ -208,6 +208,10 @@ export function GarageDoorRepair() {
     "GARAGE DOOR ROLLER REPAIR": "garage-door-roller-repair",
     "DOOR SERVICE & MAINTENANCE": "door-service-maintenance",
     "GARAGE DOOR SERVICE & MAINTENANCE": "door-service-maintenance",
+    "GARAGE DOOR OPENER REPAIR": "opener-repair-installation",
+    "GARAGE DOOR REPAIR & SERVICE": "door-service-maintenance",
+    "NEW GARAGE DOOR REPLACEMENT": "new-door-installation",
+    "BROKEN GARAGE CABLE REPAIR": "broken-cable-repair",
   };
 
   const handleReadMore = (serviceName: string) => {

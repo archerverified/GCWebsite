@@ -26,7 +26,7 @@ export function Texas() {
   return (
     <main className="bg-white">
       <Seo
-        title="Garage Door Services in Texas - Dallas-Fort Worth Metroplex"
+        title="Texas Garage Door Services - DFW Metroplex"
         description="Professional garage door repair and installation services throughout the Dallas-Fort Worth metroplex. Same-day service in all major cities."
         canonicalPath="/texas"
         schema={itemListSchema}

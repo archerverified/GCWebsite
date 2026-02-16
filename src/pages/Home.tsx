@@ -5,16 +5,20 @@ import { GarageCowboyStoryWhySection } from "../components/GarageCowboyStoryWhyS
 import { FAQSection } from "../components/FAQSection";
 import { ServiceAreasSection } from "../components/ServiceAreasSection";
 import { Seo } from "../components/seo/Seo";
-import { buildBaseGraph } from "../seo/schemas";
+import { buildBaseGraph, createFAQSchema } from "../seo/schemas";
+import { faqData } from "../components/FAQSection";
 
 export function Home() {
+  const baseGraph = buildBaseGraph();
+  const faqSchema = createFAQSchema(faqData);
+
   return (
     <>
       <Seo
-        title="Garage Cowboy - 24/7 Garage Door Repair in Dallas-Fort Worth"
-        description="Professional garage door repair and installation services in Dallas-Fort Worth. Same-day service, expert technicians, competitive prices. Call (817) 256-0122 for immediate assistance."
+        title="Garage Cowboy - 24/7 Garage Door Repair in DFW"
+        description="Professional garage door repair & installation in Dallas-Fort Worth. Same-day service, expert technicians. Call (817) 256-0122 now!"
         canonicalPath="/"
-        schema={buildBaseGraph()}
+        schema={[baseGraph, faqSchema]}
       />
       
       {/* Hero Section */}

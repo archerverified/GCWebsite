@@ -1,5 +1,5 @@
 export const SITE_NAME = "Garage Cowboy";
-export const DEFAULT_TITLE = "Garage Cowboy - 24/7 Garage Door Repair in Dallas-Fort Worth";
+export const DEFAULT_TITLE = "Garage Cowboy - 24/7 Garage Door Repair in DFW";
 export const DEFAULT_DESCRIPTION = "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured. Call (817) 256-0122!";
 
 // Use environment variable with fallback

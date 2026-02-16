@@ -32,6 +32,15 @@ export const localBusinessSchema = {
     "reviewCount": "47",
     "bestRating": "5"
   },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday", "Tuesday", "Wednesday", "Thursday",
+      "Friday", "Saturday", "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
   "sameAs": BUSINESS_INFO.sameAs,
   "url": SITE_URL,
   "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
@@ -73,6 +82,14 @@ export function createServiceSchema(serviceName: string, description: string, sl
     })),
     "description": description,
     "url": slug ? `${SITE_URL}/services/${slug}` : undefined,
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "priceCurrency": "USD"
+      }
+    },
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceLocation": {
@@ -198,6 +215,15 @@ export function buildBaseGraph() {
           "ratingValue": "5.0",
           "reviewCount": "47",
           "bestRating": "5"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
         },
         "areaServed": HUBS.filter(h => h.slug !== "dfw").map(hub => ({
           "@type": "City",

@@ -14,7 +14,7 @@ export function HeroSection() {
             <span className="text-[#f7bd15]">24/7 Garage Door Repair</span> in Dallas-Fort Worth
           </h1>
           <p className="font-product-sans font-bold text-lg sm:text-xl md:text-2xl text-white drop-shadow-md mb-6 sm:mb-8">
-            Same-Day Service Across DFW & All Surrounding Cities
+            Same-Day Repair & Garage Door Replacement Across DFW
           </p>
 
           <div className="mb-8 sm:mb-12">

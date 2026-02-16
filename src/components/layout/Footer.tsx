@@ -118,8 +118,8 @@ export function Footer() {
                 >
                   Phone:
                 </p>
-                <a 
-                  href="tel:8172560122" 
+                <a
+                  href="tel:8172560122"
                   className="font-product-sans font-black text-xl transition-colors"
                   style={{ color: colors.brand.yellowPrimary }}
                   onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowSecondary}
@@ -127,6 +127,12 @@ export function Footer() {
                 >
                   (817) 256-0122
                 </a>
+                <p
+                  className="font-product-sans font-black text-sm mt-1"
+                  style={{ color: colors.brand.yellowPrimary }}
+                >
+                  Open 24/7 — Call Anytime
+                </p>
               </div>
               <div>
                 <p 

@@ -25,7 +25,7 @@ export function Residential() {
 
   const serviceSchema = createServiceSchema(
     "Residential Garage Door Services",
-    content.intro || "Professional residential garage door repair and installation in Dallas-Fort Worth. Spring repair, opener installation, new doors.",
+    content.intro || "Professional residential garage door repair, replacement, and installation in Dallas-Fort Worth. Spring repair, opener installation, new doors.",
     undefined
   );
 
@@ -40,7 +40,7 @@ export function Residential() {
     <main className="bg-white">
       <Seo
         title="Residential Garage Door Services in DFW"
-        description="Professional residential garage door repair and installation in Dallas-Fort Worth. Spring repair, opener installation, new doors. Call (817) 256-0122."
+        description="Residential garage door repair, replacement & installation in DFW. Spring repair, opener service, new doors. Call (817) 256-0122."
         canonicalPath="/residential"
         schema={schemas}
       />

@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { Home, Phone } from "lucide-react";
+import { Seo } from "../components/seo/Seo";
 
 export function NotFound() {
   return (
     <main className="bg-white min-h-[60vh] flex items-center justify-center px-[48px] md:px-[96px] lg:px-[192px] xl:px-[288px]">
+      <Seo
+        title="Page Not Found"
+        description="The page you're looking for doesn't exist. Contact Garage Cowboy for 24/7 garage door repair in Dallas-Fort Worth. Call (817) 256-0122."
+        noindex={true}
+      />
       <div className="text-center max-w-2xl mx-auto py-20">
         <div className="font-product-sans font-black text-[120px] md:text-[180px] text-[#fec300] leading-none mb-4">
           404

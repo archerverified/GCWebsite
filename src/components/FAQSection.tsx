@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-const faqData = [
+export const faqData = [
+  {
+    question: "WHAT ARE YOUR BUSINESS HOURS?",
+    answer: "Garage Cowboy is available 24 hours a day, 7 days a week. We offer same-day garage door repair and after-hours emergency service throughout the Dallas–Fort Worth area at no additional charge. Call (817) 256-0122 anytime."
+  },
   {
     question: "HOW LONG DOES A GARAGE DOOR TYPICALLY LAST?",
     answer: "Most garage doors in North Texas last 15–30 years, depending on usage, climate exposure, door quality, and maintenance. Regular tune-ups and properly matched components can significantly extend lifespan."

@@ -24,7 +24,7 @@ export function AboutUs() {
   return (
     <main className="bg-white">
       <Seo
-        title="About Garage Cowboy - Your Trusted DFW Garage Door Experts"
+        title="About Us - DFW Garage Door Experts"
         description="Learn about Garage Cowboy's commitment to quality garage door services in Dallas-Fort Worth. Family-owned, professional technicians, 24/7 availability."
         canonicalPath="/about-us"
         schema={breadcrumbSchema}
