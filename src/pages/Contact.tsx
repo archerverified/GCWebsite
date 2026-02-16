@@ -28,7 +28,7 @@ export function Contact() {
           </nav>
 
           <h1 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-[#323232] mb-4 uppercase">
-            CONTACT GARAGE COWBOY
+            Contact Us for Garage Door Repair in DFW
           </h1>
 
           <ContactQuickActions showEmail />

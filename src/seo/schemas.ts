@@ -351,12 +351,14 @@ export function createBlogPostingSchema(post: {
   publishDate: string;
   lastModified: string;
   featuredImage: { url: string; width: number; height: number };
+  wordCount?: number;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.description,
+    ...(post.wordCount ? { "wordCount": post.wordCount } : {}),
     "image": {
       "@type": "ImageObject",
       "url": post.featuredImage.url.startsWith('http')
@@ -385,6 +387,23 @@ export function createBlogPostingSchema(post: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/blog/${post.slug}`
     }
+  };
+}
+
+/**
+ * Build ItemList schema for blog listing page.
+ * Enables carousel rich results for blog posts.
+ */
+export function buildBlogItemList(posts: Array<{ slug: string; title: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": posts.map((post, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `${SITE_URL}/blog/${post.slug}`,
+      "name": post.title
+    }))
   };
 }
 

@@ -30,6 +30,7 @@ export function BlogPost() {
   );
 
   // Build schemas
+  const wordCount = post.content.split(/\s+/).filter(Boolean).length;
   const blogPostingSchema = createBlogPostingSchema({
     title: post.metaTitle || post.title,
     description: post.metaDescription,
@@ -37,7 +38,8 @@ export function BlogPost() {
     author: post.author,
     publishDate: post.publishDate,
     lastModified: post.lastModified,
-    featuredImage: post.featuredImage
+    featuredImage: post.featuredImage,
+    wordCount
   });
 
   const schemas = [blogPostingSchema];

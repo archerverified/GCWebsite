@@ -3,7 +3,7 @@ import { Phone, BookOpen } from "lucide-react";
 import { Seo } from "../components/seo/Seo";
 import { BlogCard } from "../components/blog/BlogCard";
 import { ReadyToGetStartedCTA } from "../components/sections/ReadyToGetStartedCTA";
-import { createBlogListSchema, createBreadcrumbSchema } from "../seo/schemas";
+import { createBlogListSchema, createBreadcrumbSchema, buildBlogItemList } from "../seo/schemas";
 import { colors } from "../styles/design-tokens";
 import postsData from "../data/blog/posts.json";
 import categoriesData from "../data/blog/categories.json";
@@ -27,6 +27,9 @@ export function Blog() {
   ]);
 
   const blogListSchema = createBlogListSchema();
+  const blogItemList = buildBlogItemList(
+    sortedPosts.map(p => ({ slug: p.slug, title: p.title }))
+  );
 
   return (
     <main className="bg-white">
@@ -34,7 +37,7 @@ export function Blog() {
         title="Garage Door Blog - Tips, Guides & Expert Advice"
         description="Expert tips, guides, and insights on garage door repair, maintenance, and installation. Learn from the Garage Cowboy team serving Dallas-Fort Worth."
         canonicalPath="/blog"
-        schema={[blogListSchema, breadcrumbSchema]}
+        schema={[blogListSchema, breadcrumbSchema, blogItemList]}
       />
 
       {/* Hero Section */}
@@ -47,7 +50,7 @@ export function Blog() {
             <BookOpen size={40} className="text-[#fec300]" />
           </div>
           <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-            Garage Door Blog
+            Garage Door Tips & Expert Repair Guides
           </h1>
           <p className="font-product-sans text-xl md:text-2xl text-white mb-8 opacity-90">
             Expert tips, guides, and insights on garage door repair, maintenance, and installation from the Garage Cowboy team.

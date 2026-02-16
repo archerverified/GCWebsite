@@ -34,6 +34,6 @@ export const BUSINESS_INFO = {
   sameAs: [
     "https://www.facebook.com/profile.php?id=61577149727757",
     "https://www.yelp.com/biz/garage-cowboy-fort-worth",
-    "https://share.google/cW1X5hiNDh12RmEl9"
+    "https://www.google.com/maps/place/Garage+Cowboy"
   ]
 };
