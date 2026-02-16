@@ -83,7 +83,7 @@ export function Blog() {
           </nav>
 
           <h2 className="font-product-sans font-black text-3xl md:text-4xl text-[#323232] mb-4">
-            Latest Articles
+            Latest Garage Door Guides & Articles
           </h2>
           <p className="font-product-sans text-lg text-[#666] mb-12 max-w-2xl">
             Stay informed with our latest guides, tips, and expert advice on garage doors.

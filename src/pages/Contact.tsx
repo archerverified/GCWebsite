@@ -41,7 +41,7 @@ export function Contact() {
           <div className="bg-[#FEC300]/10 border-2 border-[#FEC300] rounded-[10px] p-6 flex flex-col sm:flex-row items-center gap-4">
             <div className="flex-1">
               <h2 className="font-product-sans font-black text-xl md:text-2xl text-[#323232] uppercase mb-1">
-                Business Hours
+                Garage Door Service Hours
               </h2>
               <p className="font-product-sans text-lg text-[#323232]">
                 Open <strong>24 hours a day, 7 days a week</strong> — including holidays and after-hours emergencies.
@@ -55,6 +55,34 @@ export function Contact() {
                 (817) 256-0122
               </span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Business Address & Email */}
+      <section className="px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 pb-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="bg-white border-2 border-[#e6e6e6] rounded-[10px] p-6 flex flex-col sm:flex-row items-start gap-6">
+            <div className="flex-1">
+              <h3 className="font-product-sans font-black text-lg text-[#323232] uppercase mb-2">
+                Our Location
+              </h3>
+              <address className="font-product-sans text-[#323232] not-italic leading-relaxed">
+                801 W Vickery Blvd<br />
+                Fort Worth, TX 76104
+              </address>
+            </div>
+            <div className="flex-1">
+              <h3 className="font-product-sans font-black text-lg text-[#323232] uppercase mb-2">
+                Email Us
+              </h3>
+              <a
+                href="mailto:deno@garagecowboy.com"
+                className="font-product-sans text-[#323232] hover:text-[#FEC300] transition-colors underline decoration-[#FEC300] decoration-2 underline-offset-2"
+              >
+                deno@garagecowboy.com
+              </a>
+            </div>
           </div>
         </div>
       </section>

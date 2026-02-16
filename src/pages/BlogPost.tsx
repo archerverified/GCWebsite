@@ -130,6 +130,7 @@ export function BlogPost() {
               className="w-full rounded-none sm:rounded-[15px] border-y-2 sm:border-2 border-[#35363a]"
               width={post.featuredImage.width}
               height={post.featuredImage.height}
+              loading="lazy"
             />
           </figure>
 

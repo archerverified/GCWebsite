@@ -6,6 +6,7 @@ export const localBusinessSchema = {
   "@type": "HomeAndConstructionBusiness",
   "name": BUSINESS_INFO.businessName,
   "telephone": BUSINESS_INFO.telephone,
+  "email": BUSINESS_INFO.email,
   "priceRange": BUSINESS_INFO.priceRange,
   "openingHours": BUSINESS_INFO.openingHours,
   "address": {
@@ -148,7 +149,12 @@ export function buildBaseGraph() {
         "name": BUSINESS_INFO.businessName,
         "url": SITE_URL,
         "telephone": BUSINESS_INFO.telephone,
+        "email": BUSINESS_INFO.email,
         "sameAs": BUSINESS_INFO.sameAs,
+        "founder": {
+          "@type": "Person",
+          "name": "Deno Yiankes"
+        },
         "logo": {
           "@type": "ImageObject",
           "url": `${SITE_URL}/social-preview.png`,
@@ -187,6 +193,7 @@ export function buildBaseGraph() {
         "name": BUSINESS_INFO.businessName,
         "url": SITE_URL,
         "telephone": BUSINESS_INFO.telephone,
+        "email": BUSINESS_INFO.email,
         "priceRange": BUSINESS_INFO.priceRange,
         "openingHours": BUSINESS_INFO.openingHours,
         "address": {
@@ -370,7 +377,8 @@ export function createBlogPostingSchema(post: {
     "author": {
       "@type": "Person",
       "name": post.author.name,
-      "jobTitle": post.author.title
+      "jobTitle": post.author.title,
+      "url": `${SITE_URL}/about-us`
     },
     "publisher": {
       "@type": "Organization",

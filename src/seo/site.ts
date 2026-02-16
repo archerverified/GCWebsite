@@ -31,6 +31,7 @@ export const BUSINESS_INFO = {
     "Cleburne"
   ],
   openingHours: "Mo,Tu,We,Th,Fr,Sa,Su 00:00-24:00",
+  email: "deno@garagecowboy.com",
   sameAs: [
     "https://www.facebook.com/profile.php?id=61577149727757",
     "https://www.yelp.com/biz/garage-cowboy-fort-worth",
