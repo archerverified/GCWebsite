@@ -1,11 +1,10 @@
-import imgBackgroundTop from "figma:asset/1e540751c4a94b57d2d98c37fda165d4dbe79475.png";
 import { ContactQuickActions } from "./ContactQuickActions";
 
 export function HeroSection() {
   return (
     <section
       className="relative w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[660px] bg-cover bg-center border-2 border-black rounded-b-[8px]"
-      style={{ backgroundImage: `url('${imgBackgroundTop}')` }}
+      style={{ backgroundImage: `url('/images/homeimage.png')` }}
       data-font-probe="hero"
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28 py-8 sm:py-12 lg:py-20">
