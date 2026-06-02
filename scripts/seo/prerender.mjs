@@ -23,7 +23,6 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import puppeteer from 'puppeteer';
 import { getAllRoutes } from './all-routes.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -119,25 +118,51 @@ async function prerenderRoute(browser, route) {
   }
 }
 
+/**
+ * Launch a headless Chromium appropriate for the current environment.
+ *
+ * Vercel's (and most CI) build images ship without the system shared libraries
+ * the Chromium bundled with the full `puppeteer` package needs, so launching it
+ * there fails. In those environments we use `puppeteer-core` driving the
+ * serverless-optimised `@sparticuz/chromium` build, which carries its own
+ * compatible binary and the right launch flags. On a normal dev machine we use
+ * the full `puppeteer` package and its bundled Chromium, with the sandbox left
+ * ON unless we're root or explicitly told to disable it.
+ */
+async function launchBrowser() {
+  const isServerless =
+    !!process.env.VERCEL || process.env.CI === '1' || process.env.CI === 'true';
+
+  if (isServerless) {
+    const [{ default: chromium }, { default: puppeteerCore }] = await Promise.all([
+      import('@sparticuz/chromium'),
+      import('puppeteer-core'),
+    ]);
+    return puppeteerCore.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
+    });
+  }
+
+  const { default: puppeteer } = await import('puppeteer');
+  // We only ever render our own trusted, first-party build, so dropping the
+  // sandbox when running as root (e.g. in a container) is low risk.
+  const noSandbox =
+    process.env.PRERENDER_NO_SANDBOX === '1' ||
+    (typeof process.getuid === 'function' && process.getuid() === 0);
+  return puppeteer.launch({
+    headless: true,
+    args: noSandbox ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
+  });
+}
+
 async function main() {
   const routes = await getAllRoutes();
   console.log(`🪄 Prerendering ${routes.length} route(s) from ${BASE_URL}\n`);
 
-  // Chromium's sandbox cannot run as root or in many CI/container images
-  // (e.g. Vercel's build container), so disable it only there. On a normal
-  // dev machine the sandbox stays ON. We only ever render our own trusted,
-  // first-party build, so the residual risk is minimal regardless.
-  const sandboxUnavailable =
-    process.env.PRERENDER_NO_SANDBOX === '1' ||
-    process.env.CI === '1' ||
-    process.env.CI === 'true' ||
-    !!process.env.VERCEL ||
-    (typeof process.getuid === 'function' && process.getuid() === 0);
-
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: sandboxUnavailable ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
-  });
+  const browser = await launchBrowser();
 
   const failures = [];
   try {
