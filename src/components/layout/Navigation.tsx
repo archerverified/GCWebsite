@@ -71,7 +71,7 @@ export function Navigation() {
               >
                 Services
                 <svg className="w-4 h-3" viewBox="0 0 18 10.2106" fill="none" aria-hidden="true">
-                  <path d={svgPaths.p82c3080} fill={colors.brand.yellowSecondary} />
+                  <path d={svgPaths.p82c3080} fill={colors.brand.yellowPrimary} />
                 </svg>
               </button>
               {activeDropdown === "services" && (
@@ -110,7 +110,7 @@ export function Navigation() {
               >
                 Texas
                 <svg className="w-4 h-3" viewBox="0 0 18 10.2106" fill="none" aria-hidden="true">
-                  <path d={svgPaths.p82c3080} fill={colors.brand.yellowSecondary} />
+                  <path d={svgPaths.p82c3080} fill={colors.brand.yellowPrimary} />
                 </svg>
               </button>
               {activeDropdown === "texas" && (
@@ -214,10 +214,10 @@ export function Navigation() {
               }}
               aria-label="Call to schedule a free inspection at 817-256-0122"
             >
-              <Phone size={24} style={{ color: colors.brand.black }} aria-hidden="true" />
+              <Phone size={24} style={{ color: colors.brand.dark}} aria-hidden="true" />
               <span
                 className="font-product-sans font-black text-sm 2xl:text-base leading-none whitespace-nowrap"
-                style={{ color: colors.brand.black }}
+                style={{ color: colors.brand.dark}}
               >
                 SCHEDULE A FREE INSPECTION
               </span>

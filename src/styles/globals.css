@@ -109,14 +109,76 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* ===========================================================================
+   Garage Cowboy — canonical brand primitives (single source of truth).
+   Mirrors src/styles/design-tokens.ts EXACTLY. Consumed as Tailwind utilities
+   via the @theme inline block below (bg-gc-* / text-gc-* / border-gc-* color
+   utilities, plus rounded-gc-* and shadow-gc-*). One yellow + one ink: this collapses the
+   legacy two yellows (#fec300/#f7bd15) and three darks (#35363a/#222222/#323232).
+   =========================================================================== */
+:root {
+  /* Brand */
+  --gc-yellow: #fec300;        /* sole brand yellow */
+  --gc-yellow-press: #e5af00;  /* pressed / active state */
+  --gc-ink: #323232;           /* sole dark ink — fg, dark surfaces, default borders */
+  --gc-black: #000000;         /* hard outlines / max contrast only */
+
+  /* Neutral scale */
+  --gc-white: #ffffff;
+  --gc-gray-50: #ededed;
+  --gc-gray-100: #eaeaea;
+  --gc-gray-200: #e6e6e6;
+  --gc-gray-300: #d9d9d9;
+  --gc-gray-500: #8b8b92;      /* a11y: ~3:1 on white — large text / non-text UI only, never body */
+  --gc-gray-700: #535458;
+
+  /* Translucent */
+  --gc-well: rgba(230, 230, 230, 0.5);
+  --gc-well-hover: rgba(230, 230, 230, 0.7);
+  --gc-list-tile: rgba(48, 49, 53, 0.1);
+  --gc-ink-75: rgba(50, 50, 50, 0.75);   /* fg-muted — muted body text only (~4.9:1 on white) */
+  --gc-hair: rgba(0, 0, 0, 0.1);         /* hairline divider */
+}
+
 @theme inline {
-  /* Garage Cowboy brand tokens */
-  --color-yellow-primary: #fec300;
-  --color-yellow-secondary: #f7bd15;
-  --color-dark: #35363a;
-  --color-brand-black: #222222;
-  --shadow-button: 0px 5px 5px rgba(0, 0, 0, 0.25);
-  --shadow-section: 0px 1px 0px rgba(17, 17, 26, 0.05), 0px 0px 8px rgba(17, 17, 26, 0.1);
+  /* ---- Garage Cowboy canonical tokens -> Tailwind utilities ---- */
+  /* Brand + neutral primitives -> bg-gc-* / text-gc-* / border-gc-* color utilities */
+  --color-gc-yellow: var(--gc-yellow);
+  --color-gc-yellow-press: var(--gc-yellow-press);
+  --color-gc-ink: var(--gc-ink);
+  --color-gc-black: var(--gc-black);
+  --color-gc-white: var(--gc-white);
+  --color-gc-gray-50: var(--gc-gray-50);
+  --color-gc-gray-100: var(--gc-gray-100);
+  --color-gc-gray-200: var(--gc-gray-200);
+  --color-gc-gray-300: var(--gc-gray-300);
+  --color-gc-gray-500: var(--gc-gray-500);
+  --color-gc-gray-700: var(--gc-gray-700);
+  --color-gc-well: var(--gc-well);
+  --color-gc-well-hover: var(--gc-well-hover);
+  --color-gc-list-tile: var(--gc-list-tile);
+  --color-gc-ink-75: var(--gc-ink-75);
+  --color-gc-hair: var(--gc-hair);
+  /* Semantic roles -> the gc-fg* / gc-surface* utilities (border-ink/border-hair come from the primitives above) */
+  --color-gc-fg: var(--gc-ink);
+  --color-gc-fg-strong: var(--gc-black);
+  --color-gc-fg-muted: var(--gc-ink-75);
+  --color-gc-fg-on-dark: var(--gc-white);
+  --color-gc-fg-accent: var(--gc-yellow);    /* accent / large only — fails body-text contrast on white */
+  --color-gc-surface: var(--gc-white);       /* default page + card background (== semantic "bg") */
+  --color-gc-surface-dark: var(--gc-ink);    /* dark nav/footer surfaces (== semantic "bg-dark") */
+  /* Radius scale -> rounded-gc-* (gc- prefix avoids clobbering shadcn --radius-sm/md/lg/xl) */
+  --radius-gc-sm: 4px;
+  --radius-gc-card: 5px;
+  --radius-gc-md: 10px;
+  --radius-gc-lg: 15px;
+  --radius-gc-xl: 20px;
+  --radius-gc-full: 9999px;
+  /* Shadows -> shadow-gc-* */
+  --shadow-gc-button: 0px 5px 5px rgba(0, 0, 0, 0.25);
+  --shadow-gc-button-hover: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  --shadow-gc-card: 0px 2px 5px 0px #535458;
+  --shadow-gc-faq: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
   --font-family-sans: "Product Sans", sans-serif;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
