@@ -32,7 +32,7 @@ export function ServiceDetail() {
     { name: content.title, url: `/services/${slug}` }
   ]);
 
-  const schemas = [serviceSchema, breadcrumbSchema];
+  const schemas: object[] = [serviceSchema, breadcrumbSchema];
   
   // Add FAQ schema if FAQs exist
   if (content.faqs && content.faqs.length > 0) {

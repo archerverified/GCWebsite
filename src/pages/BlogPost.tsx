@@ -42,7 +42,7 @@ export function BlogPost() {
     wordCount
   });
 
-  const schemas = [blogPostingSchema];
+  const schemas: object[] = [blogPostingSchema];
 
   // Add FAQ schema if FAQs exist
   if (post.faqs && post.faqs.length > 0) {

@@ -29,7 +29,7 @@ export function Commercial() {
     undefined
   );
 
-  const schemas = [breadcrumbSchema, serviceSchema];
+  const schemas: object[] = [breadcrumbSchema, serviceSchema];
   
   // Add FAQ schema if FAQs exist
   if (content.faqs && content.faqs.length > 0) {
