@@ -133,6 +133,7 @@
   --gc-gray-700: #535458;
 
   /* Translucent */
+  --gc-frost: rgba(255, 255, 255, 0.5);  /* white scrim on colored panels — form wells, banner over the yellow booking panel */
   --gc-well: rgba(230, 230, 230, 0.5);
   --gc-well-hover: rgba(230, 230, 230, 0.7);
   --gc-list-tile: rgba(48, 49, 53, 0.1);
@@ -154,6 +155,7 @@
   --color-gc-gray-300: var(--gc-gray-300);
   --color-gc-gray-500: var(--gc-gray-500);
   --color-gc-gray-700: var(--gc-gray-700);
+  --color-gc-frost: var(--gc-frost);
   --color-gc-well: var(--gc-well);
   --color-gc-well-hover: var(--gc-well-hover);
   --color-gc-list-tile: var(--gc-list-tile);

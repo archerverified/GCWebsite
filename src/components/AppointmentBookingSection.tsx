@@ -1,11 +1,23 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { toast } from "sonner";
-import { CalendarDays, Clock } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import svgPaths from "../imports/svg-pry7uv8zg5";
 import imgVerified from "figma:asset/52e672056319f396f2b1bf45a03eee134d6b47d8.png";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar } from "./ui/calendar";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { cn } from "./ui/utils";
 
 function pad2(n: number) {
   return String(n).padStart(2, "0");
@@ -100,6 +112,27 @@ const testimonials = [
   },
 ];
 
+// Shared brand look for every form control — heavy ink border, frosted-white
+// well over the yellow panel, token radius/shadow, and a high-visibility yellow
+// focus ring. Colors/radii/shadows all resolve from --gc-* tokens (globals.css);
+// `rounded-[var(--radius-gc-card)]` is the arbitrary-token form so tailwind-merge
+// dedupes it against each primitive's base `rounded-md`. Height is set per control.
+const fieldShell =
+  "border-2 border-gc-ink rounded-[var(--radius-gc-card)] bg-gc-frost text-gc-ink placeholder:text-gc-ink-75 shadow-gc-faq text-base md:text-sm focus-visible:border-gc-ink focus-visible:ring-gc-yellow focus-visible:ring-[3px]";
+
+const labelClass =
+  "text-gc-ink font-product-sans font-bold text-xs uppercase tracking-wide";
+
+const errorClass =
+  "text-gc-ink font-product-sans font-bold text-xs normal-case";
+
+type FieldKey =
+  | "name"
+  | "email"
+  | "phone"
+  | "preferredDate"
+  | "preferredTime";
+
 export interface AppointmentBookingSectionProps {
   includeTestimonials?: boolean;
 }
@@ -114,7 +147,7 @@ export function AppointmentBookingSection({
     null
   );
   const [isDateOpen, setIsDateOpen] = useState(false);
-  const [isTimeOpen, setIsTimeOpen] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -150,20 +183,42 @@ export function AppointmentBookingSection({
       preferredDate: "",
       preferredTime: "",
     });
+    setErrors({});
     setSubmitSuccess(false);
     setEmailStatus(null);
+  };
+
+  // Update one field and clear its error (if any) as the user corrects it.
+  const updateField = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => {
+      if (!(field in prev)) return prev;
+      const next = { ...prev };
+      delete next[field as FieldKey];
+      return next;
+    });
+  };
+
+  const validate = (): Partial<Record<FieldKey, string>> => {
+    const next: Partial<Record<FieldKey, string>> = {};
+    if (!formData.name.trim()) next.name = "Please enter your name.";
+    if (!formData.email.trim())
+      next.email = "Please enter your email address.";
+    if (!formData.phone.trim())
+      next.phone = "Please enter your phone number.";
+    if (!formData.preferredDate)
+      next.preferredDate = "Please choose a date.";
+    if (!formData.preferredTime)
+      next.preferredTime = "Please choose a time.";
+    return next;
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.phone ||
-      !formData.email ||
-      !formData.preferredDate ||
-      !formData.preferredTime
-    ) {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       toast.error("Please fill in all required fields");
       return;
     }
@@ -220,22 +275,24 @@ export function AppointmentBookingSection({
     setCurrentSlide(index);
   };
 
+  const requiredMark = <span aria-hidden="true">*</span>;
+
   return (
     <div
       className={
         includeTestimonials
-          ? "bg-[#f7bd15] rounded-tl-[20px] rounded-tr-[20px] border-l-[3px] border-r-[3px] border-[#303135] relative font-product-sans uppercase"
-          : "bg-[#f7bd15] rounded-[20px] border-x border-b border-t-0 border-black relative font-product-sans uppercase"
+          ? "bg-gc-yellow rounded-tl-[var(--radius-gc-xl)] rounded-tr-[var(--radius-gc-xl)] border-l-[3px] border-r-[3px] border-gc-ink relative font-product-sans uppercase"
+          : "bg-gc-yellow rounded-[var(--radius-gc-xl)] border-x border-b border-t-0 border-gc-ink relative font-product-sans uppercase"
       }
     >
       <div
         className={
           includeTestimonials
-            ? "bg-[rgba(255,255,255,0.5)] border-2 border-black rounded-tl-[16px] rounded-tr-[16px] py-4 lg:py-5"
-            : "bg-[rgba(255,255,255,0.5)] border-2 border-black rounded-[16px] py-4 lg:py-5"
+            ? "bg-gc-frost border-2 border-gc-ink rounded-tl-[var(--radius-gc-lg)] rounded-tr-[var(--radius-gc-lg)] py-4 lg:py-5"
+            : "bg-gc-frost border-2 border-gc-ink rounded-[var(--radius-gc-lg)] py-4 lg:py-5"
         }
       >
-        <p className="font-product-sans text-base md:text-lg lg:text-2xl text-center text-[#222] uppercase px-4 font-black">
+        <p className="font-product-sans text-base md:text-lg lg:text-2xl text-center text-gc-ink uppercase px-4 font-black">
           BOOK AN APPOINTMENT & GET A FREE INSPECTION TODAY
         </p>
       </div>
@@ -258,109 +315,194 @@ export function AppointmentBookingSection({
                 />
               </svg>
             </div>
-            <h3 className="font-product-sans font-black text-2xl text-[#303135] mb-3">
+            <h3 className="font-product-sans font-black text-2xl text-gc-ink mb-3">
               Appointment Scheduled!
             </h3>
-            <p className="font-product-sans text-[#303135] mb-2">
+            <p className="font-product-sans text-gc-ink mb-2">
               ✅ Added to calendar
             </p>
-            <p className="font-product-sans text-[#303135] mb-6">
+            <p className="font-product-sans text-gc-ink mb-6">
               {emailStatus === "sent"
                 ? "Confirmation email sent! We'll see you soon!"
                 : "Email may be delayed, but your appointment is confirmed. We'll see you soon!"}
             </p>
-            <button
-              type="button"
-              onClick={resetForm}
-              className="bg-[#303135] text-white font-product-sans font-black text-[13px] uppercase px-8 py-4 rounded-[5px] hover:bg-[#404145] transition-colors"
-            >
+            <Button type="button" variant="ink" size="cta" onClick={resetForm}>
               Book Another Appointment
-            </button>
+            </Button>
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="px-4 lg:px-8 py-8 lg:py-12">
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="px-4 lg:px-8 py-8 lg:py-12"
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6">
-            <div className="space-y-4">
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <input
+            {/* Name + Email */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="booking-name" className={labelClass}>
+                  Name {requiredMark}
+                </Label>
+                <Input
+                  id="booking-name"
+                  name="name"
                   type="text"
-                  placeholder="Name*"
+                  autoComplete="name"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
+                  onChange={(e) => updateField("name", e.target.value)}
                   required
+                  aria-required="true"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={
+                    errors.name ? "booking-name-error" : undefined
+                  }
                   disabled={isSubmitting}
+                  className={cn(
+                    fieldShell,
+                    "h-12 px-4 normal-case",
+                    errors.name && "border-destructive"
+                  )}
                 />
+                {errors.name && (
+                  <p
+                    id="booking-name-error"
+                    role="alert"
+                    className={errorClass}
+                  >
+                    {errors.name}
+                  </p>
+                )}
               </div>
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-bl-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <input
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="booking-email" className={labelClass}>
+                  Email Address {requiredMark}
+                </Label>
+                <Input
+                  id="booking-email"
+                  name="email"
                   type="email"
-                  placeholder="Email Address*"
+                  autoComplete="email"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
+                  onChange={(e) => updateField("email", e.target.value)}
                   required
+                  aria-required="true"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={
+                    errors.email ? "booking-email-error" : undefined
+                  }
                   disabled={isSubmitting}
+                  className={cn(
+                    fieldShell,
+                    "h-12 px-4 normal-case",
+                    errors.email && "border-destructive"
+                  )}
                 />
+                {errors.email && (
+                  <p
+                    id="booking-email-error"
+                    role="alert"
+                    className={errorClass}
+                  >
+                    {errors.email}
+                  </p>
+                )}
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-tr-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <input
+            {/* Phone + Zip */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="booking-phone" className={labelClass}>
+                  Phone Number {requiredMark}
+                </Label>
+                <Input
+                  id="booking-phone"
+                  name="phone"
                   type="tel"
-                  placeholder="Phone Number*"
+                  autoComplete="tel"
                   value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
+                  onChange={(e) => updateField("phone", e.target.value)}
                   required
-                  disabled={isSubmitting}
-                />
-              </div>
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-br-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <input
-                  type="text"
-                  placeholder="Zip Code"
-                  value={formData.zipCode}
-                  onChange={(e) =>
-                    setFormData({ ...formData, zipCode: e.target.value })
+                  aria-required="true"
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={
+                    errors.phone ? "booking-phone-error" : undefined
                   }
-                  className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] placeholder:text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
                   disabled={isSubmitting}
+                  className={cn(
+                    fieldShell,
+                    "h-12 px-4 normal-case",
+                    errors.phone && "border-destructive"
+                  )}
+                />
+                {errors.phone && (
+                  <p
+                    id="booking-phone-error"
+                    role="alert"
+                    className={errorClass}
+                  >
+                    {errors.phone}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="booking-zip" className={labelClass}>
+                  Zip Code
+                </Label>
+                <Input
+                  id="booking-zip"
+                  name="zipCode"
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="postal-code"
+                  value={formData.zipCode}
+                  onChange={(e) => updateField("zipCode", e.target.value)}
+                  disabled={isSubmitting}
+                  className={cn(fieldShell, "h-12 px-4 normal-case")}
                 />
               </div>
             </div>
 
-            <div className="space-y-4">
-              {/* Date Picker */}
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+            {/* Date + Time */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="booking-date" className={labelClass}>
+                  Preferred Date {requiredMark}
+                </Label>
                 <Popover open={isDateOpen} onOpenChange={setIsDateOpen}>
                   <PopoverTrigger asChild>
                     <button
                       type="button"
+                      id="booking-date"
                       disabled={isSubmitting}
-                      aria-label="Select date"
-                      className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] flex items-center justify-between gap-3"
+                      aria-required="true"
+                      aria-invalid={!!errors.preferredDate}
+                      aria-describedby={
+                        errors.preferredDate
+                          ? "booking-date-error"
+                          : undefined
+                      }
+                      className={cn(
+                        fieldShell,
+                        "flex h-12 w-full items-center justify-between gap-3 px-4 text-left disabled:pointer-events-none disabled:opacity-50",
+                        errors.preferredDate && "border-destructive"
+                      )}
                     >
                       <span
                         className={
                           formData.preferredDate
-                            ? "text-[#303135]"
-                            : "text-[rgba(48,49,53,0.75)]"
+                            ? "text-gc-ink"
+                            : "text-gc-ink-75"
                         }
                       >
                         {formData.preferredDate
                           ? formatDateDisplay(formData.preferredDate)
-                          : "Date"}
+                          : "Select a date"}
                       </span>
-                      <CalendarDays className="w-4 h-4 text-[rgba(48,49,53,0.75)]" />
+                      <CalendarDays className="size-4 text-gc-ink-75 shrink-0" />
                     </button>
                   </PopoverTrigger>
                   <PopoverContent
@@ -373,10 +515,7 @@ export function AppointmentBookingSection({
                       selected={selectedDate}
                       onSelect={(d) => {
                         if (!d) return;
-                        setFormData({
-                          ...formData,
-                          preferredDate: dateToIso(d),
-                        });
+                        updateField("preferredDate", dateToIso(d));
                         setIsDateOpen(false);
                       }}
                       disabled={(date) => {
@@ -390,75 +529,86 @@ export function AppointmentBookingSection({
                     />
                   </PopoverContent>
                 </Popover>
-              </div>
-
-              {/* Time Picker */}
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#303135] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                <Popover open={isTimeOpen} onOpenChange={setIsTimeOpen}>
-                  <PopoverTrigger asChild>
-                    <button
-                      type="button"
-                      disabled={isSubmitting}
-                      aria-label="Select time"
-                      className="w-full px-4 py-4 bg-transparent font-product-sans font-medium text-[13px] text-[rgba(48,49,53,0.75)] focus:outline-none focus:ring-2 focus:ring-[#fec300] flex items-center justify-between gap-3"
-                    >
-                      <span
-                        className={
-                          formData.preferredTime
-                            ? "text-[#303135]"
-                            : "text-[rgba(48,49,53,0.75)]"
-                        }
-                      >
-                        {formData.preferredTime
-                          ? formatTime12h(formData.preferredTime)
-                          : "Time"}
-                      </span>
-                      <Clock className="w-4 h-4 text-[rgba(48,49,53,0.75)]" />
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    align="start"
-                    className="w-56 max-w-[calc(100vw-2rem)] p-2"
-                    sideOffset={8}
+                {errors.preferredDate && (
+                  <p
+                    id="booking-date-error"
+                    role="alert"
+                    className={errorClass}
                   >
-                    <div className="max-h-64 overflow-auto pr-1">
-                      {timeSlots.map((slot) => (
-                        <button
-                          key={slot.value}
-                          type="button"
-                          className="w-full text-left px-3 py-2 rounded-md hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-[#fec300] font-product-sans text-[13px] text-[#303135]"
-                          onClick={() => {
-                            setFormData({
-                              ...formData,
-                              preferredTime: slot.value,
-                            });
-                            setIsTimeOpen(false);
-                          }}
-                        >
-                          {slot.label}
-                        </button>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                    {errors.preferredDate}
+                  </p>
+                )}
               </div>
-            </div>
 
-            <div className="sm:col-span-1">
-              <div className="bg-[rgba(255,255,255,0.5)] border-2 border-[#222] rounded-tr-[5px] rounded-br-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] h-full">
-                <textarea
-                  placeholder="Type your message..."
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  rows={4}
-                  className="w-full h-full px-4 py-4 bg-transparent font-product-sans text-[13px] text-[rgba(48,49,53,0.75)] resize-none focus:outline-none focus:ring-2 focus:ring-[#fec300] normal-case"
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="booking-time" className={labelClass}>
+                  Preferred Time {requiredMark}
+                </Label>
+                <Select
+                  value={formData.preferredTime}
+                  onValueChange={(v) => updateField("preferredTime", v)}
                   disabled={isSubmitting}
-                />
+                >
+                  <SelectTrigger
+                    id="booking-time"
+                    aria-required="true"
+                    aria-invalid={!!errors.preferredTime}
+                    aria-describedby={
+                      errors.preferredTime
+                        ? "booking-time-error"
+                        : undefined
+                    }
+                    className={cn(
+                      fieldShell,
+                      "data-[size=default]:h-12 px-4 data-[placeholder]:text-gc-ink-75 [&>span]:text-gc-ink",
+                      errors.preferredTime && "border-destructive"
+                    )}
+                  >
+                    <SelectValue placeholder="Select a time" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-64">
+                    <SelectGroup>
+                      {timeSlots.map((slot) => (
+                        <SelectItem key={slot.value} value={slot.value}>
+                          {slot.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                {errors.preferredTime && (
+                  <p
+                    id="booking-time-error"
+                    role="alert"
+                    className={errorClass}
+                  >
+                    {errors.preferredTime}
+                  </p>
+                )}
               </div>
             </div>
 
+            {/* Message */}
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="booking-message" className={labelClass}>
+                Message
+              </Label>
+              <Textarea
+                id="booking-message"
+                name="message"
+                value={formData.message}
+                onChange={(e) => updateField("message", e.target.value)}
+                rows={4}
+                placeholder="Tell us about your garage door issue (optional)"
+                disabled={isSubmitting}
+                className={cn(
+                  fieldShell,
+                  "min-h-[120px] px-4 py-3 normal-case h-full"
+                )}
+              />
+            </div>
+
+            {/* Submit */}
             <div className="flex flex-col items-center justify-center gap-4">
               <Button
                 type="submit"
@@ -494,25 +644,25 @@ export function AppointmentBookingSection({
             </div>
           </div>
 
-          <p className="font-product-sans font-black text-[12px] text-[#FEC300] mt-4">
+          <p className="font-product-sans font-black text-[12px] text-gc-ink mt-4">
             *REQUIRED
           </p>
         </form>
       )}
 
       {includeTestimonials && (
-        <div className="bg-white border-[2px] border-[#303135] mx-0 mb-0">
-          <div className="py-8 lg:py-12 px-4 lg:px-8 border-b-2 border-black">
+        <div className="bg-white border-[2px] border-gc-ink mx-0 mb-0">
+          <div className="py-8 lg:py-12 px-4 lg:px-8 border-b-2 border-gc-ink">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="h-[1.25px] w-20 md:w-40 lg:w-80 bg-[#8b8b92]" />
+                <div className="h-[1.25px] w-20 md:w-40 lg:w-80 bg-gc-gray-500" />
                 <img src={imgVerified} alt="Verified" className="w-8 h-8" />
-                <div className="h-[1.25px] w-20 md:w-40 lg:w-80 bg-[#8b8b92]" />
+                <div className="h-[1.25px] w-20 md:w-40 lg:w-80 bg-gc-gray-500" />
               </div>
-              <h2 className="font-product-sans text-xl md:text-2xl text-[#323232] mb-1 uppercase">
+              <h2 className="font-product-sans text-xl md:text-2xl text-gc-ink mb-1 uppercase">
                 TAKE IT FROM OUR
               </h2>
-              <h3 className="font-product-sans text-xl md:text-2xl text-[#323232] font-black uppercase">
+              <h3 className="font-product-sans text-xl md:text-2xl text-gc-ink font-black uppercase">
                 VALUED CUSTOMERS
               </h3>
             </div>
@@ -537,7 +687,7 @@ export function AppointmentBookingSection({
 
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 text-[#ededed] hover:text-[#fec300] transition-colors opacity-90"
+                className="absolute right-0 top-1/2 -translate-y-1/2 text-gc-gray-50 hover:text-gc-yellow transition-colors opacity-90"
                 aria-label="Next testimonial"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 25 25">
@@ -566,4 +716,3 @@ export function AppointmentBookingSection({
     </div>
   );
 }
-
