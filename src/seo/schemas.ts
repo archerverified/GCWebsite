@@ -30,8 +30,9 @@ export const localBusinessSchema = {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
-    "reviewCount": "47",
-    "bestRating": "5"
+    "reviewCount": "24",
+    "bestRating": "5",
+    "worstRating": "1"
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
@@ -220,8 +221,9 @@ export function buildBaseGraph() {
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5.0",
-          "reviewCount": "47",
-          "bestRating": "5"
+          "reviewCount": "24",
+          "bestRating": "5",
+          "worstRating": "1"
         },
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
