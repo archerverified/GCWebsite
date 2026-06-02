@@ -47,7 +47,7 @@ ${ABOUT_PARAGRAPHS[1]}
 
   // Add services
   SERVICES.forEach((service) => {
-    content += `- ${service}\n`;
+    content += `- ${service.name}\n`;
   });
 
   content += `

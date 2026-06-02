@@ -21,7 +21,6 @@ import {
   BUSINESS,
   SUBAREAS_BY_HUB,
   SERVICES,
-  SERVICE_SLUGS,
   cityHubs,
 } from './site-data.mjs';
 import { buildLlmsTxt } from './generate-llms.mjs';
@@ -83,7 +82,7 @@ async function buildLlmsFull() {
 
   // Per-service detail
   out += `## Service Details\n\n`;
-  for (const slug of SERVICE_SLUGS) {
+  for (const { slug } of SERVICES) {
     const svc = await tryReadJson(path.join(DATA_DIR, `services-${slug}.json`));
     if (!svc) continue;
     out += `### ${svc.title}\n`;
@@ -149,10 +148,11 @@ function buildSummaryJson() {
   return {
     name: BUSINESS.name,
     description: BUSINESS.description,
-    services: SERVICES,
+    services: SERVICES.map((s) => s.name),
     areasServed: cityHubs().map((h) => `${h.name}, ${h.state}`),
     contact: {
       phone: BUSINESS.phone,
+      email: BUSINESS.email,
       address: `${BUSINESS.address.street}, ${BUSINESS.address.city}, ${BUSINESS.address.region} ${BUSINESS.address.postalCode}`,
       url: SITE_URL,
     },

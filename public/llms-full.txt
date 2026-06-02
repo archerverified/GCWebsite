@@ -1,5 +1,5 @@
 # Garage Cowboy - Full AI Information Summary (llms-full.txt)
-# Generated: 2026-06-02T20:48:46.564Z
+# Generated: 2026-06-02T21:02:05.788Z
 # URL: https://garagecowboy.com
 
 ## About Garage Cowboy
@@ -141,6 +141,17 @@ Common questions:
 - Do you install smart garage door openers?
 - Why is my garage door opener running but the door not moving?
 
+### Broken Garage Cable Repair & Drum Replacement in DFW
+URL: https://garagecowboy.com/services/broken-cable-repair
+If your garage door is lifting unevenly or a cable has come loose, our technicians safely secure the door, replace damaged cables or drums, and restore balanced, dependable operation—often the same day.
+Common questions:
+- What happens when a garage door cable breaks?
+- Is it dangerous to use my garage door with a broken cable or drum?
+- What causes garage door cables or drums to fail?
+- Can a broken garage door cable be repaired, or does it need replacement?
+- Do both garage door cables need to be replaced at the same time?
+- How long does cable or drum repair take?
+
 ### Garage Door Off-Track Repair in DFW
 URL: https://garagecowboy.com/services/garage-door-off-track
 If your garage door is crooked, jammed, or scraping the tracks, our technicians will safely secure and reset the door, repair or replace damaged components, and restore smooth, dependable operation to get your door back on track.
@@ -152,16 +163,16 @@ Common questions:
 - How long does off-track garage door repair take?
 - Will an off-track door damage my opener?
 
-### Broken Garage Cable Repair & Drum Replacement in DFW
-URL: https://garagecowboy.com/services/broken-cable-repair
-If your garage door is lifting unevenly or a cable has come loose, our technicians safely secure the door, replace damaged cables or drums, and restore balanced, dependable operation—often the same day.
+### Garage Door Roller Replacement & Upgrades in DFW
+URL: https://garagecowboy.com/services/garage-door-roller-repair
+If your garage door is loud, shaky, or rough to operate, we replace worn rollers or upgrade to quiet nylon rollers to restore smooth, dependable operation—often in a single visit.
 Common questions:
-- What happens when a garage door cable breaks?
-- Is it dangerous to use my garage door with a broken cable or drum?
-- What causes garage door cables or drums to fail?
-- Can a broken garage door cable be repaired, or does it need replacement?
-- Do both garage door cables need to be replaced at the same time?
-- How long does cable or drum repair take?
+- What do garage door rollers do?
+- How do I know if my garage door rollers need to be replaced?
+- What types of garage door rollers do you replace?
+- Are nylon garage door rollers better than steel rollers?
+- How long does roller replacement take?
+- Can worn rollers damage other parts of my garage door?
 
 ### New Garage Door Replacement & Installation in DFW
 URL: https://garagecowboy.com/services/new-door-installation
@@ -184,17 +195,6 @@ Common questions:
 - Can you erase old or lost remotes from my opener?
 - Do you program in-car garage door buttons (Homelink)?
 - How long does remote or keypad programming take?
-
-### Garage Door Roller Replacement & Upgrades in DFW
-URL: https://garagecowboy.com/services/garage-door-roller-repair
-If your garage door is loud, shaky, or rough to operate, we replace worn rollers or upgrade to quiet nylon rollers to restore smooth, dependable operation—often in a single visit.
-Common questions:
-- What do garage door rollers do?
-- How do I know if my garage door rollers need to be replaced?
-- What types of garage door rollers do you replace?
-- Are nylon garage door rollers better than steel rollers?
-- How long does roller replacement take?
-- Can worn rollers damage other parts of my garage door?
 
 ### Garage Door Repair, Maintenance & Tune-Up in DFW
 URL: https://garagecowboy.com/services/door-service-maintenance

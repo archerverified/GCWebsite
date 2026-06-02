@@ -239,7 +239,7 @@ Edit `/styles/globals.css`:
 
 - **Phone Number:** Search for `(817) 256-0122` and replace
 - **Service Areas:** Edit `ServiceAreasSection.tsx`
-- **FAQs:** Edit `faqData` array in `FAQSection.tsx`
+- **FAQs:** Edit the home FAQ in `src/data/faq.json` (re-exported as `faqData` from `FAQSection.tsx`; also feeds `public/ai/faq.json` at build)
 - **Testimonials:** Edit `testimonials` array in `FormFiller.tsx`
 
 ### Adjust Carousel Speed

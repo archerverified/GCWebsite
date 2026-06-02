@@ -139,27 +139,17 @@ export const SUBAREAS_BY_HUB = {
   ],
 };
 
-// Primary services (display names) + their page slugs (mirrors Services.tsx).
+// Primary services — display name paired with its page slug in ONE array so
+// the two can never drift. Order here is the order surfaced in llms.txt.
 export const SERVICES = [
-  'Broken Spring Repair',
-  'Garage Door Opener Repair & Installation',
-  'Broken Cable Repair',
-  'Garage Door Off-Track Repair',
-  'Garage Door Roller Repair',
-  'New Door Installation',
-  'Remote Repair & Programming',
-  'Door Service & Maintenance',
-];
-
-export const SERVICE_SLUGS = [
-  'broken-spring-repair',
-  'opener-repair-installation',
-  'garage-door-off-track',
-  'broken-cable-repair',
-  'new-door-installation',
-  'remote-repair-programming',
-  'garage-door-roller-repair',
-  'door-service-maintenance',
+  { name: 'Broken Spring Repair', slug: 'broken-spring-repair' },
+  { name: 'Garage Door Opener Repair & Installation', slug: 'opener-repair-installation' },
+  { name: 'Broken Cable Repair', slug: 'broken-cable-repair' },
+  { name: 'Garage Door Off-Track Repair', slug: 'garage-door-off-track' },
+  { name: 'Garage Door Roller Repair', slug: 'garage-door-roller-repair' },
+  { name: 'New Door Installation', slug: 'new-door-installation' },
+  { name: 'Remote Repair & Programming', slug: 'remote-repair-programming' },
+  { name: 'Door Service & Maintenance', slug: 'door-service-maintenance' },
 ];
 
 // Key URLs to cite.
