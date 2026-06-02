@@ -687,27 +687,32 @@ export function AppointmentBookingSection({
 
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 text-gc-gray-50 hover:text-gc-yellow transition-colors opacity-90"
+                className="absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-gc-ink outline-none transition-colors hover:text-gc-yellow focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2"
                 aria-label="Next testimonial"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 25 25">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 25 25" aria-hidden="true">
                   <path d={svgPaths.p63ffa80} />
                 </svg>
               </button>
             </div>
 
-            <div className="flex items-center justify-center gap-3 mt-6">
+            <div className="flex items-center justify-center gap-1 mt-6">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
-                    index === currentSlide
-                      ? "bg-black"
-                      : "bg-black opacity-20 hover:opacity-50"
-                  }`}
+                  className="flex h-11 w-7 items-center justify-center rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow"
                   aria-label={`Go to testimonial ${index + 1}`}
-                />
+                  aria-current={index === currentSlide}
+                >
+                  <span
+                    className={`block h-2.5 w-2.5 rounded-full transition-all ${
+                      index === currentSlide
+                        ? "bg-gc-ink"
+                        : "bg-gc-ink opacity-20 hover:opacity-50"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>
