@@ -1,10 +1,11 @@
 {
+  "outputDirectory": "build",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     { "source": "/contac", "destination": "/contact", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }
-
