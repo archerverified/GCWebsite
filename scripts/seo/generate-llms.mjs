@@ -140,7 +140,7 @@ async function generateLlmsTxt() {
 
 Garage Cowboy is a professional garage door repair and installation company serving the Dallas-Fort Worth metroplex in Texas. We provide 24/7 emergency service, same-day repairs, and expert technicians for both residential and commercial customers. Our team specializes in all aspects of garage door service, from spring repairs to complete new door installations.
 
-With years of experience in the DFW area, Garage Cowboy has built a reputation for reliable, high-quality service at competitive prices. We understand that a malfunctioning garage door is not just an inconvenience—it can be a security risk. That's why we offer round-the-clock availability and fast response times throughout the metroplex.
+Founded in 2023 by owner and president Deno Borghi, Garage Cowboy is a locally owned, 100% referral-based company—not a franchise. We are licensed and insured, back every product we install with a warranty, and hold a 5.0-star rating across 24 Google reviews. Our certified local technicians live and work in North Texas. We understand that a malfunctioning garage door is not just an inconvenience—it can be a security risk, which is why we offer round-the-clock availability and fast, same-day response throughout the metroplex.
 
 ## Primary Services
 
@@ -200,6 +200,9 @@ Garage Cowboy serves the entire Dallas-Fort Worth metroplex, including 15 primar
 
 - Industry: Home Services / Construction
 - Specialization: Garage Door Repair and Installation
+- Owner & President: Deno Borghi
+- Founded: 2023 (locally owned, not a franchise)
+- Credentials: Licensed & insured; warranties on all products; 5.0-star rating (24 Google reviews)
 - Service Area: Dallas-Fort Worth Metroplex, Texas
 - Service Model: On-site service at customer locations
 
