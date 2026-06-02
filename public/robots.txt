@@ -1,3 +1,6 @@
+# robots.txt — Garage Cowboy
+# AI summary for assistants & answer engines: https://garagecowboy.com/llms.txt
+
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -6,6 +9,25 @@ Disallow: /admin/
 # Crawl-delay for bots that respect it
 Crawl-delay: 1
 
+# --- AI citation / answer-engine crawlers (explicitly welcomed) ---
+# These surface and cite live business info in AI answers. Training-data
+# crawlers (e.g. GPTBot, CCBot) are intentionally left for the site owner
+# to decide and are NOT blocked here.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 # Sitemap location
 Sitemap: https://garagecowboy.com/sitemap.xml
-

@@ -295,8 +295,39 @@ export function buildBaseGraph() {
           "addressRegion": hub.state
         }))
       },
-      founderNode
+      founderNode,
+      {
+        "@type": "WebPage",
+        "@id": `${SITE_URL}/#webpage`,
+        "url": SITE_URL,
+        "name": "Garage Cowboy - 24/7 Garage Door Repair in DFW",
+        "isPartOf": { "@id": `${SITE_URL}#website` },
+        "about": { "@id": `${SITE_URL}#localbusiness` },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "[data-speakable='faq']"]
+        }
+      }
     ]
+  };
+}
+
+/**
+ * Build a standalone WebPage node carrying a SpeakableSpecification — a
+ * voice-assistant hint marking the answer-first intro + FAQ region of a page.
+ * Has its own @context so it can sit alongside the per-page Service/FAQ schemas.
+ */
+export function buildSpeakableWebPage(pagePath: string, cssSelector: string[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE_URL}${pagePath}#webpage`,
+    "url": `${SITE_URL}${pagePath}`,
+    "isPartOf": { "@id": `${SITE_URL}#website` },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": cssSelector
+    }
   };
 }
 

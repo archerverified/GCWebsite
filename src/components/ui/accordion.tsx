@@ -73,6 +73,7 @@ export function FAQAccordion({
     <AccordionPrimitive.Root
       type="single"
       collapsible
+      data-speakable="faq"
       className={cn("flex flex-col gap-4", className)}
     >
       {faqs.map((faq, index) => (

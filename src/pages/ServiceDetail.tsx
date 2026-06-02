@@ -10,7 +10,7 @@ import { Accordion } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import { Card, CardHeader, CardContent } from "../components/ui/card";
 import { Seo } from "../components/seo/Seo";
-import { createServiceSchema, createBreadcrumbSchema, createFAQSchema } from "../seo/schemas";
+import { createServiceSchema, createBreadcrumbSchema, createFAQSchema, buildSpeakableWebPage } from "../seo/schemas";
 import { CONTENT_LAST_UPDATED_ISO, CONTENT_LAST_UPDATED_LABEL } from "../seo/site";
 
 export function ServiceDetail() {
@@ -41,6 +41,11 @@ export function ServiceDetail() {
   if (content.faqs && content.faqs.length > 0) {
     schemas.push(createFAQSchema(content.faqs));
   }
+
+  // Speakable hint for the answer-first intro + FAQ region (voice assistants)
+  schemas.push(
+    buildSpeakableWebPage(`/services/${slug}`, ["h1", "[data-speakable='answer']", "[data-speakable='faq']"])
+  );
 
   return (
     <main className="bg-white">
@@ -76,7 +81,7 @@ export function ServiceDetail() {
       {/* Main Content - Intro */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="container mx-auto max-w-4xl">
-          <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
+          <div data-speakable="answer" className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {content.intro}
             </ReactMarkdown>
