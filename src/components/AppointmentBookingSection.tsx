@@ -703,7 +703,7 @@ export function AppointmentBookingSection({
                   onClick={() => goToSlide(index)}
                   className="flex h-11 w-7 items-center justify-center rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow"
                   aria-label={`Go to testimonial ${index + 1}`}
-                  aria-current={index === currentSlide}
+                  aria-current={index === currentSlide ? "true" : undefined}
                 >
                   <span
                     className={`block h-2.5 w-2.5 rounded-full transition-all ${

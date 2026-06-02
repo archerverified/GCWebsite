@@ -38,13 +38,22 @@ export function ServiceAreaMap({
   const [status, setStatus] = useState<MapStatus>('loading');
   // On mobile we hold the heavy Maps JS until the user taps or scrolls to it.
   const [activated, setActivated] = useState(false);
+  // Gate the eager load until after mount, so the viewport (isMobile) has
+  // resolved — otherwise the first render reads isMobile=false and would kick
+  // off the Maps loader on phones before the defer applies.
+  const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
 
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
 
-  // Scroll-to-load: activate the deferred map once it nears the viewport.
   useEffect(() => {
-    if (!apiKey || !isMobile || activated) return;
+    setMounted(true);
+  }, []);
+
+  // Scroll-to-load: activate the deferred map once it nears the viewport.
+  // Depends on `status` so it (re)attaches when the placeholder actually mounts.
+  useEffect(() => {
+    if (!apiKey || !isMobile || activated || status !== 'deferred') return;
     const el = placeholderRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') return;
     const observer = new IntersectionObserver(
@@ -58,7 +67,7 @@ export function ServiceAreaMap({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [apiKey, isMobile, activated]);
+  }, [apiKey, isMobile, activated, status]);
 
   // Cleanup function to remove markers and polygon
   const cleanup = useCallback(() => {
@@ -76,6 +85,10 @@ export function ServiceAreaMap({
       setStatus('fallback');
       return;
     }
+
+    // Wait until mounted so the viewport (isMobile) has resolved before we
+    // decide whether to defer; keeps the loading state until then.
+    if (!mounted) return;
 
     // Mobile: defer the JS-API load until the user taps / scrolls to the map.
     if (isMobile && !activated) {
@@ -240,7 +253,7 @@ export function ServiceAreaMap({
       isMounted = false;
       cleanup();
     };
-  }, [apiKey, hubSlug, hubName, subcities, cleanup, isMobile, activated]);
+  }, [apiKey, hubSlug, hubName, subcities, cleanup, isMobile, activated, mounted]);
 
   // Deferred (mobile): show a tap-to-load placeholder; the iframe fallback
   // below still applies when there is no API key.
