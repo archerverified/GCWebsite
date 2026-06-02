@@ -9,6 +9,7 @@ import remotesImg from "../assets/services/garage-door-remotes.webp";
 import rollerRepairImg from "../assets/services/garage-door-roller-repair.webp";
 import { useNavigate } from "react-router-dom";
 import { Group47927 } from "./Group47927";
+import { Button } from "./ui/button";
 
 const servicesData = [
   {
@@ -154,7 +155,7 @@ function ServiceCard({ image, title, services, objectPosition, roundedCorner = "
       </div>
 
       {/* Title */}
-      <div className="bg-[#fec300] border-t-[3px] border-black py-3 px-4">
+      <div className="bg-gc-yellow border-t-[3px] border-black py-3 px-4">
         <div aria-hidden="true" className="absolute border-[3px] border-black border-solid inset-0 pointer-events-none" />
         <h3 className="font-product-sans font-black text-lg md:text-xl text-[#222] text-center uppercase leading-[22px] whitespace-pre-line">
           {title}
@@ -180,7 +181,7 @@ function ServiceCard({ image, title, services, objectPosition, roundedCorner = "
       <div className="p-4 pt-0">
         <button
           onClick={onReadMore}
-          className="w-full bg-[#e6e6e6] border-2 border-[#f7bd15] rounded-bl-[10px] rounded-br-[10px] py-2 hover:bg-[#fec300] transition-all"
+          className="w-full bg-[#e6e6e6] border-2 border-gc-yellow rounded-bl-[10px] rounded-br-[10px] py-2 hover:bg-gc-yellow transition-all"
         >
           <span className="font-product-sans font-black text-lg text-[#303135] uppercase leading-[21px]">
             Read More
@@ -261,20 +262,17 @@ export function GarageDoorRepair() {
               Call one of our neighborhood technicians in your area
             </p>
             
-            <a
-              href="tel:8172560122"
-              className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-              </svg>
-              <span className="font-['Product_Sans_Regular'] text-xl md:text-2xl text-[#222] uppercase font-semibold">
+            <Button asChild variant="primary" size="cta">
+              <a href="tel:8172560122">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
                 SCHEDULE REPAIR
-              </span>
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-              </svg>
-            </a>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+              </a>
+            </Button>
           </div>
         </div>
       </div>

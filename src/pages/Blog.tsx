@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, BookOpen } from "lucide-react";
 import { Seo } from "../components/seo/Seo";
+import { Button } from "../components/ui/button";
 import { BlogCard } from "../components/blog/BlogCard";
 import { ReadyToGetStartedCTA } from "../components/sections/ReadyToGetStartedCTA";
 import { createBlogListSchema, createBreadcrumbSchema, buildBlogItemList } from "../seo/schemas";
@@ -55,15 +56,12 @@ export function Blog() {
           <p className="font-product-sans text-xl md:text-2xl text-white mb-8 opacity-90">
             Expert tips, guides, and insights on garage door repair, maintenance, and installation from the Garage Cowboy team.
           </p>
-          <a
-            href="tel:8172560122"
-            className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            <Phone size={24} className="text-[#222]" />
-            <span className="font-product-sans font-black text-xl text-[#222] uppercase">
+          <Button asChild variant="primary" size="cta">
+            <a href="tel:8172560122">
+              <Phone />
               Call Now
-            </span>
-          </a>
+            </a>
+          </Button>
         </div>
       </section>
 

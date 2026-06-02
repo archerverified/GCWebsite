@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppointmentBookingSection } from "../components/AppointmentBookingSection";
 import { ContactQuickActions } from "../components/ContactQuickActions";
+import { Button } from "../components/ui/button";
 import { Seo } from "../components/seo/Seo";
 
 export function Contact() {
@@ -38,7 +39,7 @@ export function Contact() {
       {/* Business Hours */}
       <section className="px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 pb-4">
         <div className="container mx-auto max-w-5xl">
-          <div className="bg-[#FEC300]/10 border-2 border-[#FEC300] rounded-[10px] p-6 flex flex-col sm:flex-row items-center gap-4">
+          <div className="bg-gc-yellow/10 border-2 border-gc-yellow rounded-[10px] p-6 flex flex-col sm:flex-row items-center gap-4">
             <div className="flex-1">
               <h2 className="font-product-sans font-black text-xl md:text-2xl text-[#323232] uppercase mb-1">
                 Garage Door Service Hours
@@ -47,14 +48,11 @@ export function Contact() {
                 Open <strong>24 hours a day, 7 days a week</strong> — including holidays and after-hours emergencies.
               </p>
             </div>
-            <a
-              href="tel:8172560122"
-              className="inline-flex items-center gap-2 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-6 py-3 hover:scale-105 transition-all whitespace-nowrap"
-            >
-              <span className="font-product-sans font-black text-lg text-[#222] uppercase">
+            <Button asChild variant="primary" size="cta" className="whitespace-nowrap">
+              <a href="tel:8172560122">
                 (817) 256-0122
-              </span>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
       </section>

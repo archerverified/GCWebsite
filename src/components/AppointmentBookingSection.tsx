@@ -5,6 +5,7 @@ import svgPaths from "../imports/svg-pry7uv8zg5";
 import imgVerified from "figma:asset/52e672056319f396f2b1bf45a03eee134d6b47d8.png";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar } from "./ui/calendar";
+import { Button } from "./ui/button";
 
 function pad2(n: number) {
   return String(n).padStart(2, "0");
@@ -459,14 +460,16 @@ export function AppointmentBookingSection({
             </div>
 
             <div className="flex flex-col items-center justify-center gap-4">
-              <button
+              <Button
                 type="submit"
+                variant="primary"
+                size="cta"
                 disabled={isSubmitting}
-                className="w-full max-w-[208px] bg-[#fec300] border-2 border-[#35363a] rounded-[5px] px-8 py-4 shadow-[0px_2px_5px_0px_#535458] hover:shadow-lg transition-all hover:scale-105 font-product-sans disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full max-w-[208px]"
               >
                 {isSubmitting ? (
-                  <span className="font-product-sans font-black text-[13px] text-[#303135] uppercase flex items-center justify-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                  <>
+                    <svg className="animate-spin size-4" viewBox="0 0 24 24">
                       <circle
                         className="opacity-25"
                         cx="12"
@@ -483,13 +486,11 @@ export function AppointmentBookingSection({
                       />
                     </svg>
                     BOOKING...
-                  </span>
+                  </>
                 ) : (
-                  <span className="font-product-sans font-black text-[13px] text-[#303135] uppercase">
-                    SUBMIT
-                  </span>
+                  "SUBMIT"
                 )}
-              </button>
+              </Button>
             </div>
           </div>
 

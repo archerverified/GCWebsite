@@ -14,8 +14,20 @@ const buttonVariants = cva(
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "border bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        // Garage Cowboy brand CTAs — colors/radius/shadow all from --gc-* tokens
+        // (globals.css). `rounded-[var(--radius-gc-md)]` is the arbitrary-token
+        // form so tailwind-merge dedupes it against the base `rounded-md`.
+        // `primary`: the solid yellow call-to-action used site-wide.
+        primary:
+          "bg-gc-yellow text-gc-ink border-2 border-gc-ink font-black uppercase rounded-[var(--radius-gc-md)] shadow-gc-button hover:bg-gc-yellow-press hover:shadow-gc-button-hover active:bg-gc-yellow-press",
+        // `secondary`: outline variant (was the unused shadcn gray secondary).
+        // Flat ink outline that fills with ink on hover for a crisp inversion.
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-transparent text-gc-ink border-2 border-gc-ink font-black uppercase rounded-[var(--radius-gc-md)] hover:bg-gc-ink hover:text-gc-fg-on-dark",
+        // `ink`: solid dark-fill CTA (the brand's secondary CTA, e.g. on yellow
+        // sections / the 404 page). Same footprint as `primary`, inverted color.
+        ink:
+          "bg-gc-ink text-gc-fg-on-dark border-2 border-gc-ink font-black uppercase rounded-[var(--radius-gc-md)] shadow-gc-button hover:bg-gc-gray-700 hover:shadow-gc-button-hover",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
@@ -25,6 +37,11 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9 rounded-md",
+        // Large brand CTA footprint — keeps a >=44px tap target on mobile and
+        // scales up on >=sm. Pairs with the `primary`/`secondary` variants.
+        // Bumps icon size to 20px (overrides the base size-4 via tailwind-merge
+        // since both share the same `[&_svg…]:` modifier — last wins).
+        cta: "min-h-12 gap-3 px-6 text-base sm:min-h-14 sm:px-8 sm:text-lg [&_svg:not([class*='size-'])]:size-5",
       },
     },
     defaultVariants: {

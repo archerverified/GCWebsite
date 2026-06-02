@@ -8,6 +8,7 @@ import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
+import { Button } from "../components/ui/button";
 import { Seo } from "../components/seo/Seo";
 import { createServiceSchema, createBreadcrumbSchema, createFAQSchema } from "../seo/schemas";
 
@@ -64,15 +65,12 @@ export function ServiceDetail() {
           <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             {content.title}
           </h1>
-          <a 
-            href="tel:8172560122"
-            className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            <Phone size={24} className="text-[#222]" />
-            <span className="font-product-sans font-black text-xl text-[#222] uppercase">
+          <Button asChild variant="primary" size="cta">
+            <a href="tel:8172560122">
+              <Phone />
               Call Now
-            </span>
-          </a>
+            </a>
+          </Button>
         </div>
       </section>
 
