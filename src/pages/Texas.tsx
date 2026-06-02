@@ -39,7 +39,7 @@ export function Texas() {
       {/* Hero (markdown-first: title + intro) */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-gc-ink">
         <div className="container mx-auto max-w-5xl text-center">
-          <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-8">
+          <h1 className="font-product-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-8">
             {content.title}
           </h1>
           <div className="prose prose-lg prose-invert max-w-3xl mx-auto font-product-sans">

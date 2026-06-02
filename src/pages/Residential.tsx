@@ -52,7 +52,7 @@ export function Residential() {
         style={{ backgroundColor: colors.brand.dark }}
       >
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-16">
-          <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+          <h1 className="font-product-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             {content.title}
           </h1>
           <Button asChild variant="primary" size="cta">

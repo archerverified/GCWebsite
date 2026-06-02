@@ -62,7 +62,7 @@ export function AboutUs() {
       {/* Hero Section */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-gc-ink/90 rounded-b-[20px] border-t-2 border-t-gc-yellow border-x-0 border-b-0">
         <div className="container mx-auto max-w-5xl text-center">
-          <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-8">
+          <h1 className="font-product-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-8">
             {content.title || "About Garage Cowboy"}
           </h1>
           {content.intro && (

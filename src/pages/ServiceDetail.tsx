@@ -54,12 +54,12 @@ export function ServiceDetail() {
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-16">
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 text-white mb-6 hover:text-gc-yellow transition-colors"
+            className="inline-flex min-h-11 items-center gap-2 py-2 text-white mb-4 rounded outline-none transition-colors hover:text-gc-yellow focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={20} aria-hidden="true" />
             <span className="font-product-sans font-bold uppercase">Back to Services</span>
           </Link>
-          <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+          <h1 className="font-product-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             {content.title}
           </h1>
           <Button asChild variant="primary" size="cta">

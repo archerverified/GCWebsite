@@ -108,14 +108,14 @@ export function CityDetail() {
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-16">
           <Link
             to="/texas"
-            className="inline-flex items-center gap-2 text-white mb-6 hover:text-gc-yellow transition-colors"
+            className="inline-flex min-h-11 items-center gap-2 py-2 text-white mb-4 rounded outline-none transition-colors hover:text-gc-yellow focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={20} aria-hidden="true" />
             <span className="font-product-sans font-bold uppercase">Back to Service Areas</span>
           </Link>
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <MapPin size={48} className="text-gc-yellow" />
-            <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white">
+          <div className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-4 mb-6">
+            <MapPin size={40} className="shrink-0 text-gc-yellow sm:size-12" aria-hidden="true" />
+            <h1 className="font-product-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
               {content.title}
             </h1>
           </div>
