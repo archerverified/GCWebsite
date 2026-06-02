@@ -31,7 +31,7 @@ export function MobileMenuDropdown() {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger
         className={`
-          flex items-center gap-2 px-4 py-2 rounded-lg
+          flex min-h-11 items-center gap-2 px-4 py-2 rounded-lg
           font-product-sans font-bold text-sm uppercase
           transition-all duration-200 outline-none
           focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2
@@ -51,7 +51,7 @@ export function MobileMenuDropdown() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-1 z-50"
+        className="w-64 bg-white border border-gc-gray-200 shadow-lg rounded-lg p-1 z-50"
         align="center"
         sideOffset={8}
       >
@@ -61,11 +61,11 @@ export function MobileMenuDropdown() {
             <Link
               to={item.to}
               className={`
-                block w-full px-4 py-2.5 rounded-md
+                flex min-h-11 w-full items-center px-4 py-2.5 rounded-md
                 font-product-sans font-medium text-sm
                 transition-colors cursor-pointer
                 ${isActive(item.to)
-                  ? "bg-gc-yellow text-white"
+                  ? "bg-gc-yellow text-gc-ink"
                   : "text-gc-ink hover:bg-gc-gray-100 hover:text-gc-yellow"
                 }
               `}
@@ -76,7 +76,7 @@ export function MobileMenuDropdown() {
           </DropdownMenuItem>
         ))}
 
-        <DropdownMenuSeparator className="my-1 bg-gray-200" />
+        <DropdownMenuSeparator className="my-1 bg-gc-gray-200" />
 
         {/* Services Section */}
         <DropdownMenuLabel className="px-4 py-2 font-product-sans font-black text-xs uppercase text-gc-ink tracking-wide">
@@ -87,11 +87,11 @@ export function MobileMenuDropdown() {
             <Link
               to={item.to}
               className={`
-                block w-full px-4 py-2 rounded-md
+                flex min-h-11 w-full items-center px-4 py-2 rounded-md
                 font-product-sans text-sm
                 transition-colors cursor-pointer
                 ${isActive(item.to)
-                  ? "bg-gc-yellow text-white"
+                  ? "bg-gc-yellow text-gc-ink"
                   : "text-gc-ink hover:bg-gc-gray-100 hover:text-gc-yellow"
                 }
               `}
@@ -102,7 +102,7 @@ export function MobileMenuDropdown() {
           </DropdownMenuItem>
         ))}
 
-        <DropdownMenuSeparator className="my-1 bg-gray-200" />
+        <DropdownMenuSeparator className="my-1 bg-gc-gray-200" />
 
         {/* Texas Section */}
         <DropdownMenuLabel className="px-4 py-2 font-product-sans font-black text-xs uppercase text-gc-ink tracking-wide">
@@ -118,7 +118,7 @@ export function MobileMenuDropdown() {
                   font-product-sans text-sm
                   transition-colors cursor-pointer
                   ${isActive(item.to)
-                    ? "bg-gc-yellow text-white"
+                    ? "bg-gc-yellow text-gc-ink"
                     : "text-gc-ink hover:bg-gc-gray-100 hover:text-gc-yellow"
                   }
                 `}
