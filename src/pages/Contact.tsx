@@ -79,7 +79,7 @@ export function Contact() {
               </h3>
               <a
                 href="mailto:deno@garagecowboy.com"
-                className="font-product-sans text-gc-ink hover:text-gc-yellow transition-colors underline decoration-gc-yellow decoration-2 underline-offset-2"
+                className="inline-flex min-h-11 items-center font-product-sans text-gc-ink hover:text-gc-yellow transition-colors underline decoration-gc-yellow decoration-2 underline-offset-2"
               >
                 deno@garagecowboy.com
               </a>

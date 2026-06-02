@@ -49,7 +49,7 @@ export function ServiceAreasGrid({
                 <a
                   key={index}
                   href="#service-areas"
-                  className="inline-flex items-center gap-2 bg-white border border-[#e0e0e0] rounded-full px-4 py-2 hover:border-gc-yellow hover:shadow-sm transition-all"
+                  className="inline-flex min-h-11 items-center gap-2 bg-white border border-gc-gray-300 rounded-full px-4 py-2.5 hover:border-gc-yellow hover:shadow-sm transition-all outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2"
                 >
                   {content}
                 </a>
@@ -59,7 +59,7 @@ export function ServiceAreasGrid({
             return (
               <span
                 key={index}
-                className="inline-flex items-center gap-2 bg-white border border-[#e0e0e0] rounded-full px-4 py-2"
+                className="inline-flex min-h-11 items-center gap-2 bg-white border border-gc-gray-300 rounded-full px-4 py-2.5"
               >
                 {content}
               </span>
