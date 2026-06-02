@@ -25,30 +25,27 @@ export function Navigation() {
   const isPathActive = (path: string) => location.pathname.startsWith(path);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `font-product-sans font-bold text-lg md:text-xl uppercase whitespace-nowrap transition-colors ${
+    `font-product-sans font-bold text-base uppercase whitespace-nowrap transition-colors rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
       isActive ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
     }`;
 
   return (
     <nav
-      className="w-full h-[118px] relative bg-gc-ink"
+      className="w-full h-16 lg:h-[118px] relative bg-gc-ink"
       data-font-probe="nav"
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28 h-full">
-        <div className="h-full relative flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">
-          
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 h-full">
+        <div className="h-full relative flex items-center justify-between gap-4 lg:gap-6">
+
           {/* Mobile Menu - Absolutely Centered */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden z-20">
             <MobileMenuDropdown />
           </div>
 
-          {/* Left spacer (keeps the center column truly centered) */}
-          <div className="hidden lg:block" aria-hidden="true" />
-
-          {/* Desktop Navigation (center column) */}
-          <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 font-product-sans min-w-0" role="menubar">
+          {/* Desktop Navigation (takes available width, centered within) */}
+          <div className="hidden lg:flex flex-1 items-center justify-center gap-3 xl:gap-5 font-product-sans min-w-0" role="menubar">
             <NavLink to="/" className={navLinkClass} end aria-label="Go to Home page">
               Home
             </NavLink>
@@ -60,7 +57,7 @@ export function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("services")}
-                className={`font-product-sans font-bold text-xl uppercase whitespace-nowrap transition-colors flex items-center gap-2 ${
+                className={`font-product-sans font-bold text-base uppercase whitespace-nowrap transition-colors flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
                   isPathActive("/services") ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
                 }`}
                 aria-expanded={activeDropdown === "services"}
@@ -99,7 +96,7 @@ export function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("texas")}
-                className={`font-product-sans font-bold text-xl uppercase whitespace-nowrap transition-colors flex items-center gap-2 ${
+                className={`font-product-sans font-bold text-base uppercase whitespace-nowrap transition-colors flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
                   isPathActive("/texas") ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
                 }`}
                 aria-expanded={activeDropdown === "texas"}
@@ -149,9 +146,9 @@ export function Navigation() {
           </div>
 
           {/* Right side (social + CTA) */}
-          <div className="flex items-center justify-end h-full ml-auto lg:ml-0 gap-5 xl:gap-8">
+          <div className="flex items-center justify-end h-full ml-auto lg:ml-0 shrink-0 gap-3 xl:gap-5">
             {/* Social Icons - Desktop only */}
-            <div className="hidden lg:flex items-center gap-4 px-2 xl:px-3" aria-label="Social media links">
+            <div className="hidden min-[1800px]:flex items-center gap-4 px-2" aria-label="Social media links">
               <a
                 href="https://www.google.com/search?q=garage+cowboy+fort+worth&sca_esv=cea07bd29ebaa7bd&ei=giRYafyPA4eWvr0P4rHXmAk&ved=0ahUKEwj82MWY0-2RAxUHi68BHeLYFZMQ4dUDCBE&uact=5&oq=garage+cowboy+fort+worth&gs_lp=Egxnd3Mtd2l6LXNlcnAiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aDIFECEYoAEyBRAhGKABSMwYUOEBWKUXcAN4AZABAJgBYqAB5giqAQIxM7gBA8gBAPgBAZgCEKACkQnCAgoQABiwAxjWBBhHwgINEAAYsAMY1gQYRxjJA8ICDhAAGIAEGLADGJIDGIoFwgIKEAAYgAQYQxiKBcICBRAAGIAEwgIGEAAYFhgewgIFEAAY7wXCAggQABiABBiiBMICCxAAGIAEGIYDGIoFmAMAiAYBkAYJkgcEMTUuMaAHw0eyBwQxMi4xuAeICcIHBjIuMTMuMcgHHYAIAA&sclient=gws-wiz-serp&lqi=ChhnYXJhZ2UgY293Ym95IGZvcnQgd29ydGhIm9TVhM2zgIAIWiYQABABGAAYARgCGAMiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aJIBFGdhcmFnZV9kb29yX3N1cHBsaWVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0RmVsb3dTakZSYkRsTlkwZG9XbE5YVWpKU2VsWk9UVmQ0U0dReVl4QUL6AQUIkwMQPQ"
                 className="hover:opacity-80 transition-opacity"
@@ -205,10 +202,10 @@ export function Navigation() {
             {/* Desktop: Full CTA button (xl+) */}
             <a
               href="tel:8172560122"
-              className="hidden xl:flex items-center gap-3 rounded-[var(--radius-gc-xl)] px-6 2xl:px-7 py-3 bg-gc-yellow border-2 border-gc-ink shadow-md hover:shadow-lg transition-all font-product-sans whitespace-nowrap shrink-0"
+              className="hidden xl:flex items-center gap-2 rounded-[var(--radius-gc-xl)] px-4 2xl:px-6 py-3 bg-gc-yellow border-2 border-gc-ink shadow-md hover:shadow-lg transition-all font-product-sans whitespace-nowrap shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink"
               aria-label="Call to schedule a free inspection at 817-256-0122"
             >
-              <Phone size={24} className="text-gc-ink" aria-hidden="true" />
+              <Phone size={22} className="text-gc-ink" aria-hidden="true" />
               <span className="font-product-sans font-black text-sm 2xl:text-base leading-none whitespace-nowrap text-gc-ink">
                 SCHEDULE A FREE INSPECTION
               </span>
