@@ -42,7 +42,7 @@ export function ServiceDetail() {
   return (
     <main className="bg-white">
       <Seo
-        title={`${content.title} in DFW - Garage Cowboy`}
+        title={content.metaTitle || content.title}
         description={content.intro || content.description || `Professional ${content.title} services in Dallas-Fort Worth. Expert technicians, same-day service. Call (817) 256-0122.`}
         canonicalPath={`/services/${slug}`}
         schema={schemas}

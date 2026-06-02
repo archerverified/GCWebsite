@@ -49,6 +49,13 @@ export interface DocxContent {
  */
 export interface MarkdownContent {
   title: string;
+  /**
+   * Optional SEO <title> override. The visible H1 always uses `title`;
+   * `metaTitle` lets the meta title stay <= 60 chars (incl. the
+   * " | Garage Cowboy" suffix appended by Seo) when the H1 is longer.
+   * Falls back to `title` when omitted.
+   */
+  metaTitle?: string;
   intro: string;
   sections: ContentSection[];
   faqs: FAQ[];
