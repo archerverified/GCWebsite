@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import imgEmergency from "figma:asset/96eaf4517d4bf6650d76b0ac09c0f6969f9475e6.png";
 import imgLogo from "figma:asset/0c2b872f2c474c2f7c570ef0cd5e8697f4e13e90.png";
-import { colors } from "../../styles/design-tokens";
 
 export function Header() {
   return (
@@ -32,12 +31,9 @@ export function Header() {
               <p className="font-product-sans text-base lg:text-xl mb-1 font-black">
                 Call us at
               </p>
-              <a 
-                href="tel:8172560122" 
-                className="font-product-sans font-black text-2xl lg:text-3xl transition-colors"
-                style={{ color: colors.brand.dark }}
-                onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-                onMouseLeave={(e) => e.currentTarget.style.color = colors.brand.dark}
+              <a
+                href="tel:8172560122"
+                className="font-product-sans font-black text-2xl lg:text-3xl text-gc-ink hover:text-gc-yellow transition-colors"
               >
                 (817) 256-0122
               </a>
