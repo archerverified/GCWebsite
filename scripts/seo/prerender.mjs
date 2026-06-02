@@ -123,9 +123,20 @@ async function main() {
   const routes = await getAllRoutes();
   console.log(`🪄 Prerendering ${routes.length} route(s) from ${BASE_URL}\n`);
 
+  // Chromium's sandbox cannot run as root or in many CI/container images
+  // (e.g. Vercel's build container), so disable it only there. On a normal
+  // dev machine the sandbox stays ON. We only ever render our own trusted,
+  // first-party build, so the residual risk is minimal regardless.
+  const sandboxUnavailable =
+    process.env.PRERENDER_NO_SANDBOX === '1' ||
+    process.env.CI === '1' ||
+    process.env.CI === 'true' ||
+    !!process.env.VERCEL ||
+    (typeof process.getuid === 'function' && process.getuid() === 0);
+
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: sandboxUnavailable ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
   });
 
   const failures = [];
