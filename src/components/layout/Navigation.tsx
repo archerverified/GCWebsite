@@ -27,7 +27,7 @@ export function Navigation() {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `font-product-sans font-bold text-lg md:text-xl uppercase whitespace-nowrap transition-colors ${
-      isActive ? `text-[${colors.brand.yellowPrimary}]` : `text-white hover:text-[${colors.brand.yellowPrimary}]`
+      isActive ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
     }`;
 
   return (
