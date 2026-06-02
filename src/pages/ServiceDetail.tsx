@@ -6,9 +6,9 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
-import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
+import { Card, CardHeader, CardContent } from "../components/ui/card";
 import { Seo } from "../components/seo/Seo";
 import { createServiceSchema, createBreadcrumbSchema, createFAQSchema } from "../seo/schemas";
 
@@ -50,14 +50,11 @@ export function ServiceDetail() {
       />
       
       {/* Hero Section */}
-      <section 
-        className="relative min-h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundColor: colors.brand.dark }}
-      >
+      <section className="relative min-h-[400px] bg-gc-ink bg-cover bg-center flex items-center justify-center">
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-16">
-          <Link 
-            to="/services" 
-            className="inline-flex items-center gap-2 text-white mb-6 hover:text-[#fec300] transition-colors"
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-2 text-white mb-6 hover:text-gc-yellow transition-colors"
           >
             <ArrowLeft size={20} />
             <span className="font-product-sans font-bold uppercase">Back to Services</span>
@@ -77,7 +74,7 @@ export function ServiceDetail() {
       {/* Main Content - Intro */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="container mx-auto max-w-4xl">
-          <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-[#fec300]">
+          <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {content.intro}
             </ReactMarkdown>
@@ -85,21 +82,30 @@ export function ServiceDetail() {
         </div>
       </section>
 
-      {/* Sections */}
+      {/* Sections — standardized on shadcn Card (border-2 border-gc-ink,
+          token radius/shadow) to match the home value cards. Section titles
+          stay <h2> (not CardTitle, which renders <h4>) to preserve heading order. */}
       {content.sections && content.sections.length > 0 && (
-        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-[#f5f5f5]">
-          <div className="container mx-auto max-w-6xl">
+        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-gc-gray-100">
+          <div className="container mx-auto max-w-6xl flex flex-col gap-8 lg:gap-10">
             {content.sections.map((section, index) => (
-              <div key={index} className="mb-12 last:mb-0">
-                <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] mb-6">
-                  {section.title}
-                </h2>
-                <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-[#fec300]">
-                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-                    {section.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
+              <Card
+                key={index}
+                className="border-2 border-gc-ink rounded-[var(--radius-gc-md)] shadow-gc-card"
+              >
+                <CardHeader>
+                  <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink leading-tight">
+                    {section.title}
+                  </h2>
+                </CardHeader>
+                <CardContent>
+                  <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
+                    <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                      {section.content}
+                    </ReactMarkdown>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>

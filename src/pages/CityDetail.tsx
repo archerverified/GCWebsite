@@ -6,9 +6,9 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
-import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
+import { Card, CardHeader, CardContent } from "../components/ui/card";
 import { Seo } from "../components/seo/Seo";
 import { buildCityServiceSchema, createFAQSchema } from "../seo/schemas";
 import { SUBAREAS_BY_HUB, getHubBySlug } from "../seo/areas";
@@ -104,20 +104,17 @@ export function CityDetail() {
       />
       
       {/* Hero Section */}
-      <section 
-        className="relative min-h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundColor: colors.brand.dark }}
-      >
+      <section className="relative min-h-[400px] bg-gc-ink bg-cover bg-center flex items-center justify-center">
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-16">
-          <Link 
-            to="/texas" 
-            className="inline-flex items-center gap-2 text-white mb-6 hover:text-[#fec300] transition-colors"
+          <Link
+            to="/texas"
+            className="inline-flex items-center gap-2 text-white mb-6 hover:text-gc-yellow transition-colors"
           >
             <ArrowLeft size={20} />
             <span className="font-product-sans font-bold uppercase">Back to Service Areas</span>
           </Link>
           <div className="flex items-center justify-center gap-4 mb-6">
-            <MapPin size={48} className="text-[#fec300]" />
+            <MapPin size={48} className="text-gc-yellow" />
             <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white">
               {content.title}
             </h1>
@@ -134,7 +131,7 @@ export function CityDetail() {
       {/* Main Content - Intro */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="container mx-auto max-w-4xl">
-          <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-[#fec300]">
+          <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {content.intro}
             </ReactMarkdown>
@@ -142,21 +139,30 @@ export function CityDetail() {
         </div>
       </section>
 
-      {/* Sections */}
+      {/* Sections — standardized on shadcn Card (border-2 border-gc-ink,
+          token radius/shadow) to match the home value cards. Section titles
+          stay <h2> (not CardTitle, which renders <h4>) to preserve heading order. */}
       {content.sections && content.sections.length > 0 && (
-        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-[#f5f5f5]">
-          <div className="container mx-auto max-w-6xl">
+        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-gc-gray-100">
+          <div className="container mx-auto max-w-6xl flex flex-col gap-8 lg:gap-10">
             {content.sections.map((section, index) => (
-              <div key={index} className="mb-12 last:mb-0">
-                <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] mb-6">
-                  {section.title}
-                </h2>
-                <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-[#fec300]">
-                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-                    {section.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
+              <Card
+                key={index}
+                className="border-2 border-gc-ink rounded-[var(--radius-gc-md)] shadow-gc-card"
+              >
+                <CardHeader>
+                  <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink leading-tight">
+                    {section.title}
+                  </h2>
+                </CardHeader>
+                <CardContent>
+                  <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
+                    <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                      {section.content}
+                    </ReactMarkdown>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>
@@ -182,8 +188,8 @@ export function CityDetail() {
       {/* Map Section - Shows hub city and all subcities with markers and polygon */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] mb-8 text-center">
-            {subcities.length > 0 
+          <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink mb-8 text-center">
+            {subcities.length > 0
               ? `Service Area: ${cityName} & Surrounding Cities`
               : `Service Area: ${cityName}, TX`
             }
