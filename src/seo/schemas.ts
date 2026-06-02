@@ -45,7 +45,7 @@ export const localBusinessSchema = {
   },
   "sameAs": BUSINESS_INFO.sameAs,
   "url": SITE_URL,
-  "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
+  "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since 2023.",
   "image": {
     "@type": "ImageObject",
     "url": `${SITE_URL}/social-preview.png`,
@@ -137,6 +137,58 @@ export function createBreadcrumbSchema(items: Array<{name: string; url: string}>
 // ============================================================================
 
 /**
+ * Founder / owner Person node (E-E-A-T entity).
+ * No @context — designed to live inside an @graph. Use buildPersonSchema()
+ * for a standalone, validator-ready object.
+ */
+const founderNode = {
+  "@type": "Person",
+  "@id": `${SITE_URL}#founder`,
+  "name": "Deno Borghi",
+  "jobTitle": "President",
+  "worksFor": { "@id": `${SITE_URL}#localbusiness` },
+  "image": `${SITE_URL}/images/authors/deno-borghi.jpg`,
+  "url": `${SITE_URL}/about-us`,
+  "knowsAbout": [
+    "garage door repair",
+    "garage door installation",
+    "garage door maintenance"
+  ],
+  "description": "Deno Borghi is the President and founder of Garage Cowboy, a locally owned, licensed and insured garage door company serving the Dallas–Fort Worth metroplex since 2023."
+};
+
+/**
+ * Standalone Person schema for the founder/owner (Deno Borghi).
+ * Links to the LocalBusiness via @id for E-E-A-T entity linking.
+ */
+export function buildPersonSchema() {
+  return {
+    "@context": "https://schema.org",
+    ...founderNode
+  };
+}
+
+/**
+ * Build AboutPage schema with a dateModified for content freshness.
+ * Declares the founder as the page's main entity and links to the business.
+ * @param dateModified - ISO date (e.g. "2026-06-02") shown as "Updated" on-page.
+ */
+export function buildAboutPageSchema(dateModified: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${SITE_URL}/about-us#webpage`,
+    "url": `${SITE_URL}/about-us`,
+    "name": "About Garage Cowboy",
+    "description": "Meet Deno Borghi, President of Garage Cowboy — a locally owned, licensed and insured garage door company serving the Dallas–Fort Worth metroplex since 2023.",
+    "isPartOf": { "@id": `${SITE_URL}#website` },
+    "about": { "@id": `${SITE_URL}#localbusiness` },
+    "mainEntity": { "@id": `${SITE_URL}#founder` },
+    "dateModified": dateModified
+  };
+}
+
+/**
  * Build base graph for home page with Organization, WebSite, and LocalBusiness.
  * Uses stable @id references for entity linking.
  */
@@ -153,8 +205,7 @@ export function buildBaseGraph() {
         "email": BUSINESS_INFO.email,
         "sameAs": BUSINESS_INFO.sameAs,
         "founder": {
-          "@type": "Person",
-          "name": "Deno Yiankes"
+          "@id": `${SITE_URL}#founder`
         },
         "logo": {
           "@type": "ImageObject",
@@ -210,7 +261,7 @@ export function buildBaseGraph() {
           "latitude": "32.7555",
           "longitude": "-97.3308"
         },
-        "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since day one.",
+        "description": "24/7 emergency garage door repair in Dallas-Fort Worth, TX. Same-day service for broken springs, openers, cables & more. Licensed & insured technicians serving DFW since 2023.",
         "image": {
           "@type": "ImageObject",
           "url": `${SITE_URL}/social-preview.png`,
@@ -218,6 +269,9 @@ export function buildBaseGraph() {
           "height": 630
         },
         "sameAs": BUSINESS_INFO.sameAs,
+        "founder": {
+          "@id": `${SITE_URL}#founder`
+        },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5.0",
@@ -239,7 +293,8 @@ export function buildBaseGraph() {
           "name": hub.name,
           "addressRegion": hub.state
         }))
-      }
+      },
+      founderNode
     ]
   };
 }
