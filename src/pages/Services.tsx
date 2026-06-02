@@ -8,6 +8,7 @@ import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { colors } from "../styles/design-tokens";
 import { Accordion } from "../components/ui/accordion";
+import { Button } from "../components/ui/button";
 import { Seo } from "../components/seo/Seo";
 import { createBreadcrumbSchema } from "../seo/schemas";
 
@@ -66,15 +67,12 @@ export function Services() {
               {content.intro}
             </ReactMarkdown>
           </div>
-          <a 
-            href="tel:8172560122"
-            className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            <Phone size={24} className="text-[#222]" />
-            <span className="font-product-sans font-black text-xl text-[#222] uppercase">
+          <Button asChild variant="primary" size="cta">
+            <a href="tel:8172560122">
+              <Phone />
               Call Now
-            </span>
-          </a>
+            </a>
+          </Button>
         </div>
       </section>
 
@@ -106,7 +104,7 @@ export function Services() {
                   <p className="font-product-sans text-sm text-[#666] mb-4">
                     Residential, Commercial, Emergency
                   </p>
-                  <span className="block w-full text-center bg-[#fec300] rounded-[10px] py-2 font-product-sans font-bold text-sm text-[#222] uppercase hover:bg-[#f7bd15] transition-colors">
+                  <span className="block w-full text-center bg-gc-yellow rounded-[10px] py-2 font-product-sans font-bold text-sm text-[#222] uppercase hover:bg-gc-yellow-press transition-colors">
                     View Details
                   </span>
                 </Link>

@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import imgHat from "figma:asset/cec67c9176b88456cc934d95fdc03002a1d8e2b9.png";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const whyWorkWithUs = [
   {
@@ -34,21 +33,11 @@ const whyWorkWithUs = [
 ];
 
 export function GarageCowboyStoryWhySection() {
-  const [openItems, setOpenItems] = useState<number[]>([]);
-
-  const toggleItem = (index: number) => {
-    if (openItems.includes(index)) {
-      setOpenItems(openItems.filter(i => i !== index));
-    } else {
-      setOpenItems([...openItems, index]);
-    }
-  };
-
   return (
     <section className="w-full bg-white font-product-sans" data-font-probe="story">
       <div className="container mx-auto max-w-6xl px-4 lg:px-8">
       {/* Story Section */}
-      <div className="relative bg-gradient-to-r from-[#f7bd15] to-[#f7bd15] rounded-tl-[20px] rounded-tr-[20px] border-[3px] border-[#303135]">
+      <div className="relative bg-gc-yellow rounded-tl-[20px] rounded-tr-[20px] border-[3px] border-gc-ink">
         {/* Header with hats */}
         <div className="bg-white rounded-tl-[20px] rounded-tr-[20px] border-b-[3px] border-black py-8 relative">
           {/* Left Hat */}
@@ -62,11 +51,11 @@ export function GarageCowboyStoryWhySection() {
           
           {/* Title */}
           <div className="text-center px-4">
-            <h2 className="font-product-sans font-black text-2xl md:text-3xl lg:text-4xl text-[#323232] leading-tight">
+            <h2 className="font-product-sans font-black text-2xl md:text-3xl lg:text-4xl text-gc-ink leading-tight">
               THE STORY OF
             </h2>
             <h3 
-              className="text-[#323232] text-center font-product-sans font-black not-italic"
+              className="text-gc-ink text-center font-product-sans font-black not-italic"
               style={{
                 textShadow: "0 8px 2px rgba(0, 0, 0, 0.13), 0 4px 4px rgba(247, 189, 21, 0.75)",
                 fontSize: "36px",
@@ -140,10 +129,10 @@ export function GarageCowboyStoryWhySection() {
 
             {/* Signature */}
             <div className="mt-12">
-              <p className="font-['Product_Sans'] font-black text-xl md:text-2xl text-[#323232] leading-7">
+              <p className="font-['Product_Sans'] font-black text-xl md:text-2xl text-gc-ink leading-7">
                 Deno Borghi
               </p>
-              <p className="font-['Product_Sans:Regular'] text-xl md:text-2xl text-[#323232] leading-7 font-[Product_Sans]">
+              <p className="font-['Product_Sans:Regular'] text-xl md:text-2xl text-gc-ink leading-7 font-[Product_Sans]">
                 <span className="font-['Product_Sans'] font-black">President</span>, Garage Cowboy
               </p>
             </div>
@@ -152,54 +141,45 @@ export function GarageCowboyStoryWhySection() {
       </div>
 
       {/* Why Work With Us Section */}
-      <div className="border-x-[3px] border-b-[3px] border-[#303135] pb-12 lg:pb-20">
+      <div className="border-x-[3px] border-b-[3px] border-gc-ink pb-12 lg:pb-20">
         <div className="px-4 md:px-8 lg:px-16 py-12 lg:py-16">
           <div className="max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
-              <h2 className="font-product-sans text-2xl md:text-3xl lg:text-4xl text-[#323232] leading-tight mb-2">
+              <h2 className="font-product-sans text-2xl md:text-3xl lg:text-4xl text-gc-ink leading-tight mb-2">
                 WHY WORK WITH US?
               </h2>
-              <p className="font-product-sans font-black text-lg md:text-xl lg:text-2xl text-[#323232]">
+              <p className="font-product-sans font-black text-lg md:text-xl lg:text-2xl text-gc-ink">
                 QUALITY WORK, HONEST PRICING & RELIABLE SERVICES
               </p>
             </div>
 
-            {/* List */}
-            <div className="space-y-4">
+            {/* Always-visible value cards — every benefit is in the DOM, no
+                collapsing. Responsive 1 / 2 / 3 column grid. */}
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {whyWorkWithUs.map((item, index) => (
-                <div key={index} className="space-y-2">
-                  <button
-                    onClick={() => toggleItem(index)}
-                    className="w-full bg-[rgba(230,230,230,0.5)] border-[2.5px] border-[#323232] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] p-6 md:p-8 flex items-center justify-between hover:bg-[rgba(230,230,230,0.7)] transition-all group"
-                  >
-                    <div className="flex items-center gap-4 md:gap-6">
-                      <span 
-                        className="font-product-sans font-black text-3xl md:text-4xl text-black"
-                        style={{ textShadow: "0px 2px 2px #f7bd15" }}
-                      >
-                        {index + 1}.
-                      </span>
-                      <span className="font-product-sans font-black text-xl md:text-2xl lg:text-3xl text-[#323232] text-left leading-8">
-                        {item.title}
-                      </span>
-                    </div>
-                    <div className="bg-[#eaeaea] border-4 border-[#323232] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-                      <ChevronDown 
-                        className={`w-5 h-5 text-[#f7bd15] transition-transform ${
-                          openItems.includes(index) ? "rotate-180" : ""
-                        }`}
-                      />
-                    </div>
-                  </button>
-                  {openItems.includes(index) && (
-                    <div className="mt-2 px-4 md:px-8 lg:px-10 pb-4 text-left">
-                      <p className="font-product-sans text-base md:text-lg text-[#323232] leading-relaxed">
-                        {item.body}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                <Card
+                  key={index}
+                  className="border-2 border-gc-ink rounded-[var(--radius-gc-md)] shadow-gc-card"
+                >
+                  <CardHeader className="gap-2">
+                    <span
+                      aria-hidden="true"
+                      className="font-product-sans font-black text-3xl leading-none text-gc-ink"
+                      style={{ textShadow: "0px 2px 2px var(--gc-yellow)" }}
+                    >
+                      {index + 1}.
+                    </span>
+                    <CardTitle className="font-product-sans font-black text-base md:text-lg uppercase leading-tight text-gc-ink">
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="font-product-sans text-base leading-relaxed text-gc-ink">
+                      {item.body}
+                    </p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>

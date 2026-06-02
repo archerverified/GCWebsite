@@ -8,6 +8,7 @@ import { Seo } from "../components/seo/Seo";
 import { BlogHeader } from "../components/blog/BlogHeader";
 import { RelatedPosts } from "../components/blog/RelatedPosts";
 import { ReadyToGetStartedCTA } from "../components/sections/ReadyToGetStartedCTA";
+import { Button } from "../components/ui/button";
 import { createBlogPostingSchema, createFAQSchema } from "../seo/schemas";
 import postsData from "../data/blog/posts.json";
 import categoriesData from "../data/blog/categories.json";
@@ -42,7 +43,7 @@ export function BlogPost() {
     wordCount
   });
 
-  const schemas = [blogPostingSchema];
+  const schemas: object[] = [blogPostingSchema];
 
   // Add FAQ schema if FAQs exist
   if (post.faqs && post.faqs.length > 0) {
@@ -135,7 +136,7 @@ export function BlogPost() {
           </figure>
 
           {/* Article Body */}
-          <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-headings:text-[#323232] prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:leading-relaxed prose-p:mb-4 prose-strong:font-bold prose-strong:text-[#323232] prose-a:text-[#35363a] prose-a:underline prose-a:decoration-[#fec300] prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:bg-[#fec300]/20 prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:mb-2 prose-li:marker:text-[#fec300] prose-blockquote:border-l-4 prose-blockquote:border-[#fec300] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-[#666] prose-blockquote:bg-[#f5f5f5] prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg prose-hr:border-[#e6e6e6] prose-hr:my-10 prose-table:border-collapse prose-th:bg-[#35363a] prose-th:text-white prose-th:font-bold prose-th:p-3 prose-th:text-left prose-td:border prose-td:border-[#e6e6e6] prose-td:p-3 prose-code:bg-[#f5f5f5] prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
+          <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-headings:text-[#323232] prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:leading-relaxed prose-p:mb-4 prose-strong:font-bold prose-strong:text-[#323232] prose-a:text-[#35363a] prose-a:underline prose-a:decoration-[#fec300] prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:bg-gc-yellow/20 prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:mb-2 prose-li:marker:text-[#fec300] prose-blockquote:border-l-4 prose-blockquote:border-[#fec300] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-[#666] prose-blockquote:bg-[#f5f5f5] prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg prose-hr:border-[#e6e6e6] prose-hr:my-10 prose-table:border-collapse prose-th:bg-[#35363a] prose-th:text-white prose-th:font-bold prose-th:p-3 prose-th:text-left prose-td:border prose-td:border-[#e6e6e6] prose-td:p-3 prose-code:bg-[#f5f5f5] prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {post.content}
             </ReactMarkdown>
@@ -192,15 +193,12 @@ export function BlogPost() {
             <p className="font-product-sans text-[#eaeaea] mb-6">
               Our expert technicians are ready to assist with repairs, installation, and maintenance.
             </p>
-            <a
-              href="tel:8172560122"
-              className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#222] rounded-[15px] px-6 py-3 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-            >
-              <Phone size={20} className="text-[#222]" />
-              <span className="font-product-sans font-black text-lg text-[#222] uppercase">
+            <Button asChild variant="primary" size="cta">
+              <a href="tel:8172560122">
+                <Phone />
                 Call (817) 256-0122
-              </span>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
       </article>

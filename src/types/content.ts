@@ -57,6 +57,12 @@ export interface MarkdownContent {
    */
   metaTitle?: string;
   intro: string;
+  /**
+   * Optional longer-form description. Some pages (e.g. ServiceDetail) prefer
+   * `description` over `intro` for schema/meta copy and fall back to `intro`
+   * when it is absent.
+   */
+  description?: string;
   sections: ContentSection[];
   faqs: FAQ[];
 }

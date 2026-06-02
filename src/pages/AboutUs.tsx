@@ -6,6 +6,7 @@ import remarkBreaks from "remark-breaks";
 import { useContent, ContentLoading, ContentError } from "../hooks/useContent";
 import type { MarkdownContent } from "../types/content";
 import { Accordion } from "../components/ui/accordion";
+import { Button } from "../components/ui/button";
 import { LazyImage } from "../components/ui/LazyImage";
 import { Seo } from "../components/seo/Seo";
 import {
@@ -71,15 +72,12 @@ export function AboutUs() {
               </ReactMarkdown>
             </div>
           )}
-          <a 
-            href="tel:8172560122"
-            className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105 mt-8"
-          >
-            <Phone size={24} className="text-[#222]" />
-            <span className="font-product-sans font-black text-xl text-[#222] uppercase">
+          <Button asChild variant="primary" size="cta" className="mt-8">
+            <a href="tel:8172560122">
+              <Phone />
               Call Now
-            </span>
-          </a>
+            </a>
+          </Button>
         </div>
       </section>
 
@@ -122,7 +120,7 @@ export function AboutUs() {
               {/* Bio */}
               <div className="p-8 md:p-10 lg:p-12">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="h-1 w-10 rounded-full bg-[#fec300]" aria-hidden="true" />
+                  <span className="h-1 w-10 rounded-full bg-gc-yellow" aria-hidden="true" />
                   <span className="font-product-sans font-bold uppercase tracking-wider text-sm text-[#35363a]">
                     Meet the Owner
                   </span>
@@ -158,7 +156,7 @@ export function AboutUs() {
                   {TRUST_SIGNALS.map((signal) => (
                     <li
                       key={signal}
-                      className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#35363a] bg-[#fec300] px-3.5 py-1.5 font-product-sans font-bold text-sm text-[#222]"
+                      className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#35363a] bg-gc-yellow px-3.5 py-1.5 font-product-sans font-bold text-sm text-[#222]"
                     >
                       <Check size={15} strokeWidth={3} className="text-[#35363a]" aria-hidden="true" />
                       {signal}

@@ -72,7 +72,7 @@ export function Texas() {
                 <p className="font-product-sans text-sm text-[#666] mb-4">
                   Residential, Commercial, Emergency
                 </p>
-                <span className="block w-full text-center bg-[#fec300] rounded-[10px] py-2 font-product-sans font-bold text-sm text-[#222] uppercase hover:bg-[#f7bd15] transition-colors">
+                <span className="block w-full text-center bg-gc-yellow rounded-[10px] py-2 font-product-sans font-bold text-sm text-[#222] uppercase hover:bg-gc-yellow-press transition-colors">
                   View Details
                 </span>
               </Link>

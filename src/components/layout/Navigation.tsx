@@ -6,7 +6,6 @@ import imgGoogle from "figma:asset/43868bc8eeea26f5e93f178b6ba8e3677c4213e1.png"
 import imgFacebook from "figma:asset/8dbe5f86efa1469441d188b9e45cc6558331091f.png";
 import imgYelp from "figma:asset/9397697363694d03af296d09c2d018d15b0d2911.png";
 import imgGoogleMaps from "figma:asset/9b3ea44960a30e76204c97c302b0f370311844da.png";
-import { colors } from "../../styles/design-tokens";
 import { MobileMenuDropdown } from "./nav/MobileMenuDropdown";
 import { SERVICES_ITEMS, TEXAS_ITEMS } from "./nav/navConfig";
 
@@ -31,9 +30,8 @@ export function Navigation() {
     }`;
 
   return (
-    <nav 
-      className="w-full h-[118px] relative"
-      style={{ backgroundColor: colors.brand.dark }}
+    <nav
+      className="w-full h-[118px] relative bg-gc-ink"
       data-font-probe="nav"
       role="navigation"
       aria-label="Main navigation"
@@ -63,7 +61,7 @@ export function Navigation() {
               <button
                 onClick={() => toggleDropdown("services")}
                 className={`font-product-sans font-bold text-xl uppercase whitespace-nowrap transition-colors flex items-center gap-2 ${
-                  isPathActive("/services") ? "text-[#fec300]" : "text-white hover:text-[#fec300]"
+                  isPathActive("/services") ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
                 }`}
                 aria-expanded={activeDropdown === "services"}
                 aria-haspopup="true"
@@ -71,7 +69,7 @@ export function Navigation() {
               >
                 Services
                 <svg className="w-4 h-3" viewBox="0 0 18 10.2106" fill="none" aria-hidden="true">
-                  <path d={svgPaths.p82c3080} fill={colors.brand.yellowPrimary} />
+                  <path d={svgPaths.p82c3080} className="fill-gc-yellow" />
                 </svg>
               </button>
               {activeDropdown === "services" && (
@@ -85,8 +83,8 @@ export function Navigation() {
                       key={idx}
                       to={service.to}
                       onClick={closeMenu}
-                      className={`block w-full text-left px-4 py-2 hover:bg-[#EAEAEA] hover:text-[#fec300] transition-colors font-product-sans ${
-                        idx === 0 ? "font-semibold border-b border-gray-200" : ""
+                      className={`block w-full text-left px-4 py-2 hover:bg-gc-gray-100 hover:text-gc-yellow transition-colors font-product-sans ${
+                        idx === 0 ? "font-semibold border-b border-gc-gray-200" : ""
                       }`}
                       role="menuitem"
                     >
@@ -102,7 +100,7 @@ export function Navigation() {
               <button
                 onClick={() => toggleDropdown("texas")}
                 className={`font-product-sans font-bold text-xl uppercase whitespace-nowrap transition-colors flex items-center gap-2 ${
-                  isPathActive("/texas") ? "text-[#fec300]" : "text-white hover:text-[#fec300]"
+                  isPathActive("/texas") ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
                 }`}
                 aria-expanded={activeDropdown === "texas"}
                 aria-haspopup="true"
@@ -110,7 +108,7 @@ export function Navigation() {
               >
                 Texas
                 <svg className="w-4 h-3" viewBox="0 0 18 10.2106" fill="none" aria-hidden="true">
-                  <path d={svgPaths.p82c3080} fill={colors.brand.yellowPrimary} />
+                  <path d={svgPaths.p82c3080} className="fill-gc-yellow" />
                 </svg>
               </button>
               {activeDropdown === "texas" && (
@@ -124,8 +122,8 @@ export function Navigation() {
                       key={idx}
                       to={city.to}
                       onClick={closeMenu}
-                      className={`block w-full text-left px-4 py-2 hover:bg-[#EAEAEA] hover:text-[#fec300] transition-colors font-product-sans ${
-                        idx === 0 ? "font-semibold border-b border-gray-200" : ""
+                      className={`block w-full text-left px-4 py-2 hover:bg-gc-gray-100 hover:text-gc-yellow transition-colors font-product-sans ${
+                        idx === 0 ? "font-semibold border-b border-gc-gray-200" : ""
                       }`}
                       role="menuitem"
                     >
@@ -195,30 +193,23 @@ export function Navigation() {
             {/* Mobile: Icon-only phone button (below xl) */}
             <a
               href="tel:8172560122"
-              className="xl:hidden flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#EAEAEA] transition-colors group"
+              className="xl:hidden flex items-center justify-center w-12 h-12 rounded-full hover:bg-gc-gray-100 transition-colors group"
               aria-label="Call 817-256-0122"
             >
-              <Phone 
-                className="w-6 h-6 text-white group-hover:text-[#FEC300] transition-colors" 
-                aria-hidden="true" 
+              <Phone
+                className="w-6 h-6 text-white group-hover:text-gc-yellow transition-colors"
+                aria-hidden="true"
               />
             </a>
 
             {/* Desktop: Full CTA button (xl+) */}
             <a
               href="tel:8172560122"
-              className="hidden xl:flex items-center gap-3 rounded-[20px] px-6 2xl:px-7 py-3 shadow-md hover:shadow-lg transition-all font-product-sans whitespace-nowrap shrink-0"
-              style={{ 
-                backgroundColor: colors.brand.yellowPrimary, 
-                border: `2px solid ${colors.brand.dark}` 
-              }}
+              className="hidden xl:flex items-center gap-3 rounded-[var(--radius-gc-xl)] px-6 2xl:px-7 py-3 bg-gc-yellow border-2 border-gc-ink shadow-md hover:shadow-lg transition-all font-product-sans whitespace-nowrap shrink-0"
               aria-label="Call to schedule a free inspection at 817-256-0122"
             >
-              <Phone size={24} style={{ color: colors.brand.dark}} aria-hidden="true" />
-              <span
-                className="font-product-sans font-black text-sm 2xl:text-base leading-none whitespace-nowrap"
-                style={{ color: colors.brand.dark}}
-              >
+              <Phone size={24} className="text-gc-ink" aria-hidden="true" />
+              <span className="font-product-sans font-black text-sm 2xl:text-base leading-none whitespace-nowrap text-gc-ink">
                 SCHEDULE A FREE INSPECTION
               </span>
             </a>

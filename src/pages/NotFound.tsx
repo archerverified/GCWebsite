@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Home, Phone } from "lucide-react";
 import { Seo } from "../components/seo/Seo";
+import { Button } from "../components/ui/button";
 
 export function NotFound() {
   return (
@@ -21,24 +22,18 @@ export function NotFound() {
           Oops! The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            <Home size={24} className="text-[#222]" />
-            <span className="font-product-sans font-black text-lg text-[#222] uppercase">
+          <Button asChild variant="primary" size="cta">
+            <Link to="/">
+              <Home />
               Go Home
-            </span>
-          </Link>
-          <a
-            href="tel:8172560122"
-            className="inline-flex items-center justify-center gap-3 bg-[#35363a] border-2 border-[#35363a] rounded-[20px] px-8 py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          >
-            <Phone size={24} className="text-white" />
-            <span className="font-product-sans font-black text-lg text-white uppercase">
+            </Link>
+          </Button>
+          <Button asChild variant="ink" size="cta">
+            <a href="tel:8172560122">
+              <Phone />
               Call Us
-            </span>
-          </a>
+            </a>
+          </Button>
         </div>
       </div>
     </main>

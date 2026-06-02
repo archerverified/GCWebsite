@@ -62,7 +62,10 @@
       },
       "devDependencies": {
             "@sparticuz/chromium": "^149.0.0",
+            "@types/google.maps": "^3.65.0",
             "@types/node": "^20.10.0",
+            "@types/react": "^18.3.30",
+            "@types/react-dom": "^18.3.7",
             "@types/react-router-hash-link": "^2.4.9",
             "@vercel/node": "^5.5.16",
             "@vitejs/plugin-react-swc": "^3.10.2",

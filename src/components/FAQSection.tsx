@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { Button } from "./ui/button";
+import { FAQAccordion } from "./ui/accordion";
 
 export const faqData = [
   {
@@ -25,12 +25,6 @@ export const faqData = [
 ];
 
 export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
     <section className="w-full bg-white lg:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 py-[7px] mx-[0px] my-[64px] font-product-sans" data-font-probe="faq">
       <div className="container mx-auto px-4 lg:px-8">
@@ -42,7 +36,7 @@ export function FAQSection() {
           <h3 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-black leading-tight mb-8">
             Expert Answers from Garage Cowboy
           </h3>
-          
+
           <div className="max-w-4xl mx-auto">
             <p className="font-product-sans text-lg md:text-xl lg:text-2xl text-black uppercase leading-7 mb-4">
               <span>Garage doors are </span>
@@ -63,54 +57,20 @@ export function FAQSection() {
           </div>
         </div>
 
-        {/* FAQ Accordion */}
-        <div className="max-w-5xl mx-auto space-y-4">
-          {faqData.map((faq, index) => (
-            <button
-              key={index}
-              onClick={() => toggleFAQ(index)}
-              className="w-full bg-[rgba(230,230,230,0.5)] border-[2.5px] border-[#323232] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] p-6 md:p-8 flex items-center justify-between hover:bg-[rgba(230,230,230,0.7)] transition-all group"
-              style={{
-                borderTopLeftRadius: index === 0 ? "5px" : "5px",
-                borderTopRightRadius: index === 0 ? "5px" : "5px",
-                borderBottomLeftRadius: index === faqData.length - 1 ? "5px" : "5px",
-                borderBottomRightRadius: index === faqData.length - 1 ? "5px" : "5px"
-              }}
-            >
-              <div className="flex-1 text-left pr-4">
-                <h3 className="font-product-sans font-black text-xl md:text-2xl lg:text-3xl text-[#323232] leading-8 uppercase m-[0px]">
-                  {faq.question}
-                </h3>
-                {openIndex === index && (
-                  <p className="font-product-sans text-base md:text-lg lg:text-xl text-[#323232] mt-4 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                )}
-              </div>
-              <div className="bg-[#eaeaea] border-4 border-[#323232] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-                <ChevronDown 
-                  className={`w-5 h-5 text-[#f7bd15] transition-transform ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
-              </div>
-            </button>
-          ))}
-        </div>
+        {/* FAQ Accordion — shared, single-open Radix component (answers stay in
+            the DOM when collapsed for SEO) */}
+        <FAQAccordion faqs={faqData} className="max-w-5xl mx-auto" />
 
         {/* Call to Action */}
         <div className="text-center mt-16">
           <h3 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-black uppercase mb-8">
             HAVE MORE QUESTIONS?
           </h3>
-          <a
-            href="tel:8172560122"
-            className="inline-flex items-center gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-8 md:px-12 py-4 md:py-6 shadow-[0px_5px_5px_0px_rgba(0,0,0,0.25)] hover:shadow-xl transition-all hover:scale-105"
-          >
-            <span className="font-product-sans font-black text-2xl md:text-3xl lg:text-4xl text-[#222] uppercase leading-9">
+          <Button asChild variant="primary" size="cta">
+            <a href="tel:8172560122">
               CALL US TODAY
-            </span>
-          </a>
+            </a>
+          </Button>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { Mail, Phone, UserPlus } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface ContactQuickActionsProps {
   className?: string;
@@ -16,40 +17,31 @@ export function ContactQuickActions({
         "flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
       }
     >
-      <a
-        href="/garage-cowboy.vcf"
-        download="garage-cowboy.vcf"
-        className="inline-flex items-center gap-2 sm:gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-        aria-label="Add Garage Cowboy to contacts"
-      >
-        <UserPlus className="w-6 h-6 sm:w-7 sm:h-7 text-[#222]" />
-        <span className="font-product-sans font-black text-base sm:text-lg md:text-xl text-[#222] uppercase">
+      <Button asChild variant="primary" size="cta">
+        <a
+          href="/garage-cowboy.vcf"
+          download="garage-cowboy.vcf"
+          aria-label="Add Garage Cowboy to contacts"
+        >
+          <UserPlus />
           Add to Contacts
-        </span>
-      </a>
+        </a>
+      </Button>
 
-      <a
-        href="tel:+18172560122"
-        className="inline-flex items-center gap-2 sm:gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-        aria-label="Call Garage Cowboy"
-      >
-        <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-[#222]" />
-        <span className="font-product-sans font-black text-base sm:text-lg md:text-xl text-[#222] uppercase">
+      <Button asChild variant="primary" size="cta">
+        <a href="tel:+18172560122" aria-label="Call Garage Cowboy">
+          <Phone />
           Call Now
-        </span>
-      </a>
+        </a>
+      </Button>
 
       {showEmail && (
-        <a
-          href="mailto:deno@garagecowboy.com"
-          className="inline-flex items-center gap-2 sm:gap-3 bg-[#fec300] border-2 border-[#35363a] rounded-[10px] px-5 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          aria-label="Email Garage Cowboy"
-        >
-          <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-[#222]" />
-          <span className="font-product-sans font-black text-base sm:text-lg md:text-xl text-[#222] uppercase">
+        <Button asChild variant="primary" size="cta">
+          <a href="mailto:deno@garagecowboy.com" aria-label="Email Garage Cowboy">
+            <Mail />
             Email Us
-          </span>
-        </a>
+          </a>
+        </Button>
       )}
     </div>
   );

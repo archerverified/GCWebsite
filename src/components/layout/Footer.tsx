@@ -3,7 +3,6 @@ import imgLogo from "figma:asset/0c2b872f2c474c2f7c570ef0cd5e8697f4e13e90.png";
 import imgGoogle from "figma:asset/43868bc8eeea26f5e93f178b6ba8e3677c4213e1.png";
 import imgFacebook from "figma:asset/8dbe5f86efa1469441d188b9e45cc6558331091f.png";
 import imgYelp from "figma:asset/9397697363694d03af296d09c2d018d15b0d2911.png";
-import { colors } from "../../styles/design-tokens";
 
 const quickLinks = [
   { name: "Home", path: "/" },
@@ -28,15 +27,14 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer 
-      className="w-full py-12 lg:py-16 font-product-sans px-[48px] md:px-[96px] lg:px-[192px] xl:px-[288px]" 
-      style={{ backgroundColor: colors.neutral.white }}
+    <footer
+      className="w-full bg-white py-12 lg:py-16 font-product-sans px-[48px] md:px-[96px] lg:px-[192px] xl:px-[288px]"
       data-font-probe="footer"
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             <Link to="/">
               <img 
                 src={imgLogo} 
@@ -44,31 +42,22 @@ export function Footer() {
                 className="h-16 w-auto object-contain mb-4"
               />
             </Link>
-            <p 
-              className="font-product-sans text-sm leading-relaxed"
-              style={{ color: colors.text.secondary }}
-            >
+            <p className="font-product-sans text-sm leading-relaxed text-gc-ink">
               Professional garage door repair and installation services across the Dallas-Fort Worth area.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 
-              className="font-product-sans font-black text-lg uppercase mb-4"
-              style={{ color: colors.text.primary }}
-            >
+            <h3 className="font-product-sans font-black text-lg uppercase mb-4 text-gc-ink">
               Quick Links
             </h3>
-            <ul className="space-y-2">
+            <ul className="flex flex-col gap-2">
               {quickLinks.map((link) => (
                 <li key={link.path}>
                   <Link 
                     to={link.path} 
-                    className="font-product-sans text-sm transition-colors"
-                    style={{ color: colors.text.secondary }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-                    onMouseLeave={(e) => e.currentTarget.style.color = colors.text.secondary}
+                    className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -79,21 +68,15 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h3 
-              className="font-product-sans font-black text-lg uppercase mb-4"
-              style={{ color: colors.text.primary }}
-            >
+            <h3 className="font-product-sans font-black text-lg uppercase mb-4 text-gc-ink">
               Services
             </h3>
-            <ul className="space-y-2">
+            <ul className="flex flex-col gap-2">
               {serviceLinks.map((service) => (
                 <li key={service.path}>
                   <Link 
                     to={service.path} 
-                    className="font-product-sans text-sm transition-colors"
-                    style={{ color: colors.text.secondary }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-                    onMouseLeave={(e) => e.currentTarget.style.color = colors.text.secondary}
+                    className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
                   >
                     {service.name}
                   </Link>
@@ -104,47 +87,29 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 
-              className="font-product-sans font-black text-lg uppercase mb-4"
-              style={{ color: colors.text.primary }}
-            >
+            <h3 className="font-product-sans font-black text-lg uppercase mb-4 text-gc-ink">
               Contact Us
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               <div>
-                <p 
-                  className="font-product-sans text-sm mb-1"
-                  style={{ color: colors.text.secondary }}
-                >
+                <p className="font-product-sans text-sm mb-1 text-gc-ink">
                   Phone:
                 </p>
                 <a
                   href="tel:8172560122"
-                  className="font-product-sans font-black text-xl transition-colors"
-                  style={{ color: colors.brand.yellowPrimary }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-                  onMouseLeave={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
+                  className="font-product-sans font-black text-xl text-gc-yellow transition-colors"
                 >
                   (817) 256-0122
                 </a>
-                <p
-                  className="font-product-sans font-black text-sm mt-1"
-                  style={{ color: colors.brand.yellowPrimary }}
-                >
+                <p className="font-product-sans font-black text-sm mt-1 text-gc-yellow">
                   Open 24/7 — Call Anytime
                 </p>
               </div>
               <div>
-                <p 
-                  className="font-product-sans text-sm mb-1"
-                  style={{ color: colors.text.secondary }}
-                >
+                <p className="font-product-sans text-sm mb-1 text-gc-ink">
                   Service Area:
                 </p>
-                <p 
-                  className="font-product-sans text-sm"
-                  style={{ color: colors.text.secondary }}
-                >
+                <p className="font-product-sans text-sm text-gc-ink">
                   Dallas-Fort Worth & Surrounding Cities
                 </p>
               </div>
@@ -179,35 +144,23 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div 
-          className="border-t mt-8 pt-8"
-          style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}
-        >
+        <div className="border-t border-gc-hair mt-8 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-2">
             <Link 
               to="/privacy" 
-              className="font-product-sans text-sm transition-colors"
-              style={{ color: colors.text.secondary }}
-              onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-              onMouseLeave={(e) => e.currentTarget.style.color = colors.text.secondary}
+              className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
             >
               Privacy Policy
             </Link>
-            <span className="hidden sm:inline" style={{ color: colors.text.secondary }}>|</span>
+            <span className="hidden sm:inline text-gc-ink">|</span>
             <Link 
               to="/terms" 
-              className="font-product-sans text-sm transition-colors"
-              style={{ color: colors.text.secondary }}
-              onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-              onMouseLeave={(e) => e.currentTarget.style.color = colors.text.secondary}
+              className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
             >
               Terms of Service
             </Link>
           </div>
-          <p 
-            className="font-product-sans text-sm text-center"
-            style={{ color: colors.text.secondary }}
-          >
+          <p className="font-product-sans text-sm text-center text-gc-ink">
             © {currentYear} Garage Cowboy. All rights reserved. | Professional Garage Door Services in DFW
           </p>
         </div>
