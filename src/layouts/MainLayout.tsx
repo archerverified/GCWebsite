@@ -1,4 +1,5 @@
 import { Header, Navigation, Footer, ScrollToTop } from "../components/layout";
+import { StickyCallBar } from "../components/layout/StickyCallBar";
 import { Toaster } from "sonner";
 import { PAGE_X_PADDING, SHELL_WRAPPER, SHELL_TOP_ACCENT } from "../styles/layoutStyles";
 
@@ -21,6 +22,10 @@ export function MainLayout({ children }: MainLayoutProps) {
         <main className="flex-grow">{children}</main>
         <Footer />
       </div>
+
+      {/* Mobile spacer so the fixed call bar never covers the footer */}
+      <div className="h-20 md:hidden" aria-hidden="true" />
+      <StickyCallBar />
     </div>
   );
 }
