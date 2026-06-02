@@ -25,7 +25,7 @@ export function ReadyToGetStartedCTA({
 }: ReadyToGetStartedCTAProps) {
   return (
     <div className={`${READY_CTA_WRAPPER} ${className}`}>
-      <section className={`py-16 lg:py-24 ${PAGE_X_PADDING} bg-[#fec300]`}>
+      <section className={`py-16 lg:py-24 ${PAGE_X_PADDING} bg-gc-yellow`}>
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="font-product-sans font-black text-3xl md:text-4xl text-[#222] mb-4">
             {title}

@@ -35,9 +35,9 @@ export function Header() {
               <a 
                 href="tel:8172560122" 
                 className="font-product-sans font-black text-2xl lg:text-3xl transition-colors"
-                style={{ color: colors.brand.black }}
+                style={{ color: colors.brand.dark }}
                 onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
-                onMouseLeave={(e) => e.currentTarget.style.color = colors.brand.black}
+                onMouseLeave={(e) => e.currentTarget.style.color = colors.brand.dark}
               >
                 (817) 256-0122
               </a>

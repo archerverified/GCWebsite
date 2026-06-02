@@ -122,7 +122,7 @@ export function Footer() {
                   href="tel:8172560122"
                   className="font-product-sans font-black text-xl transition-colors"
                   style={{ color: colors.brand.yellowPrimary }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowSecondary}
+                  onMouseEnter={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
                   onMouseLeave={(e) => e.currentTarget.style.color = colors.brand.yellowPrimary}
                 >
                   (817) 256-0122
