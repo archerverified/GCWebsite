@@ -118,7 +118,7 @@ const testimonials = [
 // `rounded-[var(--radius-gc-card)]` is the arbitrary-token form so tailwind-merge
 // dedupes it against each primitive's base `rounded-md`. Height is set per control.
 const fieldShell =
-  "border-2 border-gc-ink rounded-[var(--radius-gc-card)] bg-gc-frost text-gc-ink placeholder:text-gc-ink-75 shadow-gc-faq text-base md:text-sm focus-visible:border-gc-ink focus-visible:ring-gc-yellow focus-visible:ring-[3px]";
+  "border-2 border-gc-ink rounded-[var(--radius-gc-card)] bg-gc-frost text-gc-ink placeholder:text-gc-ink-75 shadow-gc-faq text-base md:text-sm focus-visible:border-gc-ink focus-visible:ring-gc-yellow focus-visible:ring-[3px] aria-invalid:focus-visible:border-destructive";
 
 const labelClass =
   "text-gc-ink font-product-sans font-bold text-xs uppercase tracking-wide";
