@@ -64,8 +64,8 @@ export function ContentLoading() {
   return (
     <div className="flex justify-center items-center min-h-[400px]">
       <div className="animate-pulse flex flex-col items-center gap-4">
-        <div className="w-16 h-16 bg-[#fec300] rounded-full animate-bounce" />
-        <p className="font-product-sans text-lg text-[#323232]">Loading...</p>
+        <div className="w-16 h-16 bg-gc-yellow rounded-full animate-bounce" />
+        <p className="font-product-sans text-lg text-gc-ink">Loading...</p>
       </div>
     </div>
   );
