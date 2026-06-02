@@ -1,153 +1,52 @@
 /**
  * Generate llms.txt for AI search optimization (AIO).
  * This file provides a structured summary of the business for AI crawlers.
+ *
+ * All data comes from ./site-data.mjs (single source of truth, also used by
+ * generate-ai-endpoints.mjs). buildLlmsTxt() is exported so the deeper
+ * llms-full.txt variant can reuse this exact base without duplicating it.
  */
 
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
+import {
+  SITE_URL,
+  BUSINESS,
+  ABOUT_PARAGRAPHS,
+  SUBAREAS_BY_HUB,
+  SERVICES,
+  KEY_URLS,
+  cityHubs,
+} from './site-data.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.join(__dirname, '..', '..');
 
-const SITE_URL = process.env.VITE_SITE_URL || process.env.SITE_URL || 'https://garagecowboy.com';
+/**
+ * Build the llms.txt content string from the shared site data.
+ * @returns {string}
+ */
+export function buildLlmsTxt() {
+  const hubs = cityHubs();
 
-// Hub and subcity data (mirrors src/seo/areas.ts)
-const HUBS = [
-  { slug: "dfw", name: "Dallas–Fort Worth (DFW)", state: "TX" },
-  { slug: "dallas", name: "Dallas", state: "TX" },
-  { slug: "fort-worth", name: "Fort Worth", state: "TX" },
-  { slug: "arlington", name: "Arlington", state: "TX" },
-  { slug: "plano", name: "Plano", state: "TX" },
-  { slug: "irving", name: "Irving", state: "TX" },
-  { slug: "frisco", name: "Frisco", state: "TX" },
-  { slug: "grand-prairie", name: "Grand Prairie", state: "TX" },
-  { slug: "keller", name: "Keller", state: "TX" },
-  { slug: "mansfield", name: "Mansfield", state: "TX" },
-  { slug: "weatherford", name: "Weatherford", state: "TX" },
-  { slug: "denton", name: "Denton", state: "TX" },
-  { slug: "southlake", name: "Southlake", state: "TX" },
-  { slug: "burleson", name: "Burleson", state: "TX" },
-  { slug: "cleburne", name: "Cleburne", state: "TX" },
-  { slug: "mckinney", name: "McKinney", state: "TX" },
-];
-
-const SUBAREAS_BY_HUB = {
-  dfw: [
-    "Dallas, TX", "Fort Worth, TX", "Arlington, TX", "Plano, TX", "Irving, TX",
-    "Frisco, TX", "Grand Prairie, TX", "Keller, TX", "Mansfield, TX",
-    "Weatherford, TX", "Denton, TX", "Southlake, TX", "Burleson, TX",
-    "Cleburne, TX", "McKinney, TX"
-  ],
-  dallas: [
-    "University Park, TX", "Highland Park, TX", "Addison, TX", "Farmers Branch, TX",
-    "Cedar Hill, TX", "DeSoto, TX", "Duncanville, TX", "Lancaster, TX",
-    "Garland, TX", "Rowlett, TX", "Richardson, TX"
-  ],
-  "fort-worth": [
-    "Benbrook, TX", "White Settlement, TX", "River Oaks, TX", "Lake Worth, TX",
-    "Sansom Park, TX", "Westworth Village, TX", "Blue Mound, TX", "Saginaw, TX",
-    "Watauga, TX", "Haltom City, TX", "Richland Hills, TX", "Forest Hill, TX",
-    "Crowley, TX", "Everman, TX", "Rendon, TX", "Aledo, TX"
-  ],
-  arlington: [
-    "Kennedale, TX", "Mansfield, TX", "Grand Prairie, TX",
-    "Dalworthington Gardens, TX", "Pantego, TX"
-  ],
-  plano: [
-    "Richardson, TX", "Allen, TX", "Addison, TX", "Murphy, TX", "Wylie, TX"
-  ],
-  irving: [
-    "Coppell, TX", "Farmers Branch, TX", "Carrollton, TX", "Grapevine, TX",
-    "Euless, TX", "Bedford, TX", "Hurst, TX", "Grand Prairie, TX"
-  ],
-  frisco: [
-    "The Colony, TX", "Little Elm, TX", "Prosper, TX", "Celina, TX",
-    "McKinney, TX", "West Frisco / North Plano adjacency, TX"
-  ],
-  "grand-prairie": [
-    "Irving, TX", "Arlington, TX", "Dallas, TX", "Coppell, TX"
-  ],
-  keller: [
-    "Southlake, TX", "Colleyville, TX", "Watauga, TX", "North Richland Hills, TX",
-    "Roanoke, TX", "Trophy Club, TX", "Westlake, TX", "Northlake, TX"
-  ],
-  mansfield: [
-    "Arlington, TX", "Kennedale, TX", "Midlothian, TX", "Venus, TX",
-    "Alvarado, TX", "Cedar Hill, TX", "DeSoto, TX"
-  ],
-  weatherford: [
-    "Willow Park, TX", "Aledo, TX", "Springtown, TX", "Hudson Oaks, TX",
-    "Brock, TX", "Peaster, TX"
-  ],
-  denton: [
-    "Corinth, TX", "Lake Dallas, TX", "Highland Village, TX", "Argyle, TX",
-    "Northlake, TX", "Aubrey, TX", "Krum, TX", "Sanger, TX", "Oak Point, TX"
-  ],
-  southlake: [
-    "Colleyville, TX", "Grapevine, TX", "Trophy Club, TX", "Westlake, TX",
-    "Keller, TX", "Coppell, TX"
-  ],
-  burleson: [
-    "Crowley, TX", "Everman, TX", "Joshua, TX", "Alvarado, TX",
-    "Venus, TX", "Rendon, TX"
-  ],
-  cleburne: [
-    "Joshua, TX", "Alvarado, TX", "Venus, TX", "Keene, TX", "Godley, TX"
-  ],
-  mckinney: [
-    "Allen, TX", "Prosper, TX", "Celina, TX", "Melissa, TX",
-    "Anna, TX", "Fairview, TX", "Lucas, TX"
-  ]
-};
-
-// Primary services offered
-const SERVICES = [
-  "Broken Spring Repair",
-  "Garage Door Opener Repair & Installation",
-  "Broken Cable Repair",
-  "Garage Door Off-Track Repair",
-  "Garage Door Roller Repair",
-  "New Door Installation",
-  "Remote Repair & Programming",
-  "Door Service & Maintenance"
-];
-
-// Key URLs to cite
-const KEY_URLS = [
-  { path: "/", title: "Home" },
-  { path: "/services", title: "All Services" },
-  { path: "/texas", title: "Texas Service Areas" },
-  { path: "/services/broken-spring-repair", title: "Spring Repair" },
-  { path: "/services/opener-repair-installation", title: "Opener Installation" },
-  { path: "/services/new-door-installation", title: "New Door Installation" },
-  { path: "/services/garage-door-off-track", title: "Off-Track Repair" },
-  { path: "/residential", title: "Residential Services" },
-  { path: "/commercial", title: "Commercial Services" }
-];
-
-async function generateLlmsTxt() {
-  console.log('🤖 Generating llms.txt for AI search optimization...');
-  
-  const cityHubs = HUBS.filter(h => h.slug !== 'dfw');
-  
   let content = `# Garage Cowboy - AI Information Summary
 # Generated: ${new Date().toISOString()}
 # URL: ${SITE_URL}
 
 ## About Garage Cowboy
 
-Garage Cowboy is a professional garage door repair and installation company serving the Dallas-Fort Worth metroplex in Texas. We provide 24/7 emergency service, same-day repairs, and expert technicians for both residential and commercial customers. Our team specializes in all aspects of garage door service, from spring repairs to complete new door installations.
+${ABOUT_PARAGRAPHS[0]}
 
-Founded in 2023 by owner and president Deno Borghi, Garage Cowboy is a locally owned, 100% referral-based company—not a franchise. We are licensed and insured, back every product we install with a warranty, and hold a 5.0-star rating across 24 Google reviews. Our certified local technicians live and work in North Texas. We understand that a malfunctioning garage door is not just an inconvenience—it can be a security risk, which is why we offer round-the-clock availability and fast, same-day response throughout the metroplex.
+${ABOUT_PARAGRAPHS[1]}
 
 ## Primary Services
 
 `;
 
   // Add services
-  SERVICES.forEach(service => {
+  SERVICES.forEach((service) => {
     content += `- ${service}\n`;
   });
 
@@ -161,7 +60,7 @@ Garage Cowboy serves the entire Dallas-Fort Worth metroplex, including 15 primar
 `;
 
   // Add hub cities
-  cityHubs.forEach(hub => {
+  hubs.forEach((hub) => {
     content += `- ${hub.name}, ${hub.state}\n`;
   });
 
@@ -171,7 +70,7 @@ Garage Cowboy serves the entire Dallas-Fort Worth metroplex, including 15 primar
 `;
 
   // Add subcities grouped by hub
-  cityHubs.forEach(hub => {
+  hubs.forEach((hub) => {
     const subcities = SUBAREAS_BY_HUB[hub.slug];
     if (subcities && subcities.length > 0) {
       content += `#### ${hub.name}, ${hub.state}\n`;
@@ -184,24 +83,24 @@ Garage Cowboy serves the entire Dallas-Fort Worth metroplex, including 15 primar
 `;
 
   // Add key URLs
-  KEY_URLS.forEach(url => {
+  KEY_URLS.forEach((url) => {
     content += `- ${url.title}: ${SITE_URL}${url.path}\n`;
   });
 
   content += `
 ## Contact Information
 
-- Phone: (817) 256-0122
+- Phone: ${BUSINESS.phone}
 - Website: ${SITE_URL}
-- Service Hours: 24/7, including weekends and holidays
+- Service Hours: ${BUSINESS.hours}
 - Emergency Service: Available
 
 ## Business Type
 
 - Industry: Home Services / Construction
 - Specialization: Garage Door Repair and Installation
-- Owner & President: Deno Borghi
-- Founded: 2023 (locally owned, not a franchise)
+- Owner & President: ${BUSINESS.founder}
+- Founded: ${BUSINESS.founded} (locally owned, not a franchise)
 - Credentials: Licensed & insured; warranties on all products; 5.0-star rating (24 Google reviews)
 - Service Area: Dallas-Fort Worth Metroplex, Texas
 - Service Model: On-site service at customer locations
@@ -210,19 +109,28 @@ Garage Cowboy serves the entire Dallas-Fort Worth metroplex, including 15 primar
 # End of llms.txt
 `;
 
+  return content;
+}
+
+async function generateLlmsTxt() {
+  console.log('🤖 Generating llms.txt for AI search optimization...');
+
+  const content = buildLlmsTxt();
+
   const outputPath = path.join(ROOT_DIR, 'public', 'llms.txt');
   await fs.writeFile(outputPath, content, 'utf-8');
-  
+
   console.log(`✅ llms.txt generated successfully`);
-  console.log(`   Hub cities: ${cityHubs.length}`);
+  console.log(`   Hub cities: ${cityHubs().length}`);
   console.log(`   Services listed: ${SERVICES.length}`);
   console.log(`   Key URLs: ${KEY_URLS.length}`);
   console.log(`   Saved to: ${outputPath}`);
 }
 
-// Run the generator
-generateLlmsTxt().catch(error => {
-  console.error('❌ Failed to generate llms.txt:', error);
-  process.exit(1);
-});
-
+// Only auto-run when invoked directly (not when imported by another generator).
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  generateLlmsTxt().catch((error) => {
+    console.error('❌ Failed to generate llms.txt:', error);
+    process.exit(1);
+  });
+}

@@ -1,0 +1,44 @@
+{
+  "name": "Garage Cowboy",
+  "description": "Locally owned, 24/7 garage door repair and installation serving the Dallas–Fort Worth metroplex. Same-day service, licensed and insured, with a warranty on every product installed.",
+  "services": [
+    "Broken Spring Repair",
+    "Garage Door Opener Repair & Installation",
+    "Broken Cable Repair",
+    "Garage Door Off-Track Repair",
+    "Garage Door Roller Repair",
+    "New Door Installation",
+    "Remote Repair & Programming",
+    "Door Service & Maintenance"
+  ],
+  "areasServed": [
+    "Dallas, TX",
+    "Fort Worth, TX",
+    "Arlington, TX",
+    "Plano, TX",
+    "Irving, TX",
+    "Frisco, TX",
+    "Grand Prairie, TX",
+    "Keller, TX",
+    "Mansfield, TX",
+    "Weatherford, TX",
+    "Denton, TX",
+    "Southlake, TX",
+    "Burleson, TX",
+    "Cleburne, TX",
+    "McKinney, TX"
+  ],
+  "contact": {
+    "phone": "(817) 256-0122",
+    "address": "801 W Vickery Blvd, Fort Worth, TX 76104",
+    "url": "https://garagecowboy.com"
+  },
+  "aggregateRating": {
+    "value": "5.0",
+    "count": 24
+  },
+  "founder": "Deno Borghi",
+  "founded": 2023,
+  "hours": "24/7",
+  "url": "https://garagecowboy.com"
+}

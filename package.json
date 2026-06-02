@@ -82,7 +82,7 @@
       "scripts": {
             "dev": "vite",
             "typecheck": "tsc --noEmit",
-            "prebuild": "node scripts/seo/generate-icons.mjs && node scripts/seo/generate-sitemap.mjs && node scripts/seo/generate-llms.mjs",
+            "prebuild": "node scripts/seo/generate-icons.mjs && node scripts/seo/generate-sitemap.mjs && node scripts/seo/generate-llms.mjs && node scripts/seo/generate-ai-endpoints.mjs",
             "build": "npm run prebuild && vite build && npm run prerender",
             "prerender": "start-server-and-test \"vite preview --port 4180\" http://127.0.0.1:4180 \"node scripts/seo/prerender.mjs\"",
             "preview": "vite preview",

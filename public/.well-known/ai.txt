@@ -1,0 +1,23 @@
+# ai.txt — AI usage & discovery declaration for Garage Cowboy
+# Emerging convention; kept simple and honest.
+# Machine-readable data: https://garagecowboy.com/ai/summary.json
+
+Business: Garage Cowboy
+Owner: Deno Borghi (Owner & President)
+Phone: (817) 256-0122
+Email: deno@garagecowboy.com
+Website: https://garagecowboy.com
+
+# Structured resources for AI assistants and answer engines
+AI-Summary: https://garagecowboy.com/llms.txt
+AI-Summary-Full: https://garagecowboy.com/llms-full.txt
+AI-Data: https://garagecowboy.com/ai/summary.json
+AI-FAQ: https://garagecowboy.com/ai/faq.json
+Sitemap: https://garagecowboy.com/sitemap.xml
+
+# Usage stance
+# Garage Cowboy welcomes AI search engines and assistants using this public
+# business information (services, service area, hours, contact) to answer user
+# questions, with attribution and a link back to the website.
+Usage: cite-with-attribution
+Attribution: https://garagecowboy.com
