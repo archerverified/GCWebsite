@@ -7,6 +7,12 @@ export const SITE_URL = import.meta.env.VITE_SITE_URL || "https://garagecowboy.c
 
 export const DEFAULT_OG_IMAGE = "/social-preview.png";
 
+// Content freshness — the date the service content/schema was last reviewed in
+// the June 2026 SEO content pass. Single source for the visible "Updated …"
+// label and the Service schema dateModified.
+export const CONTENT_LAST_UPDATED_ISO = "2026-06-02";
+export const CONTENT_LAST_UPDATED_LABEL = "June 2026";
+
 // Business information for schema
 export const BUSINESS_INFO = {
   businessName: "Garage Cowboy",

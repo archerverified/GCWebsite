@@ -11,6 +11,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardHeader, CardContent } from "../components/ui/card";
 import { Seo } from "../components/seo/Seo";
 import { createServiceSchema, createBreadcrumbSchema, createFAQSchema } from "../seo/schemas";
+import { CONTENT_LAST_UPDATED_ISO, CONTENT_LAST_UPDATED_LABEL } from "../seo/site";
 
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -22,9 +23,10 @@ export function ServiceDetail() {
 
   // Create schemas for this page
   const serviceSchema = createServiceSchema(
-    content.title, 
+    content.title,
     content.intro || content.description || `Professional ${content.title} services in Dallas-Fort Worth`,
-    slug
+    slug,
+    CONTENT_LAST_UPDATED_ISO
   );
   
   const breadcrumbSchema = createBreadcrumbSchema([
@@ -79,6 +81,9 @@ export function ServiceDetail() {
               {content.intro}
             </ReactMarkdown>
           </div>
+          <p className="mt-8 font-product-sans text-sm text-gc-gray-600">
+            Updated <time dateTime={CONTENT_LAST_UPDATED_ISO}>{CONTENT_LAST_UPDATED_LABEL}</time>
+          </p>
         </div>
       </section>
 

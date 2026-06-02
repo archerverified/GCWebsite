@@ -69,7 +69,7 @@ export const websiteSchema = {
   }
 };
 
-export function createServiceSchema(serviceName: string, description: string, slug?: string) {
+export function createServiceSchema(serviceName: string, description: string, slug?: string, dateModified?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -83,6 +83,7 @@ export function createServiceSchema(serviceName: string, description: string, sl
       "addressRegion": "TX"
     })),
     "description": description,
+    ...(dateModified ? { "dateModified": dateModified } : {}),
     "url": slug ? `${SITE_URL}/services/${slug}` : undefined,
     "offers": {
       "@type": "Offer",
