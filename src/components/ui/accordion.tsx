@@ -1,6 +1,91 @@
-import { useState } from "react";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 import type { FAQ } from "../../types/content";
+import { cn } from "./utils";
+
+/**
+ * Brand-styled FAQ accordion built on Radix (`@radix-ui/react-accordion`),
+ * `type="single"` + `collapsible` (one panel open at a time, all can close).
+ *
+ * SEO: every answer must be present in the prerendered HTML even when its panel
+ * is collapsed. Plain Radix UNMOUNTS closed content; `forceMount` keeps it
+ * mounted but (because Radix's internal `isPresent` stays true) would render it
+ * visible. So we force-mount AND hide collapsed panels with
+ * `data-[state=closed]:hidden` — the answer text stays in the DOM but is not
+ * displayed until its panel opens.
+ */
+
+interface FAQItemProps {
+  value: string;
+  question: string;
+  answer: string;
+}
+
+function FAQItem({ value, question, answer }: FAQItemProps) {
+  return (
+    <AccordionPrimitive.Item
+      value={value}
+      className="overflow-hidden rounded-gc-card border-[2.5px] border-gc-ink bg-gc-well shadow-gc-faq"
+    >
+      {/* Radix Header renders the <h3>; the question lives in a <span> inside
+          the trigger so we don't nest a second heading. */}
+      <AccordionPrimitive.Header className="m-0">
+        <AccordionPrimitive.Trigger
+          className={cn(
+            "group flex w-full items-center justify-between gap-4 p-6 text-left outline-none transition-colors md:p-8",
+            "hover:bg-gc-well-hover focus-visible:bg-gc-well-hover",
+          )}
+        >
+          <span className="font-product-sans text-lg font-black uppercase leading-tight text-gc-ink md:text-xl lg:text-2xl">
+            {question}
+          </span>
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-4 border-gc-ink bg-gc-gray-100">
+            <ChevronDown className="size-5 text-gc-yellow transition-transform duration-200 group-data-[state=open]:rotate-180" />
+          </span>
+        </AccordionPrimitive.Trigger>
+      </AccordionPrimitive.Header>
+      <AccordionPrimitive.Content
+        forceMount
+        className="px-6 pb-6 data-[state=closed]:hidden md:px-8 md:pb-8"
+      >
+        <p className="whitespace-pre-line font-product-sans text-base leading-relaxed text-gc-ink md:text-lg">
+          {answer}
+        </p>
+      </AccordionPrimitive.Content>
+    </AccordionPrimitive.Item>
+  );
+}
+
+/**
+ * The single styled FAQ list (single source of truth). Renders just the
+ * accordion — no section chrome — so it can be embedded under any heading.
+ */
+export function FAQAccordion({
+  faqs,
+  className,
+}: {
+  faqs: FAQ[];
+  className?: string;
+}) {
+  if (!faqs || faqs.length === 0) return null;
+
+  return (
+    <AccordionPrimitive.Root
+      type="single"
+      collapsible
+      className={cn("flex flex-col gap-4", className)}
+    >
+      {faqs.map((faq, index) => (
+        <FAQItem
+          key={index}
+          value={`faq-${index}`}
+          question={faq.question}
+          answer={faq.answer}
+        />
+      ))}
+    </AccordionPrimitive.Root>
+  );
+}
 
 interface AccordionProps {
   faqs: FAQ[];
@@ -9,68 +94,30 @@ interface AccordionProps {
 }
 
 /**
- * Reusable Accordion component for FAQs
- * Accepts dynamic FAQ content from JSON data
+ * Section-level FAQ block used across pages: an optional centered heading plus
+ * the shared {@link FAQAccordion}. Public API is unchanged from the previous
+ * hand-rolled component so existing `<Accordion faqs=… title=… />` call sites
+ * keep working.
  */
-export function Accordion({ faqs, title = "Frequently Asked Questions", showHeader = true }: AccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  if (!faqs || faqs.length === 0) {
-    return null;
-  }
+export function Accordion({
+  faqs,
+  title = "Frequently Asked Questions",
+  showHeader = true,
+}: AccordionProps) {
+  if (!faqs || faqs.length === 0) return null;
 
   return (
-    <section className="w-full bg-white py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 font-product-sans">
+    <section className="w-full bg-white px-4 py-12 font-product-sans sm:px-6 md:px-10 lg:px-16 lg:py-16 xl:px-24">
       <div className="container mx-auto max-w-5xl">
         {showHeader && (
-          <div className="text-center mb-10">
-            <h2 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
+          <div className="mb-10 text-center">
+            <h2 className="font-product-sans text-3xl font-black leading-tight text-black md:text-4xl lg:text-5xl">
               {title}
             </h2>
           </div>
         )}
 
-        {/* FAQ Accordion */}
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-[rgba(230,230,230,0.5)] border-[2.5px] border-[#323232] rounded-[5px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] overflow-hidden"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full p-6 md:p-8 flex items-center justify-between hover:bg-[rgba(230,230,230,0.7)] transition-all text-left"
-                aria-expanded={openIndex === index}
-                aria-controls={`faq-answer-${index}`}
-              >
-                <h3 className="font-product-sans font-black text-lg md:text-xl lg:text-2xl text-[#323232] leading-tight uppercase pr-4">
-                  {faq.question}
-                </h3>
-                <div className="bg-[#eaeaea] border-4 border-[#323232] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-                  <ChevronDown 
-                    className={`w-5 h-5 text-[#f7bd15] transition-transform duration-200 ${
-                      openIndex === index ? "rotate-180" : ""
-                    }`}
-                  />
-                </div>
-              </button>
-              {openIndex === index && (
-                <div 
-                  id={`faq-answer-${index}`}
-                  className="px-6 md:px-8 pb-6 md:pb-8"
-                >
-                  <p className="font-product-sans text-base md:text-lg text-[#323232] leading-relaxed whitespace-pre-line">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <FAQAccordion faqs={faqs} />
       </div>
     </section>
   );
