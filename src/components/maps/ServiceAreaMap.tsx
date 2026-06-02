@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
+import { MapPin } from 'lucide-react';
 import { normalizeQuery, geocodeAddress, convexHull } from './geo';
 import { colors } from '../../styles/design-tokens';
+import { useIsMobile } from '../ui/use-mobile';
+import { Button } from '../ui/button';
 
 interface ServiceAreaMapProps {
   hubSlug: string;
@@ -11,7 +14,8 @@ interface ServiceAreaMapProps {
   fallbackEmbedUrl?: string;
 }
 
-type MapStatus = 'loading' | 'ready' | 'error' | 'fallback';
+// 'deferred' = mobile, JS-API load held until the user taps or scrolls to it.
+type MapStatus = 'deferred' | 'loading' | 'ready' | 'error' | 'fallback';
 
 /**
  * ServiceAreaMap displays a Google Maps view of the service area
@@ -29,10 +33,32 @@ export function ServiceAreaMap({
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const polygonRef = useRef<google.maps.Polygon | null>(null);
-  
+  const placeholderRef = useRef<HTMLDivElement>(null);
+
   const [status, setStatus] = useState<MapStatus>('loading');
-  
+  // On mobile we hold the heavy Maps JS until the user taps or scrolls to it.
+  const [activated, setActivated] = useState(false);
+  const isMobile = useIsMobile();
+
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
+
+  // Scroll-to-load: activate the deferred map once it nears the viewport.
+  useEffect(() => {
+    if (!apiKey || !isMobile || activated) return;
+    const el = placeholderRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setActivated(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [apiKey, isMobile, activated]);
 
   // Cleanup function to remove markers and polygon
   const cleanup = useCallback(() => {
@@ -51,7 +77,14 @@ export function ServiceAreaMap({
       return;
     }
 
+    // Mobile: defer the JS-API load until the user taps / scrolls to the map.
+    if (isMobile && !activated) {
+      setStatus('deferred');
+      return;
+    }
+
     let isMounted = true;
+    setStatus('loading');
 
     const initializeMap = async () => {
       if (!mapRef.current) return;
@@ -207,7 +240,32 @@ export function ServiceAreaMap({
       isMounted = false;
       cleanup();
     };
-  }, [apiKey, hubSlug, hubName, subcities, cleanup]);
+  }, [apiKey, hubSlug, hubName, subcities, cleanup, isMobile, activated]);
+
+  // Deferred (mobile): show a tap-to-load placeholder; the iframe fallback
+  // below still applies when there is no API key.
+  if (status === 'deferred') {
+    return (
+      <div
+        ref={placeholderRef}
+        className={`flex h-[360px] flex-col items-center justify-center gap-4 rounded-[20px] border-2 border-gc-ink bg-gc-gray-100 px-4 text-center shadow-lg sm:h-[420px] lg:h-[450px] ${className}`}
+        role="region"
+        aria-label={`Service area map for ${hubName}`}
+      >
+        <MapPin className="size-10 text-gc-yellow" aria-hidden="true" />
+        <div>
+          <p className="font-product-sans text-lg font-bold text-gc-ink">Service Area Map</p>
+          <p className="font-product-sans text-sm text-gc-gray-600">
+            Serving {hubName} and {subcities.length} surrounding cities
+          </p>
+        </div>
+        <Button variant="ink" size="cta" onClick={() => setActivated(true)}>
+          <MapPin aria-hidden="true" />
+          Load interactive map
+        </Button>
+      </div>
+    );
+  }
 
   // Fallback: render iframe embed
   if (status === 'fallback') {
@@ -235,11 +293,11 @@ export function ServiceAreaMap({
     // No fallback URL, show placeholder
     return (
       <div 
-        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink bg-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
+        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink bg-gc-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
         role="region"
         aria-label={`Service area map for ${hubName}`}
       >
-        <div className="text-center text-gray-500 px-4">
+        <div className="text-center text-gc-gray-600 px-4">
           <p className="font-product-sans font-bold text-lg mb-2">Service Area Map</p>
           <p className="text-sm">
             Serving {hubName} and {subcities.length} surrounding cities
@@ -253,13 +311,13 @@ export function ServiceAreaMap({
   if (status === 'loading') {
     return (
       <div 
-        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink bg-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
+        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink bg-gc-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
         role="region"
         aria-label={`Loading service area map for ${hubName}`}
       >
         <div className="text-center">
           <div className="inline-block w-8 h-8 border-4 border-gc-yellow border-t-transparent rounded-full animate-spin mb-3" />
-          <p className="font-product-sans text-gray-500">Loading map...</p>
+          <p className="font-product-sans text-gc-gray-600">Loading map...</p>
         </div>
       </div>
     );
