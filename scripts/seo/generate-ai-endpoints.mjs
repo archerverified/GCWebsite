@@ -4,10 +4,12 @@
  *
  * Emits:
  *   public/llms-full.txt        deeper variant of llms.txt (+ per-service and
- *                               per-hub-city detail pulled from src/data)
+ *                               per-hub-city detail, plus the full FAQ — every
+ *                               home + service Q&A — pulled from src/data)
  *   public/.well-known/ai.txt   minimal AI-usage / discovery declaration
  *   public/ai/summary.json      machine-readable business summary
- *   public/ai/faq.json          the site FAQ as {question, answer}[]
+ *   public/ai/faq.json          ALL home + service FAQs, grouped/tagged by
+ *                               service: {business, url, count, groups[]}
  *
  * VERIFIED FACTS ONLY. The deeper detail is pulled verbatim/summarized from the
  * existing page content in src/data — nothing new is invented here.
@@ -70,7 +72,73 @@ function plainSummary(md, maxSentences = 2) {
   return clean.split(/(?<=[.!?])\s+/).slice(0, maxSentences).join(' ').trim();
 }
 
-async function buildLlmsFull() {
+/**
+ * Conservatively convert a fully-UPPERCASE question to sentence case for the
+ * machine endpoints ONLY. The on-page / source data stays UPPERCASE brand
+ * style — we never touch it. Mixed-case questions (the service FAQs) pass
+ * through verbatim, so no proper noun or acronym in already-sentence-cased
+ * data is ever mangled; only all-caps strings (the home FAQ) are lowered and
+ * sentence-cased.
+ */
+function toSentenceCase(s) {
+  const str = String(s);
+  const isAllCaps = /[A-Z]/.test(str) && !/[a-z]/.test(str);
+  if (!isAllCaps) return str;
+  const lower = str.toLowerCase();
+  return lower.charAt(0).toUpperCase() + lower.slice(1);
+}
+
+/** Read every services-<slug>.json once, paired with its canonical name. */
+async function loadServiceData() {
+  const services = [];
+  for (const { name, slug } of SERVICES) {
+    const data = await tryReadJson(path.join(DATA_DIR, `services-${slug}.json`));
+    services.push({ name, slug, data });
+  }
+  return services;
+}
+
+/**
+ * Aggregate ALL site FAQs from their single source (src/data) into groups,
+ * tagged by the service each question belongs to. The home / general FAQ
+ * (src/data/faq.json) is one group; each service's `faqs` array is another.
+ * No FAQ text lives in this generator — it is read verbatim from the
+ * page-content JSON. Answers are passed through untouched; only all-caps
+ * questions are sentence-cased for the machine output (see toSentenceCase).
+ */
+async function collectFaqGroups(services) {
+  const groups = [];
+
+  const home = await tryReadJson(path.join(DATA_DIR, 'faq.json'));
+  if (Array.isArray(home) && home.length > 0) {
+    groups.push({
+      category: 'General',
+      url: `${SITE_URL}/`,
+      faqs: home.map((f) => ({ question: toSentenceCase(f.question), answer: f.answer })),
+    });
+  }
+
+  for (const { name, slug, data } of services) {
+    const faqs = data && Array.isArray(data.faqs) ? data.faqs : [];
+    if (faqs.length === 0) continue;
+    groups.push({
+      category: name,
+      service: slug,
+      url: `${SITE_URL}/services/${slug}`,
+      faqs: faqs.map((f) => ({ question: toSentenceCase(f.question), answer: f.answer })),
+    });
+  }
+
+  return groups;
+}
+
+/** The combined FAQ machine endpoint: grouped + tagged by service. */
+function buildFaqJson(faqGroups) {
+  const count = faqGroups.reduce((n, g) => n + g.faqs.length, 0);
+  return { business: BUSINESS.name, url: SITE_URL, count, groups: faqGroups };
+}
+
+async function buildLlmsFull(services, faqGroups) {
   // Reuse the exact llms.txt base, retitle it, and strip its end marker so we
   // can append the deeper detail.
   let out = buildLlmsTxt()
@@ -80,21 +148,14 @@ async function buildLlmsFull() {
     )
     .replace(/\n---\n# End of llms\.txt\n$/, '\n');
 
-  // Per-service detail
+  // Per-service detail (the full Q&A lives in the FAQ section below)
   out += `## Service Details\n\n`;
-  for (const { slug } of SERVICES) {
-    const svc = await tryReadJson(path.join(DATA_DIR, `services-${slug}.json`));
-    if (!svc) continue;
-    out += `### ${svc.title}\n`;
+  for (const { slug, data } of services) {
+    if (!data) continue;
+    out += `### ${data.title}\n`;
     out += `URL: ${SITE_URL}/services/${slug}\n`;
-    const summary = plainSummary(svc.intro || svc.description || '');
+    const summary = plainSummary(data.intro || data.description || '');
     if (summary) out += `${summary}\n`;
-    if (Array.isArray(svc.faqs) && svc.faqs.length > 0) {
-      out += `Common questions:\n`;
-      svc.faqs.slice(0, 6).forEach((f) => {
-        out += `- ${f.question}\n`;
-      });
-    }
     out += `\n`;
   }
 
@@ -110,6 +171,19 @@ async function buildLlmsFull() {
     }
     const subs = SUBAREAS_BY_HUB[hub.slug];
     if (subs && subs.length > 0) out += `Also serving: ${subs.join(', ')}\n`;
+    out += `\n`;
+  }
+
+  // Full FAQ — every home + service question with its verbatim answer, grouped
+  // and tagged by service (same single source as public/ai/faq.json).
+  out += `## Frequently Asked Questions\n\n`;
+  for (const group of faqGroups) {
+    out += `### ${group.category}\n`;
+    out += `URL: ${group.url}\n`;
+    for (const f of group.faqs) {
+      out += `Q: ${f.question}\n`;
+      out += `A: ${f.answer}\n`;
+    }
     out += `\n`;
   }
 
@@ -170,8 +244,12 @@ async function generate() {
   await fs.mkdir(path.join(PUBLIC_DIR, '.well-known'), { recursive: true });
   await fs.mkdir(path.join(PUBLIC_DIR, 'ai'), { recursive: true });
 
+  // Load page-content once; both llms-full.txt and ai/faq.json read from it.
+  const services = await loadServiceData();
+  const faqGroups = await collectFaqGroups(services);
+
   // 1) llms-full.txt
-  const full = await buildLlmsFull();
+  const full = await buildLlmsFull(services, faqGroups);
   await fs.writeFile(path.join(PUBLIC_DIR, 'llms-full.txt'), full, 'utf-8');
 
   // 2) .well-known/ai.txt
@@ -184,11 +262,12 @@ async function generate() {
     'utf-8'
   );
 
-  // 4) ai/faq.json — reuse the single home/site FAQ source (src/data/faq.json)
-  const faq = await readJson(path.join(DATA_DIR, 'faq.json'));
+  // 4) ai/faq.json — ALL home + service FAQs, single-sourced from src/data,
+  //    grouped and tagged by service.
+  const faqJson = buildFaqJson(faqGroups);
   await fs.writeFile(
     path.join(PUBLIC_DIR, 'ai', 'faq.json'),
-    JSON.stringify(faq, null, 2) + '\n',
+    JSON.stringify(faqJson, null, 2) + '\n',
     'utf-8'
   );
 
@@ -196,7 +275,7 @@ async function generate() {
   console.log('   public/llms-full.txt');
   console.log('   public/.well-known/ai.txt');
   console.log('   public/ai/summary.json');
-  console.log(`   public/ai/faq.json (${faq.length} Q&A)`);
+  console.log(`   public/ai/faq.json (${faqJson.count} Q&A across ${faqGroups.length} groups)`);
 }
 
 generate().catch((error) => {
