@@ -20,7 +20,10 @@ export function Terms() {
       <section className="py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-gradient-to-b from-gc-yellow/10 to-white">
         <div className="container mx-auto max-w-4xl">
           <nav className="mb-6">
-            <Link to="/" className="text-gc-yellow hover:underline font-product-sans">
+            <Link
+              to="/"
+              className="inline-flex min-h-11 items-center py-2 font-product-sans text-gc-ink underline underline-offset-2 outline-none transition-colors hover:text-gc-yellow focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 rounded"
+            >
               ← Back to Home
             </Link>
           </nav>
@@ -151,8 +154,8 @@ export function Terms() {
           </p>
           <div className="font-product-sans text-gc-gray-600 mb-6 bg-gray-50 p-6 rounded-lg">
             <p className="font-bold text-gc-ink">Garage Cowboy</p>
-            <p>Email: <a href="mailto:deno@garagecowboy.com" className="text-gc-yellow hover:underline">deno@garagecowboy.com</a></p>
-            <p>Phone: <a href="tel:+18172560122" className="text-gc-yellow hover:underline">(817) 256-0122</a></p>
+            <p>Email: <a href="mailto:deno@garagecowboy.com" className="text-gc-ink underline underline-offset-2 transition-colors hover:text-gc-yellow">deno@garagecowboy.com</a></p>
+            <p>Phone: <a href="tel:+18172560122" className="text-gc-ink underline underline-offset-2 transition-colors hover:text-gc-yellow">(817) 256-0122</a></p>
           </div>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">

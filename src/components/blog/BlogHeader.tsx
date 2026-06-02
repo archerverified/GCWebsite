@@ -20,14 +20,14 @@ export function BlogHeader({ post, category }: BlogHeaderProps) {
         >
           Home
         </Link>
-        <ChevronRight size={14} className="text-gc-gray-400" />
+        <ChevronRight size={14} className="text-gc-gray-600" aria-hidden="true" />
         <Link
           to="/blog"
           className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
         >
           Blog
         </Link>
-        <ChevronRight size={14} className="text-gc-gray-400" />
+        <ChevronRight size={14} className="text-gc-gray-600" aria-hidden="true" />
         <span className="font-product-sans text-gc-ink line-clamp-1">
           {post.title}
         </span>

@@ -50,7 +50,7 @@ export function Blog() {
           <div className="flex items-center justify-center gap-3 mb-6">
             <BookOpen size={40} className="text-gc-yellow" />
           </div>
-          <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+          <h1 className="font-product-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             Garage Door Tips & Expert Repair Guides
           </h1>
           <p className="font-product-sans text-xl md:text-2xl text-white mb-8 opacity-90">
@@ -76,7 +76,7 @@ export function Blog() {
             >
               Home
             </Link>
-            <span className="text-gc-gray-400">/</span>
+            <span className="text-gc-gray-600" aria-hidden="true">/</span>
             <span className="font-product-sans text-gc-ink">Blog</span>
           </nav>
 
@@ -137,7 +137,7 @@ export function Blog() {
                     <p className="font-product-sans text-sm text-gc-gray-600 mb-3">
                       {category.description}
                     </p>
-                    <span className="font-product-sans text-xs text-gc-gray-400">
+                    <span className="font-product-sans text-xs text-gc-gray-600">
                       {categoryPostCount} {categoryPostCount === 1 ? "article" : "articles"}
                     </span>
                   </div>
