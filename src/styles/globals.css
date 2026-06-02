@@ -129,7 +129,9 @@
   --gc-gray-100: #eaeaea;
   --gc-gray-200: #e6e6e6;
   --gc-gray-300: #d9d9d9;
+  --gc-gray-400: #999999;      /* a11y: ~2.85:1 on white — decorative separators / meta icons only, never body */
   --gc-gray-500: #8b8b92;      /* a11y: ~3:1 on white — large text / non-text UI only, never body */
+  --gc-gray-600: #666666;      /* a11y: ~5.7:1 on white — muted meta text (AA body-safe); preserves legacy #666 exactly */
   --gc-gray-700: #535458;
 
   /* Translucent */
@@ -153,7 +155,9 @@
   --color-gc-gray-100: var(--gc-gray-100);
   --color-gc-gray-200: var(--gc-gray-200);
   --color-gc-gray-300: var(--gc-gray-300);
+  --color-gc-gray-400: var(--gc-gray-400);
   --color-gc-gray-500: var(--gc-gray-500);
+  --color-gc-gray-600: var(--gc-gray-600);
   --color-gc-gray-700: var(--gc-gray-700);
   --color-gc-frost: var(--gc-frost);
   --color-gc-well: var(--gc-well);

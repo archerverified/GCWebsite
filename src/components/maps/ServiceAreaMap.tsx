@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 import { normalizeQuery, geocodeAddress, convexHull } from './geo';
+import { colors } from '../../styles/design-tokens';
 
 interface ServiceAreaMapProps {
   hubSlug: string;
@@ -151,9 +152,9 @@ export function ServiceAreaMap({
               // Subcity marker: smaller yellow pin
               path: google.maps.SymbolPath.CIRCLE,
               scale: 8,
-              fillColor: '#FEC300',
+              fillColor: colors.brand.yellowPrimary,
               fillOpacity: 1,
-              strokeColor: '#35363A',
+              strokeColor: colors.brand.dark,
               strokeWeight: 2
             }
           });
@@ -213,7 +214,7 @@ export function ServiceAreaMap({
     if (fallbackEmbedUrl) {
       return (
         <div 
-          className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-[#35363a] ${className}`}
+          className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink ${className}`}
           role="region"
           aria-label={`Service area map for ${hubName}`}
         >
@@ -234,7 +235,7 @@ export function ServiceAreaMap({
     // No fallback URL, show placeholder
     return (
       <div 
-        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-[#35363a] bg-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
+        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink bg-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
         role="region"
         aria-label={`Service area map for ${hubName}`}
       >
@@ -252,12 +253,12 @@ export function ServiceAreaMap({
   if (status === 'loading') {
     return (
       <div 
-        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-[#35363a] bg-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
+        className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink bg-gray-100 h-[360px] sm:h-[420px] lg:h-[450px] flex items-center justify-center ${className}`}
         role="region"
         aria-label={`Loading service area map for ${hubName}`}
       >
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-[#FEC300] border-t-transparent rounded-full animate-spin mb-3" />
+          <div className="inline-block w-8 h-8 border-4 border-gc-yellow border-t-transparent rounded-full animate-spin mb-3" />
           <p className="font-product-sans text-gray-500">Loading map...</p>
         </div>
       </div>
@@ -267,7 +268,7 @@ export function ServiceAreaMap({
   // Map container
   return (
     <div 
-      className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-[#35363a] ${className}`}
+      className={`rounded-[20px] overflow-hidden shadow-lg border-2 border-gc-ink ${className}`}
       role="region"
       aria-label={`Service area map for ${hubName}`}
     >

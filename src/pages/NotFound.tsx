@@ -12,13 +12,13 @@ export function NotFound() {
         noindex={true}
       />
       <div className="text-center max-w-2xl mx-auto py-20">
-        <div className="font-product-sans font-black text-[120px] md:text-[180px] text-[#fec300] leading-none mb-4">
+        <div className="font-product-sans font-black text-[120px] md:text-[180px] text-gc-yellow leading-none mb-4">
           404
         </div>
-        <h1 className="font-product-sans font-black text-3xl md:text-4xl text-[#323232] mb-4">
+        <h1 className="font-product-sans font-black text-3xl md:text-4xl text-gc-ink mb-4">
           Page Not Found
         </h1>
-        <p className="font-product-sans text-lg text-[#666] mb-8">
+        <p className="font-product-sans text-lg text-gc-gray-600 mb-8">
           Oops! The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

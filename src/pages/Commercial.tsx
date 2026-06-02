@@ -67,7 +67,7 @@ export function Commercial() {
       {/* Main Content - Intro */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="container mx-auto max-w-4xl">
-          <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-[#fec300]">
+          <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {content.intro}
             </ReactMarkdown>
@@ -81,10 +81,10 @@ export function Commercial() {
           <div className="container mx-auto max-w-6xl">
             {content.sections.map((section, index) => (
               <div key={index} className="mb-12 last:mb-0">
-                <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] mb-6">
+                <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink mb-6">
                   {section.title}
                 </h2>
-                <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-[#fec300]">
+                <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-strong:font-bold prose-ul:list-disc prose-li:marker:text-gc-yellow">
                   <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
                     {section.content}
                   </ReactMarkdown>

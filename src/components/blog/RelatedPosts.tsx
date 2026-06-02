@@ -46,7 +46,7 @@ export function RelatedPosts({
   return (
     <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-[#f5f5f5]">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] text-center mb-12">
+        <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink text-center mb-12">
           Related Articles
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

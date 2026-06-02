@@ -48,7 +48,7 @@ export function Blog() {
       >
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-16">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <BookOpen size={40} className="text-[#fec300]" />
+            <BookOpen size={40} className="text-gc-yellow" />
           </div>
           <h1 className="font-product-sans font-black text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             Garage Door Tips & Expert Repair Guides
@@ -72,18 +72,18 @@ export function Blog() {
           <nav className="flex items-center gap-2 text-sm mb-8">
             <Link
               to="/"
-              className="font-product-sans text-[#666] hover:text-[#323232] transition-colors"
+              className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
             >
               Home
             </Link>
-            <span className="text-[#999]">/</span>
-            <span className="font-product-sans text-[#323232]">Blog</span>
+            <span className="text-gc-gray-400">/</span>
+            <span className="font-product-sans text-gc-ink">Blog</span>
           </nav>
 
-          <h2 className="font-product-sans font-black text-3xl md:text-4xl text-[#323232] mb-4">
+          <h2 className="font-product-sans font-black text-3xl md:text-4xl text-gc-ink mb-4">
             Latest Garage Door Guides & Articles
           </h2>
-          <p className="font-product-sans text-lg text-[#666] mb-12 max-w-2xl">
+          <p className="font-product-sans text-lg text-gc-gray-600 mb-12 max-w-2xl">
             Stay informed with our latest guides, tips, and expert advice on garage doors.
           </p>
 
@@ -99,7 +99,7 @@ export function Blog() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="font-product-sans text-lg text-[#666]">
+              <p className="font-product-sans text-lg text-gc-gray-600">
                 No blog posts yet. Check back soon for expert garage door tips and guides!
               </p>
             </div>
@@ -111,7 +111,7 @@ export function Blog() {
       {categories.length > 0 && (
         <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 bg-[#f5f5f5]">
           <div className="container mx-auto max-w-6xl">
-            <h2 className="font-product-sans font-black text-2xl md:text-3xl text-[#323232] text-center mb-12">
+            <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink text-center mb-12">
               Browse by Category
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -123,21 +123,21 @@ export function Blog() {
                 return (
                   <div
                     key={category.id}
-                    className="bg-white rounded-[15px] border-2 border-[#35363a] p-6 text-center hover:shadow-lg transition-all"
+                    className="bg-white rounded-[15px] border-2 border-gc-ink p-6 text-center hover:shadow-lg transition-all"
                   >
                     <div
                       className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
                       style={{ backgroundColor: category.color }}
                     >
-                      <BookOpen size={24} className="text-[#222]" />
+                      <BookOpen size={24} className="text-gc-ink" />
                     </div>
-                    <h3 className="font-product-sans font-bold text-lg text-[#323232] mb-2">
+                    <h3 className="font-product-sans font-bold text-lg text-gc-ink mb-2">
                       {category.name}
                     </h3>
-                    <p className="font-product-sans text-sm text-[#666] mb-3">
+                    <p className="font-product-sans text-sm text-gc-gray-600 mb-3">
                       {category.description}
                     </p>
-                    <span className="font-product-sans text-xs text-[#999]">
+                    <span className="font-product-sans text-xs text-gc-gray-400">
                       {categoryPostCount} {categoryPostCount === 1 ? "article" : "articles"}
                     </span>
                   </div>

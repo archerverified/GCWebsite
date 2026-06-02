@@ -128,7 +128,7 @@ export function BlogPost() {
             <img
               src={post.featuredImage.url}
               alt={post.featuredImage.alt}
-              className="w-full rounded-none sm:rounded-[15px] border-y-2 sm:border-2 border-[#35363a]"
+              className="w-full rounded-none sm:rounded-[15px] border-y-2 sm:border-2 border-gc-ink"
               width={post.featuredImage.width}
               height={post.featuredImage.height}
               loading="lazy"
@@ -136,7 +136,7 @@ export function BlogPost() {
           </figure>
 
           {/* Article Body */}
-          <div className="prose prose-lg max-w-none font-product-sans text-[#323232] prose-headings:font-product-sans prose-headings:font-black prose-headings:text-[#323232] prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:leading-relaxed prose-p:mb-4 prose-strong:font-bold prose-strong:text-[#323232] prose-a:text-[#35363a] prose-a:underline prose-a:decoration-[#fec300] prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:bg-gc-yellow/20 prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:mb-2 prose-li:marker:text-[#fec300] prose-blockquote:border-l-4 prose-blockquote:border-[#fec300] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-[#666] prose-blockquote:bg-[#f5f5f5] prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg prose-hr:border-[#e6e6e6] prose-hr:my-10 prose-table:border-collapse prose-th:bg-[#35363a] prose-th:text-white prose-th:font-bold prose-th:p-3 prose-th:text-left prose-td:border prose-td:border-[#e6e6e6] prose-td:p-3 prose-code:bg-[#f5f5f5] prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
+          <div className="prose prose-lg max-w-none font-product-sans text-gc-ink prose-headings:font-product-sans prose-headings:font-black prose-headings:text-gc-ink prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:leading-relaxed prose-p:mb-4 prose-strong:font-bold prose-strong:text-gc-ink prose-a:text-gc-ink prose-a:underline prose-a:decoration-gc-yellow prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:bg-gc-yellow/20 prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:mb-2 prose-li:marker:text-gc-yellow prose-blockquote:border-l-4 prose-blockquote:border-gc-yellow prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gc-gray-600 prose-blockquote:bg-[#f5f5f5] prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg prose-hr:border-gc-gray-200 prose-hr:my-10 prose-table:border-collapse prose-th:bg-gc-ink prose-th:text-white prose-th:font-bold prose-th:p-3 prose-th:text-left prose-td:border prose-td:border-gc-gray-200 prose-td:p-3 prose-code:bg-[#f5f5f5] prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
               {post.content}
             </ReactMarkdown>
@@ -144,15 +144,15 @@ export function BlogPost() {
 
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-12 pt-6 border-t-2 border-[#e6e6e6]">
-              <h3 className="font-product-sans font-bold text-sm text-[#666] uppercase tracking-wide mb-3">
+            <div className="mt-12 pt-6 border-t-2 border-gc-gray-200">
+              <h3 className="font-product-sans font-bold text-sm text-gc-gray-600 uppercase tracking-wide mb-3">
                 Tags
               </h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map(tag => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-[#f5f5f5] border border-[#e6e6e6] rounded-full font-product-sans text-sm text-[#666]"
+                    className="px-3 py-1 bg-[#f5f5f5] border border-gc-gray-200 rounded-full font-product-sans text-sm text-gc-gray-600"
                   >
                     {tag}
                   </span>
@@ -162,23 +162,23 @@ export function BlogPost() {
           )}
 
           {/* Author Bio */}
-          <div className="mt-12 p-6 bg-[#f5f5f5] rounded-[15px] border-2 border-[#e6e6e6]">
+          <div className="mt-12 p-6 bg-[#f5f5f5] rounded-[15px] border-2 border-gc-gray-200">
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <img
                 src={post.author.image}
                 alt={post.author.name}
-                className="w-20 h-20 rounded-full object-cover border-2 border-[#35363a]"
+                className="w-20 h-20 rounded-full object-cover border-2 border-gc-ink"
                 width={80}
                 height={80}
               />
               <div>
-                <h3 className="font-product-sans font-bold text-lg text-[#323232]">
+                <h3 className="font-product-sans font-bold text-lg text-gc-ink">
                   About {post.author.name}
                 </h3>
-                <p className="font-product-sans text-sm text-[#fec300] font-bold mb-2">
+                <p className="font-product-sans text-sm text-gc-yellow font-bold mb-2">
                   {post.author.title}
                 </p>
-                <p className="font-product-sans text-[#666]">
+                <p className="font-product-sans text-gc-gray-600">
                   {post.author.bio}
                 </p>
               </div>
@@ -186,11 +186,11 @@ export function BlogPost() {
           </div>
 
           {/* CTA Banner */}
-          <div className="mt-12 p-8 bg-[#35363a] rounded-[15px] text-center">
+          <div className="mt-12 p-8 bg-gc-ink rounded-[15px] text-center">
             <h3 className="font-product-sans font-black text-2xl text-white mb-4">
               Need Help With Your Garage Door?
             </h3>
-            <p className="font-product-sans text-[#eaeaea] mb-6">
+            <p className="font-product-sans text-gc-gray-100 mb-6">
               Our expert technicians are ready to assist with repairs, installation, and maintenance.
             </p>
             <Button asChild variant="primary" size="cta">

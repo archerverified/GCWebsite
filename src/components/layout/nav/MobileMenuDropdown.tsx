@@ -34,10 +34,10 @@ export function MobileMenuDropdown() {
           flex items-center gap-2 px-4 py-2 rounded-lg
           font-product-sans font-bold text-sm uppercase
           transition-all duration-200 outline-none
-          focus-visible:ring-2 focus-visible:ring-[#FEC300] focus-visible:ring-offset-2
+          focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2
           ${isOpen 
-            ? "bg-[#EAEAEA] text-[#FEC300]" 
-            : "bg-transparent text-white hover:bg-[#EAEAEA] hover:text-[#FEC300]"
+            ? "bg-gc-gray-100 text-gc-yellow" 
+            : "bg-transparent text-white hover:bg-gc-gray-100 hover:text-gc-yellow"
           }
         `}
         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -65,8 +65,8 @@ export function MobileMenuDropdown() {
                 font-product-sans font-medium text-sm
                 transition-colors cursor-pointer
                 ${isActive(item.to)
-                  ? "bg-[#FEC300] text-white"
-                  : "text-[#323232] hover:bg-[#EAEAEA] hover:text-[#FEC300]"
+                  ? "bg-gc-yellow text-white"
+                  : "text-gc-ink hover:bg-gc-gray-100 hover:text-gc-yellow"
                 }
               `}
               onClick={() => setIsOpen(false)}
@@ -79,7 +79,7 @@ export function MobileMenuDropdown() {
         <DropdownMenuSeparator className="my-1 bg-gray-200" />
 
         {/* Services Section */}
-        <DropdownMenuLabel className="px-4 py-2 font-product-sans font-black text-xs uppercase text-[#35363A] tracking-wide">
+        <DropdownMenuLabel className="px-4 py-2 font-product-sans font-black text-xs uppercase text-gc-ink tracking-wide">
           Services
         </DropdownMenuLabel>
         {SERVICES_ITEMS.map((item) => (
@@ -91,8 +91,8 @@ export function MobileMenuDropdown() {
                 font-product-sans text-sm
                 transition-colors cursor-pointer
                 ${isActive(item.to)
-                  ? "bg-[#FEC300] text-white"
-                  : "text-[#323232] hover:bg-[#EAEAEA] hover:text-[#FEC300]"
+                  ? "bg-gc-yellow text-white"
+                  : "text-gc-ink hover:bg-gc-gray-100 hover:text-gc-yellow"
                 }
               `}
               onClick={() => setIsOpen(false)}
@@ -105,7 +105,7 @@ export function MobileMenuDropdown() {
         <DropdownMenuSeparator className="my-1 bg-gray-200" />
 
         {/* Texas Section */}
-        <DropdownMenuLabel className="px-4 py-2 font-product-sans font-black text-xs uppercase text-[#35363A] tracking-wide">
+        <DropdownMenuLabel className="px-4 py-2 font-product-sans font-black text-xs uppercase text-gc-ink tracking-wide">
           Texas Service Areas
         </DropdownMenuLabel>
         <div className="max-h-48 overflow-y-auto">
@@ -118,8 +118,8 @@ export function MobileMenuDropdown() {
                   font-product-sans text-sm
                   transition-colors cursor-pointer
                   ${isActive(item.to)
-                    ? "bg-[#FEC300] text-white"
-                    : "text-[#323232] hover:bg-[#EAEAEA] hover:text-[#FEC300]"
+                    ? "bg-gc-yellow text-white"
+                    : "text-gc-ink hover:bg-gc-gray-100 hover:text-gc-yellow"
                   }
                 `}
                 onClick={() => setIsOpen(false)}

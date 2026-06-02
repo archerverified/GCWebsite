@@ -13,7 +13,7 @@ export function Group47927() {
       </div>
       {/* Title Text - centered */}
       <p 
-        className="leading-[42px] text-3xl md:text-4xl lg:text-[56px] text-center text-[#323232] w-full"
+        className="leading-[42px] text-3xl md:text-4xl lg:text-[56px] text-center text-gc-ink w-full"
         style={{
           fontFamily: '"Product Sans"',
           fontWeight: 500,

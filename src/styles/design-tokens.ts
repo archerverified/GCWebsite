@@ -33,8 +33,12 @@ export const colors = {
     gray100: '#EAEAEA',
     gray200: '#E6E6E6',
     gray300: '#D9D9D9',
+    /** a11y: ~2.85:1 on white — decorative separators / meta icons only, never body copy. */
+    gray400: '#999999',
     /** a11y: ~3:1 on white — large text / non-text UI only, never body copy. */
     gray500: '#8B8B92',
+    /** a11y: ~5.7:1 on white — muted meta text (AA body-safe). Preserves legacy #666 exactly. */
+    gray600: '#666666',
     gray700: '#535458',
   },
   text: {

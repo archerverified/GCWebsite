@@ -23,7 +23,7 @@ export function LazyImage({
   className = "",
   width,
   height,
-  placeholderColor = "#e6e6e6",
+  placeholderColor = "var(--gc-gray-200)",
   objectFit = "cover",
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -122,7 +122,7 @@ export function LazyBackgroundImage({
   className = "",
   children,
   overlayColor,
-  placeholderColor = "#35363a",
+  placeholderColor = "var(--gc-ink)",
 }: LazyBackgroundImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 

@@ -8,7 +8,7 @@ interface BlogHeaderProps {
 }
 
 export function BlogHeader({ post, category }: BlogHeaderProps) {
-  const categoryColor = category?.color || "#fec300";
+  const categoryColor = category?.color || "var(--gc-yellow)";
 
   return (
     <header className="mb-8">
@@ -16,19 +16,19 @@ export function BlogHeader({ post, category }: BlogHeaderProps) {
       <nav className="flex items-center gap-2 text-sm mb-6 flex-wrap">
         <Link
           to="/"
-          className="font-product-sans text-[#666] hover:text-[#323232] transition-colors"
+          className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
         >
           Home
         </Link>
-        <ChevronRight size={14} className="text-[#999]" />
+        <ChevronRight size={14} className="text-gc-gray-400" />
         <Link
           to="/blog"
-          className="font-product-sans text-[#666] hover:text-[#323232] transition-colors"
+          className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
         >
           Blog
         </Link>
-        <ChevronRight size={14} className="text-[#999]" />
-        <span className="font-product-sans text-[#323232] line-clamp-1">
+        <ChevronRight size={14} className="text-gc-gray-400" />
+        <span className="font-product-sans text-gc-ink line-clamp-1">
           {post.title}
         </span>
       </nav>
@@ -36,7 +36,7 @@ export function BlogHeader({ post, category }: BlogHeaderProps) {
       {/* Category Badge */}
       <div className="mb-4">
         <span
-          className="inline-block px-3 py-1 rounded-md font-product-sans font-bold text-xs text-[#222] uppercase tracking-wide"
+          className="inline-block px-3 py-1 rounded-md font-product-sans font-bold text-xs text-gc-ink uppercase tracking-wide"
           style={{ backgroundColor: categoryColor }}
         >
           {category?.name || post.category}
@@ -44,33 +44,33 @@ export function BlogHeader({ post, category }: BlogHeaderProps) {
       </div>
 
       {/* Title */}
-      <h1 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-[#323232] mb-6 leading-tight">
+      <h1 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-gc-ink mb-6 leading-tight">
         {post.title}
       </h1>
 
       {/* Author & Meta */}
-      <div className="flex flex-wrap items-center gap-6 pb-6 border-b-2 border-[#e6e6e6]">
+      <div className="flex flex-wrap items-center gap-6 pb-6 border-b-2 border-gc-gray-200">
         {/* Author */}
         <div className="flex items-center gap-3">
           <img
             src={post.author.image}
             alt={post.author.name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-[#35363a]"
+            className="w-12 h-12 rounded-full object-cover border-2 border-gc-ink"
             width={48}
             height={48}
           />
           <div>
-            <p className="font-product-sans font-bold text-[#323232]">
+            <p className="font-product-sans font-bold text-gc-ink">
               {post.author.name}
             </p>
-            <p className="font-product-sans text-sm text-[#666]">
+            <p className="font-product-sans text-sm text-gc-gray-600">
               {post.author.title}
             </p>
           </div>
         </div>
 
         {/* Date & Reading Time */}
-        <div className="flex items-center gap-4 text-sm text-[#666]">
+        <div className="flex items-center gap-4 text-sm text-gc-gray-600">
           <span className="flex items-center gap-1">
             <Calendar size={16} />
             <span className="font-product-sans">
