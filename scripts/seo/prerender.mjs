@@ -96,6 +96,15 @@ async function prerenderRoute(browser, route) {
       document.querySelectorAll('script, iframe, div, link').forEach((el) => {
         const src = el.getAttribute('src') || el.getAttribute('href') || '';
         if (el.tagName === 'SCRIPT' && src === loaderSrc) return; // keep widget loader
+        // Inert resource hints (dns-prefetch / preconnect) carry no content and
+        // never execute or inject DOM, so they must survive snapshotting even
+        // when they point at a blocked third-party host (e.g. the LeadConnector
+        // or GTM connection warmups). Only executable / runtime-injected DOM is
+        // stripped below.
+        if (el.tagName === 'LINK') {
+          const rel = (el.getAttribute('rel') || '').toLowerCase();
+          if (rel === 'dns-prefetch' || rel === 'preconnect') return;
+        }
         const id = el.getAttribute('id') || '';
         if (thirdParty.test(src) || /^lc_|leadconnector|chat-widget/i.test(id)) {
           el.remove();
