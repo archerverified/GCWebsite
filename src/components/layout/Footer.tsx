@@ -28,7 +28,7 @@ export function Footer() {
 
   return (
     <footer
-      className="w-full bg-white py-12 lg:py-16 font-product-sans px-[48px] md:px-[96px] lg:px-[192px] xl:px-[288px]"
+      className="w-full bg-white py-12 lg:py-16 font-product-sans px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24"
       data-font-probe="footer"
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -57,7 +57,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link 
                     to={link.path} 
-                    className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
+                    className="inline-flex min-h-11 items-center font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -76,7 +76,7 @@ export function Footer() {
                 <li key={service.path}>
                   <Link 
                     to={service.path} 
-                    className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
+                    className="inline-flex min-h-11 items-center font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
                   >
                     {service.name}
                   </Link>
@@ -97,11 +97,11 @@ export function Footer() {
                 </p>
                 <a
                   href="tel:8172560122"
-                  className="font-product-sans font-black text-xl text-gc-yellow transition-colors"
+                  className="inline-flex min-h-11 items-center font-product-sans font-black text-xl text-gc-ink transition-colors hover:text-gc-yellow"
                 >
                   (817) 256-0122
                 </a>
-                <p className="font-product-sans font-black text-sm mt-1 text-gc-yellow">
+                <p className="font-product-sans font-black text-sm mt-1 text-gc-ink">
                   Open 24/7 — Call Anytime
                 </p>
               </div>
@@ -116,7 +116,7 @@ export function Footer() {
               <div className="flex items-center gap-3 pt-2">
                 <a
                   href="https://www.yelp.com/biz/garage-cowboy-fort-worth"
-                  className="hover:opacity-80 transition-opacity"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center hover:opacity-80 transition-opacity"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -124,7 +124,7 @@ export function Footer() {
                 </a>
                 <a
                   href="https://www.google.com/search?q=garage+cowboy+fort+worth&sca_esv=cea07bd29ebaa7bd&ei=giRYafyPA4eWvr0P4rHXmAk&ved=0ahUKEwj82MWY0-2RAxUHi68BHeLYFZMQ4dUDCBE&uact=5&oq=garage+cowboy+fort+worth&gs_lp=Egxnd3Mtd2l6LXNlcnAiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aDIFECEYoAEyBRAhGKABSMwYUOEBWKUXcAN4AZABAJgBYqAB5giqAQIxM7gBA8gBAPgBAZgCEKACkQnCAgoQABiwAxjWBBhHwgINEAAYsAMY1gQYRxjJA8ICDhAAGIAEGLADGJIDGIoFwgIKEAAYgAQYQxiKBcICBRAAGIAEwgIGEAAYFhgewgIFEAAY7wXCAggQABiABBiiBMICCxAAGIAEGIYDGIoFmAMAiAYBkAYJkgcEMTUuMaAHw0eyBwQxMi4xuAeICcIHBjIuMTMuMcgHHYAIAA&sclient=gws-wiz-serp&lqi=ChhnYXJhZ2UgY293Ym95IGZvcnQgd29ydGhIm9TVhM2zgIAIWiYQABABGAAYARgCGAMiGGdhcmFnZSBjb3dib3kgZm9ydCB3b3J0aJIBFGdhcmFnZV9kb29yX3N1cHBsaWVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0RmVsb3dTakZSYkRsTlkwZG9XbE5YVWpKU2VsWk9UVmQ0U0dReVl4QUL6AQUIkwMQPQ"
-                  className="hover:opacity-80 transition-opacity"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center hover:opacity-80 transition-opacity"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -132,7 +132,7 @@ export function Footer() {
                 </a>
                 <a
                   href="https://www.facebook.com/profile.php?id=61577149727757"
-                  className="hover:opacity-80 transition-opacity"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center hover:opacity-80 transition-opacity"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -148,14 +148,14 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-2">
             <Link 
               to="/privacy" 
-              className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
+              className="inline-flex min-h-11 items-center font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
             >
               Privacy Policy
             </Link>
             <span className="hidden sm:inline text-gc-ink">|</span>
             <Link 
               to="/terms" 
-              className="font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
+              className="inline-flex min-h-11 items-center font-product-sans text-sm text-gc-ink hover:text-gc-yellow transition-colors"
             >
               Terms of Service
             </Link>
