@@ -35,7 +35,7 @@ export function Blog() {
   return (
     <main className="bg-white">
       <Seo
-        title="Garage Door Blog - Tips, Guides & Expert Advice"
+        title="Garage Door Tips & Repair Guides"
         description="Expert tips, guides, and insights on garage door repair, maintenance, and installation. Learn from the Garage Cowboy team serving Dallas-Fort Worth."
         canonicalPath="/blog"
         schema={[blogListSchema, breadcrumbSchema, blogItemList]}
