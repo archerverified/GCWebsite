@@ -72,7 +72,7 @@ export function Blog() {
           <nav className="flex items-center gap-2 text-sm mb-8">
             <Link
               to="/"
-              className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
+              className="inline-flex min-h-11 items-center font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
             >
               Home
             </Link>

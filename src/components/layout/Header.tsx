@@ -33,7 +33,7 @@ export function Header() {
               </p>
               <a
                 href="tel:8172560122"
-                className="font-product-sans font-black text-2xl lg:text-3xl text-gc-ink hover:text-gc-yellow transition-colors"
+                className="inline-flex min-h-11 items-center justify-center lg:justify-start font-product-sans font-black text-2xl lg:text-3xl text-gc-ink hover:text-gc-yellow transition-colors rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2"
               >
                 (817) 256-0122
               </a>

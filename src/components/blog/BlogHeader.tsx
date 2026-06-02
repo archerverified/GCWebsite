@@ -16,14 +16,14 @@ export function BlogHeader({ post, category }: BlogHeaderProps) {
       <nav className="flex items-center gap-2 text-sm mb-6 flex-wrap">
         <Link
           to="/"
-          className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
+          className="inline-flex min-h-11 items-center font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
         >
           Home
         </Link>
         <ChevronRight size={14} className="text-gc-gray-600" aria-hidden="true" />
         <Link
           to="/blog"
-          className="font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
+          className="inline-flex min-h-11 items-center font-product-sans text-gc-gray-600 hover:text-gc-ink transition-colors"
         >
           Blog
         </Link>
