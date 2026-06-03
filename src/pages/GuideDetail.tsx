@@ -45,6 +45,10 @@ const SERVICE_LABELS: Record<string, string> = {
   "opener-repair-installation": "Garage door opener repair",
 };
 
+/**
+ * Render a /guides/:slug buyer guide (Article + FAQ + Speakable schema, related
+ * city links) or a noindex not-found fallback for an unknown slug.
+ */
 export function GuideDetail() {
   const { slug } = useParams<{ slug: string }>();
   const guide = GUIDES.find((g) => g.slug === slug);

@@ -52,6 +52,7 @@ function normalizeQuestion(q: string): string {
   return lower.charAt(0).toUpperCase() + lower.slice(1);
 }
 
+/** Normalize each question (sentence-case all-caps); answer text stays verbatim. */
 function mapFaqs(faqs: FAQ[]): FAQ[] {
   return faqs.map((f) => ({ question: normalizeQuestion(f.question), answer: f.answer }));
 }
@@ -61,6 +62,10 @@ function cleanServiceLabel(title: string, slug: string): string {
   return (title || slug).replace(/\s+in DFW$/i, "").trim();
 }
 
+/**
+ * Assemble the grouped FAQ data in a stable, drift-proof order: General (home),
+ * one group per service page, one per hub city, then the two overview pages.
+ */
 function buildGroups(): FaqGroup[] {
   const groups: FaqGroup[] = [];
 
@@ -137,6 +142,7 @@ const SCHEMA_FAQS: FAQ[] = (() => {
   return out;
 })();
 
+/** Render the /faq hub: grouped in-DOM accordions plus one deduped FAQPage schema. */
 export function Faq() {
   const schemas: object[] = [
     createFAQSchema(SCHEMA_FAQS),

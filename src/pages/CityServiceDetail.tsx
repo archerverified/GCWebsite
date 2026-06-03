@@ -40,6 +40,7 @@ const SERVICE_LABELS: Record<string, string> = {
   "opener-repair-installation": "Opener Repair & Installation",
 };
 
+/** Short, link-friendly label for a service slug (falls back to the full name). */
 function serviceLabel(slug: string, fallback: string): string {
   return SERVICE_LABELS[slug] ?? fallback;
 }
@@ -49,12 +50,18 @@ const MONTHS = [
   "July", "August", "September", "October", "November", "December",
 ];
 
+/** "2026-06-03" -> "June 2026" (no Date parsing; avoids timezone drift). */
 function formatMonthYear(iso: string): string {
   const [year, month] = iso.split("-");
   const m = Number(month);
   return m >= 1 && m <= 12 ? `${MONTHS[m - 1]} ${year}` : iso;
 }
 
+/**
+ * Render a /texas/:city/:service combo page (Service + LocalBusiness +
+ * BreadcrumbList + FAQPage + Speakable schema, cross-links) or a noindex
+ * not-found fallback for an unknown city/service pair.
+ */
 export function CityServiceDetail() {
   const { city, service } = useParams<{ city: string; service: string }>();
   const combo = COMBOS.find((c) => c.city === city && c.service === service);

@@ -19,6 +19,7 @@ import {
  * verify and read every review.
  */
 
+/** Render a 5-star rating row (filled vs muted stars) with an accessible label. */
 function Stars({ count = 5, label }: { count?: number; label?: string }) {
   return (
     <div className="flex items-center gap-1" role="img" aria-label={label ?? `${count} out of 5 stars`}>
@@ -33,6 +34,7 @@ function Stars({ count = 5, label }: { count?: number; label?: string }) {
   );
 }
 
+/** Render the /reviews page from the shared real testimonials + Review/AggregateRating schema. */
 export function Reviews() {
   const schemas: object[] = [buildReviewsLocalBusiness(testimonials)];
 
