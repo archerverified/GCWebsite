@@ -124,7 +124,7 @@ const GROUPS = buildGroups();
 const ALL_FAQS: FAQ[] = GROUPS.flatMap((g) => g.faqs);
 
 /**
- * FAQPage schema must not repeat the same question — Google ignores a FAQ rich
+ * FAQPage schema must not repeat the same question. Google ignores a FAQ rich
  * result that contains duplicate Question entities. Several questions recur
  * across city/service groups (e.g. "Can you fix a garage door that won't
  * open?"), so we dedupe by normalized question text for the SCHEMA ONLY. Every
