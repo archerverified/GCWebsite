@@ -14,6 +14,10 @@ import { Seo } from "../components/seo/Seo";
 import { createServiceSchema, createBreadcrumbSchema, createFAQSchema, buildSpeakableWebPage } from "../seo/schemas";
 import { CONTENT_LAST_UPDATED_ISO, CONTENT_LAST_UPDATED_LABEL } from "../seo/site";
 
+/**
+ * Render a /services/:slug page from services-<slug>.json: Service + FAQ +
+ * Speakable schema, intro, sections, and per-city combo links (pilot services).
+ */
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: content, loading, error } = useContent<MarkdownContent>(`services-${slug}`);

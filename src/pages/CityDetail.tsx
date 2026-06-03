@@ -63,7 +63,7 @@ function generateServiceAreaMapUrl(hubSlug: string, hubName: string): string {
   return `https://www.google.com/maps?q=${encodeURIComponent(hubName + ', TX')}&t=m&z=10&output=embed`;
 }
 
-// Helper to extract city name from slug
+/** Title-case a city slug into a display name (fallback when the hub is unknown). */
 const getCityDisplayName = (slug: string): string => {
   return slug
     .split('-')
@@ -71,6 +71,10 @@ const getCityDisplayName = (slug: string): string => {
     .join(' ');
 };
 
+/**
+ * Render a /texas/:city hub page from city-<slug>.json: city Service + FAQ
+ * schema, intro, sections, combo deep links (pilot cities), subareas and map.
+ */
 export function CityDetail() {
   const { city } = useParams<{ city: string }>();
   const { data: content, loading, error } = useContent<MarkdownContent>(`city-${city}`);
