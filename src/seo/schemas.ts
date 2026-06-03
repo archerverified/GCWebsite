@@ -524,6 +524,191 @@ export function createBlogListSchema() {
 }
 
 // ============================================================================
+// Shared building blocks (single source for new-page schemas)
+// ============================================================================
+
+/**
+ * Owner-verified Google Business Profile rating: 5.0 across 24 reviews.
+ * Mirrors the #localbusiness node in buildBaseGraph() and REVIEW_SUMMARY in
+ * src/data/testimonials.ts. Keep all three in lockstep.
+ */
+export const AGGREGATE_RATING = {
+  "@type": "AggregateRating",
+  "ratingValue": "5.0",
+  "reviewCount": "24",
+  "bestRating": "5",
+  "worstRating": "1",
+};
+
+const POSTAL_ADDRESS = {
+  "@type": "PostalAddress",
+  "streetAddress": "801 W Vickery Blvd",
+  "addressLocality": "Fort Worth",
+  "addressRegion": "TX",
+  "postalCode": "76104",
+  "addressCountry": "US",
+};
+
+const GEO_COORDINATES = {
+  "@type": "GeoCoordinates",
+  "latitude": "32.7555",
+  "longitude": "-97.3308",
+};
+
+const OPENING_HOURS_24_7 = {
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  "opens": "00:00",
+  "closes": "23:59",
+};
+
+const BUSINESS_IMAGE = {
+  "@type": "ImageObject",
+  "url": `${SITE_URL}/social-preview.png`,
+  "width": 1200,
+  "height": 630,
+};
+
+// ============================================================================
+// Guide (Article) + Reviews + City-Service combo schema builders
+// ============================================================================
+
+/**
+ * Build Article schema for the /guides/* buyer guides. Author is the founder
+ * (Deno Borghi) for E-E-A-T; publisher is the Garage Cowboy Organization.
+ */
+export function buildArticleSchema(opts: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": opts.headline,
+    "description": opts.description,
+    "author": {
+      "@type": "Person",
+      "name": "Deno Borghi",
+      "jobTitle": "President",
+      "url": `${SITE_URL}/about-us`,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": `${SITE_URL}#organization`,
+      "name": BUSINESS_INFO.businessName,
+      "logo": BUSINESS_IMAGE,
+    },
+    "datePublished": opts.datePublished,
+    "dateModified": opts.dateModified,
+    "image": BUSINESS_IMAGE,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}${opts.path}`,
+    },
+  };
+}
+
+/**
+ * Build the LocalBusiness node for the /reviews page: the canonical
+ * #localbusiness entity carrying the aggregateRating (5.0/24) plus the real,
+ * attributed reviews shown on the page. A 5.0 average across 24 reviews means
+ * every review is 5 stars, so each displayed review is marked 5/5 truthfully.
+ */
+export function buildReviewsLocalBusiness(
+  reviews: Array<{ author: string; fullReview: string; source: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": `${SITE_URL}#localbusiness`,
+    "name": BUSINESS_INFO.businessName,
+    "url": `${SITE_URL}/reviews`,
+    "telephone": BUSINESS_INFO.telephone,
+    "email": BUSINESS_INFO.email,
+    "priceRange": BUSINESS_INFO.priceRange,
+    "address": POSTAL_ADDRESS,
+    "geo": GEO_COORDINATES,
+    "image": BUSINESS_IMAGE,
+    "sameAs": BUSINESS_INFO.sameAs,
+    "openingHoursSpecification": OPENING_HOURS_24_7,
+    "aggregateRating": AGGREGATE_RATING,
+    "review": reviews.map((r) => ({
+      "@type": "Review",
+      "author": { "@type": "Person", "name": r.author },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1",
+      },
+      "reviewBody": r.fullReview,
+      "publisher": { "@type": "Organization", "name": r.source },
+    })),
+  };
+}
+
+/**
+ * Build a city-scoped LocalBusiness node for a /texas/:city/:service combo page.
+ * Uses the canonical #localbusiness @id (so the page's Service.provider resolves
+ * to it) and carries the same aggregateRating, with areaServed narrowed to the
+ * combo's city.
+ */
+export function buildComboLocalBusiness(cityName: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": `${SITE_URL}#localbusiness`,
+    "name": BUSINESS_INFO.businessName,
+    "url": SITE_URL,
+    "telephone": BUSINESS_INFO.telephone,
+    "email": BUSINESS_INFO.email,
+    "priceRange": BUSINESS_INFO.priceRange,
+    "address": POSTAL_ADDRESS,
+    "geo": GEO_COORDINATES,
+    "image": BUSINESS_IMAGE,
+    "sameAs": BUSINESS_INFO.sameAs,
+    "openingHoursSpecification": OPENING_HOURS_24_7,
+    "aggregateRating": AGGREGATE_RATING,
+    "areaServed": { "@type": "City", "name": cityName, "addressRegion": "TX" },
+  };
+}
+
+/**
+ * Build the Service schema for a /texas/:city/:service combo page. areaServed is
+ * the single combo city; provider links to the on-page #localbusiness node.
+ */
+export function buildComboServiceSchema(opts: {
+  serviceName: string;
+  description: string;
+  path: string;
+  cityName: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": opts.serviceName,
+    "provider": { "@id": `${SITE_URL}#localbusiness` },
+    "areaServed": { "@type": "City", "name": opts.cityName, "addressRegion": "TX" },
+    "description": opts.description,
+    "dateModified": opts.dateModified,
+    "url": `${SITE_URL}${opts.path}`,
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceLocation": {
+        "@type": "Place",
+        "name": `${opts.cityName}, TX`,
+      },
+      "servicePhone": BUSINESS_INFO.telephone,
+      "serviceUrl": `${SITE_URL}${opts.path}`,
+    },
+  };
+}
+
+// ============================================================================
 // Helpers
 // ============================================================================
 

@@ -14,6 +14,14 @@ import { buildCityServiceSchema, createFAQSchema } from "../seo/schemas";
 import { SUBAREAS_BY_HUB, getHubBySlug } from "../seo/areas";
 import { ServiceAreasGrid } from "../components/sections/ServiceAreasGrid";
 import { ServiceAreaMap } from "../components/maps/ServiceAreaMap";
+import { ArrowRight } from "lucide-react";
+import combosData from "../data/combos.json";
+
+/** Short link labels for the combo services available in a city. */
+const COMBO_SERVICE_LABELS: Record<string, string> = {
+  "broken-spring-repair": "Broken Spring Repair",
+  "opener-repair-installation": "Opener Repair & Installation",
+};
 
 /**
  * Hub map configurations with center coordinates and zoom levels.
@@ -75,7 +83,12 @@ export function CityDetail() {
   const hub = getHubBySlug(citySlug);
   const cityName = hub?.name || getCityDisplayName(citySlug);
   const subcities = SUBAREAS_BY_HUB[citySlug] ?? [];
-  
+
+  // City + service combo pages available for this hub (pilot cities only).
+  const cityCombos = (combosData.combos as { city: string; service: string }[]).filter(
+    (c) => c.city === citySlug,
+  );
+
   // Generate map URL showing hub city boundary + surrounding service area
   const mapSrc = generateServiceAreaMapUrl(citySlug, cityName);
 
@@ -164,6 +177,31 @@ export function CityDetail() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* City + service combo pages (pilot cities): deep links into the
+          most-requested services for this city. */}
+      {cityCombos.length > 0 && (
+        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink mb-8 text-center">
+              Popular Garage Door Services in {cityName}
+            </h2>
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {cityCombos.map((combo) => (
+                <li key={combo.service}>
+                  <Link
+                    to={`/texas/${combo.city}/${combo.service}`}
+                    className="flex min-h-11 items-center justify-between gap-2 rounded-[var(--radius-gc-md)] border-2 border-gc-ink bg-white px-5 py-4 font-product-sans font-bold text-gc-ink transition-colors hover:bg-gc-yellow"
+                  >
+                    {COMBO_SERVICE_LABELS[combo.service] ?? combo.service} in {cityName}
+                    <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}

@@ -17,6 +17,10 @@ const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Con
 const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.NotFound })));
 const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));
 const BlogPost = lazy(() => import("./pages/BlogPost").then(m => ({ default: m.BlogPost })));
+const Faq = lazy(() => import("./pages/Faq").then(m => ({ default: m.Faq })));
+const Reviews = lazy(() => import("./pages/Reviews").then(m => ({ default: m.Reviews })));
+const GuideDetail = lazy(() => import("./pages/GuideDetail").then(m => ({ default: m.GuideDetail })));
+const CityServiceDetail = lazy(() => import("./pages/CityServiceDetail").then(m => ({ default: m.CityServiceDetail })));
 
 // Loading fallback component
 function PageLoader() {
@@ -43,6 +47,7 @@ export default function App() {
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/texas" element={<Texas />} />
             <Route path="/texas/:city" element={<CityDetail />} />
+            <Route path="/texas/:city/:service" element={<CityServiceDetail />} />
             <Route path="/residential" element={<Residential />} />
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/contact" element={<Contact />} />
@@ -51,6 +56,9 @@ export default function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/guides/:slug" element={<GuideDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

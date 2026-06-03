@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { cn } from "./ui/utils";
+import { testimonials } from "../data/testimonials";
 
 function pad2(n: number) {
   return String(n).padStart(2, "0");
@@ -60,57 +61,6 @@ function buildTimeSlots(): Array<{ value: string; label: string }> {
 
   return slots;
 }
-
-const testimonials = [
-  {
-    quote: "Great price, professional and courteous.",
-    author: "T. Bradley",
-    fullReview:
-      "Deno and crew did a great job. They arrived on time and finished in a timely manner. Great price, professional and courteous. Would highly recommend his company.",
-  },
-  {
-    quote: "Fast, accurate, and extremely reasonable pricing.",
-    author: "Yeon Young Kim",
-    fullReview:
-      "Our garage door was completely broken, and Deno responded very quickly. He handled everything promptly and professionally, and I am extremely satisfied. Excellent service at a very reasonable price.",
-  },
-  {
-    quote: "He almost totally redid both doors.",
-    author: "Linda W.",
-    fullReview:
-      "Oh my goodness, this guy is AMAZING. I had all kinds of problems with both doors and he almost totally redid them. Very reasonably priced. I would totally recommend him.",
-  },
-  {
-    quote: "Arrived early, finished quickly, pricing couldn't be beat.",
-    author: "Katrina M.",
-    fullReview:
-      "Deno was friendly and professional. He arrived early and finished quickly. His pricing couldn't be beat! Highly recommend!",
-  },
-  {
-    quote: "Local, honest, and not a big franchise.",
-    author: "Cliff C.",
-    fullReview:
-      "I was looking for a local garage door contractor to replace a broken spring. Came across Garage Cowboy and decided to give them a call. Don't let the lack of reviews fool you—Deno is local and not part of one of the big franchises.",
-  },
-  {
-    quote: "Best prices in town & comes out right away for emergencies.",
-    author: "Dee",
-    fullReview:
-      "Garage Cowboy is the best for fixing garage repairs or replacing the garage door in general. He literally comes out right away for emergencies and has the best prices in town. Very kind and knowledgeable.",
-  },
-  {
-    quote: "Very knowledgeable, even with 25-year-old equipment.",
-    author: "Anthony R. (Local Guide)",
-    fullReview:
-      "Deno was very knowledgeable about my garage door issue, even though my equipment was 25 years old. He offered multiple options and pricing. Definitely A1 in the garage business.",
-  },
-  {
-    quote: "Helped when a DIY project became too much.",
-    author: "Eric S.",
-    fullReview:
-      "I thought I could handle a large roll-up door myself and quickly realized it was too much. Deno was extremely helpful and got everything installed quickly and affordably.",
-  },
-];
 
 // Shared brand look for every form control — heavy ink border, frosted-white
 // well over the yellow panel, token radius/shadow, and a high-visibility yellow
