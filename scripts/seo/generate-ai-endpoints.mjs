@@ -5,11 +5,13 @@
  * Emits:
  *   public/llms-full.txt        deeper variant of llms.txt (+ per-service and
  *                               per-hub-city detail, plus the full FAQ — every
- *                               home + service Q&A — pulled from src/data)
+ *                               home, service, city and service-area Q&A —
+ *                               pulled from src/data)
  *   public/.well-known/ai.txt   minimal AI-usage / discovery declaration
  *   public/ai/summary.json      machine-readable business summary
- *   public/ai/faq.json          ALL home + service FAQs, grouped/tagged by
- *                               service: {business, url, count, groups[]}
+ *   public/ai/faq.json          EVERY site FAQ (home + service + city +
+ *                               service-area pages), grouped/tagged by source
+ *                               page: {business, url, count, groups[]}
  *
  * VERIFIED FACTS ONLY. The deeper detail is pulled verbatim/summarized from the
  * existing page content in src/data — nothing new is invented here.
@@ -23,6 +25,7 @@ import {
   BUSINESS,
   SUBAREAS_BY_HUB,
   SERVICES,
+  KEY_URLS,
   cityHubs,
 } from './site-data.mjs';
 import { buildLlmsTxt } from './generate-llms.mjs';
@@ -31,6 +34,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..', '..');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 const DATA_DIR = path.join(ROOT_DIR, 'src', 'data');
+
+// Index/overview pages whose FAQs round out the set: the All-Services and
+// Texas-Service-Areas hubs. The group label + canonical path come from
+// KEY_URLS (site-data) so they can't drift from the site's own nav; only the
+// data filename lives here.
+const OVERVIEW_PAGES = [
+  { keyUrl: '/services', file: 'services.json' },
+  { keyUrl: '/texas', file: 'texas.json' },
+];
 
 async function readJson(file) {
   return JSON.parse(await fs.readFile(file, 'utf-8'));
@@ -98,26 +110,39 @@ async function loadServiceData() {
   return services;
 }
 
+/** Read every city-<slug>.json once, paired with its canonical hub name. */
+async function loadCityData() {
+  const cities = [];
+  for (const { name, slug, state } of cityHubs()) {
+    const data = await tryReadJson(path.join(DATA_DIR, `city-${slug}.json`));
+    cities.push({ name, slug, state, data });
+  }
+  return cities;
+}
+
 /**
- * Aggregate ALL site FAQs from their single source (src/data) into groups,
- * tagged by the service each question belongs to. The home / general FAQ
- * (src/data/faq.json) is one group; each service's `faqs` array is another.
+ * Aggregate EVERY site FAQ from its single source (src/data) into groups,
+ * tagged by the page each question belongs to:
+ *   - home / general FAQ     (src/data/faq.json)             -> "General"
+ *   - one group per service  (src/data/services-<slug>.json) -> service name
+ *   - one group per hub city (src/data/city-<slug>.json)     -> "City, TX"
+ *   - All-Services + Texas-Service-Areas index pages         -> KEY_URLS title
  * No FAQ text lives in this generator — it is read verbatim from the
  * page-content JSON. Answers are passed through untouched; only all-caps
  * questions are sentence-cased for the machine output (see toSentenceCase).
  */
-async function collectFaqGroups(services) {
+async function collectFaqGroups(services, cities) {
   const groups = [];
+  const mapFaqs = (faqs) =>
+    faqs.map((f) => ({ question: toSentenceCase(f.question), answer: f.answer }));
 
+  // Home / general FAQ.
   const home = await tryReadJson(path.join(DATA_DIR, 'faq.json'));
   if (Array.isArray(home) && home.length > 0) {
-    groups.push({
-      category: 'General',
-      url: `${SITE_URL}/`,
-      faqs: home.map((f) => ({ question: toSentenceCase(f.question), answer: f.answer })),
-    });
+    groups.push({ category: 'General', url: `${SITE_URL}/`, faqs: mapFaqs(home) });
   }
 
+  // One group per service page.
   for (const { name, slug, data } of services) {
     const faqs = data && Array.isArray(data.faqs) ? data.faqs : [];
     if (faqs.length === 0) continue;
@@ -125,20 +150,52 @@ async function collectFaqGroups(services) {
       category: name,
       service: slug,
       url: `${SITE_URL}/services/${slug}`,
-      faqs: faqs.map((f) => ({ question: toSentenceCase(f.question), answer: f.answer })),
+      faqs: mapFaqs(faqs),
     });
+  }
+
+  // One group per hub city page (/texas/<slug>).
+  for (const { name, slug, state, data } of cities) {
+    const faqs = data && Array.isArray(data.faqs) ? data.faqs : [];
+    if (faqs.length === 0) {
+      // Surface drift: an expected hub city contributed nothing (missing /
+      // emptied city-<slug>.json) so a silently dropped group is visible.
+      console.warn(`⚠️  No FAQs for hub city "${slug}" (city-${slug}.json) — group omitted.`);
+      continue;
+    }
+    groups.push({
+      category: `${name}, ${state}`,
+      hub: slug,
+      url: `${SITE_URL}/texas/${slug}`,
+      faqs: mapFaqs(faqs),
+    });
+  }
+
+  // Index / overview pages (All Services, Texas Service Areas). Label + path
+  // come from KEY_URLS so they stay in lockstep with the site nav.
+  for (const { keyUrl, file } of OVERVIEW_PAGES) {
+    const meta = KEY_URLS.find((u) => u.path === keyUrl);
+    const data = await tryReadJson(path.join(DATA_DIR, file));
+    const faqs = data && Array.isArray(data.faqs) ? data.faqs : [];
+    if (!meta || faqs.length === 0) {
+      // Surface drift: a renamed KEY_URL or missing/empty index page would
+      // otherwise drop this group (and the total count) without a trace.
+      console.warn(`⚠️  No FAQs / missing KEY_URL for overview page ${keyUrl} (${file}) — group omitted.`);
+      continue;
+    }
+    groups.push({ category: meta.title, url: `${SITE_URL}${meta.path}`, faqs: mapFaqs(faqs) });
   }
 
   return groups;
 }
 
-/** The combined FAQ machine endpoint: grouped + tagged by service. */
+/** The combined FAQ machine endpoint: grouped + tagged by source page. */
 function buildFaqJson(faqGroups) {
   const count = faqGroups.reduce((n, g) => n + g.faqs.length, 0);
   return { business: BUSINESS.name, url: SITE_URL, count, groups: faqGroups };
 }
 
-async function buildLlmsFull(services, faqGroups) {
+async function buildLlmsFull(services, cities, faqGroups) {
   // Reuse the exact llms.txt base, retitle it, and strip its end marker so we
   // can append the deeper detail.
   let out = buildLlmsTxt()
@@ -159,17 +216,16 @@ async function buildLlmsFull(services, faqGroups) {
     out += `\n`;
   }
 
-  // Per-hub-city detail
+  // Per-hub-city detail (cities preloaded once; shared with the FAQ section)
   out += `## Service Area Detail by Hub City\n\n`;
-  for (const hub of cityHubs()) {
-    const city = await tryReadJson(path.join(DATA_DIR, `city-${hub.slug}.json`));
-    out += `### ${hub.name}, ${hub.state}\n`;
-    out += `URL: ${SITE_URL}/texas/${hub.slug}\n`;
-    if (city) {
-      const summary = plainSummary(city.intro || '');
+  for (const { name, slug, state, data } of cities) {
+    out += `### ${name}, ${state}\n`;
+    out += `URL: ${SITE_URL}/texas/${slug}\n`;
+    if (data) {
+      const summary = plainSummary(data.intro || '');
       if (summary) out += `${summary}\n`;
     }
-    const subs = SUBAREAS_BY_HUB[hub.slug];
+    const subs = SUBAREAS_BY_HUB[slug];
     if (subs && subs.length > 0) out += `Also serving: ${subs.join(', ')}\n`;
     out += `\n`;
   }
@@ -246,10 +302,11 @@ async function generate() {
 
   // Load page-content once; both llms-full.txt and ai/faq.json read from it.
   const services = await loadServiceData();
-  const faqGroups = await collectFaqGroups(services);
+  const cities = await loadCityData();
+  const faqGroups = await collectFaqGroups(services, cities);
 
   // 1) llms-full.txt
-  const full = await buildLlmsFull(services, faqGroups);
+  const full = await buildLlmsFull(services, cities, faqGroups);
   await fs.writeFile(path.join(PUBLIC_DIR, 'llms-full.txt'), full, 'utf-8');
 
   // 2) .well-known/ai.txt
@@ -262,8 +319,8 @@ async function generate() {
     'utf-8'
   );
 
-  // 4) ai/faq.json — ALL home + service FAQs, single-sourced from src/data,
-  //    grouped and tagged by service.
+  // 4) ai/faq.json — EVERY site FAQ (home + service + city + service-area),
+  //    single-sourced from src/data, grouped and tagged by source page.
   const faqJson = buildFaqJson(faqGroups);
   await fs.writeFile(
     path.join(PUBLIC_DIR, 'ai', 'faq.json'),

@@ -1,7 +1,7 @@
 {
   "business": "Garage Cowboy",
   "url": "https://garagecowboy.com",
-  "count": 83,
+  "count": 151,
   "groups": [
     {
       "category": "General",
@@ -394,6 +394,395 @@
         {
           "question": "Do you offer garage door maintenance across DFW?",
           "answer": "Yes. We provide garage door maintenance and tune-ups throughout the Dallas–Fort Worth metroplex, including Fort Worth, Arlington, Dallas, Keller, Mansfield, and nearby areas."
+        }
+      ]
+    },
+    {
+      "category": "Dallas, TX",
+      "hub": "dallas",
+      "url": "https://garagecowboy.com/texas/dallas",
+      "faqs": [
+        {
+          "question": "Do you serve Dallas and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Dallas and nearby areas such as Addison, Farmers Branch, Cedar Hill, DeSoto, and Duncanville."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Dallas?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Dallas, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Dallas?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Dallas and the greater DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Fort Worth, TX",
+      "hub": "fort-worth",
+      "url": "https://garagecowboy.com/texas/fort-worth",
+      "faqs": [
+        {
+          "question": "Do you serve Fort Worth and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Fort Worth and nearby areas such as Benbrook, White Settlement, Saginaw, and Lake Worth."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Fort Worth?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Fort Worth, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Fort Worth and the greater DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Arlington, TX",
+      "hub": "arlington",
+      "url": "https://garagecowboy.com/texas/arlington",
+      "faqs": [
+        {
+          "question": "Do you serve Arlington and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Arlington and nearby areas such as Kennedale, Pantego, and Dalworthington Gardens."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Arlington?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Arlington, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Arlington and the greater DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Plano, TX",
+      "hub": "plano",
+      "url": "https://garagecowboy.com/texas/plano",
+      "faqs": [
+        {
+          "question": "Do you serve Plano and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Plano and nearby areas such as Richardson, Allen, Addison, Murphy, and Wylie."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Plano?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Plano, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Plano?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Plano and the greater North DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Irving, TX",
+      "hub": "irving",
+      "url": "https://garagecowboy.com/texas/irving",
+      "faqs": [
+        {
+          "question": "Do you serve Irving and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Irving and nearby areas such as Coppell, Farmers Branch, Euless, Bedford, and Grand Prairie."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Irving?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Irving, depending on availability and parts required."
+        },
+        {
+          "question": "Can you service commercial garage doors in Irving?",
+          "answer": "Yes. We handle residential and light-commercial garage door systems throughout Irving and the Mid-Cities."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        }
+      ]
+    },
+    {
+      "category": "Frisco, TX",
+      "hub": "frisco",
+      "url": "https://garagecowboy.com/texas/frisco",
+      "faqs": [
+        {
+          "question": "Do you serve Frisco and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Frisco and nearby areas such as The Colony, Prosper, Little Elm, and parts of McKinney."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Frisco?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Frisco, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Frisco?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Frisco and the greater North DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Grand Prairie, TX",
+      "hub": "grand-prairie",
+      "url": "https://garagecowboy.com/texas/grand-prairie",
+      "faqs": [
+        {
+          "question": "Do you serve Grand Prairie and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Grand Prairie and nearby Mid-Cities areas, including Irving, Arlington, and Coppell."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Grand Prairie?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Grand Prairie, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and fix it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Grand Prairie and the greater DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Keller, TX",
+      "hub": "keller",
+      "url": "https://garagecowboy.com/texas/keller",
+      "faqs": [
+        {
+          "question": "Do you serve Keller and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Keller and nearby areas such as Southlake, Colleyville, Watauga, and North Richland Hills."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Keller?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Keller, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Keller?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Keller and the greater DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Mansfield, TX",
+      "hub": "mansfield",
+      "url": "https://garagecowboy.com/texas/mansfield",
+      "faqs": [
+        {
+          "question": "Do you serve Mansfield and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Mansfield and nearby areas such as Arlington, Kennedale, Midlothian, and Cedar Hill."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Mansfield?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Mansfield, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Mansfield?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout Mansfield and the greater DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Weatherford, TX",
+      "hub": "weatherford",
+      "url": "https://garagecowboy.com/texas/weatherford",
+      "faqs": [
+        {
+          "question": "Do you serve Weatherford and nearby cities?",
+          "answer": "Yes. We regularly service homes and properties throughout Weatherford and nearby areas such as Willow Park, Aledo, Springtown, Brock, and Peaster."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Weatherford?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Weatherford, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle residential and rural garage doors?",
+          "answer": "Yes. We service residential, detached, and light-commercial garage door systems throughout Weatherford and surrounding areas."
+        }
+      ]
+    },
+    {
+      "category": "Denton, TX",
+      "hub": "denton",
+      "url": "https://garagecowboy.com/texas/denton",
+      "faqs": [
+        {
+          "question": "Do you serve Denton and nearby cities?",
+          "answer": "Yes. We regularly service homes and properties throughout Denton and nearby areas such as Corinth, Highland Village, Argyle, Aubrey, and Krum."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Denton?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Denton, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle rental and light-commercial garage doors in Denton?",
+          "answer": "Yes. We service residential, rental, and light-commercial garage door systems throughout Denton and the greater North DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Southlake, TX",
+      "hub": "southlake",
+      "url": "https://garagecowboy.com/texas/southlake",
+      "faqs": [
+        {
+          "question": "Do you serve Southlake and nearby cities?",
+          "answer": "Yes. We regularly service homes throughout Southlake and nearby areas such as Colleyville, Trophy Club, Westlake, Keller, and Coppell."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Southlake?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Southlake, depending on availability and parts required."
+        },
+        {
+          "question": "Can you service custom or oversized garage doors?",
+          "answer": "Absolutely. We regularly service heavier, insulated, and custom garage door systems common in Southlake homes."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Southlake?",
+          "answer": "Yes. We service residential and select commercial garage door systems throughout Southlake and the surrounding area."
+        }
+      ]
+    },
+    {
+      "category": "Burleson, TX",
+      "hub": "burleson",
+      "url": "https://garagecowboy.com/texas/burleson",
+      "faqs": [
+        {
+          "question": "Do you serve Burleson and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout Burleson and nearby areas such as Crowley, Joshua, Everman, and Alvarado."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Burleson?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Burleson, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Burleson?",
+          "answer": "Yes. We service both residential and light-commercial garage door systems throughout Burleson and the greater South DFW area."
+        }
+      ]
+    },
+    {
+      "category": "Cleburne, TX",
+      "hub": "cleburne",
+      "url": "https://garagecowboy.com/texas/cleburne",
+      "faqs": [
+        {
+          "question": "Do you serve Cleburne and nearby cities?",
+          "answer": "Yes. We regularly service homes and properties throughout Cleburne and nearby areas such as Joshua, Alvarado, Venus, Keene, and Godley."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in Cleburne?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in Cleburne, depending on availability and parts required."
+        },
+        {
+          "question": "Can you service older or detached garage doors?",
+          "answer": "Absolutely. We regularly service older systems, detached garages, and heavier doors common in the Cleburne area."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in Cleburne?",
+          "answer": "Yes. We service residential and light-commercial garage door systems throughout Cleburne and the surrounding area."
+        }
+      ]
+    },
+    {
+      "category": "McKinney, TX",
+      "hub": "mckinney",
+      "url": "https://garagecowboy.com/texas/mckinney",
+      "faqs": [
+        {
+          "question": "Do you serve McKinney and nearby cities?",
+          "answer": "Yes. We regularly service homes and businesses throughout McKinney and nearby areas such as Allen, Prosper, Celina, Melissa, and Anna."
+        },
+        {
+          "question": "Do you offer same-day garage door repair in McKinney?",
+          "answer": "Yes. Same-day service is available for many garage door repairs in McKinney, depending on availability and parts required."
+        },
+        {
+          "question": "Can you fix a garage door that won’t open?",
+          "answer": "Absolutely. Garage doors that won’t open are often caused by broken springs, cable issues, or opener problems. We’ll diagnose the issue and repair it safely."
+        },
+        {
+          "question": "Do you handle both residential and commercial garage doors in McKinney?",
+          "answer": "Yes. We service both residential and commercial garage door systems throughout McKinney and the greater North DFW area."
+        }
+      ]
+    },
+    {
+      "category": "All Services",
+      "url": "https://garagecowboy.com/services",
+      "faqs": [
+        {
+          "question": "Do you really offer after-hours emergency service with no extra charge?",
+          "answer": "Yes. We provide after-hours emergency garage door service at no additional charge. You’ll always receive clear, upfront pricing before any work begins."
+        },
+        {
+          "question": "What should I do if my garage door is stuck open at night?",
+          "answer": "Stop using the door and contact us immediately. A stuck-open garage door is a security risk, and forcing it can cause further damage."
+        },
+        {
+          "question": "Can emergency repairs be completed the same visit?",
+          "answer": "In many cases, yes. If parts are available, we aim to complete permanent repairs during the emergency visit. If not, we’ll secure the door safely and schedule follow-up service."
+        },
+        {
+          "question": "Do you provide emergency service for commercial garage doors?",
+          "answer": "Yes. We service residential and light-commercial garage door systems across DFW."
+        }
+      ]
+    },
+    {
+      "category": "Texas Service Areas",
+      "url": "https://garagecowboy.com/texas",
+      "faqs": [
+        {
+          "question": "Do you service the entire DFW metroplex?",
+          "answer": "Yes. We provide garage door repair and installation services throughout the Dallas–Fort Worth area, including Fort Worth, Dallas, Plano, Frisco, Arlington, and surrounding cities."
+        },
+        {
+          "question": "Do you offer same-day garage door repair across DFW?",
+          "answer": "Yes. Same-day service is available in many areas across DFW, depending on technician availability and the parts required."
+        },
+        {
+          "question": "Can you service both residential and commercial garage doors?",
+          "answer": "Yes. We handle residential, commercial, and light-industrial garage door systems throughout the metroplex."
+        },
+        {
+          "question": "What should I do if my garage door won’t open?",
+          "answer": "Stop using the door and contact a professional. Forcing a stuck garage door can cause further damage or injury. We can safely diagnose and repair the issue."
         }
       ]
     }
