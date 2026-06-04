@@ -619,17 +619,17 @@ export function AppointmentBookingSection({
 
             <div className="relative max-w-4xl mx-auto">
               <div className="text-center mb-6">
-                <p className="font-['Product_Sans:Bold'] text-lg md:text-xl text-black mb-3 italic">
+                <p className="font-product-sans font-bold text-lg md:text-xl text-black mb-3 italic">
                   "{testimonials[currentSlide].quote}"
                 </p>
-                <p className="font-['Product_Sans:Regular'] text-base md:text-lg text-black">
+                <p className="font-product-sans text-base md:text-lg text-black">
                   <span className="text-sm">--</span> {testimonials[currentSlide].author}
                 </p>
               </div>
 
               <div className="overflow-hidden min-h-[100px] mb-6">
                 <div className="text-center">
-                  <p className="font-['Product_Sans_Regular'] italic text-base md:text-lg lg:text-xl text-black leading-relaxed">
+                  <p className="font-product-sans italic text-base md:text-lg lg:text-xl text-black leading-relaxed">
                     "{testimonials[currentSlide].fullReview}"
                   </p>
                 </div>

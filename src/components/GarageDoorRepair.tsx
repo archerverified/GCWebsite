@@ -239,13 +239,13 @@ export function GarageDoorRepair() {
 
         {/* Call to Action */}
         <div className="mt-12 lg:mt-20 text-center">
-          <h2 className="font-['Product_Sans_Regular'] text-3xl md:text-4xl lg:text-5xl text-gc-ink uppercase mb-8 font-extrabold">
+          <h2 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-gc-ink uppercase mb-8">
             NEED HELP NOW?
           </h2>
 
           <Card className="border-2 border-gc-yellow rounded-[var(--radius-gc-md)] shadow-gc-card max-w-3xl mx-auto">
             <CardContent className="p-8">
-              <p className="font-['Product_Sans_Regular'] text-xl md:text-2xl text-gc-ink mb-6">
+              <p className="font-product-sans text-xl md:text-2xl text-gc-ink mb-6">
                 Call one of our neighborhood technicians in your area
               </p>
 

@@ -27,10 +27,10 @@ export function ServiceAreasSection() {
       <div className="container mx-auto max-w-6xl lg:px-16 px-8 py-[27px] my-[0px]">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-['Product_Sans_Medium:Regular'] text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-2 font-[Product_Sans_Black]">
+          <h2 className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-2">
             SERVICE AREAS IN TEXAS
           </h2>
-          <p className="font-['Product_Sans_Black:Regular'] text-3xl md:text-4xl lg:text-5xl text-gc-yellow underline decoration-solid font-[Product_Sans_Black]">
+          <p className="font-product-sans font-black text-3xl md:text-4xl lg:text-5xl text-gc-yellow underline decoration-solid">
             (MAJOR HUBS)
           </p>
         </div>
@@ -46,7 +46,7 @@ export function ServiceAreasSection() {
                 </svg>
                 <Link
                   to={`/texas/${city.slug}`}
-                  className="font-['Product_Sans:Regular'] text-4xl md:text-5xl lg:text-6xl text-white leading-7 px-[0px] py-[10px] font-[Product_Sans] hover:text-gc-yellow transition-colors"
+                  className="font-product-sans text-4xl md:text-5xl lg:text-6xl text-white leading-7 px-[0px] py-[10px] hover:text-gc-yellow transition-colors"
                   style={{ textDecoration: 'none' }}
                 >
                   {city.name}
@@ -64,7 +64,7 @@ export function ServiceAreasSection() {
                 </svg>
                 <Link
                   to={`/texas/${city.slug}`}
-                  className="font-['Product_Sans:Regular'] text-4xl md:text-5xl lg:text-6xl text-white leading-7 px-[0px] py-[10px] font-[Product_Sans] hover:text-gc-yellow transition-colors"
+                  className="font-product-sans text-4xl md:text-5xl lg:text-6xl text-white leading-7 px-[0px] py-[10px] hover:text-gc-yellow transition-colors"
                   style={{ textDecoration: 'none' }}
                 >
                   {city.name}
