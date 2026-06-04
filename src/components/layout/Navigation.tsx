@@ -24,8 +24,12 @@ export function Navigation() {
   // Check if current path starts with the given path (for dropdown parent highlighting)
   const isPathActive = (path: string) => location.pathname.startsWith(path);
 
+  // Desktop nav links are pinned to a literal 16px (text-[1rem]) rather than
+  // the `text-base` token: the body type scale was nudged up for readability,
+  // but the nav row is space-constrained (8 links + 2 menus + CTA must fit at
+  // >=lg without clipping), so this chrome stays at its tuned size.
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `font-product-sans font-bold text-base uppercase whitespace-nowrap transition-colors rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
+    `font-product-sans font-bold text-[1rem] uppercase whitespace-nowrap transition-colors rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
       isActive ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
     }`;
 
@@ -57,7 +61,7 @@ export function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("services")}
-                className={`font-product-sans font-bold text-base uppercase whitespace-nowrap transition-colors flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
+                className={`font-product-sans font-bold text-[1rem] uppercase whitespace-nowrap transition-colors flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
                   isPathActive("/services") ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
                 }`}
                 aria-expanded={activeDropdown === "services"}
@@ -96,7 +100,7 @@ export function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("texas")}
-                className={`font-product-sans font-bold text-base uppercase whitespace-nowrap transition-colors flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
+                className={`font-product-sans font-bold text-[1rem] uppercase whitespace-nowrap transition-colors flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-gc-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-gc-ink ${
                   isPathActive("/texas") ? "text-gc-yellow" : "text-white hover:text-gc-yellow"
                 }`}
                 aria-expanded={activeDropdown === "texas"}

@@ -190,6 +190,13 @@
   --shadow-gc-card: 0px 2px 5px 0px #535458;
   --shadow-gc-faq: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
   --font-family-sans: "Product Sans", sans-serif;
+  /* Body type scale — nudged up one notch for desktop readability. Only the
+     body/description range (base + lg) grows; headings (text-2xl and up) are
+     left at their defaults so the type hierarchy is preserved. Line-heights
+     are inherited from the defaults (unitless ratios) so they scale with the
+     new sizes automatically. */
+  --text-base: 1.0625rem;   /* 17px (was 16px) */
+  --text-lg: 1.1875rem;     /* 19px (was 18px) */
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
