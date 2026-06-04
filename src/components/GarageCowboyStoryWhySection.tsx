@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const whyWorkWithUs = [
   {
-    title: "SAFETY, SECURITY & FREE GARAGE DOOR INSPECTIONS",
-    body: "Every service call includes a complimentary 23 point inspection of your garage door system to identify safety risks, worn components, or potential failures. We check springs, cables, rollers, tracks, and safety features to ensure your door operates securely and reliably."
+    title: "CUSTOMER SATISFACTION PROMISE",
+    body: "We stand behind our work. If you’re not completely satisfied with the service provided, we’ll return and make it right—no questions asked. Our business is built on referrals and long-term trust."
   },
   {
     title: "SAME-DAY GARAGE DOOR REPAIR & MAINTENANCE",
@@ -27,8 +27,8 @@ const whyWorkWithUs = [
     body: "Our technicians are trained specifically in garage door repair, installation, and maintenance. From broken springs to full door replacements, your system is handled by specialists—not general contractors."
   },
   {
-    title: "CUSTOMER SATISFACTION PROMISE",
-    body: "We stand behind our work. If you’re not completely satisfied with the service provided, we’ll return and make it right—no questions asked. Our business is built on referrals and long-term trust."
+    title: "SAFETY, SECURITY & FREE GARAGE DOOR INSPECTIONS",
+    body: "Every service call includes a complimentary 23 point inspection of your garage door system to identify safety risks, worn components, or potential failures. We check springs, cables, rollers, tracks, and safety features to ensure your door operates securely and reliably."
   }
 ];
 
@@ -156,11 +156,11 @@ export function GarageCowboyStoryWhySection() {
 
             {/* Always-visible value cards — every benefit is in the DOM, no
                 collapsing. Responsive 1 / 2 / 3 column grid. */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
               {whyWorkWithUs.map((item, index) => (
                 <Card
                   key={index}
-                  className="border-2 border-gc-ink rounded-[var(--radius-gc-md)] shadow-gc-card"
+                  className="h-full border-2 border-gc-ink rounded-[var(--radius-gc-md)] shadow-gc-card"
                 >
                   <CardHeader className="gap-2">
                     <span
