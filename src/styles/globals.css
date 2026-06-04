@@ -141,6 +141,10 @@
   --gc-list-tile: rgba(48, 49, 53, 0.1);
   --gc-ink-75: rgba(50, 50, 50, 0.75);   /* fg-muted — muted body text only (~4.9:1 on white) */
   --gc-hair: rgba(0, 0, 0, 0.1);         /* hairline divider */
+
+  /* Motion — shared open/close timing for dropdowns + accordion */
+  --gc-dur: 220ms;                          /* base reveal/collapse duration */
+  --gc-ease: cubic-bezier(0.16, 1, 0.3, 1); /* smooth ease-out for reveals */
 }
 
 @theme inline {
@@ -300,6 +304,27 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* Dropdown reveal: fade + slide-down into place (Services/Texas nav menus).
+   Duration/easing pull the shared --gc-* motion tokens; the reduced-motion
+   media query below neutralizes the animation for users who opt out. */
+@keyframes gc-enter-down {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .animate-gc-dropdown {
+    animation: gc-enter-down var(--gc-dur) var(--gc-ease);
+    transform-origin: top;
+  }
 }
 
 /* Respect users who prefer reduced motion: neutralize animations/transitions. */

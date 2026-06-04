@@ -70,8 +70,8 @@ export function Navigation() {
                 </svg>
               </button>
               {activeDropdown === "services" && (
-                <div 
-                  className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg py-2 min-w-[250px] z-50"
+                <div
+                  className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg py-2 min-w-[250px] z-50 animate-gc-dropdown"
                   role="menu"
                   aria-label="Services submenu"
                 >
@@ -80,7 +80,7 @@ export function Navigation() {
                       key={idx}
                       to={service.to}
                       onClick={closeMenu}
-                      className={`block w-full text-left px-4 py-2 hover:bg-gc-gray-100 hover:text-gc-yellow transition-colors font-product-sans ${
+                      className={`block w-full text-left px-4 py-2.5 hover:bg-gc-gray-100 hover:text-gc-yellow transition-colors font-product-sans ${
                         idx === 0 ? "font-semibold border-b border-gc-gray-200" : ""
                       }`}
                       role="menuitem"
@@ -109,8 +109,8 @@ export function Navigation() {
                 </svg>
               </button>
               {activeDropdown === "texas" && (
-                <div 
-                  className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg py-2 min-w-[200px] z-50"
+                <div
+                  className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg py-2 min-w-[200px] z-50 animate-gc-dropdown"
                   role="menu"
                   aria-label="Texas areas submenu"
                 >
@@ -119,7 +119,7 @@ export function Navigation() {
                       key={idx}
                       to={city.to}
                       onClick={closeMenu}
-                      className={`block w-full text-left px-4 py-2 hover:bg-gc-gray-100 hover:text-gc-yellow transition-colors font-product-sans ${
+                      className={`block w-full text-left px-4 py-2.5 hover:bg-gc-gray-100 hover:text-gc-yellow transition-colors font-product-sans ${
                         idx === 0 ? "font-semibold border-b border-gc-gray-200" : ""
                       }`}
                       role="menuitem"

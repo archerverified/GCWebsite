@@ -44,13 +44,20 @@ function FAQItem({ value, question, answer }: FAQItemProps) {
           </span>
         </AccordionPrimitive.Trigger>
       </AccordionPrimitive.Header>
+      {/* Height + fade reveal via a CSS grid 0fr -> 1fr transition (token
+          easing/duration). forceMount keeps the answer in the prerendered HTML
+          for SEO even while collapsed; `invisible` (transitioned) removes
+          collapsed answers from the a11y tree at rest, and the global
+          prefers-reduced-motion rule neutralizes the animation. */}
       <AccordionPrimitive.Content
         forceMount
-        className="px-6 pb-6 data-[state=closed]:hidden md:px-8 md:pb-8"
+        className="grid grid-rows-[0fr] overflow-hidden opacity-0 invisible transition-[grid-template-rows,opacity,visibility] duration-[var(--gc-dur)] ease-[var(--gc-ease)] data-[state=open]:grid-rows-[1fr] data-[state=open]:opacity-100 data-[state=open]:visible"
       >
-        <p className="whitespace-pre-line font-product-sans text-base leading-relaxed text-gc-ink md:text-lg">
-          {answer}
-        </p>
+        <div className="overflow-hidden">
+          <p className="whitespace-pre-line px-6 pb-6 font-product-sans text-lg leading-relaxed text-gc-ink md:px-8 md:pb-8 md:text-xl">
+            {answer}
+          </p>
+        </div>
       </AccordionPrimitive.Content>
     </AccordionPrimitive.Item>
   );
