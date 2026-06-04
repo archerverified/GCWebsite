@@ -10,9 +10,10 @@ import { cn } from "./utils";
  * SEO: every answer must be present in the prerendered HTML even when its panel
  * is collapsed. Plain Radix UNMOUNTS closed content; `forceMount` keeps it
  * mounted but (because Radix's internal `isPresent` stays true) would render it
- * visible. So we force-mount AND hide collapsed panels with
- * `data-[state=closed]:hidden` — the answer text stays in the DOM but is not
- * displayed until its panel opens.
+ * visible. So we force-mount AND collapse closed panels with a CSS grid
+ * `0fr -> 1fr` height + fade transition plus `invisible` (see the per-item
+ * Content below) — the answer text stays in the DOM but is hidden until its
+ * panel opens.
  */
 
 interface FAQItemProps {
