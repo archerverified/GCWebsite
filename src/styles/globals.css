@@ -327,11 +327,10 @@ html {
   }
 }
 
-@layer utilities {
-  .animate-gc-dropdown {
-    animation: gc-enter-down var(--gc-dur) var(--gc-ease);
-    transform-origin: top;
-  }
+/* Tailwind v4 native custom utility (registers as a real utility). */
+@utility animate-gc-dropdown {
+  animation: gc-enter-down var(--gc-dur) var(--gc-ease);
+  transform-origin: top;
 }
 
 /* Respect users who prefer reduced motion: neutralize animations/transitions. */

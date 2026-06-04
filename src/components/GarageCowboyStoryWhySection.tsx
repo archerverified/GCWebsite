@@ -133,7 +133,7 @@ export function GarageCowboyStoryWhySection() {
                 Deno Borghi
               </p>
               <p className="font-product-sans text-xl md:text-2xl text-gc-ink leading-7">
-                <span className="font-['Product_Sans'] font-black">President</span>, Garage Cowboy
+                <span className="font-product-sans font-black">President</span>, Garage Cowboy
               </p>
             </div>
           </div>
