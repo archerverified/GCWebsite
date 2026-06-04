@@ -104,7 +104,7 @@ export function Footer() {
                   (817) 256-0122
                 </a>
                 <p className="font-product-sans font-black text-sm mt-1 text-gc-ink">
-                  Open 24/7 — Call Anytime
+                  Open 24/7, Call Anytime
                 </p>
               </div>
               <div>

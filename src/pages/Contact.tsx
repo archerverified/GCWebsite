@@ -48,7 +48,7 @@ export function Contact() {
                 Garage Door Service Hours
               </h2>
               <p className="font-product-sans text-lg text-gc-ink">
-                Open <strong>24 hours a day, 7 days a week</strong> — including holidays and after-hours emergencies.
+                Open <strong>24 hours a day, 7 days a week</strong>, including holidays and after-hours emergencies.
               </p>
             </div>
             <Button asChild variant="primary" size="cta" className="whitespace-nowrap">

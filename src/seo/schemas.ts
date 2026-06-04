@@ -181,7 +181,7 @@ export function buildAboutPageSchema(dateModified: string) {
     "@id": `${SITE_URL}/about-us#webpage`,
     "url": `${SITE_URL}/about-us`,
     "name": "About Garage Cowboy",
-    "description": "Meet Deno Borghi, President of Garage Cowboy — a locally owned, licensed and insured garage door company serving the Dallas–Fort Worth metroplex since 2023.",
+    "description": "Meet Deno Borghi, President of Garage Cowboy, a locally owned, licensed and insured garage door company serving the Dallas–Fort Worth metroplex since 2023.",
     "isPartOf": { "@id": `${SITE_URL}#website` },
     "about": { "@id": `${SITE_URL}#localbusiness` },
     "mainEntity": { "@id": `${SITE_URL}#founder` },

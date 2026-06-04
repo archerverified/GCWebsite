@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 const whyWorkWithUs = [
   {
     title: "CUSTOMER SATISFACTION PROMISE",
-    body: "We stand behind our work. If you’re not completely satisfied with the service provided, we’ll return and make it right—no questions asked. Our business is built on referrals and long-term trust."
+    body: "We stand behind our work. If you’re not completely satisfied with the service provided, we’ll return and make it right, no questions asked. Our business is built on referrals and long-term trust."
   },
   {
     title: "SAME-DAY GARAGE DOOR REPAIR & MAINTENANCE",
@@ -12,11 +12,11 @@ const whyWorkWithUs = [
   },
   {
     title: "24/7 EMERGENCY GARAGE DOOR REPAIR",
-    body: "Garage door emergencies can happen at any time. We provide after-hours and emergency garage door repair across the DFW area to secure and repair doors that are stuck open, off track, or unsafe—at no additional charge."
+    body: "Garage door emergencies can happen at any time. We provide after-hours and emergency garage door repair across the DFW area to secure and repair doors that are stuck open, off track, or unsafe, at no additional charge."
   },
   {
     title: "COMPETITIVE & TRANSPARENT PRICING",
-    body: "We provide clear, upfront pricing before any work begins. No hidden fees, no surprise charges—just honest recommendations and fair pricing based on the work your garage door actually needs."
+    body: "We provide clear, upfront pricing before any work begins. No hidden fees, no surprise charges, just honest recommendations and fair pricing based on the work your garage door actually needs."
   },
   {
     title: "GUARANTEED QUALITY & DURABILITY",
@@ -24,7 +24,7 @@ const whyWorkWithUs = [
   },
   {
     title: "EXPERT GARAGE DOOR SPECIALISTS",
-    body: "Our technicians are trained specifically in garage door repair, installation, and maintenance. From broken springs to full door replacements, your system is handled by specialists—not general contractors."
+    body: "Our technicians are trained specifically in garage door repair, installation, and maintenance. From broken springs to full door replacements, your system is handled by specialists, not general contractors."
   },
   {
     title: "SAFETY, SECURITY & FREE GARAGE DOOR INSPECTIONS",

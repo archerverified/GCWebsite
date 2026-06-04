@@ -23,7 +23,7 @@ const LAST_UPDATED_LABEL = "June 2, 2026";
 // Truthful, owner-verified trust signals (no tenure overstatement).
 const TRUST_SIGNALS = [
   "Licensed & Insured",
-  "Locally Owned — Not a Franchise",
+  "Locally Owned, Not a Franchise",
   "Serving DFW Since 2023",
   "5.0★ on Google (24 reviews)",
   "Warranties on All Products",
@@ -54,7 +54,7 @@ export function AboutUs() {
     <main className="bg-white">
       <Seo
         title="About Us - DFW Garage Door Experts"
-        description="Meet Deno Borghi, President of Garage Cowboy — a locally owned, licensed & insured DFW garage door company serving Dallas–Fort Worth since 2023."
+        description="Meet Deno Borghi, President of Garage Cowboy, a locally owned, licensed & insured DFW garage door company serving Dallas–Fort Worth since 2023."
         canonicalPath="/about-us"
         schema={schema}
       />
@@ -140,7 +140,7 @@ export function AboutUs() {
                     promise: treat every garage door like it&rsquo;s his own.
                   </p>
                   <p>
-                    Deno founded Garage Cowboy in 2023 and grew it the hard way &mdash; 100% by
+                    Deno founded Garage Cowboy in 2023 and grew it the hard way: 100% by
                     referral, one happy neighbor at a time. His certified local technicians live
                     and work right here in North Texas, so you get fast response times, honest
                     pricing, and a warranty on every product they install.

@@ -54,7 +54,7 @@ export const testimonials: Testimonial[] = [
     quote: "Local, honest, and not a big franchise.",
     author: "Cliff C.",
     fullReview:
-      "I was looking for a local garage door contractor to replace a broken spring. Came across Garage Cowboy and decided to give them a call. Don't let the lack of reviews fool you—Deno is local and not part of one of the big franchises.",
+      "I was looking for a local garage door contractor to replace a broken spring. Came across Garage Cowboy and decided to give them a call. Don't let the lack of reviews fool you. Deno is local and not part of one of the big franchises.",
     source: "Google",
   },
   {
