@@ -24,7 +24,7 @@ export function StickyCallBar() {
           asChild
           variant="primary"
           size="cta"
-          className="min-w-0 flex-1 px-1.5 text-sm sm:px-4 sm:text-base"
+          className="min-h-12 min-w-0 flex-1 px-1.5 text-sm sm:min-h-14 sm:px-4 sm:text-base"
         >
           <a href="tel:8172560122" aria-label="Call Garage Cowboy at 817-256-0122">
             <span className="truncate">Call (817) 256-0122</span>
@@ -34,7 +34,7 @@ export function StickyCallBar() {
           asChild
           variant="ink"
           size="cta"
-          className="min-w-0 shrink-0 basis-[6.5rem] px-1.5 text-sm sm:basis-auto sm:px-4 sm:text-base"
+          className="min-h-12 min-w-0 shrink-0 basis-[6.5rem] px-1.5 text-sm sm:min-h-14 sm:basis-auto sm:px-4 sm:text-base"
         >
           <Link to="/contact" aria-label="Request a free quote">
             <span className="truncate">Free Quote</span>

@@ -37,11 +37,12 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9 rounded-md",
-        // Large brand CTA footprint — keeps a >=44px tap target on mobile and
-        // scales up on >=sm. Pairs with the `primary`/`secondary` variants.
-        // Bumps icon size to 20px (overrides the base size-4 via tailwind-merge
-        // since both share the same `[&_svg…]:` modifier — last wins).
-        cta: "min-h-12 gap-3 px-6 text-base sm:min-h-14 sm:px-8 sm:text-lg [&_svg:not([class*='size-'])]:size-5",
+        // Large brand CTA footprint — bumped ~30-40% for stronger presence.
+        // Keeps a comfortable >=56px tap target on mobile and scales up on
+        // >=sm. Pairs with the `primary`/`secondary`/`ink` variants. Bumps icon
+        // size to 24px (overrides the base size-4 via tailwind-merge since both
+        // share the same `[&_svg…]:` modifier — last wins).
+        cta: "min-h-14 gap-3 px-8 text-lg sm:min-h-16 sm:px-10 sm:text-xl [&_svg:not([class*='size-'])]:size-6",
       },
     },
     defaultVariants: {
