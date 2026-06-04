@@ -31,7 +31,7 @@ export function Privacy() {
             Privacy Policy
           </h1>
           <p className="font-product-sans text-gc-gray-600 text-lg">
-            Last updated: January 2026
+            Last updated: June 2026
           </p>
         </div>
       </section>
@@ -78,7 +78,29 @@ export function Privacy() {
           </p>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            4. Cookies and Analytics
+            4. SMS / Mobile Messaging
+          </h2>
+          <p className="font-product-sans text-gc-gray-600 mb-6">
+            When you opt in to receive SMS text messages from Garage Cowboy LLC, we collect your mobile
+            phone number and your consent to be contacted. We use this information solely to send the
+            messages you have requested: appointment reminders and confirmations, service updates,
+            customer care messages, and, where you have agreed, promotional offers and discounts.
+          </p>
+          <p className="font-product-sans text-gc-gray-600 mb-6">
+            No mobile information will be shared with third parties or affiliates for marketing or
+            promotional purposes. We do not sell, rent, or share your mobile opt-in information or SMS
+            consent with any third party. Information may be shared only with the service providers that
+            help us operate our messaging program (for example, our SMS platform provider), and only as
+            needed to deliver the service.
+          </p>
+          <p className="font-product-sans text-gc-gray-600 mb-6">
+            Message frequency may vary, and message and data rates may apply. You can opt out at any time
+            by replying STOP, or reply HELP for assistance. For questions about how we handle your
+            information, contact us at deno@garagecowboy.com or (817) 256-0122.
+          </p>
+
+          <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
+            5. Cookies and Analytics
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
             Our website may use cookies and similar technologies to enhance your browsing experience. 
@@ -88,7 +110,7 @@ export function Privacy() {
           </p>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            5. Data Security
+            6. Data Security
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
             We implement appropriate security measures to protect your personal information against 
@@ -97,7 +119,7 @@ export function Privacy() {
           </p>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            6. Your Rights
+            7. Your Rights
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-4">
             You have the right to:
@@ -110,7 +132,7 @@ export function Privacy() {
           </ul>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            7. Contact Us
+            8. Contact Us
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
             If you have any questions about this Privacy Policy or our data practices, please contact us:
@@ -122,7 +144,7 @@ export function Privacy() {
           </div>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            8. Changes to This Policy
+            9. Changes to This Policy
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
             We may update this Privacy Policy from time to time. Any changes will be posted on this page 

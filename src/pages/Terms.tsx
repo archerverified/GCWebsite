@@ -31,7 +31,7 @@ export function Terms() {
             Terms of Service
           </h1>
           <p className="font-product-sans text-gc-gray-600 text-lg">
-            Last updated: January 2026
+            Last updated: June 2026
           </p>
         </div>
       </section>
@@ -147,7 +147,65 @@ export function Terms() {
           </p>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            10. Contact Information
+            10. SMS / Text Messaging Terms
+          </h2>
+
+          <h3 className="font-product-sans font-bold text-lg text-gc-ink mt-6 mb-2">
+            Opt-In &amp; Message Types
+          </h3>
+          <p className="font-product-sans text-gc-gray-600 mb-4">
+            By opting in to receive SMS messages from Garage Cowboy LLC, you agree to receive text
+            messages from Garage Cowboy LLC related to appointment reminders, appointment confirmations,
+            service updates, customer care messages, promotional offers, discounts, and other relevant
+            business communications.
+          </p>
+
+          <h3 className="font-product-sans font-bold text-lg text-gc-ink mt-6 mb-2">
+            Message Frequency &amp; Rates
+          </h3>
+          <p className="font-product-sans text-gc-gray-600 mb-4">
+            Message frequency may vary. Message and data rates may apply for any messages sent to you
+            from us and to us from you. If you have questions about your text or data plan, contact your
+            wireless provider.
+          </p>
+
+          <h3 className="font-product-sans font-bold text-lg text-gc-ink mt-6 mb-2">
+            Opting Out
+          </h3>
+          <p className="font-product-sans text-gc-gray-600 mb-4">
+            You can cancel the SMS service at any time. Just text STOP to (817) 256-0122. After you send
+            STOP, we will send you an SMS message confirming that you have been unsubscribed. After this,
+            you will no longer receive SMS messages from us. If you want to join again, simply sign up as
+            you did the first time and we will start sending SMS messages to you again.
+          </p>
+
+          <h3 className="font-product-sans font-bold text-lg text-gc-ink mt-6 mb-2">
+            Help &amp; Support
+          </h3>
+          <p className="font-product-sans text-gc-gray-600 mb-4">
+            If you are experiencing issues with the messaging program, you can reply HELP for more
+            assistance, or you can contact us directly at deno@garagecowboy.com or (817) 256-0122.
+          </p>
+
+          <h3 className="font-product-sans font-bold text-lg text-gc-ink mt-6 mb-2">
+            Carrier Liability
+          </h3>
+          <p className="font-product-sans text-gc-gray-600 mb-4">
+            Carriers are not liable for delayed or undelivered messages.
+          </p>
+          <p className="font-product-sans text-gc-gray-600 mb-6">
+            If you have any questions regarding privacy, please review our{" "}
+            <Link
+              to="/privacy"
+              className="text-gc-ink underline underline-offset-2 transition-colors hover:text-gc-yellow"
+            >
+              Privacy Policy
+            </Link>
+            .
+          </p>
+
+          <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
+            11. Contact Information
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
             If you have any questions about these Terms of Service, please contact us:
@@ -159,7 +217,7 @@ export function Terms() {
           </div>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
-            11. Governing Law
+            12. Governing Law
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
             These Terms of Service are governed by and construed in accordance with the laws of the State 
