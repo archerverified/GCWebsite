@@ -24,6 +24,8 @@ const STATIC_ROUTES = [
   '/services',
   '/texas',
   '/blog',
+  '/faq',
+  '/reviews',
   '/contact',
   '/residential',
   '/commercial',
@@ -70,6 +72,34 @@ export async function getAllRoutes() {
     }
   } catch {
     // No blog posts file yet — continue without error.
+  }
+
+  // Buyer guides (/guides/<slug>) - single source: src/data/guides.json.
+  try {
+    const guidesRaw = await fs.readFile(path.join(DATA_DIR, 'guides.json'), 'utf-8');
+    const guidesData = JSON.parse(guidesRaw);
+    if (Array.isArray(guidesData.guides)) {
+      for (const guide of guidesData.guides) {
+        if (guide.slug) routes.add(`/guides/${guide.slug}`);
+      }
+    }
+  } catch {
+    // No guides file - continue without error.
+  }
+
+  // City + service combos (/texas/<city>/<service>) - single source:
+  // src/data/combos.json (named so it is NOT picked up by the city-/services-
+  // filename matchers above).
+  try {
+    const combosRaw = await fs.readFile(path.join(DATA_DIR, 'combos.json'), 'utf-8');
+    const combosData = JSON.parse(combosRaw);
+    if (Array.isArray(combosData.combos)) {
+      for (const combo of combosData.combos) {
+        if (combo.city && combo.service) routes.add(`/texas/${combo.city}/${combo.service}`);
+      }
+    }
+  } catch {
+    // No combos file - continue without error.
   }
 
   return [...routes];

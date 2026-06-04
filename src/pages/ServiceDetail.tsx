@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { Phone, ArrowLeft } from "lucide-react";
+import { Phone, ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import combosData from "../data/combos.json";
 import { ReadyToGetStartedCTA } from "../components/sections/ReadyToGetStartedCTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -13,6 +14,10 @@ import { Seo } from "../components/seo/Seo";
 import { createServiceSchema, createBreadcrumbSchema, createFAQSchema, buildSpeakableWebPage } from "../seo/schemas";
 import { CONTENT_LAST_UPDATED_ISO, CONTENT_LAST_UPDATED_LABEL } from "../seo/site";
 
+/**
+ * Render a /services/:slug page from services-<slug>.json: Service + FAQ +
+ * Speakable schema, intro, sections, and per-city combo links (pilot services).
+ */
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { data: content, loading, error } = useContent<MarkdownContent>(`services-${slug}`);
@@ -45,6 +50,11 @@ export function ServiceDetail() {
   // Speakable hint for the answer-first intro + FAQ region (voice assistants)
   schemas.push(
     buildSpeakableWebPage(`/services/${slug}`, ["h1", "[data-speakable='answer']", "[data-speakable='faq']"])
+  );
+
+  // City + service combo pages for this service (pilot services only).
+  const serviceCombos = (combosData.combos as { city: string; cityName: string; service: string }[]).filter(
+    (c) => c.service === slug,
   );
 
   return (
@@ -121,11 +131,39 @@ export function ServiceDetail() {
         </section>
       )}
 
+      {/* City + service combo pages for this service (pilot services):
+          location-specific deep links into the DFW cities we cover. */}
+      {serviceCombos.length > 0 && (
+        <section className="py-16 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="font-product-sans font-black text-2xl md:text-3xl text-gc-ink mb-8 text-center">
+              {content.title} by City
+            </h2>
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {serviceCombos.map((combo) => (
+                <li key={combo.city}>
+                  <Link
+                    to={`/texas/${combo.city}/${combo.service}`}
+                    className="flex min-h-11 items-center justify-between gap-2 rounded-[var(--radius-gc-md)] border-2 border-gc-ink bg-white px-5 py-4 font-product-sans font-bold text-gc-ink transition-colors hover:bg-gc-yellow"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <MapPin className="size-4 shrink-0 text-gc-yellow" aria-hidden="true" />
+                      {combo.cityName}
+                    </span>
+                    <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {/* FAQs Section */}
       {content.faqs && content.faqs.length > 0 && (
-        <Accordion 
-          faqs={content.faqs} 
-          title={`${content.title} FAQs`} 
+        <Accordion
+          faqs={content.faqs}
+          title={`${content.title} FAQs`}
         />
       )}
 

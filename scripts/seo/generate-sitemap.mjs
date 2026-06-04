@@ -14,6 +14,8 @@ const staticPages = [
   { path: '/services', priority: 0.9, changefreq: 'weekly' },
   { path: '/texas', priority: 0.9, changefreq: 'weekly' },
   { path: '/blog', priority: 0.8, changefreq: 'weekly' },
+  { path: '/faq', priority: 0.7, changefreq: 'weekly' },
+  { path: '/reviews', priority: 0.7, changefreq: 'monthly' },
   { path: '/contact', priority: 0.8, changefreq: 'monthly' },
   { path: '/residential', priority: 0.8, changefreq: 'monthly' },
   { path: '/commercial', priority: 0.8, changefreq: 'monthly' },
@@ -73,6 +75,45 @@ async function getDynamicPages() {
   } catch (error) {
     // Blog posts file may not exist yet, continue without error
     console.log('   Note: No blog posts found for sitemap');
+  }
+
+  // Add buyer guides (/guides/<slug>) - single source: src/data/guides.json
+  try {
+    const guidesFile = await fs.readFile(path.join(dataDir, 'guides.json'), 'utf-8');
+    const guidesData = JSON.parse(guidesFile);
+    if (Array.isArray(guidesData.guides)) {
+      for (const guide of guidesData.guides) {
+        if (guide.slug) {
+          dynamicPages.push({
+            path: `/guides/${guide.slug}`,
+            priority: 0.6,
+            changefreq: 'monthly'
+          });
+        }
+      }
+    }
+  } catch (error) {
+    console.log('   Note: No guides found for sitemap');
+  }
+
+  // Add city + service combos (/texas/<city>/<service>) - single source:
+  // src/data/combos.json
+  try {
+    const combosFile = await fs.readFile(path.join(dataDir, 'combos.json'), 'utf-8');
+    const combosData = JSON.parse(combosFile);
+    if (Array.isArray(combosData.combos)) {
+      for (const combo of combosData.combos) {
+        if (combo.city && combo.service) {
+          dynamicPages.push({
+            path: `/texas/${combo.city}/${combo.service}`,
+            priority: 0.6,
+            changefreq: 'monthly'
+          });
+        }
+      }
+    }
+  } catch (error) {
+    console.log('   Note: No combos found for sitemap');
   }
 
   return dynamicPages;
