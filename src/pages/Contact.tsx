@@ -10,7 +10,7 @@ export function Contact() {
   ];
 
   return (
-    <main className="bg-white">
+    <main className="bg-white pb-10 lg:pb-14">
       <Seo
         title="Contact Us - 24/7 Garage Door Repair DFW"
         description="Contact Garage Cowboy for fast garage door repair in Dallas-Fort Worth. Call (817) 256-0122, email us, or book a free inspection appointment online."
