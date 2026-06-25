@@ -1,4 +1,5 @@
 import { HeroSection } from "../components/HeroSection";
+import { HomeTestimonials } from "../components/sections/HomeTestimonials";
 import { GarageDoorRepair } from "../components/GarageDoorRepair";
 import { GarageCowboyStoryWhySection } from "../components/GarageCowboyStoryWhySection";
 import { FAQSection } from "../components/FAQSection";
@@ -22,6 +23,11 @@ export function Home() {
       
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Customer Testimonials */}
+      <div className="py-12 lg:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28">
+        <HomeTestimonials />
+      </div>
 
       {/* Garage Door Repair Services */}
       <GarageDoorRepair />
