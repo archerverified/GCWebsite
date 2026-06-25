@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { AppointmentBookingSection } from "../components/AppointmentBookingSection";
 import { ContactQuickActions } from "../components/ContactQuickActions";
 import { Button } from "../components/ui/button";
 import { Seo } from "../components/seo/Seo";
@@ -11,7 +10,7 @@ export function Contact() {
   ];
 
   return (
-    <main className="bg-white">
+    <main className="bg-white pb-10 lg:pb-14">
       <Seo
         title="Contact Us - 24/7 Garage Door Repair DFW"
         description="Contact Garage Cowboy for fast garage door repair in Dallas-Fort Worth. Call (817) 256-0122, email us, or book a free inspection appointment online."
@@ -85,13 +84,6 @@ export function Contact() {
               </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Booking Form (short version - no testimonials) */}
-      <section className="py-10 lg:py-12 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
-        <div className="container mx-auto max-w-5xl">
-          <AppointmentBookingSection includeTestimonials={false} />
         </div>
       </section>
     </main>
