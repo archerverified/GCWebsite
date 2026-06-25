@@ -1,5 +1,4 @@
 import { HeroSection } from "../components/HeroSection";
-import { FormFiller } from "../components/FormFiller";
 import { GarageDoorRepair } from "../components/GarageDoorRepair";
 import { GarageCowboyStoryWhySection } from "../components/GarageCowboyStoryWhySection";
 import { FAQSection } from "../components/FAQSection";
@@ -23,12 +22,7 @@ export function Home() {
       
       {/* Hero Section */}
       <HeroSection />
-      
-      {/* Form Filler (Contact Form + Testimonials) */}
-      <div className="-mt-6 sm:-mt-8 lg:-mt-12 relative z-10 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28">
-        <FormFiller />
-      </div>
-      
+
       {/* Garage Door Repair Services */}
       <GarageDoorRepair />
       
