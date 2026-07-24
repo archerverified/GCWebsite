@@ -31,7 +31,7 @@ export function Privacy() {
             Privacy Policy
           </h1>
           <p className="font-product-sans text-gc-gray-600 text-lg">
-            Last updated: June 2026
+            Last updated: July 2026
           </p>
         </div>
       </section>
@@ -39,6 +39,13 @@ export function Privacy() {
       {/* Content */}
       <section className="py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="container mx-auto max-w-4xl prose prose-lg">
+          <p className="font-product-sans text-gc-gray-600 mb-6">
+            This Privacy Policy is provided by Garage Cowboy LLC, doing business as ("DBA") Garage
+            Cowboy. "Garage Cowboy" is the trade name (DBA) of Garage Cowboy LLC; both names refer to
+            the same company. References to "Garage Cowboy," "we," "us," and "our" in this policy mean
+            Garage Cowboy LLC DBA Garage Cowboy.
+          </p>
+
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
             1. Information We Collect
           </h2>
@@ -81,7 +88,7 @@ export function Privacy() {
             4. SMS / Mobile Messaging
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
-            When you opt in to receive SMS text messages from Garage Cowboy LLC, we collect your mobile
+            When you opt in to receive SMS text messages from Garage Cowboy LLC (DBA Garage Cowboy), we collect your mobile
             phone number and your consent to be contacted. We use this information solely to send the
             messages you have requested: appointment reminders and confirmations, service updates,
             customer care messages, and, where you have agreed, promotional offers and discounts.
@@ -138,7 +145,7 @@ export function Privacy() {
             If you have any questions about this Privacy Policy or our data practices, please contact us:
           </p>
           <div className="font-product-sans text-gc-gray-600 mb-6 bg-gray-50 p-6 rounded-lg">
-            <p className="font-bold text-gc-ink">Garage Cowboy</p>
+            <p className="font-bold text-gc-ink">Garage Cowboy LLC DBA Garage Cowboy</p>
             <p>Email: <a href="mailto:deno@garagecowboy.com" className="text-gc-yellow hover:underline">deno@garagecowboy.com</a></p>
             <p>Phone: <a href="tel:+18172560122" className="text-gc-yellow hover:underline">(817) 256-0122</a></p>
           </div>

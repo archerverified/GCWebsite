@@ -163,7 +163,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="font-product-sans text-sm text-center text-gc-ink">
-            © {currentYear} Garage Cowboy. All rights reserved. | Professional Garage Door Services in DFW
+            © {currentYear} Garage Cowboy LLC DBA Garage Cowboy. All rights reserved. | Professional Garage Door Services in DFW
           </p>
         </div>
       </div>
