@@ -18,7 +18,7 @@ export const BUSINESS_INFO = {
   businessName: "Garage Cowboy",
   // Legal entity behind the "Garage Cowboy" trade name (DBA), required to be
   // consistent across the site for A2P/10DLC carrier verification.
-  legalName: "Garage Cowboy LLC",
+  legalName: "AAA Organization LLC",
   telephone: "+18172560122",
   priceRange: "$$",
   serviceArea: [
