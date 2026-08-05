@@ -45,7 +45,7 @@ export const BUSINESS = {
 
 // The two "About" paragraphs surfaced in llms.txt / llms-full.txt.
 export const ABOUT_PARAGRAPHS = [
-  'Garage Cowboy (legally Garage Cowboy LLC, doing business as Garage Cowboy) is a professional garage door repair and installation company serving the Dallas-Fort Worth metroplex in Texas. We provide 24/7 emergency service, same-day repairs, and expert technicians for both residential and commercial customers. Our team specializes in all aspects of garage door service, from spring repairs to complete new door installations.',
+  'Garage Cowboy (legally AAA Organization LLC, doing business as Garage Cowboy) is a professional garage door repair and installation company serving the Dallas-Fort Worth metroplex in Texas. We provide 24/7 emergency service, same-day repairs, and expert technicians for both residential and commercial customers. Our team specializes in all aspects of garage door service, from spring repairs to complete new door installations.',
   'Founded in 2023 by owner and president Deno Borghi, Garage Cowboy is a locally owned, 100% referral-based company, not a franchise. We are licensed and insured, back every product we install with a warranty, and hold a 5.0-star rating across 24 Google reviews. Our certified local technicians live and work in North Texas. We understand that a malfunctioning garage door is not just an inconvenience. It can be a security risk, which is why we offer round-the-clock availability and fast, same-day response throughout the metroplex.',
 ];
 

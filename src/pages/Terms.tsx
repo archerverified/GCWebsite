@@ -43,10 +43,11 @@ export function Terms() {
             1. Who We Are
           </h2>
           <p className="font-product-sans text-gc-gray-600 mb-6">
-            This website and the services described on it are operated by Garage Cowboy LLC, doing
-            business as ("DBA") Garage Cowboy. "Garage Cowboy" is the trade name (DBA) of Garage Cowboy
-            LLC; both names refer to the same company. Throughout these Terms of Service, references to
-            "Garage Cowboy," "we," "us," and "our" mean Garage Cowboy LLC DBA Garage Cowboy.
+            This website and the services described on it are operated by AAA Organization LLC, doing
+            business as ("DBA") Garage Cowboy. "Garage Cowboy" is the trade name (DBA) of AAA
+            Organization LLC; both names refer to the same company. Throughout these Terms of Service,
+            references to "Garage Cowboy," "we," "us," and "our" mean AAA Organization LLC DBA Garage
+            Cowboy.
           </p>
 
           <h2 className="font-product-sans font-bold text-2xl text-gc-ink mt-8 mb-4">
@@ -164,8 +165,8 @@ export function Terms() {
             Opt-In &amp; Message Types
           </h3>
           <p className="font-product-sans text-gc-gray-600 mb-4">
-            By opting in to receive SMS messages from Garage Cowboy LLC (DBA Garage Cowboy), you agree to receive text
-            messages from Garage Cowboy LLC related to appointment reminders, appointment confirmations,
+            By opting in to receive SMS messages from AAA Organization LLC (DBA Garage Cowboy), you agree to receive text
+            messages from AAA Organization LLC related to appointment reminders, appointment confirmations,
             service updates, customer care messages, promotional offers, discounts, and other relevant
             business communications.
           </p>
@@ -221,7 +222,7 @@ export function Terms() {
             If you have any questions about these Terms of Service, please contact us:
           </p>
           <div className="font-product-sans text-gc-gray-600 mb-6 bg-gray-50 p-6 rounded-lg">
-            <p className="font-bold text-gc-ink">Garage Cowboy LLC DBA Garage Cowboy</p>
+            <p className="font-bold text-gc-ink">AAA Organization LLC DBA Garage Cowboy</p>
             <p>Email: <a href="mailto:deno@garagecowboy.com" className="text-gc-ink underline underline-offset-2 transition-colors hover:text-gc-yellow">deno@garagecowboy.com</a></p>
             <p>Phone: <a href="tel:+18172560122" className="text-gc-ink underline underline-offset-2 transition-colors hover:text-gc-yellow">(817) 256-0122</a></p>
           </div>
