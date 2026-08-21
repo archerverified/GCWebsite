@@ -14,6 +14,8 @@ const Commercial = lazy(() => import("./pages/Commercial").then(m => ({ default:
 const Privacy = lazy(() => import("./pages/Privacy").then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import("./pages/Terms").then(m => ({ default: m.Terms })));
 const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
+// Paid-traffic landing page. Renders chrome-free via MainLayout's BARE_ROUTES.
+const FreeQuote = lazy(() => import("./pages/FreeQuote").then(m => ({ default: m.FreeQuote })));
 const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.NotFound })));
 const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));
 const BlogPost = lazy(() => import("./pages/BlogPost").then(m => ({ default: m.BlogPost })));
@@ -51,6 +53,7 @@ export default function App() {
             <Route path="/residential" element={<Residential />} />
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/free-quote" element={<FreeQuote />} />
             <Route path="/contac" element={<Navigate to="/contact" replace />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
