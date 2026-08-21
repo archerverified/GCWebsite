@@ -1,4 +1,5 @@
 import { HeroSection } from "../components/HeroSection";
+import { AppointmentBookingSection } from "../components/AppointmentBookingSection";
 import { HomeTestimonials } from "../components/sections/HomeTestimonials";
 import { GarageDoorRepair } from "../components/GarageDoorRepair";
 import { GarageCowboyStoryWhySection } from "../components/GarageCowboyStoryWhySection";
@@ -23,6 +24,11 @@ export function Home() {
       
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Booking Form (overlaps the hero; testimonials live in their own section below) */}
+      <div className="-mt-6 sm:-mt-8 lg:-mt-12 relative z-10 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28">
+        <AppointmentBookingSection includeTestimonials={false} />
+      </div>
 
       {/* Customer Testimonials */}
       <div className="py-12 lg:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-28">

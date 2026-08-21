@@ -32,6 +32,11 @@ const STATIC_ROUTES = [
   '/about-us',
   '/privacy',
   '/terms',
+  // Paid-traffic landing page. Prerendered on purpose (Google Ads quality score rewards
+  // fast loads) but intentionally ABSENT from generate-sitemap.mjs staticPages and marked
+  // noindex in the page itself, so it never competes with /contact in organic results.
+  // This is the one route where these two lists are meant to diverge.
+  '/free-quote',
 ];
 
 /**

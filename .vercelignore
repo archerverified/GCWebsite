@@ -1,0 +1,34 @@
+# Local-only scratch that must never be uploaded by a CLI `vercel deploy`.
+# Irrelevant to git-based deploys (Vercel clones the repo, so untracked files
+# are absent anyway) but without this a CLI deploy from this working copy
+# uploads ~260MB of virtualenvs, audit screenshots, and design source files.
+
+node_modules
+build
+dist
+
+# Playwright / design-review tooling
+.pw-venv
+.playwright-mcp
+.pw-*.py
+
+# Audit + report artifacts
+design-audit-*
+seo-reports
+reports
+
+# Design sources
+*.fig
+*.make
+GCWebsite-main
+
+# Local notes and captures.
+# NOTE: only ROOT-level .png is excluded (leading slash). A bare `*.png` rule
+# also drops src/assets/gc-logo-transparent.png and src/imports/favicon.png,
+# which scripts/seo/generate-icons.mjs reads during prebuild — that fails the
+# build with "Input file is missing".
+activities.md
+activities.md.bak
+md.md
+/*.png
+docs/superpowers

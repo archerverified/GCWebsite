@@ -1,0 +1,34 @@
+{
+  // Serverless functions compile SEPARATELY from the Vite frontend.
+  //
+  // Without this file, @vercel/node walks up to the root tsconfig.json, which is
+  // written for Vite ("module": "ESNext", "moduleResolution": "bundler",
+  // "allowImportingTsExtensions", "noEmit"). Those settings make it emit ESM
+  // `import` statements into plain .js files. package.json has no
+  // "type": "module", so Node loads them as CommonJS and every function dies at
+  // line 1 with:
+  //
+  //   SyntaxError: Cannot use import statement outside a module
+  //
+  // which surfaces as a 500 FUNCTION_INVOCATION_FAILED on every route, even a
+  // GET that should short-circuit to 405, because the failure is at module load.
+  //
+  // Pinning CommonJS here isolates the functions from the frontend's bundler
+  // config. Do not "simplify" by adding "type": "module" to the root
+  // package.json instead: that would change module resolution for Vite, PostCSS,
+  // and every .js script in the repo.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"]
+}
