@@ -37,6 +37,11 @@ const STATIC_ROUTES = [
   // noindex in the page itself, so it never competes with /contact in organic results.
   // This is the one route where these two lists are meant to diverge.
   '/free-quote',
+  // Bare quote-request page (form only). Same deal as /free-quote: prerendered for speed,
+  // deliberately absent from generate-sitemap.mjs staticPages, noindex in the page itself.
+  // NOTE: unrelated to quote.garagecowboy.com, which is the separate configurator served
+  // by the gc-quote Vercel project from the repo's quote/ directory.
+  '/quote',
 ];
 
 /**
