@@ -16,6 +16,8 @@ const Terms = lazy(() => import("./pages/Terms").then(m => ({ default: m.Terms }
 const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
 // Paid-traffic landing page. Renders chrome-free via MainLayout's BARE_ROUTES.
 const FreeQuote = lazy(() => import("./pages/FreeQuote").then(m => ({ default: m.FreeQuote })));
+// Bare quote-request page: form only, no nav or CTAs. Also chrome-free.
+const Quote = lazy(() => import("./pages/Quote").then(m => ({ default: m.Quote })));
 const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.NotFound })));
 const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));
 const BlogPost = lazy(() => import("./pages/BlogPost").then(m => ({ default: m.BlogPost })));
@@ -54,6 +56,7 @@ export default function App() {
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/free-quote" element={<FreeQuote />} />
+            <Route path="/quote" element={<Quote />} />
             <Route path="/contac" element={<Navigate to="/contact" replace />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />

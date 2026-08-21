@@ -13,7 +13,7 @@ interface MainLayoutProps {
  * wrapper. Paid-traffic landing pages live here, because every nav link is an exit on a
  * click that was paid for. These pages own their full-bleed layout entirely.
  */
-const BARE_ROUTES = ["/free-quote"];
+const BARE_ROUTES = ["/free-quote", "/quote"];
 
 export function MainLayout({ children }: MainLayoutProps) {
   const { pathname } = useLocation();
