@@ -1,19 +1,21 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { sendAdminBookingEmail, sendCustomerBookingEmail, type BookingPayload } from '../_lib/email';
+import { forwardToGoHighLevel } from '../_lib/ghl';
 
 /**
  * Booking Creation Endpoint
- * 
+ *
  * Receives form submissions from the homepage booking form,
  * validates the data, and creates a Google Calendar event.
- * 
+ *
  * Environment Variables Required:
  * - GOOGLE_OAUTH_CLIENT_ID
  * - GOOGLE_OAUTH_CLIENT_SECRET
  * - GOOGLE_REFRESH_TOKEN
- * 
+ *
  * Optional:
  * - GOOGLE_CALENDAR_ID (defaults to "primary")
+ * - GHL_WEBHOOK_URL / GHL_WEBHOOK_SECRET (see ../_lib/ghl.ts; unset means no CRM forward)
  */
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
@@ -27,6 +29,12 @@ interface BookingRequest {
   time: string;
   zipCode?: string;
   message?: string;
+  /** A2P/10DLC consent record captured by the booking form. */
+  smsConsent?: boolean;
+  consentText?: string;
+  consentTimestamp?: string;
+  /** Which page/channel produced this booking, e.g. "website" or "google-ads". */
+  source?: string;
 }
 
 interface ValidationErrors {
@@ -85,7 +93,32 @@ function validateRequest(body: Partial<BookingRequest>): ValidationErrors {
     }
   }
 
+  // The form requires SMS consent before it will submit, so the server enforces the same
+  // rule. Anything reaching here without it is not a booking we have a consent record for.
+  if (body.smsConsent !== true) {
+    errors.smsConsent = 'Please agree to receive text messages about your appointment';
+  }
+
   return errors;
+}
+
+/** Best-effort client IP for the consent record. Vercel populates x-forwarded-for. */
+function clientIp(req: VercelRequest): string {
+  const forwarded = req.headers['x-forwarded-for'];
+  const raw = Array.isArray(forwarded) ? forwarded[0] : forwarded;
+  return raw?.split(',')[0]?.trim() ?? '';
+}
+
+/**
+ * Reduce a client-supplied source to a short, safe slug before it reaches the calendar
+ * description or the CRM. This value is attacker-controllable, so it is never trusted
+ * verbatim: anything unexpected collapses to the default rather than being rejected,
+ * because a weird source label must not cost the customer their booking.
+ */
+function normalizeSource(raw: unknown): string {
+  if (typeof raw !== 'string') return 'website';
+  const slug = raw.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 32);
+  return slug || 'website';
 }
 
 function combineDateAndTime(date: string, time: string): string {
@@ -123,6 +156,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       fields: validationErrors,
     });
   }
+
+  // Captured once, used in both the calendar consent record and the CRM forward.
+  const consentIp = clientIp(req);
+  const bookingSource = normalizeSource(body.source);
 
   // Get environment variables
   const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
@@ -174,7 +211,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Create calendar event
     const eventBody = {
-      summary: `Garage Cowboy Inspection — ${body.name}`,
+      summary: `Garage Cowboy Inspection - ${body.name}`,
       description: `
 Booking Details:
 ────────────────
@@ -187,7 +224,12 @@ Message:
 ${body.message || 'No message provided'}
 
 ────────────────
+SMS Consent: GRANTED${body.consentTimestamp ? ` at ${body.consentTimestamp}` : ''}${consentIp ? ` from ${consentIp}` : ''}
+${body.consentText || ''}
+
+────────────────
 Booked via garagecowboy.com
+Source: ${bookingSource}
       `.trim(),
       start: {
         dateTime: startDateTime,
@@ -282,6 +324,24 @@ Booked via garagecowboy.com
       console.error('Email send error:', emailErr instanceof Error ? emailErr.message : 'Unknown error');
     }
 
+    // Forward the lead to GoHighLevel. Inert until GHL_WEBHOOK_URL is set, and it can
+    // never fail the booking: a CRM outage must not cost the customer their appointment.
+    const crm = await forwardToGoHighLevel({
+      name: body.name!,
+      email: body.email!,
+      phone: body.phone!,
+      postalCode: body.zipCode,
+      message: body.message,
+      appointmentDate: body.date!,
+      appointmentTime: body.time!.substring(0, 5),
+      calendarEventId: eventData.id,
+      smsConsent: body.smsConsent === true,
+      consentText: body.consentText,
+      consentTimestamp: body.consentTimestamp,
+      consentIp,
+      source: bookingSource,
+    });
+
     // Success response
     return res.status(200).json({
       success: true,
@@ -290,6 +350,8 @@ Booked via garagecowboy.com
       htmlLink: eventData.htmlLink,
       emailStatus,
       emailErrorHint,
+      // Diagnostic only; the client ignores this.
+      crmStatus: crm.forwarded ? 'forwarded' : crm.reason,
       appointment: {
         date: body.date,
         time: body.time,

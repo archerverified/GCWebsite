@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { CalendarDays } from "lucide-react";
 import svgPaths from "../imports/svg-pry7uv8zg5";
@@ -6,6 +7,7 @@ import imgVerified from "figma:asset/52e672056319f396f2b1bf45a03eee134d6b47d8.pn
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar } from "./ui/calendar";
 import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
@@ -19,6 +21,49 @@ import {
 } from "./ui/select";
 import { cn } from "./ui/utils";
 import { testimonials } from "../data/testimonials";
+import { BUSINESS_INFO } from "../seo/site";
+
+// Exact SMS opt-in language shown beside the consent checkbox. Exported because the same
+// string is transmitted with the booking and stored as the consent record, so what the
+// customer agreed to is provably what they were shown. The legal name interpolates from
+// BUSINESS_INFO so it can never drift from the footer, Terms, Privacy, or the JSON-LD.
+//
+// Scope is deliberately TRANSACTIONAL (messages about this appointment). That is what
+// makes a required checkbox lawful. Consent to MARKETING messages may not be a condition
+// of service, so marketing opt-in would need its own separate, optional checkbox.
+export const SMS_CONSENT_TEXT = `By checking this box, I agree to receive text messages from ${BUSINESS_INFO.legalName} DBA ${BUSINESS_INFO.businessName} about my appointment at the phone number provided. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help.`;
+
+/**
+ * Announce a completed booking to analytics.
+ *
+ * The Google Ads tag (AW-17367077872) is loaded THROUGH GTM (GTM-W7MW64K9), not directly,
+ * so the primary signal is a dataLayer event. Build a GTM trigger on `booking_submitted`
+ * and point the Ads conversion tag at it; that way the conversion can be wired or rewired
+ * without a deploy, and no conversion label has to be hardcoded here.
+ *
+ * `VITE_ADS_CONVERSION_LABEL` is an optional escape hatch for firing the conversion
+ * directly instead. Unset means no-op, same inert-seam pattern as GHL_WEBHOOK_URL.
+ *
+ * Everything here is optional-chained and wrapped: analytics must never be able to break
+ * a booking that already succeeded.
+ */
+function reportBookingConversion(source: string) {
+  try {
+    const w = window as typeof window & {
+      dataLayer?: unknown[];
+      gtag?: (...args: unknown[]) => void;
+    };
+
+    w.dataLayer?.push({ event: "booking_submitted", booking_source: source });
+
+    const label = import.meta.env.VITE_ADS_CONVERSION_LABEL;
+    if (label) {
+      w.gtag?.("event", "conversion", { send_to: `AW-17367077872/${label}` });
+    }
+  } catch {
+    // Analytics failures are never worth surfacing to a customer who just booked.
+  }
+}
 
 function pad2(n: number) {
   return String(n).padStart(2, "0");
@@ -81,14 +126,22 @@ type FieldKey =
   | "email"
   | "phone"
   | "preferredDate"
-  | "preferredTime";
+  | "preferredTime"
+  | "smsConsent";
 
 export interface AppointmentBookingSectionProps {
   includeTestimonials?: boolean;
+  /**
+   * Where this booking came from. Rides along with the submission into the calendar
+   * event, the CRM record, and the analytics event, so paid-channel leads can be told
+   * apart from organic ones after the fact. Keep it a short lowercase slug.
+   */
+  source?: string;
 }
 
 export function AppointmentBookingSection({
   includeTestimonials = true,
+  source = "website",
 }: AppointmentBookingSectionProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -97,6 +150,8 @@ export function AppointmentBookingSection({
     null
   );
   const [isDateOpen, setIsDateOpen] = useState(false);
+  // Kept out of formData (which is all strings) and never pre-checked.
+  const [smsConsent, setSmsConsent] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});
   const [formData, setFormData] = useState({
     name: "",
@@ -133,9 +188,21 @@ export function AppointmentBookingSection({
       preferredDate: "",
       preferredTime: "",
     });
+    setSmsConsent(false);
     setErrors({});
     setSubmitSuccess(false);
     setEmailStatus(null);
+  };
+
+  // Toggling consent clears its error the same way updateField does for text inputs.
+  const updateConsent = (checked: boolean) => {
+    setSmsConsent(checked);
+    setErrors((prev) => {
+      if (!("smsConsent" in prev)) return prev;
+      const next = { ...prev };
+      delete next.smsConsent;
+      return next;
+    });
   };
 
   // Update one field and clear its error (if any) as the user corrects it.
@@ -160,6 +227,9 @@ export function AppointmentBookingSection({
       next.preferredDate = "Please choose a date.";
     if (!formData.preferredTime)
       next.preferredTime = "Please choose a time.";
+    if (!smsConsent)
+      next.smsConsent =
+        "Please agree to receive text messages about your appointment.";
     return next;
   };
 
@@ -187,6 +257,11 @@ export function AppointmentBookingSection({
           time: formData.preferredTime,
           zipCode: formData.zipCode,
           message: formData.message,
+          // Consent record: the flag, the exact wording shown, and when it was given.
+          smsConsent,
+          consentText: SMS_CONSENT_TEXT,
+          consentTimestamp: new Date().toISOString(),
+          source,
         }),
       });
 
@@ -202,6 +277,7 @@ export function AppointmentBookingSection({
 
       setSubmitSuccess(true);
       setEmailStatus(data.emailStatus || "sent");
+      reportBookingConversion(source);
 
       if (data.emailStatus === "sent") {
         toast.success("Booked! Added to calendar. Confirmation email sent.");
@@ -287,7 +363,7 @@ export function AppointmentBookingSection({
           noValidate
           className="px-4 lg:px-8 py-8 lg:py-12"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
             {/* Name + Email */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
@@ -557,9 +633,62 @@ export function AppointmentBookingSection({
                 )}
               />
             </div>
+          </div>
+
+          {/* SMS consent + submit.
+              These live in a full-width footer row rather than inside the field grid so
+              the consent language sits immediately BEFORE the submit control at every
+              breakpoint. A block below the grid would land after the button on mobile,
+              which is exactly where opt-in language must not be. */}
+          <div className="mt-6 lg:mt-8 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+            <div className="flex flex-col gap-1.5 lg:max-w-3xl">
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="booking-sms-consent"
+                  name="smsConsent"
+                  checked={smsConsent}
+                  onCheckedChange={(checked) => updateConsent(checked === true)}
+                  disabled={isSubmitting}
+                  aria-invalid={errors.smsConsent ? true : undefined}
+                  aria-describedby={
+                    errors.smsConsent ? "booking-sms-consent-error" : undefined
+                  }
+                  className="mt-0.5 size-5 shrink-0 border-2 border-gc-ink bg-gc-frost shadow-gc-faq data-[state=checked]:bg-gc-ink data-[state=checked]:border-gc-ink data-[state=checked]:text-gc-yellow focus-visible:border-gc-ink focus-visible:ring-gc-yellow focus-visible:ring-[3px]"
+                />
+                <Label
+                  htmlFor="booking-sms-consent"
+                  className="block select-text font-product-sans text-[12px] font-normal leading-snug normal-case text-gc-ink"
+                >
+                  {SMS_CONSENT_TEXT}{" "}
+                  <Link
+                    to="/terms"
+                    className="font-bold underline underline-offset-2 hover:text-gc-ink-75"
+                  >
+                    Terms of Service
+                  </Link>
+                  {" and "}
+                  <Link
+                    to="/privacy"
+                    className="font-bold underline underline-offset-2 hover:text-gc-ink-75"
+                  >
+                    Privacy Policy
+                  </Link>
+                  .
+                </Label>
+              </div>
+              {errors.smsConsent && (
+                <p
+                  id="booking-sms-consent-error"
+                  role="alert"
+                  className={cn(errorClass, "pl-8")}
+                >
+                  {errors.smsConsent}
+                </p>
+              )}
+            </div>
 
             {/* Submit */}
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex flex-col items-center justify-center gap-4 lg:shrink-0">
               <Button
                 type="submit"
                 variant="primary"
