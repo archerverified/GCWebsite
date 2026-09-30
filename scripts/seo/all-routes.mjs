@@ -37,6 +37,9 @@ const STATIC_ROUTES = [
   // noindex in the page itself, so it never competes with /contact in organic results.
   // This is the one route where these two lists are meant to diverge.
   '/free-quote',
+  // Its conversion page: same rules (prerendered, noindex, not in the sitemap). The GTM
+  // Ads conversion tag for AW-18399788005 fires on this path.
+  '/free-quote/thank-you',
 ];
 
 /**

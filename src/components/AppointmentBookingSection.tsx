@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { CalendarDays } from "lucide-react";
 import svgPaths from "../imports/svg-pry7uv8zg5";
@@ -146,6 +146,7 @@ export function AppointmentBookingSection({
   includeTestimonials = true,
   source = "website",
 }: AppointmentBookingSectionProps) {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -278,9 +279,22 @@ export function AppointmentBookingSection({
         throw new Error(data.message || "Failed to schedule appointment");
       }
 
+      reportBookingConversion(source);
+
+      // The Google Ads landing page gets a real conversion URL: navigate to the
+      // thank-you page (the GTM Ads conversion tag fires on that path). Every other
+      // placement keeps the in-place success state.
+      if (source === "google-ads") {
+        navigate("/free-quote/thank-you", {
+          state: {
+            emailStatus: data.emailStatus === "sent" ? "sent" : "delayed",
+          },
+        });
+        return;
+      }
+
       setSubmitSuccess(true);
       setEmailStatus(data.emailStatus || "sent");
-      reportBookingConversion(source);
 
       if (data.emailStatus === "sent") {
         toast.success("Booked! Added to calendar. Confirmation email sent.");

@@ -41,12 +41,20 @@ The code is merged, deployed, and inert by design. Nothing to write.
 
 The new "Sign-up" conversion action lives on a SECOND Ads account, **AW-18399788005**
 (label `zepPCJa2_YMdEOX32cVE`, 1.0 USD). The account GTM already loads, `AW-17367077872`,
-stays; the new one is added alongside. The form pushes `booking_submitted` to the
-dataLayer with a `booking_source` value, which is the trigger.
+stays; the new one is added alongside. Owner chose the email's conversion-page approach:
+a real thank-you URL, with the GTM conversion tag fired by that page's path.
 
-- In GTM (`GTM-W7MW64K9`): add a Google tag for `AW-18399788005` on all pages, a Custom
-  Event trigger on `booking_submitted`, and a Google Ads Conversion Tracking tag
-  (ID `AW-18399788005`, label `zepPCJa2_YMdEOX32cVE`) on that trigger. Publish.
+- **`/free-quote/thank-you` exists** (`src/pages/FreeQuoteThankYou.tsx`): the landing
+  page's booking form navigates there on success (only when `source === "google-ads"`;
+  `/` and `/contact` keep the in-place success state). Same rules as `/free-quote`:
+  BARE_ROUTES, noindex, out of the sitemap, prerendered.
+- In GTM (`GTM-W7MW64K9`): Google tag for `AW-18399788005` on all pages, plus a Google
+  Ads Conversion Tracking tag (ID `AW-18399788005`, label `zepPCJa2_YMdEOX32cVE`) fired
+  by **History Change + Page View triggers** where Page Path = `/free-quote/thank-you`
+  (History Change because the redirect is a client-side SPA navigation). Publish.
+- The `booking_submitted` dataLayer push still fires on every successful booking
+  (`booking_source` = google-ads | website | contact) and remains available for any
+  event-based trigger later.
 - Escape hatch renamed: set `VITE_ADS_SEND_TO` to a full `AW-XXXXXXXXXX/LABEL` value and
   the code fires the conversion directly. The old `VITE_ADS_CONVERSION_LABEL` (which
   hardcoded `AW-17367077872`) is gone from the code. It was never referenced in
