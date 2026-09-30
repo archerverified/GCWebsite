@@ -41,8 +41,11 @@ export const SMS_CONSENT_TEXT = `By checking this box, I agree to receive text m
  * and point the Ads conversion tag at it; that way the conversion can be wired or rewired
  * without a deploy, and no conversion label has to be hardcoded here.
  *
- * `VITE_ADS_CONVERSION_LABEL` is an optional escape hatch for firing the conversion
- * directly instead. Unset means no-op, same inert-seam pattern as GHL_WEBHOOK_URL.
+ * `VITE_ADS_SEND_TO` is an optional escape hatch for firing the conversion directly
+ * instead. It holds the FULL send_to value, "AW-XXXXXXXXXX/LABEL", so the Ads account
+ * is explicit here rather than hardcoded below; the conversion action may live on a
+ * different account than the one GTM loads. Unset means no-op, same inert-seam
+ * pattern as GHL_WEBHOOK_URL.
  *
  * Everything here is optional-chained and wrapped: analytics must never be able to break
  * a booking that already succeeded.
@@ -56,9 +59,9 @@ function reportBookingConversion(source: string) {
 
     w.dataLayer?.push({ event: "booking_submitted", booking_source: source });
 
-    const label = import.meta.env.VITE_ADS_CONVERSION_LABEL;
-    if (label) {
-      w.gtag?.("event", "conversion", { send_to: `AW-17367077872/${label}` });
+    const sendTo = import.meta.env.VITE_ADS_SEND_TO;
+    if (sendTo) {
+      w.gtag?.("event", "conversion", { send_to: sendTo });
     }
   } catch {
     // Analytics failures are never worth surfacing to a customer who just booked.

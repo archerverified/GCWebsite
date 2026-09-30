@@ -37,16 +37,26 @@ The code is merged, deployed, and inert by design. Nothing to write.
   can reject anything not from the site.
 - Verify by submitting a booking and confirming the contact appears in GHL.
 
-### 2. Wire the Google Ads conversion
+### 2. Wire the Google Ads conversion (code done 2026-09-30; GTM console steps pending)
 
-The Ads tag (`AW-17367077872`) loads through GTM (`GTM-W7MW64K9`), so no conversion label
-is needed in code. The form already pushes `booking_submitted` to the dataLayer with a
-`booking_source` value.
+The new "Sign-up" conversion action lives on a SECOND Ads account, **AW-18399788005**
+(label `zepPCJa2_YMdEOX32cVE`, 1.0 USD). The account GTM already loads, `AW-17367077872`,
+stays; the new one is added alongside. The form pushes `booking_submitted` to the
+dataLayer with a `booking_source` value, which is the trigger.
 
-- In GTM, create a trigger on the custom event `booking_submitted` and point the Ads
-  conversion tag at it.
-- Alternatively set `VITE_ADS_CONVERSION_LABEL` and the code fires the conversion directly.
+- In GTM (`GTM-W7MW64K9`): add a Google tag for `AW-18399788005` on all pages, a Custom
+  Event trigger on `booking_submitted`, and a Google Ads Conversion Tracking tag
+  (ID `AW-18399788005`, label `zepPCJa2_YMdEOX32cVE`) on that trigger. Publish.
+- Escape hatch renamed: set `VITE_ADS_SEND_TO` to a full `AW-XXXXXXXXXX/LABEL` value and
+  the code fires the conversion directly. The old `VITE_ADS_CONVERSION_LABEL` (which
+  hardcoded `AW-17367077872`) is gone from the code. It was never referenced in
+  `.env.example`; confirm it is not set on the Vercel project (could not be checked from
+  this session: the Vercel token lacks the `denos-projects-81415503` scope) and delete
+  it there if present, since nothing reads it anymore.
 - Set the Google Ads final URL to `https://garagecowboy.com/free-quote`.
+- Consent Mode v2 is EEA/UK-only, not needed for this US-only site. Enhanced
+  conversions for leads deliberately skipped (privacy policy says form data is used
+  solely for the appointment).
 
 ### 3. Decide: marketing texts, or service only
 
